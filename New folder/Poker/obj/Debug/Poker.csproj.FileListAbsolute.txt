@@ -1,0 +1,10 @@
+C:\Users\Y50\Desktop\New folder\Poker\bin\Debug\Poker.exe.config
+C:\Users\Y50\Desktop\New folder\Poker\bin\Debug\Poker.exe
+C:\Users\Y50\Desktop\New folder\Poker\bin\Debug\Poker.pdb
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.exe
+C:\Users\Y50\Desktop\New folder\Poker\obj\Debug\Poker.pdb
