@@ -61,9 +61,10 @@
             // 
             this.bFold.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.bFold.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bFold.Location = new System.Drawing.Point(335, 660);
+            this.bFold.Location = new System.Drawing.Point(447, 812);
+            this.bFold.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bFold.Name = "bFold";
-            this.bFold.Size = new System.Drawing.Size(130, 62);
+            this.bFold.Size = new System.Drawing.Size(173, 76);
             this.bFold.TabIndex = 0;
             this.bFold.Text = "Fold";
             this.bFold.UseVisualStyleBackColor = true;
@@ -73,9 +74,10 @@
             // 
             this.bCheck.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.bCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCheck.Location = new System.Drawing.Point(494, 660);
+            this.bCheck.Location = new System.Drawing.Point(659, 812);
+            this.bCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bCheck.Name = "bCheck";
-            this.bCheck.Size = new System.Drawing.Size(134, 62);
+            this.bCheck.Size = new System.Drawing.Size(179, 76);
             this.bCheck.TabIndex = 2;
             this.bCheck.Text = "Check";
             this.bCheck.UseVisualStyleBackColor = true;
@@ -85,9 +87,10 @@
             // 
             this.bCall.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.bCall.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCall.Location = new System.Drawing.Point(667, 661);
+            this.bCall.Location = new System.Drawing.Point(889, 814);
+            this.bCall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bCall.Name = "bCall";
-            this.bCall.Size = new System.Drawing.Size(126, 62);
+            this.bCall.Size = new System.Drawing.Size(168, 76);
             this.bCall.TabIndex = 3;
             this.bCall.Text = "Call";
             this.bCall.UseVisualStyleBackColor = true;
@@ -97,9 +100,10 @@
             // 
             this.bRaise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.bRaise.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bRaise.Location = new System.Drawing.Point(835, 661);
+            this.bRaise.Location = new System.Drawing.Point(1113, 814);
+            this.bRaise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bRaise.Name = "bRaise";
-            this.bRaise.Size = new System.Drawing.Size(124, 62);
+            this.bRaise.Size = new System.Drawing.Size(165, 76);
             this.bRaise.TabIndex = 4;
             this.bRaise.Text = "Raise";
             this.bRaise.UseVisualStyleBackColor = true;
@@ -109,10 +113,11 @@
             // 
             this.pbTimer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pbTimer.BackColor = System.Drawing.SystemColors.Control;
-            this.pbTimer.Location = new System.Drawing.Point(335, 631);
+            this.pbTimer.Location = new System.Drawing.Point(447, 777);
+            this.pbTimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbTimer.Maximum = 1000;
             this.pbTimer.Name = "pbTimer";
-            this.pbTimer.Size = new System.Drawing.Size(667, 23);
+            this.pbTimer.Size = new System.Drawing.Size(889, 28);
             this.pbTimer.TabIndex = 5;
             this.pbTimer.Value = 1000;
             // 
@@ -120,18 +125,20 @@
             // 
             this.tbChips.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbChips.Location = new System.Drawing.Point(755, 553);
+            this.tbChips.Location = new System.Drawing.Point(1007, 681);
+            this.tbChips.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbChips.Name = "tbChips";
-            this.tbChips.Size = new System.Drawing.Size(163, 23);
+            this.tbChips.Size = new System.Drawing.Size(216, 26);
             this.tbChips.TabIndex = 6;
             this.tbChips.Text = "Chips : 0";
             // 
             // bAdd
             // 
             this.bAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bAdd.Location = new System.Drawing.Point(12, 697);
+            this.bAdd.Location = new System.Drawing.Point(16, 858);
+            this.bAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bAdd.Name = "bAdd";
-            this.bAdd.Size = new System.Drawing.Size(75, 25);
+            this.bAdd.Size = new System.Drawing.Size(100, 31);
             this.bAdd.TabIndex = 7;
             this.bAdd.Text = "AddChips";
             this.bAdd.UseVisualStyleBackColor = true;
@@ -140,18 +147,20 @@
             // tbAdd
             // 
             this.tbAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbAdd.Location = new System.Drawing.Point(93, 700);
+            this.tbAdd.Location = new System.Drawing.Point(124, 862);
+            this.tbAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdd.Name = "tbAdd";
-            this.tbAdd.Size = new System.Drawing.Size(125, 20);
+            this.tbAdd.Size = new System.Drawing.Size(165, 22);
             this.tbAdd.TabIndex = 8;
             // 
             // tbBotChips5
             // 
             this.tbBotChips5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips5.Location = new System.Drawing.Point(1012, 553);
+            this.tbBotChips5.Location = new System.Drawing.Point(1349, 681);
+            this.tbBotChips5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBotChips5.Name = "tbBotChips5";
-            this.tbBotChips5.Size = new System.Drawing.Size(152, 23);
+            this.tbBotChips5.Size = new System.Drawing.Size(201, 26);
             this.tbBotChips5.TabIndex = 9;
             this.tbBotChips5.Text = "Chips : 0";
             // 
@@ -159,9 +168,10 @@
             // 
             this.tbBotChips4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips4.Location = new System.Drawing.Point(970, 81);
+            this.tbBotChips4.Location = new System.Drawing.Point(1293, 100);
+            this.tbBotChips4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBotChips4.Name = "tbBotChips4";
-            this.tbBotChips4.Size = new System.Drawing.Size(123, 23);
+            this.tbBotChips4.Size = new System.Drawing.Size(163, 26);
             this.tbBotChips4.TabIndex = 10;
             this.tbBotChips4.Text = "Chips : 0";
             // 
@@ -169,28 +179,32 @@
             // 
             this.tbBotChips3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips3.Location = new System.Drawing.Point(755, 81);
+            this.tbBotChips3.Location = new System.Drawing.Point(1007, 100);
+            this.tbBotChips3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBotChips3.Name = "tbBotChips3";
-            this.tbBotChips3.Size = new System.Drawing.Size(125, 23);
+            this.tbBotChips3.Size = new System.Drawing.Size(165, 26);
             this.tbBotChips3.TabIndex = 11;
             this.tbBotChips3.Text = "Chips : 0";
             // 
             // tbBotChips2
             // 
             this.tbBotChips2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips2.Location = new System.Drawing.Point(276, 81);
+            this.tbBotChips2.Location = new System.Drawing.Point(368, 100);
+            this.tbBotChips2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBotChips2.Name = "tbBotChips2";
-            this.tbBotChips2.Size = new System.Drawing.Size(133, 23);
+            this.tbBotChips2.Size = new System.Drawing.Size(176, 26);
             this.tbBotChips2.TabIndex = 12;
             this.tbBotChips2.Text = "Chips : 0";
+            this.tbBotChips2.TextChanged += new System.EventHandler(this.tbBotChips2_TextChanged);
             // 
             // tbBotChips1
             // 
             this.tbBotChips1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbBotChips1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips1.Location = new System.Drawing.Point(181, 553);
+            this.tbBotChips1.Location = new System.Drawing.Point(241, 681);
+            this.tbBotChips1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBotChips1.Name = "tbBotChips1";
-            this.tbBotChips1.Size = new System.Drawing.Size(142, 23);
+            this.tbBotChips1.Size = new System.Drawing.Size(188, 26);
             this.tbBotChips1.TabIndex = 13;
             this.tbBotChips1.Text = "Chips : 0";
             // 
@@ -198,18 +212,20 @@
             // 
             this.tbPot.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbPot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbPot.Location = new System.Drawing.Point(606, 212);
+            this.tbPot.Location = new System.Drawing.Point(808, 261);
+            this.tbPot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPot.Name = "tbPot";
-            this.tbPot.Size = new System.Drawing.Size(125, 23);
+            this.tbPot.Size = new System.Drawing.Size(165, 26);
             this.tbPot.TabIndex = 14;
             this.tbPot.Text = "0";
             // 
             // bOptions
             // 
             this.bOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bOptions.Location = new System.Drawing.Point(12, 12);
+            this.bOptions.Location = new System.Drawing.Point(16, 15);
+            this.bOptions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bOptions.Name = "bOptions";
-            this.bOptions.Size = new System.Drawing.Size(75, 36);
+            this.bOptions.Size = new System.Drawing.Size(100, 44);
             this.bOptions.TabIndex = 15;
             this.bOptions.Text = "BB/SB";
             this.bOptions.UseVisualStyleBackColor = true;
@@ -217,9 +233,10 @@
             // 
             // bBB
             // 
-            this.bBB.Location = new System.Drawing.Point(12, 254);
+            this.bBB.Location = new System.Drawing.Point(16, 313);
+            this.bBB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bBB.Name = "bBB";
-            this.bBB.Size = new System.Drawing.Size(75, 23);
+            this.bBB.Size = new System.Drawing.Size(100, 28);
             this.bBB.TabIndex = 16;
             this.bBB.Text = "Big Blind";
             this.bBB.UseVisualStyleBackColor = true;
@@ -227,17 +244,19 @@
             // 
             // tbSB
             // 
-            this.tbSB.Location = new System.Drawing.Point(12, 228);
+            this.tbSB.Location = new System.Drawing.Point(16, 281);
+            this.tbSB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbSB.Name = "tbSB";
-            this.tbSB.Size = new System.Drawing.Size(75, 20);
+            this.tbSB.Size = new System.Drawing.Size(99, 22);
             this.tbSB.TabIndex = 17;
             this.tbSB.Text = "250";
             // 
             // bSB
             // 
-            this.bSB.Location = new System.Drawing.Point(12, 199);
+            this.bSB.Location = new System.Drawing.Point(16, 245);
+            this.bSB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bSB.Name = "bSB";
-            this.bSB.Size = new System.Drawing.Size(75, 23);
+            this.bSB.Size = new System.Drawing.Size(100, 28);
             this.bSB.TabIndex = 18;
             this.bSB.Text = "Small Blind";
             this.bSB.UseVisualStyleBackColor = true;
@@ -245,84 +264,93 @@
             // 
             // tbBB
             // 
-            this.tbBB.Location = new System.Drawing.Point(12, 283);
+            this.tbBB.Location = new System.Drawing.Point(16, 348);
+            this.tbBB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBB.Name = "tbBB";
-            this.tbBB.Size = new System.Drawing.Size(75, 20);
+            this.tbBB.Size = new System.Drawing.Size(99, 22);
             this.tbBB.TabIndex = 19;
             this.tbBB.Text = "500";
             // 
             // b5Status
             // 
             this.b5Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.b5Status.Location = new System.Drawing.Point(1012, 579);
+            this.b5Status.Location = new System.Drawing.Point(1349, 713);
+            this.b5Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.b5Status.Name = "b5Status";
-            this.b5Status.Size = new System.Drawing.Size(152, 32);
+            this.b5Status.Size = new System.Drawing.Size(203, 39);
             this.b5Status.TabIndex = 26;
             // 
             // b4Status
             // 
             this.b4Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.b4Status.Location = new System.Drawing.Point(970, 107);
+            this.b4Status.Location = new System.Drawing.Point(1293, 132);
+            this.b4Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.b4Status.Name = "b4Status";
-            this.b4Status.Size = new System.Drawing.Size(123, 32);
+            this.b4Status.Size = new System.Drawing.Size(164, 39);
             this.b4Status.TabIndex = 27;
             // 
             // b3Status
             // 
             this.b3Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.b3Status.Location = new System.Drawing.Point(755, 107);
+            this.b3Status.Location = new System.Drawing.Point(1007, 132);
+            this.b3Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.b3Status.Name = "b3Status";
-            this.b3Status.Size = new System.Drawing.Size(125, 32);
+            this.b3Status.Size = new System.Drawing.Size(167, 39);
             this.b3Status.TabIndex = 28;
             // 
             // b1Status
             // 
             this.b1Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.b1Status.Location = new System.Drawing.Point(181, 579);
+            this.b1Status.Location = new System.Drawing.Point(241, 713);
+            this.b1Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.b1Status.Name = "b1Status";
-            this.b1Status.Size = new System.Drawing.Size(142, 32);
+            this.b1Status.Size = new System.Drawing.Size(189, 39);
             this.b1Status.TabIndex = 29;
             // 
             // pStatus
             // 
             this.pStatus.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pStatus.Location = new System.Drawing.Point(755, 579);
+            this.pStatus.Location = new System.Drawing.Point(1007, 713);
+            this.pStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pStatus.Name = "pStatus";
-            this.pStatus.Size = new System.Drawing.Size(163, 32);
+            this.pStatus.Size = new System.Drawing.Size(217, 39);
             this.pStatus.TabIndex = 30;
             // 
             // b2Status
             // 
-            this.b2Status.Location = new System.Drawing.Point(276, 107);
+            this.b2Status.Location = new System.Drawing.Point(368, 132);
+            this.b2Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.b2Status.Name = "b2Status";
-            this.b2Status.Size = new System.Drawing.Size(133, 32);
+            this.b2Status.Size = new System.Drawing.Size(177, 39);
             this.b2Status.TabIndex = 31;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(654, 188);
+            this.label1.Location = new System.Drawing.Point(872, 231);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 21);
+            this.label1.Size = new System.Drawing.Size(41, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "Pot";
             // 
             // tbRaise
             // 
             this.tbRaise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbRaise.Location = new System.Drawing.Point(965, 703);
+            this.tbRaise.Location = new System.Drawing.Point(1287, 865);
+            this.tbRaise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbRaise.Name = "tbRaise";
-            this.tbRaise.Size = new System.Drawing.Size(108, 20);
+            this.tbRaise.Size = new System.Drawing.Size(143, 22);
             this.tbRaise.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Poker.Properties.Resources.poker_table___Copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.ClientSize = new System.Drawing.Size(1800, 897);
             this.Controls.Add(this.tbRaise);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.b2Status);
@@ -351,6 +379,7 @@
             this.Controls.Add(this.bCheck);
             this.Controls.Add(this.bFold);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "GLS Texas Poker";
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Layout_Change);

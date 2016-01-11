@@ -676,6 +676,7 @@ namespace Poker
             }
         }
 
+        #region John
         void Rules(int c1, int c2, string currentText, ref double current, ref double Power, bool foldedTurn)
         {
             if (c1 == 0 && c2 == 1)
@@ -1409,6 +1410,9 @@ namespace Poker
                 }
             }
         }
+        #endregion
+
+        #region Martin
         private void rThreeOfAKind(ref double current, ref double Power, int[] Straight)
         {
             if (current >= -1)
@@ -1690,7 +1694,9 @@ namespace Poker
                 }
             }
         }
+#endregion
 
+        #region Saki
         void Winner(double current, double Power, string currentText, int chips, string lastly)
         {
             if (lastly == " ")
@@ -2304,6 +2310,9 @@ namespace Poker
             Winner(b4Type, b4Power, "Bot 4", bot4Chips, fixedLast);
             Winner(b5Type, b5Power, "Bot 5", bot5Chips, fixedLast);
         }
+#endregion
+
+        #region Alex
         void AI(int c1, int c2, ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower, double botCurrent)
         {
             if (!sFTurn)
@@ -2417,6 +2426,9 @@ namespace Poker
                 Smooth(ref sChips, ref sTurn, ref sFTurn, sStatus, name, tCall, tRaise);
             }
         }
+#endregion
+
+        #region Tsvetelin
         private void Straight(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
         {
             Random str = new Random();
@@ -2476,7 +2488,6 @@ namespace Poker
                 Smooth(ref sChips, ref sTurn, ref sFTurn, sStatus, name, sfCall, sfRaise);
             }
         }
-
         private void Fold(ref bool sTurn, ref bool sFTurn, Label sStatus)
         {
             raising = false;
@@ -2484,6 +2495,9 @@ namespace Poker
             sTurn = false;
             sFTurn = true;
         }
+#endregion
+
+        #region Daniela
         private void Check(ref bool cTurn, Label cStatus)
         {
             cStatus.Text = "Check";
@@ -2716,6 +2730,7 @@ namespace Poker
                 botFTurn = true;
             }
         }
+#endregion
 
         #region UI
         private async void timer_Tick(object sender, object e)
@@ -3019,5 +3034,10 @@ namespace Poker
             height = this.Height;
         }
         #endregion
+
+        private void tbBotChips2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
