@@ -18,3 +18,13 @@ C:\Users\ff\Documents\HighQualityCodeTeamProject\Poker-Mechanics\New folder\Poke
 C:\Users\ff\Documents\HighQualityCodeTeamProject\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.Form1.resources
 C:\Users\ff\Documents\HighQualityCodeTeamProject\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\ff\Documents\HighQualityCodeTeamProject\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\bin\Debug\Poker.exe.config
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\bin\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\bin\Debug\Poker.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.AddChips.resources
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.Form1.resources
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\New folder\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
