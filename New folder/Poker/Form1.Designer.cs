@@ -41,7 +41,7 @@
             this.tbBotChips3 = new System.Windows.Forms.TextBox();
             this.tbBotChips2 = new System.Windows.Forms.TextBox();
             this.tbBotChips1 = new System.Windows.Forms.TextBox();
-            this.tbPot = new System.Windows.Forms.TextBox();
+            this.pot = new System.Windows.Forms.TextBox();
             this.bOptions = new System.Windows.Forms.Button();
             this.bBB = new System.Windows.Forms.Button();
             this.tbSB = new System.Windows.Forms.TextBox();
@@ -210,14 +210,14 @@
             // 
             // tbPot
             // 
-            this.tbPot.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbPot.Location = new System.Drawing.Point(808, 261);
-            this.tbPot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tbPot.Name = "tbPot";
-            this.tbPot.Size = new System.Drawing.Size(165, 26);
-            this.tbPot.TabIndex = 14;
-            this.tbPot.Text = "0";
+            this.pot.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.pot.Location = new System.Drawing.Point(808, 261);
+            this.pot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pot.Name = "pot";
+            this.pot.Size = new System.Drawing.Size(165, 26);
+            this.pot.TabIndex = 14;
+            this.pot.Text = "0";
             // 
             // bOptions
             // 
@@ -364,7 +364,7 @@
             this.Controls.Add(this.tbSB);
             this.Controls.Add(this.bBB);
             this.Controls.Add(this.bOptions);
-            this.Controls.Add(this.tbPot);
+            this.Controls.Add(this.pot);
             this.Controls.Add(this.tbBotChips1);
             this.Controls.Add(this.tbBotChips2);
             this.Controls.Add(this.tbBotChips3);
@@ -403,7 +403,7 @@
         private System.Windows.Forms.TextBox tbBotChips3;
         private System.Windows.Forms.TextBox tbBotChips2;
         private System.Windows.Forms.TextBox tbBotChips1;
-        private System.Windows.Forms.TextBox tbPot;
+        private System.Windows.Forms.TextBox pot;
         private System.Windows.Forms.Button bOptions;
         private System.Windows.Forms.Button bBB;
         private System.Windows.Forms.TextBox tbSB;
