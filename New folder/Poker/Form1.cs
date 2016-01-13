@@ -71,7 +71,7 @@ namespace Poker
             width = this.Width;
             height = this.Height;
             Shuffle();
-            pot.Enabled = false;
+            potChips.Enabled = false;
             tbChips.Enabled = false;
             tbBotChips1.Enabled = false;
             tbBotChips2.Enabled = false;
@@ -88,28 +88,28 @@ namespace Poker
             timer.Tick += timer_Tick;
             Updates.Interval = (1 * 1 * 100);
             Updates.Tick += Update_Tick;
-            tbBB.Visible = true;
-            tbSB.Visible = true;
-            bBB.Visible = true;
-            bSB.Visible = true;
-            tbBB.Visible = true;
-            tbSB.Visible = true;
-            bBB.Visible = true;
-            bSB.Visible = true;
-            tbBB.Visible = false;
-            tbSB.Visible = false;
-            bBB.Visible = false;
-            bSB.Visible = false;
+            bigBlindSum.Visible = true;
+            smallBlindSum.Visible = true;
+            bigBlindButton.Visible = true;
+            smallBlindButton.Visible = true;
+            bigBlindSum.Visible = true;
+            smallBlindSum.Visible = true;
+            bigBlindButton.Visible = true;
+            smallBlindButton.Visible = true;
+            bigBlindSum.Visible = false;
+            smallBlindSum.Visible = false;
+            bigBlindButton.Visible = false;
+            smallBlindButton.Visible = false;
             tbRaise.Text = (bb * 2).ToString();
         }
 
         async Task Shuffle()
         {
             bools.Add(PFturn); bools.Add(B1Fturn); bools.Add(B2Fturn); bools.Add(B3Fturn); bools.Add(B4Fturn); bools.Add(B5Fturn);
-            bCall.Enabled = false;
-            bRaise.Enabled = false;
-            bFold.Enabled = false;
-            bCheck.Enabled = false;
+            callButton.Enabled = false;
+            raiseButton.Enabled = false;
+            foldButton.Enabled = false;
+            checkButton.Enabled = false;
             MaximizeBox = false;
             MinimizeBox = false;
             bool check = false;
@@ -485,11 +485,11 @@ namespace Poker
 
             if (i == 17)
             {
-                bRaise.Enabled = true;
-                bCall.Enabled = true;
-                bRaise.Enabled = true;
-                bRaise.Enabled = true;
-                bFold.Enabled = true;
+                raiseButton.Enabled = true;
+                callButton.Enabled = true;
+                raiseButton.Enabled = true;
+                raiseButton.Enabled = true;
+                foldButton.Enabled = true;
             }
         }
 
@@ -507,11 +507,11 @@ namespace Poker
                     t = 60;
                     up = 10000000;
                     timer.Start();
-                    bRaise.Enabled = true;
-                    bCall.Enabled = true;
-                    bRaise.Enabled = true;
-                    bRaise.Enabled = true;
-                    bFold.Enabled = true;
+                    raiseButton.Enabled = true;
+                    callButton.Enabled = true;
+                    raiseButton.Enabled = true;
+                    raiseButton.Enabled = true;
+                    foldButton.Enabled = true;
                     turnCount++;
                     FixCall(playerStatus, ref playerCall, ref playerRise, 2);
                 }
@@ -521,7 +521,7 @@ namespace Poker
                 await AllIn();
                 if (PFturn && !pFolded)
                 {
-                    if (bCall.Text.Contains("All in") == false || bRaise.Text.Contains("All in") == false)
+                    if (callButton.Text.Contains("All in") == false || raiseButton.Text.Contains("All in") == false)
                     {
                         bools.RemoveAt(0);
                         bools.Insert(0, null);
@@ -531,11 +531,11 @@ namespace Poker
                 }
                 await CheckRaise(0, 0);
                 pbTimer.Visible = false;
-                bRaise.Enabled = false;
-                bCall.Enabled = false;
-                bRaise.Enabled = false;
-                bRaise.Enabled = false;
-                bFold.Enabled = false;
+                raiseButton.Enabled = false;
+                callButton.Enabled = false;
+                raiseButton.Enabled = false;
+                raiseButton.Enabled = false;
+                foldButton.Enabled = false;
                 timer.Stop();
                 B1turn = true;
                 if (!B1Fturn)
@@ -674,7 +674,7 @@ namespace Poker
                 }
                 if (PFturn && !pFolded)
                 {
-                    if (bCall.Text.Contains("All in") == false || bRaise.Text.Contains("All in") == false)
+                    if (callButton.Text.Contains("All in") == false || raiseButton.Text.Contains("All in") == false)
                     {
                         bools.RemoveAt(0);
                         bools.Insert(0, null);
@@ -1783,38 +1783,38 @@ namespace Poker
                 {
                     if (CheckWinners.Contains("Player"))
                     {
-                        Chips += int.Parse(pot.Text) / winners;
+                        Chips += int.Parse(potChips.Text) / winners;
                         tbChips.Text = Chips.ToString();
                         //playerPanel.Visible = true;
 
                     }
                     if (CheckWinners.Contains("Bot 1"))
                     {
-                        firstBotChips += int.Parse(pot.Text) / winners;
+                        firstBotChips += int.Parse(potChips.Text) / winners;
                         tbBotChips1.Text = firstBotChips.ToString();
                         //firstBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 2"))
                     {
-                        secondBotChips += int.Parse(pot.Text) / winners;
+                        secondBotChips += int.Parse(potChips.Text) / winners;
                         tbBotChips2.Text = secondBotChips.ToString();
                         //secondBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 3"))
                     {
-                        thirdBotChips += int.Parse(pot.Text) / winners;
+                        thirdBotChips += int.Parse(potChips.Text) / winners;
                         tbBotChips3.Text = thirdBotChips.ToString();
                         //thirdBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 4"))
                     {
-                        fourthBotChips += int.Parse(pot.Text) / winners;
+                        fourthBotChips += int.Parse(potChips.Text) / winners;
                         tbBotChips4.Text = fourthBotChips.ToString();
                         //fourthBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 5"))
                     {
-                        fifthBotChips += int.Parse(pot.Text) / winners;
+                        fifthBotChips += int.Parse(potChips.Text) / winners;
                         tbBotChips5.Text = fifthBotChips.ToString();
                         //fifthBotPanel.Visible = true;
                     }
@@ -1824,38 +1824,38 @@ namespace Poker
                 {
                     if (CheckWinners.Contains("Player"))
                     {
-                        Chips += int.Parse(pot.Text);
+                        Chips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //playerPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 1"))
                     {
-                        firstBotChips += int.Parse(pot.Text);
+                        firstBotChips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //firstBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 2"))
                     {
-                        secondBotChips += int.Parse(pot.Text);
+                        secondBotChips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //secondBotPanel.Visible = true;
 
                     }
                     if (CheckWinners.Contains("Bot 3"))
                     {
-                        thirdBotChips += int.Parse(pot.Text);
+                        thirdBotChips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //thirdBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 4"))
                     {
-                        fourthBotChips += int.Parse(pot.Text);
+                        fourthBotChips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //fourthBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 5"))
                     {
-                        fifthBotChips += int.Parse(pot.Text);
+                        fifthBotChips += int.Parse(potChips.Text);
                         //await Finish(1);
                         //fifthBotPanel.Visible = true;
                     }
@@ -2034,10 +2034,10 @@ namespace Poker
                         fifthBotChips += f2.a;
                         PFturn = false;
                         playerTurn = true;
-                        bRaise.Enabled = true;
-                        bFold.Enabled = true;
-                        bCheck.Enabled = true;
-                        bRaise.Text = "Raise";
+                        raiseButton.Enabled = true;
+                        foldButton.Enabled = true;
+                        checkButton.Enabled = true;
+                        raiseButton.Text = "Raise";
                     }
                 }
                 playerPanel.Visible = false;
@@ -2095,7 +2095,7 @@ namespace Poker
                     Holder[os].Invalidate();
                     Holder[os].Visible = false;
                 }
-                pot.Text = "0";
+                potChips.Text = "0";
                 playerStatus.Text = string.Empty;
                 await Shuffle();
                 await Turns();
@@ -2144,8 +2144,8 @@ namespace Poker
                     if (cRaise == Raise && Raise > 0)
                     {
                         call = 0;
-                        bCall.Enabled = false;
-                        bCall.Text = "Callisfuckedup";
+                        callButton.Enabled = false;
+                        callButton.Text = "Callisfuckedup";
                     }
                 }
             }
@@ -2234,42 +2234,42 @@ namespace Poker
                 int index = bools.IndexOf(false);
                 if (index == 0)
                 {
-                    Chips += int.Parse(pot.Text);
+                    Chips += int.Parse(potChips.Text);
                     tbChips.Text = Chips.ToString();
                     playerPanel.Visible = true;
                     MessageBox.Show("Player Wins");
                 }
                 if (index == 1)
                 {
-                    firstBotChips += int.Parse(pot.Text);
+                    firstBotChips += int.Parse(potChips.Text);
                     tbChips.Text = firstBotChips.ToString();
                     firstBotPanel.Visible = true;
                     MessageBox.Show("Bot 1 Wins");
                 }
                 if (index == 2)
                 {
-                    secondBotChips += int.Parse(pot.Text);
+                    secondBotChips += int.Parse(potChips.Text);
                     tbChips.Text = secondBotChips.ToString();
                     secondBotPanel.Visible = true;
                     MessageBox.Show("Bot 2 Wins");
                 }
                 if (index == 3)
                 {
-                    thirdBotChips += int.Parse(pot.Text);
+                    thirdBotChips += int.Parse(potChips.Text);
                     tbChips.Text = thirdBotChips.ToString();
                     thirdBotPanel.Visible = true;
                     MessageBox.Show("Bot 3 Wins");
                 }
                 if (index == 4)
                 {
-                    fourthBotChips += int.Parse(pot.Text);
+                    fourthBotChips += int.Parse(potChips.Text);
                     tbChips.Text = fourthBotChips.ToString();
                     fourthBotPanel.Visible = true;
                     MessageBox.Show("Bot 4 Wins");
                 }
                 if (index == 5)
                 {
-                    fifthBotChips += int.Parse(pot.Text);
+                    fifthBotChips += int.Parse(potChips.Text);
                     tbChips.Text = fifthBotChips.ToString();
                     fifthBotPanel.Visible = true;
                     MessageBox.Show("Bot 5 Wins");
@@ -2391,7 +2391,7 @@ namespace Poker
             Win.Clear();
             sorted.Current = 0;
             sorted.Power = 0;
-            pot.Text = "0";
+            potChips.Text = "0";
 
             t = 60;
             up = 10000000;
@@ -2418,10 +2418,10 @@ namespace Poker
                     fifthBotChips += f2.a;
                     PFturn = false;
                     playerTurn = true;
-                    bRaise.Enabled = true;
-                    bFold.Enabled = true;
-                    bCheck.Enabled = true;
-                    bRaise.Text = "Raise";
+                    raiseButton.Enabled = true;
+                    foldButton.Enabled = true;
+                    checkButton.Enabled = true;
+                    raiseButton.Text = "Raise";
                 }
             }
 
@@ -2689,7 +2689,7 @@ namespace Poker
             isBotsTurn = false;
             botChips -= call;
             statusLabel.Text = "Call " + call;
-            pot.Text = (int.Parse(pot.Text) + call).ToString();
+            potChips.Text = (int.Parse(potChips.Text) + call).ToString();
         }
 
         //The bot raises the bet
@@ -2697,7 +2697,7 @@ namespace Poker
         {
             botChips -= Convert.ToInt32(Raise);
             statusLabel.Text = "Raise " + Raise;
-            pot.Text = (int.Parse(pot.Text) + Convert.ToInt32(Raise)).ToString();
+            potChips.Text = (int.Parse(potChips.Text) + Convert.ToInt32(Raise)).ToString();
             call = Convert.ToInt32(Raise);
             isRaising = true;
             isBotsTurn = false;
@@ -2891,7 +2891,7 @@ namespace Poker
                         isBotsTurn = false;
                         botChips = 0;
                         botStatus.Text = "Call " + botChips;
-                        pot.Text = (int.Parse(pot.Text) + botChips).ToString();
+                        potChips.Text = (int.Parse(potChips.Text) + botChips).ToString();
                     }
                 }
                 else
@@ -2972,10 +2972,10 @@ namespace Poker
             {
                 playerTurn = false;
                 PFturn = true;
-                bCall.Enabled = false;
-                bRaise.Enabled = false;
-                bFold.Enabled = false;
-                bCheck.Enabled = false;
+                callButton.Enabled = false;
+                raiseButton.Enabled = false;
+                foldButton.Enabled = false;
+                checkButton.Enabled = false;
             }
             if (up > 0)
             {
@@ -2983,26 +2983,26 @@ namespace Poker
             }
             if (Chips >= call)
             {
-                bCall.Text = "Call " + call.ToString();
+                callButton.Text = "Call " + call.ToString();
             }
             else
             {
-                bCall.Text = "All in";
-                bRaise.Enabled = false;
+                callButton.Text = "All in";
+                raiseButton.Enabled = false;
             }
             if (call > 0)
             {
-                bCheck.Enabled = false;
+                checkButton.Enabled = false;
             }
             if (call <= 0)
             {
-                bCheck.Enabled = true;
-                bCall.Text = "Call";
-                bCall.Enabled = false;
+                checkButton.Enabled = true;
+                callButton.Text = "Call";
+                callButton.Enabled = false;
             }
             if (Chips <= 0)
             {
-                bRaise.Enabled = false;
+                raiseButton.Enabled = false;
             }
             int parsedValue;
 
@@ -3010,16 +3010,16 @@ namespace Poker
             {
                 if (Chips <= int.Parse(tbRaise.Text))
                 {
-                    bRaise.Text = "All in";
+                    raiseButton.Text = "All in";
                 }
                 else
                 {
-                    bRaise.Text = "Raise";
+                    raiseButton.Text = "Raise";
                 }
             }
             if (Chips < call)
             {
-                bRaise.Enabled = false;
+                raiseButton.Enabled = false;
             }
         }
         private async void bFold_Click(object sender, EventArgs e)
@@ -3040,7 +3040,7 @@ namespace Poker
             {
                 //playerStatus.Text = "All in " + Chips;
 
-                bCheck.Enabled = false;
+                checkButton.Enabled = false;
             }
             await Turns();
         }
@@ -3051,13 +3051,13 @@ namespace Poker
             {
                 Chips -= call;
                 tbChips.Text = "Chips : " + Chips.ToString();
-                if (pot.Text != "")
+                if (potChips.Text != "")
                 {
-                    pot.Text = (int.Parse(pot.Text) + call).ToString();
+                    potChips.Text = (int.Parse(potChips.Text) + call).ToString();
                 }
                 else
                 {
-                    pot.Text = call.ToString();
+                    potChips.Text = call.ToString();
                 }
                 playerTurn = false;
                 playerStatus.Text = "Call " + call;
@@ -3065,12 +3065,12 @@ namespace Poker
             }
             else if (Chips <= call && call > 0)
             {
-                pot.Text = (int.Parse(pot.Text) + Chips).ToString();
+                potChips.Text = (int.Parse(potChips.Text) + Chips).ToString();
                 playerStatus.Text = "All in " + Chips;
                 Chips = 0;
                 tbChips.Text = "Chips : " + Chips.ToString();
                 playerTurn = false;
-                bFold.Enabled = false;
+                foldButton.Enabled = false;
                 playerCall = Chips;
             }
             await Turns();
@@ -3096,8 +3096,8 @@ namespace Poker
                             call = int.Parse(tbRaise.Text);
                             Raise = int.Parse(tbRaise.Text);
                             playerStatus.Text = "Raise " + call.ToString();
-                            pot.Text = (int.Parse(pot.Text) + call).ToString();
-                            bCall.Text = "Call";
+                            potChips.Text = (int.Parse(potChips.Text) + call).ToString();
+                            callButton.Text = "Call";
                             Chips -= int.Parse(tbRaise.Text);
                             isRaising = true;
                             last = 0;
@@ -3107,7 +3107,7 @@ namespace Poker
                         {
                             call = Chips;
                             Raise = Chips;
-                            pot.Text = (int.Parse(pot.Text) + Chips).ToString();
+                            potChips.Text = (int.Parse(potChips.Text) + Chips).ToString();
                             playerStatus.Text = "Raise " + call.ToString();
                             Chips = 0;
                             isRaising = true;
@@ -3127,94 +3127,94 @@ namespace Poker
         }
         private void bAdd_Click(object sender, EventArgs e)
         {
-            if (tbAdd.Text == "") { }
+            if (numberOfChipsToAdd.Text == "") { }
             else
             {
-                Chips += int.Parse(tbAdd.Text);
-                firstBotChips += int.Parse(tbAdd.Text);
-                secondBotChips += int.Parse(tbAdd.Text);
-                thirdBotChips += int.Parse(tbAdd.Text);
-                fourthBotChips += int.Parse(tbAdd.Text);
-                fifthBotChips += int.Parse(tbAdd.Text);
+                Chips += int.Parse(numberOfChipsToAdd.Text);
+                firstBotChips += int.Parse(numberOfChipsToAdd.Text);
+                secondBotChips += int.Parse(numberOfChipsToAdd.Text);
+                thirdBotChips += int.Parse(numberOfChipsToAdd.Text);
+                fourthBotChips += int.Parse(numberOfChipsToAdd.Text);
+                fifthBotChips += int.Parse(numberOfChipsToAdd.Text);
             }
             tbChips.Text = "Chips : " + Chips.ToString();
         }
         private void bOptions_Click(object sender, EventArgs e)
         {
-            tbBB.Text = bb.ToString();
-            tbSB.Text = sb.ToString();
-            if (tbBB.Visible == false)
+            bigBlindSum.Text = bb.ToString();
+            smallBlindSum.Text = sb.ToString();
+            if (bigBlindSum.Visible == false)
             {
-                tbBB.Visible = true;
-                tbSB.Visible = true;
-                bBB.Visible = true;
-                bSB.Visible = true;
+                bigBlindSum.Visible = true;
+                smallBlindSum.Visible = true;
+                bigBlindButton.Visible = true;
+                smallBlindButton.Visible = true;
             }
             else
             {
-                tbBB.Visible = false;
-                tbSB.Visible = false;
-                bBB.Visible = false;
-                bSB.Visible = false;
+                bigBlindSum.Visible = false;
+                smallBlindSum.Visible = false;
+                bigBlindButton.Visible = false;
+                smallBlindButton.Visible = false;
             }
         }
         private void bSB_Click(object sender, EventArgs e)
         {
             int parsedValue;
-            if (tbSB.Text.Contains(",") || tbSB.Text.Contains("."))
+            if (smallBlindSum.Text.Contains(",") || smallBlindSum.Text.Contains("."))
             {
                 MessageBox.Show("The Small Blind can be only round number !");
-                tbSB.Text = sb.ToString();
+                smallBlindSum.Text = sb.ToString();
                 return;
             }
-            if (!int.TryParse(tbSB.Text, out parsedValue))
+            if (!int.TryParse(smallBlindSum.Text, out parsedValue))
             {
                 MessageBox.Show("This is a number only field");
-                tbSB.Text = sb.ToString();
+                smallBlindSum.Text = sb.ToString();
                 return;
             }
-            if (int.Parse(tbSB.Text) > 100000)
+            if (int.Parse(smallBlindSum.Text) > 100000)
             {
                 MessageBox.Show("The maximum of the Small Blind is 100 000 $");
-                tbSB.Text = sb.ToString();
+                smallBlindSum.Text = sb.ToString();
             }
-            if (int.Parse(tbSB.Text) < 250)
+            if (int.Parse(smallBlindSum.Text) < 250)
             {
                 MessageBox.Show("The minimum of the Small Blind is 250 $");
             }
-            if (int.Parse(tbSB.Text) >= 250 && int.Parse(tbSB.Text) <= 100000)
+            if (int.Parse(smallBlindSum.Text) >= 250 && int.Parse(smallBlindSum.Text) <= 100000)
             {
-                sb = int.Parse(tbSB.Text);
+                sb = int.Parse(smallBlindSum.Text);
                 MessageBox.Show("The changes have been saved ! They will become available the next hand you play. ");
             }
         }
         private void bBB_Click(object sender, EventArgs e)
         {
             int parsedValue;
-            if (tbBB.Text.Contains(",") || tbBB.Text.Contains("."))
+            if (bigBlindSum.Text.Contains(",") || bigBlindSum.Text.Contains("."))
             {
                 MessageBox.Show("The Big Blind can be only round number !");
-                tbBB.Text = bb.ToString();
+                bigBlindSum.Text = bb.ToString();
                 return;
             }
-            if (!int.TryParse(tbSB.Text, out parsedValue))
+            if (!int.TryParse(smallBlindSum.Text, out parsedValue))
             {
                 MessageBox.Show("This is a number only field");
-                tbSB.Text = bb.ToString();
+                smallBlindSum.Text = bb.ToString();
                 return;
             }
-            if (int.Parse(tbBB.Text) > 200000)
+            if (int.Parse(bigBlindSum.Text) > 200000)
             {
                 MessageBox.Show("The maximum of the Big Blind is 200 000");
-                tbBB.Text = bb.ToString();
+                bigBlindSum.Text = bb.ToString();
             }
-            if (int.Parse(tbBB.Text) < 500)
+            if (int.Parse(bigBlindSum.Text) < 500)
             {
                 MessageBox.Show("The minimum of the Big Blind is 500 $");
             }
-            if (int.Parse(tbBB.Text) >= 500 && int.Parse(tbBB.Text) <= 200000)
+            if (int.Parse(bigBlindSum.Text) >= 500 && int.Parse(bigBlindSum.Text) <= 200000)
             {
-                bb = int.Parse(tbBB.Text);
+                bb = int.Parse(bigBlindSum.Text);
                 MessageBox.Show("The changes have been saved ! They will become available the next hand you play. ");
             }
         }
