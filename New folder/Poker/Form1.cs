@@ -759,7 +759,7 @@ namespace Poker
             }
         }
 
-        #region John
+        #region Saki
         void Rules(int c1, int c2, string currentText, ref double current, ref double Power, bool foldedTurn)
         {
             if (c1 == 0 && c2 == 1)
@@ -1760,7 +1760,7 @@ namespace Poker
         }
         #endregion
 
-        #region Saki
+        #region 
 
         //This method determines winner
         void Winner(double current, double power, string currentText, int chips, string lastPlayed)
