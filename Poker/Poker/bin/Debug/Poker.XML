@@ -28,7 +28,6 @@
         </member>
         <member name="M:Poker.Form1.CheckRaise(System.Int32,System.Int32)">
             <summary>
-            
             </summary>
             <param name="currentTurn"></param>
             <param name="raiseTurn"></param>
@@ -36,7 +35,6 @@
         </member>
         <member name="M:Poker.Form1.FixCall(System.Windows.Forms.Label,System.Int32@,System.Int32@,System.Int32)">
             <summary>
-            
             </summary>
             <param name="status"></param>
             <param name="cCall"></param>
@@ -45,25 +43,22 @@
         </member>
         <member name="M:Poker.Form1.AllIn">
             <summary>
-            
             </summary>
             <returns></returns>
         </member>
         <member name="M:Poker.Form1.Finish(System.Int32)">
             <summary>
-            
             </summary>
             <param name="n"></param>
             <returns></returns>
         </member>
         <member name="M:Poker.Form1.FixWinners">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Poker.Form1.AI(System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
             <summary>
-            x
+                x
             </summary>
             <param name="firstCall">The first call.</param>
             <param name="secondCall">The second call.</param>
@@ -77,7 +72,6 @@
         </member>
         <member name="M:Poker.Form1.HighCard(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
-            
             </summary>
             <param name="sChips">The s chips.</param>
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
@@ -87,7 +81,6 @@
         </member>
         <member name="M:Poker.Form1.PairTable(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
-            
             </summary>
             <param name="sChips">The s chips.</param>
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
@@ -97,7 +90,7 @@
         </member>
         <member name="M:Poker.Form1.PairHand(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
-            Pairs the hand.
+                Pairs the hand.
             </summary>
             <param name="sChips">The s chips.</param>
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
@@ -107,7 +100,6 @@
         </member>
         <member name="M:Poker.Form1.TwoPairs(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
-            
             </summary>
             <param name="sChips">The s chips.</param>
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
@@ -117,7 +109,7 @@
         </member>
         <member name="M:Poker.Form1.ThreeOfAKind(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double)">
             <summary>
-            Threes the kind of the of a.
+                Threes the kind of the of a.
             </summary>
             <param name="sChips">The s chips.</param>
             <param name="sTurn">if set to <c>true</c> [s turn].</param>

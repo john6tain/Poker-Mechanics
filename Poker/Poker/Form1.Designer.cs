@@ -133,7 +133,7 @@ namespace Poker
             // addChipsButton
             // 
             this.addChipsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addChipsButton.Location = new System.Drawing.Point(271, 410);
+            this.addChipsButton.Location = new System.Drawing.Point(265, 368);
             this.addChipsButton.Name = "addChipsButton";
             this.addChipsButton.Size = new System.Drawing.Size(75, 25);
             this.addChipsButton.TabIndex = 7;
@@ -144,11 +144,10 @@ namespace Poker
             // numberOfChipsToAdd
             // 
             this.numberOfChipsToAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numberOfChipsToAdd.Location = new System.Drawing.Point(254, 381);
+            this.numberOfChipsToAdd.Location = new System.Drawing.Point(248, 339);
             this.numberOfChipsToAdd.Name = "numberOfChipsToAdd";
             this.numberOfChipsToAdd.Size = new System.Drawing.Size(92, 20);
             this.numberOfChipsToAdd.TabIndex = 8;
-            this.numberOfChipsToAdd.TextChanged += new System.EventHandler(this.numberOfChipsToAdd_TextChanged);
             // 
             // tableBotChips5
             // 
