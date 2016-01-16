@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace Poker
 {
+    /// <summary>
+    /// Adding Chips
+    /// </summary>
     public partial class AddChips : Form
     {
         public int a = 0;

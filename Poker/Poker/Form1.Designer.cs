@@ -62,9 +62,9 @@
             // 
             this.foldButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.foldButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.foldButton.Location = new System.Drawing.Point(9, 403);
+            this.foldButton.Location = new System.Drawing.Point(265, 536);
             this.foldButton.Name = "foldButton";
-            this.foldButton.Size = new System.Drawing.Size(130, 62);
+            this.foldButton.Size = new System.Drawing.Size(114, 49);
             this.foldButton.TabIndex = 0;
             this.foldButton.Text = "Fold";
             this.foldButton.UseVisualStyleBackColor = true;
@@ -74,9 +74,9 @@
             // 
             this.checkButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkButton.Location = new System.Drawing.Point(168, 403);
+            this.checkButton.Location = new System.Drawing.Point(404, 536);
             this.checkButton.Name = "checkButton";
-            this.checkButton.Size = new System.Drawing.Size(134, 62);
+            this.checkButton.Size = new System.Drawing.Size(111, 49);
             this.checkButton.TabIndex = 2;
             this.checkButton.Text = "Check";
             this.checkButton.UseVisualStyleBackColor = true;
@@ -86,9 +86,9 @@
             // 
             this.callButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.callButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.callButton.Location = new System.Drawing.Point(341, 404);
+            this.callButton.Location = new System.Drawing.Point(535, 537);
             this.callButton.Name = "callButton";
-            this.callButton.Size = new System.Drawing.Size(126, 62);
+            this.callButton.Size = new System.Drawing.Size(111, 48);
             this.callButton.TabIndex = 3;
             this.callButton.Text = "Call";
             this.callButton.UseVisualStyleBackColor = true;
@@ -98,9 +98,9 @@
             // 
             this.raiseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.raiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.raiseButton.Location = new System.Drawing.Point(509, 404);
+            this.raiseButton.Location = new System.Drawing.Point(685, 537);
             this.raiseButton.Name = "raiseButton";
-            this.raiseButton.Size = new System.Drawing.Size(124, 62);
+            this.raiseButton.Size = new System.Drawing.Size(111, 48);
             this.raiseButton.TabIndex = 4;
             this.raiseButton.Text = "raise";
             this.raiseButton.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             // 
             this.pbTimer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pbTimer.BackColor = System.Drawing.SystemColors.Control;
-            this.pbTimer.Location = new System.Drawing.Point(9, 374);
+            this.pbTimer.Location = new System.Drawing.Point(265, 507);
             this.pbTimer.Maximum = 1000;
             this.pbTimer.Name = "pbTimer";
             this.pbTimer.Size = new System.Drawing.Size(667, 23);
@@ -121,7 +121,7 @@
             // 
             this.tbChips.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbChips.Location = new System.Drawing.Point(584, 285);
+            this.tbChips.Location = new System.Drawing.Point(694, 461);
             this.tbChips.Name = "tbChips";
             this.tbChips.Size = new System.Drawing.Size(163, 23);
             this.tbChips.TabIndex = 6;
@@ -130,7 +130,7 @@
             // addChipsButton
             // 
             this.addChipsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addChipsButton.Location = new System.Drawing.Point(24, 472);
+            this.addChipsButton.Location = new System.Drawing.Point(271, 410);
             this.addChipsButton.Name = "addChipsButton";
             this.addChipsButton.Size = new System.Drawing.Size(75, 25);
             this.addChipsButton.TabIndex = 7;
@@ -141,16 +141,17 @@
             // numberOfChipsToAdd
             // 
             this.numberOfChipsToAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numberOfChipsToAdd.Location = new System.Drawing.Point(7, 443);
+            this.numberOfChipsToAdd.Location = new System.Drawing.Point(254, 381);
             this.numberOfChipsToAdd.Name = "numberOfChipsToAdd";
-            this.numberOfChipsToAdd.Size = new System.Drawing.Size(125, 20);
+            this.numberOfChipsToAdd.Size = new System.Drawing.Size(92, 20);
             this.numberOfChipsToAdd.TabIndex = 8;
+            this.numberOfChipsToAdd.TextChanged += new System.EventHandler(this.numberOfChipsToAdd_TextChanged);
             // 
             // tbBotChips5
             // 
             this.tbBotChips5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips5.Location = new System.Drawing.Point(491, 344);
+            this.tbBotChips5.Location = new System.Drawing.Point(1112, 488);
             this.tbBotChips5.Name = "tbBotChips5";
             this.tbBotChips5.Size = new System.Drawing.Size(152, 23);
             this.tbBotChips5.TabIndex = 9;
@@ -160,9 +161,9 @@
             // 
             this.tbBotChips4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips4.Location = new System.Drawing.Point(270, 100);
+            this.tbBotChips4.Location = new System.Drawing.Point(1148, 122);
             this.tbBotChips4.Name = "tbBotChips4";
-            this.tbBotChips4.Size = new System.Drawing.Size(123, 23);
+            this.tbBotChips4.Size = new System.Drawing.Size(116, 23);
             this.tbBotChips4.TabIndex = 10;
             this.tbBotChips4.Text = "Chips : 0";
             // 
@@ -170,7 +171,7 @@
             // 
             this.tbBotChips3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBotChips3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips3.Location = new System.Drawing.Point(-72, 12);
+            this.tbBotChips3.Location = new System.Drawing.Point(714, 3);
             this.tbBotChips3.Name = "tbBotChips3";
             this.tbBotChips3.Size = new System.Drawing.Size(125, 23);
             this.tbBotChips3.TabIndex = 11;
@@ -179,7 +180,7 @@
             // tbBotChips2
             // 
             this.tbBotChips2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips2.Location = new System.Drawing.Point(42, 2);
+            this.tbBotChips2.Location = new System.Drawing.Point(213, 3);
             this.tbBotChips2.Name = "tbBotChips2";
             this.tbBotChips2.Size = new System.Drawing.Size(133, 23);
             this.tbBotChips2.TabIndex = 12;
@@ -190,7 +191,7 @@
             // 
             this.tbBotChips1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbBotChips1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbBotChips1.Location = new System.Drawing.Point(12, 403);
+            this.tbBotChips1.Location = new System.Drawing.Point(12, 509);
             this.tbBotChips1.Name = "tbBotChips1";
             this.tbBotChips1.Size = new System.Drawing.Size(142, 23);
             this.tbBotChips1.TabIndex = 13;
@@ -200,7 +201,7 @@
             // 
             this.potChips.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.potChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.potChips.Location = new System.Drawing.Point(155, 122);
+            this.potChips.Location = new System.Drawing.Point(548, 169);
             this.potChips.Name = "potChips";
             this.potChips.Size = new System.Drawing.Size(125, 23);
             this.potChips.TabIndex = 14;
@@ -256,7 +257,7 @@
             // fifthBotStatus
             // 
             this.fifthBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fifthBotStatus.Location = new System.Drawing.Point(491, 370);
+            this.fifthBotStatus.Location = new System.Drawing.Point(1112, 514);
             this.fifthBotStatus.Name = "fifthBotStatus";
             this.fifthBotStatus.Size = new System.Drawing.Size(152, 32);
             this.fifthBotStatus.TabIndex = 26;
@@ -264,7 +265,7 @@
             // fourthBotStatus
             // 
             this.fourthBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fourthBotStatus.Location = new System.Drawing.Point(449, 24);
+            this.fourthBotStatus.Location = new System.Drawing.Point(1157, 160);
             this.fourthBotStatus.Name = "fourthBotStatus";
             this.fourthBotStatus.Size = new System.Drawing.Size(123, 32);
             this.fourthBotStatus.TabIndex = 27;
@@ -272,7 +273,7 @@
             // thirdBotStatus
             // 
             this.thirdBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.thirdBotStatus.Location = new System.Drawing.Point(44, 2);
+            this.thirdBotStatus.Location = new System.Drawing.Point(714, 29);
             this.thirdBotStatus.Name = "thirdBotStatus";
             this.thirdBotStatus.Size = new System.Drawing.Size(125, 32);
             this.thirdBotStatus.TabIndex = 28;
@@ -280,7 +281,7 @@
             // firstBotStatus
             // 
             this.firstBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.firstBotStatus.Location = new System.Drawing.Point(95, 322);
+            this.firstBotStatus.Location = new System.Drawing.Point(12, 535);
             this.firstBotStatus.Name = "firstBotStatus";
             this.firstBotStatus.Size = new System.Drawing.Size(142, 32);
             this.firstBotStatus.TabIndex = 29;
@@ -288,23 +289,23 @@
             // playerStatus
             // 
             this.playerStatus.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.playerStatus.Location = new System.Drawing.Point(584, 322);
+            this.playerStatus.Location = new System.Drawing.Point(799, 536);
             this.playerStatus.Name = "playerStatus";
-            this.playerStatus.Size = new System.Drawing.Size(163, 32);
+            this.playerStatus.Size = new System.Drawing.Size(120, 27);
             this.playerStatus.TabIndex = 30;
             // 
             // secondBotStatus
             // 
-            this.secondBotStatus.Location = new System.Drawing.Point(190, 2);
+            this.secondBotStatus.Location = new System.Drawing.Point(214, 29);
             this.secondBotStatus.Name = "secondBotStatus";
-            this.secondBotStatus.Size = new System.Drawing.Size(133, 32);
+            this.secondBotStatus.Size = new System.Drawing.Size(109, 32);
             this.secondBotStatus.TabIndex = 31;
             // 
             // potLabel
             // 
             this.potLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.potLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.potLabel.Location = new System.Drawing.Point(203, 83);
+            this.potLabel.Location = new System.Drawing.Point(596, 130);
             this.potLabel.Name = "potLabel";
             this.potLabel.Size = new System.Drawing.Size(31, 21);
             this.potLabel.TabIndex = 0;
@@ -313,10 +314,11 @@
             // tbRaise
             // 
             this.tbRaise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbRaise.Location = new System.Drawing.Point(639, 446);
+            this.tbRaise.Location = new System.Drawing.Point(802, 566);
             this.tbRaise.Name = "tbRaise";
             this.tbRaise.Size = new System.Drawing.Size(108, 20);
             this.tbRaise.TabIndex = 0;
+            this.tbRaise.TextChanged += new System.EventHandler(this.tbRaise_TextChanged);
             // 
             // Form1
             // 
@@ -327,7 +329,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::Poker.Properties.Resources.poker_table___Copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1244, 611);
             this.Controls.Add(this.tbRaise);
             this.Controls.Add(this.potLabel);
             this.Controls.Add(this.secondBotStatus);

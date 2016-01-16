@@ -4,6 +4,11 @@
         <name>Poker</name>
     </assembly>
     <members>
+        <member name="T:Poker.AddChips">
+            <summary>
+            Adding Chips
+            </summary>
+        </member>
         <member name="F:Poker.AddChips.components">
             <summary>
             Required designer variable.

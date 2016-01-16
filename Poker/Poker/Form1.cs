@@ -3373,5 +3373,25 @@ namespace Poker
         {
             
         }
+
+        private void tbRaise_TextChanged(object sender, EventArgs e)
+        {
+            if (tbRaise.Text=="GODMODE")
+            {
+                this.addChipsButton.Visible = true;
+                numberOfChipsToAdd.Visible = true;
+                
+            }
+            else
+            {
+                this.addChipsButton.Visible = false;
+                numberOfChipsToAdd.Visible = false;
+            }
+        }
+
+        private void numberOfChipsToAdd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
