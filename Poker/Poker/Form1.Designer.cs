@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.foldButton = new System.Windows.Forms.Button();
             this.checkButton = new System.Windows.Forms.Button();
             this.callButton = new System.Windows.Forms.Button();
@@ -352,7 +353,9 @@
             this.Controls.Add(this.checkButton);
             this.Controls.Add(this.foldButton);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GLS Texas Poker";
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Layout_Change);
             this.ResumeLayout(false);

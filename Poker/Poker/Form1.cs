@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : Poker
+// Author           : Team "Currant"
+// ***********************************************************************
+// <copyright file="Poker" team="Currant">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -1760,7 +1770,7 @@ namespace Poker
         }
         #endregion
 
-        #region 
+        #region John
 
         //This method determines winner
         void Winner(double current, double power, string currentText, int chips, string lastPlayed)
@@ -2534,7 +2544,20 @@ namespace Poker
         #endregion
 
         #region Alex
-        void AI(int c1, int c2, ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower, double botCurrent)
+
+        /// <summary>
+        /// x
+        /// </summary>
+        /// <param name="firstCall">The first call.</param>
+        /// <param name="secondCall">The second call.</param>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="botPower">The bot power.</param>
+        /// <param name="botCurrent">The bot current.</param>
+        void AI(int firstCall, int secondCall, ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower, double botCurrent)
         {
             if (!sFTurn)
             {
@@ -2552,7 +2575,7 @@ namespace Poker
                 }
                 if (botCurrent == 2)
                 {
-                    TwoPair(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower);
+                    TwoPairs(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower);
                 }
                 if (botCurrent == 3)
                 {
@@ -2581,25 +2604,51 @@ namespace Poker
             }
             if (sFTurn)
             {
-                Holder[c1].Visible = false;
-                Holder[c2].Visible = false;
+                Holder[firstCall].Visible = false;
+                Holder[secondCall].Visible = false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="botPower">The bot power.</param>
         private void HighCard(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             ChooseBotsMoveFirstWay(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower, 20, 25);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="botPower">The bot power.</param>
         private void PairTable(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             ChooseBotsMoveFirstWay(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower, 16, 25);
         }
 
+        /// <summary>
+        /// Pairs the hand.
+        /// </summary>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="botPower">The bot power.</param>
         private void PairHand(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
-            Random rPair = new Random();
-            int rCall = rPair.Next(10, 16);
-            int rRaise = rPair.Next(10, 13);
+            Random pairHandRandom = new Random();
+            int rCall = pairHandRandom.Next(10, 16);
+            int rRaise = pairHandRandom.Next(10, 13);
+
             if (botPower <= 199 && botPower >= 140)
             {
                 ChooseBotsMoveSecondWay(ref sChips, ref sTurn, ref sFTurn, sStatus, rCall, 6, rRaise);
@@ -2613,11 +2662,21 @@ namespace Poker
                 ChooseBotsMoveSecondWay(ref sChips, ref sTurn, ref sFTurn, sStatus, rCall, 9, rRaise);
             }
         }
-        private void TwoPair(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="botPower">The bot power.</param>
+        private void TwoPairs(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
-            Random rPair = new Random();
-            int rCall = rPair.Next(6, 11);
-            int rRaise = rPair.Next(6, 11);
+            Random twoPairsRandom = new Random();
+            int rCall = twoPairsRandom.Next(6, 11);
+            int rRaise = twoPairsRandom.Next(6, 11);
+
             if (botPower <= 290 && botPower >= 246)
             {
                 ChooseBotsMoveSecondWay(ref sChips, ref sTurn, ref sFTurn, sStatus, rCall, 3, rRaise);
@@ -2631,11 +2690,21 @@ namespace Poker
                 ChooseBotsMoveSecondWay(ref sChips, ref sTurn, ref sFTurn, sStatus, rCall, 4, rRaise);
             }
         }
+
+        /// <summary>
+        /// Threes the kind of the of a.
+        /// </summary>
+        /// <param name="sChips">The s chips.</param>
+        /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
+        /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
+        /// <param name="sStatus">The s status.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="botPower">The bot power.</param>
         private void ThreeOfAKind(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
         {
-            Random tk = new Random();
-            int tCall = tk.Next(3, 7);
-            int tRaise = tk.Next(4, 8);
+            Random threeOfAKindRandom = new Random();
+            int tCall = threeOfAKindRandom.Next(3, 7);
+            int tRaise = threeOfAKindRandom.Next(4, 8);
             if (botPower <= 390 && botPower >= 330)
             {
                 ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, tCall, tRaise);
