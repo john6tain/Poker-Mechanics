@@ -15,7 +15,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace Poker
 {
@@ -40,22 +39,22 @@ namespace Poker
         private int thirdBotChips = 10000;
         private int fourthBotChips = 10000;
         private int fifthBotChips = 10000;
-        private int playerCall = 0;
-        private int firstBotCall = 0;
-        private int secondBotCall = 0;
-        private int thirdBotCall = 0;
-        private int fourthBotCall = 0;
-        private int fifthBotCall = 0;
-        private int playerRise = 0;
-        private int firstBotRise = 0;
-        private int secondBotRise = 0;
-        private int thirdBotRise = 0;
-        private int fourthBotRise = 0;
-        private int fifthBotRise = 0;
+        private int playerCall;
+        private int firstBotCall;
+        private int secondBotCall;
+        private int thirdBotCall;
+        private int fourthBotCall;
+        private int fifthBotCall;
+        private int playerRise;
+        private int firstBotRise;
+        private int secondBotRise;
+        private int thirdBotRise;
+        private int fourthBotRise;
+        private int fifthBotRise;
 
         private int height;
         private int width;
-        private int winners = 0;
+        private int winners;
         private int Flop = 1;
         private int Turn = 2;
         private int River = 3;
@@ -65,31 +64,31 @@ namespace Poker
         private int raisedTurn = 1;
 
         private double type;
-        private double rounds = 0;
+        private double rounds;
         private double firstBotPower;
         private double secondBotPower;
         private double thirdBotPower;
         private double fourthBotPower;
         private double fifthBotPower;
-        private double playerPower = 0;
+        private double playerPower;
         private double playerType = -1;
-        private double raise = 0;
+        private double raise;
         private double firstBotType = -1;
         private double secondBotType = -1;
         private double thirdBotType = -1;
         private double fourthBotType = -1;
         private double fifthBotType = -1;
 
-        private bool B1turn = false;
-        private bool B2turn = false;
-        private bool B3turn = false;
-        private bool B4turn = false;
-        private bool B5turn = false;
-        private bool B1Fturn = false;
-        private bool B2Fturn = false;
-        private bool B3Fturn = false;
-        private bool B4Fturn = false;
-        private bool B5Fturn = false;
+        private bool B1turn;
+        private bool B2turn;
+        private bool B3turn;
+        private bool B4turn;
+        private bool B5turn;
+        private bool B1Fturn;
+        private bool B2Fturn;
+        private bool B3Fturn;
+        private bool B4Fturn;
+        private bool B5Fturn;
 
         private bool pFolded;
         private bool b1Folded;
@@ -100,17 +99,17 @@ namespace Poker
 
         private bool intsadded;
         private bool changed;
-        private bool PFturn = false;
+        private bool PlayerFirstTurn;
         private bool playerTurn = true;
-        private bool restart = false;
-        private bool isRaising = false;
+        private bool restart;
+        private bool isRaising;
 
         List<bool?> bools = new List<bool?>();
         List<Type> Win = new List<Type>();
         List<string> CheckWinners = new List<string>();
         List<int> ints = new List<int>();
 
-        Poker.Type sorted;
+        Type sorted;
 
         string[] ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
         /*string[] ImgLocation ={
@@ -135,35 +134,35 @@ namespace Poker
         private int bb = 500;
         private int sb = 250;
         private int up = 10000000;
-        private int turnCount = 0;
+        private int turnCount;
         ProgressBar progressBar = new ProgressBar();
 
         #endregion
 
         public Form1()
         {
-            //bools.Add(PFturn); bools.Add(B1Fturn); bools.Add(B2Fturn); bools.Add(B3Fturn); bools.Add(B4Fturn); bools.Add(B5Fturn);
+            //bools.Add(PlayerFirstTurn); bools.Add(B1Fturn); bools.Add(B2Fturn); bools.Add(B3Fturn); bools.Add(B4Fturn); bools.Add(B5Fturn);
             call = bb;
             MaximizeBox = false;
             MinimizeBox = false;
             Updates.Start();
             InitializeComponent();
-            width = this.Width;
-            height = this.Height;
+            width = Width;
+            height = Height;
             Shuffle();
             potChips.Enabled = false;
-            tbChips.Enabled = false;
-            tbBotChips1.Enabled = false;
-            tbBotChips2.Enabled = false;
-            tbBotChips3.Enabled = false;
-            tbBotChips4.Enabled = false;
-            tbBotChips5.Enabled = false;
-            tbChips.Text = "Chips : " + Chips.ToString();
-            tbBotChips1.Text = "Chips : " + firstBotChips.ToString();
-            tbBotChips2.Text = "Chips : " + secondBotChips.ToString();
-            tbBotChips3.Text = "Chips : " + thirdBotChips.ToString();
-            tbBotChips4.Text = "Chips : " + fourthBotChips.ToString();
-            tbBotChips5.Text = "Chips : " + fifthBotChips.ToString();
+            tableChips.Enabled = false;
+            tableBotChips1.Enabled = false;
+            tableBotChips2.Enabled = false;
+            tableBotChips3.Enabled = false;
+            tableBotChips4.Enabled = false;
+            tableBotChips5.Enabled = false;
+            tableChips.Text = "Chips : " + Chips;
+            tableBotChips1.Text = "Chips : " + firstBotChips;
+            tableBotChips2.Text = "Chips : " + secondBotChips;
+            tableBotChips3.Text = "Chips : " + thirdBotChips;
+            tableBotChips4.Text = "Chips : " + fourthBotChips;
+            tableBotChips5.Text = "Chips : " + fifthBotChips;
             timer.Interval = (1 * 1 * 1000);
             timer.Tick += timer_Tick;
             Updates.Interval = (1 * 1 * 100);
@@ -185,7 +184,7 @@ namespace Poker
 
         async Task Shuffle()
         {
-            bools.Add(PFturn); bools.Add(B1Fturn); bools.Add(B2Fturn); bools.Add(B3Fturn); bools.Add(B4Fturn); bools.Add(B5Fturn);
+            bools.Add(PlayerFirstTurn); bools.Add(B1Fturn); bools.Add(B2Fturn); bools.Add(B3Fturn); bools.Add(B4Fturn); bools.Add(B5Fturn);
             callButton.Enabled = false;
             raiseButton.Enabled = false;
             foldButton.Enabled = false;
@@ -209,7 +208,7 @@ namespace Poker
             {
 
                 Deck[i] = Image.FromFile(ImgLocation[i]);
-                var charsToRemove = new string[] { "Assets\\Cards\\", ".png" };
+                var charsToRemove = new[] { "Assets\\Cards\\", ".png" };
                 foreach (var c in charsToRemove)
                 {
                     ImgLocation[i] = ImgLocation[i].Replace(c, string.Empty);
@@ -219,8 +218,8 @@ namespace Poker
                 Holder[i].SizeMode = PictureBoxSizeMode.StretchImage;
                 Holder[i].Height = 130;
                 Holder[i].Width = 80;
-                this.Controls.Add(Holder[i]);
-                Holder[i].Name = "pb" + i.ToString();
+                Controls.Add(Holder[i]);
+                Holder[i].Name = "pb" + i;
                 await Task.Delay(200);
                 #region Throwing Cards
                 if (i < 2)
@@ -235,7 +234,7 @@ namespace Poker
                     //Holder[i].Dock = DockStyle.Top;
                     Holder[i].Location = new Point(horizontal, vertical);
                     horizontal += Holder[i].Width;
-                    this.Controls.Add(playerPanel);
+                    Controls.Add(playerPanel);
                     playerPanel.Location = new Point(Holder[0].Left - 10, Holder[0].Top - 10);
                     playerPanel.BackColor = Color.DarkBlue;
                     playerPanel.Height = 150;
@@ -264,7 +263,7 @@ namespace Poker
                         Holder[i].Location = new Point(horizontal, vertical);
                         horizontal += Holder[i].Width;
                         Holder[i].Visible = true;
-                        this.Controls.Add(firstBotPanel);
+                        Controls.Add(firstBotPanel);
                         firstBotPanel.Location = new Point(Holder[2].Left - 10, Holder[2].Top - 10);
                         firstBotPanel.BackColor = Color.DarkBlue;
                         firstBotPanel.Height = 150;
@@ -298,7 +297,7 @@ namespace Poker
                         Holder[i].Location = new Point(horizontal, vertical);
                         horizontal += Holder[i].Width;
                         Holder[i].Visible = true;
-                        this.Controls.Add(secondBotPanel);
+                        Controls.Add(secondBotPanel);
                         secondBotPanel.Location = new Point(Holder[4].Left - 10, Holder[4].Top - 10);
                         secondBotPanel.BackColor = Color.DarkBlue;
                         secondBotPanel.Height = 150;
@@ -332,7 +331,7 @@ namespace Poker
                         Holder[i].Location = new Point(horizontal, vertical);
                         horizontal += Holder[i].Width;
                         Holder[i].Visible = true;
-                        this.Controls.Add(thirdBotPanel);
+                        Controls.Add(thirdBotPanel);
                         thirdBotPanel.Location = new Point(Holder[6].Left - 10, Holder[6].Top - 10);
                         thirdBotPanel.BackColor = Color.DarkBlue;
                         thirdBotPanel.Height = 150;
@@ -366,7 +365,7 @@ namespace Poker
                         Holder[i].Location = new Point(horizontal, vertical);
                         horizontal += Holder[i].Width;
                         Holder[i].Visible = true;
-                        this.Controls.Add(fourthBotPanel);
+                        Controls.Add(fourthBotPanel);
                         fourthBotPanel.Location = new Point(Holder[8].Left - 10, Holder[8].Top - 10);
                         fourthBotPanel.BackColor = Color.DarkBlue;
                         fourthBotPanel.Height = 150;
@@ -400,7 +399,7 @@ namespace Poker
                         Holder[i].Location = new Point(horizontal, vertical);
                         horizontal += Holder[i].Width;
                         Holder[i].Visible = true;
-                        this.Controls.Add(fifthBotPanel);
+                        Controls.Add(fifthBotPanel);
                         fifthBotPanel.Location = new Point(Holder[10].Left - 10, Holder[10].Top - 10);
                         fifthBotPanel.BackColor = Color.DarkBlue;
                         fifthBotPanel.Height = 150;
@@ -576,14 +575,14 @@ namespace Poker
         async Task Turns()
         {
             #region Rotating
-            if (!PFturn)
+            if (!PlayerFirstTurn)
             {
                 if (playerTurn)
                 {
                     FixCall(playerStatus, ref playerCall, ref playerRise, 1);
                     //MessageBox.Show("Player's Turn");
-                    pbTimer.Visible = true;
-                    pbTimer.Value = 1000;
+                    progressBarTimer.Visible = true;
+                    progressBarTimer.Value = 1000;
                     t = 60;
                     up = 10000000;
                     timer.Start();
@@ -596,10 +595,10 @@ namespace Poker
                     FixCall(playerStatus, ref playerCall, ref playerRise, 2);
                 }
             }
-            if (PFturn || !playerTurn)
+            if (PlayerFirstTurn || !playerTurn)
             {
                 await AllIn();
-                if (PFturn && !pFolded)
+                if (PlayerFirstTurn && !pFolded)
                 {
                     if (callButton.Text.Contains("All in") == false || raiseButton.Text.Contains("All in") == false)
                     {
@@ -610,7 +609,7 @@ namespace Poker
                     }
                 }
                 await CheckRaise(0, 0);
-                pbTimer.Visible = false;
+                progressBarTimer.Visible = false;
                 raiseButton.Enabled = false;
                 callButton.Enabled = false;
                 raiseButton.Enabled = false;
@@ -752,7 +751,7 @@ namespace Poker
                     await CheckRaise(5, 5);
                     playerTurn = true;
                 }
-                if (PFturn && !pFolded)
+                if (PlayerFirstTurn && !pFolded)
                 {
                     if (callButton.Text.Contains("All in") == false || raiseButton.Text.Contains("All in") == false)
                     {
@@ -858,14 +857,14 @@ namespace Poker
                     {
                         current = 8;
                         Power = (st1.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 8 });
+                        Win.Add(new Type { Power = Power, Current = 8 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (st1[0] == 0 && st1[1] == 9 && st1[2] == 10 && st1[3] == 11 && st1[0] + 12 == st1[4])
                     {
                         current = 9;
                         Power = (st1.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 9 });
+                        Win.Add(new Type { Power = Power, Current = 9 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -875,14 +874,14 @@ namespace Poker
                     {
                         current = 8;
                         Power = (st2.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 8 });
+                        Win.Add(new Type { Power = Power, Current = 8 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (st2[0] == 0 && st2[1] == 9 && st2[2] == 10 && st2[3] == 11 && st2[0] + 12 == st2[4])
                     {
                         current = 9;
                         Power = (st2.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 9 });
+                        Win.Add(new Type { Power = Power, Current = 9 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -892,14 +891,14 @@ namespace Poker
                     {
                         current = 8;
                         Power = (st3.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 8 });
+                        Win.Add(new Type { Power = Power, Current = 8 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (st3[0] == 0 && st3[1] == 9 && st3[2] == 10 && st3[3] == 11 && st3[0] + 12 == st3[4])
                     {
                         current = 9;
                         Power = (st3.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 9 });
+                        Win.Add(new Type { Power = Power, Current = 9 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -909,14 +908,14 @@ namespace Poker
                     {
                         current = 8;
                         Power = (st4.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 8 });
+                        Win.Add(new Type { Power = Power, Current = 8 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (st4[0] == 0 && st4[1] == 9 && st4[2] == 10 && st4[3] == 11 && st4[0] + 12 == st4[4])
                     {
                         current = 9;
                         Power = (st4.Max()) / 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 9 });
+                        Win.Add(new Type { Power = Power, Current = 9 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -933,14 +932,14 @@ namespace Poker
                     {
                         current = 7;
                         Power = (Straight[j] / 4) * 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 7 });
+                        Win.Add(new Type { Power = Power, Current = 7 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (Straight[j] / 4 == 0 && Straight[j + 1] / 4 == 0 && Straight[j + 2] / 4 == 0 && Straight[j + 3] / 4 == 0)
                     {
                         current = 7;
                         Power = 13 * 4 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 7 });
+                        Win.Add(new Type { Power = Power, Current = 7 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -962,7 +961,7 @@ namespace Poker
                             {
                                 current = 6;
                                 Power = 13 * 2 + current * 100;
-                                Win.Add(new Type() { Power = Power, Current = 6 });
+                                Win.Add(new Type { Power = Power, Current = 6 });
                                 sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                                 break;
                             }
@@ -970,7 +969,7 @@ namespace Poker
                             {
                                 current = 6;
                                 Power = fh.Max() / 4 * 2 + current * 100;
-                                Win.Add(new Type() { Power = Power, Current = 6 });
+                                Win.Add(new Type { Power = Power, Current = 6 });
                                 sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                                 break;
                             }
@@ -1014,7 +1013,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1022,7 +1021,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1030,7 +1029,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f1.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1044,7 +1043,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1052,7 +1051,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f1.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1063,7 +1062,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1071,7 +1070,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f1.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1083,7 +1082,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1091,7 +1090,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i + 1] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1099,7 +1098,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = f1.Max() + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1113,7 +1112,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1121,7 +1120,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1129,7 +1128,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f2.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1143,7 +1142,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1151,7 +1150,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f2.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1162,7 +1161,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1170,7 +1169,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f2.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1182,7 +1181,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1190,7 +1189,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i + 1] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1198,7 +1197,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = f2.Max() + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1212,7 +1211,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1220,7 +1219,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1228,7 +1227,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f3.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1242,7 +1241,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1250,7 +1249,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f3.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1261,7 +1260,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1269,7 +1268,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f3.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1281,7 +1280,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1289,7 +1288,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i + 1] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1297,7 +1296,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = f3.Max() + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1311,7 +1310,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1319,7 +1318,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1327,7 +1326,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f4.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1341,7 +1340,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1349,7 +1348,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f4.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1360,7 +1359,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = Reserve[i + 1] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1368,7 +1367,7 @@ namespace Poker
                         {
                             current = 5;
                             Power = f4.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 5 });
+                            Win.Add(new Type { Power = Power, Current = 5 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                             vf = true;
                         }
@@ -1380,7 +1379,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1388,7 +1387,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = Reserve[i + 1] + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1396,7 +1395,7 @@ namespace Poker
                     {
                         current = 5;
                         Power = f4.Max() + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5 });
+                        Win.Add(new Type { Power = Power, Current = 5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         vf = true;
                     }
@@ -1408,14 +1407,14 @@ namespace Poker
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (Reserve[i + 1] / 4 == 0 && Reserve[i + 1] % 4 == f1[0] % 4 && vf && f1.Length > 0)
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -1425,14 +1424,14 @@ namespace Poker
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (Reserve[i + 1] / 4 == 0 && Reserve[i + 1] % 4 == f2[0] % 4 && vf && f2.Length > 0)
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -1442,14 +1441,14 @@ namespace Poker
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (Reserve[i + 1] / 4 == 0 && Reserve[i + 1] % 4 == f3[0] % 4 && vf && f3.Length > 0)
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -1459,14 +1458,14 @@ namespace Poker
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                     if (Reserve[i + 1] / 4 == 0 && Reserve[i + 1] % 4 == f4[0] % 4 && vf)
                     {
                         current = 5.5;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 5.5 });
+                        Win.Add(new Type { Power = Power, Current = 5.5 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -1485,14 +1484,14 @@ namespace Poker
                         {
                             current = 4;
                             Power = op.Max() + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 4 });
+                            Win.Add(new Type { Power = Power, Current = 4 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         }
                         else
                         {
                             current = 4;
                             Power = op[j + 4] + current * 100;
-                            Win.Add(new Type() { Power = Power, Current = 4 });
+                            Win.Add(new Type { Power = Power, Current = 4 });
                             sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                         }
                     }
@@ -1500,7 +1499,7 @@ namespace Poker
                     {
                         current = 4;
                         Power = 13 + current * 100;
-                        Win.Add(new Type() { Power = Power, Current = 4 });
+                        Win.Add(new Type { Power = Power, Current = 4 });
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -1530,7 +1529,7 @@ namespace Poker
                         {
                             power = fh[0] / 4 + fh[1] / 4 + fh[2] / 4 + current * 100;
                         }
-                        Win.Add(new Type() { Power = power, Current = 3 });
+                        Win.Add(new Type { Power = power, Current = 3 });
                         sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                     }
                 }
@@ -1568,17 +1567,17 @@ namespace Poker
                                         if (Reserve[i] / 4 == 0)
                                         {
                                             power = 13 * 4 + (Reserve[i + 1] / 4) * 2 + current * 100;
-                                            Win.Add(new Type() { Power = power, Current = 2 });
+                                            Win.Add(new Type { Power = power, Current = 2 });
                                         }
                                         if (Reserve[i + 1] / 4 == 0)
                                         {
                                             power = 13 * 4 + (Reserve[i] / 4) * 2 + current * 100;
-                                            Win.Add(new Type() { Power = power, Current = current });
+                                            Win.Add(new Type { Power = power, Current = current });
                                         }
                                         if (Reserve[i + 1] / 4 != 0 && Reserve[i] / 4 != 0)
                                         {
                                             power = (Reserve[i] / 4) * 2 + (Reserve[i + 1] / 4) * 2 + current * 100;
-                                            Win.Add(new Type() { Power = power, Current = current });
+                                            Win.Add(new Type { Power = power, Current = current });
                                         }
 
                                         sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
@@ -1624,7 +1623,7 @@ namespace Poker
                                         {
                                             power = (Reserve[tc] / 4) * 2 + (Reserve[i + 1] / 4) * 2 + current * 100;
                                         }
-                                        Win.Add(new Type() { Power = power, Current = 2 });
+                                        Win.Add(new Type { Power = power, Current = 2 });
 
                                         if (Reserve[i] / 4 == 0)
                                         {
@@ -1634,7 +1633,7 @@ namespace Poker
                                         {
                                             power = (Reserve[tc] / 4) * 2 + (Reserve[i] / 4) * 2 + current * 100;
                                         }
-                                        Win.Add(new Type() { Power = power, Current = 2 });
+                                        Win.Add(new Type { Power = power, Current = 2 });
 
                                         sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                                     }
@@ -1656,7 +1655,7 @@ namespace Poker
                                             {
                                                 power = Reserve[tc] / 4 + Reserve[i] / 4 + current * 100;
                                             }
-                                            Win.Add(new Type() { Power = power, Current = 1 });
+                                            Win.Add(new Type { Power = power, Current = 1 });
                                             sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                                         }
                                         else
@@ -1669,7 +1668,7 @@ namespace Poker
                                             {
                                                 power = Reserve[tc] / 4 + Reserve[i + 1] / 4 + current * 100;
                                             }
-                                            Win.Add(new Type() { Power = power, Current = 1 });
+                                            Win.Add(new Type { Power = power, Current = 1 });
                                             sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                                         }
                                     }
@@ -1700,7 +1699,7 @@ namespace Poker
                             power = (Reserve[i + 1] / 4) * 4 + current * 100;
                         }
 
-                        Win.Add(new Type() { Power = power, Current = 1 });
+                        Win.Add(new Type { Power = power, Current = 1 });
                         sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                     }
                     hasBeenProcessed = true;
@@ -1722,7 +1721,7 @@ namespace Poker
                                 power = (Reserve[i + 1] / 4) * 4 + Reserve[i] / 4 + current * 100;
                             }
 
-                            Win.Add(new Type() { Power = power, Current = 1 });
+                            Win.Add(new Type { Power = power, Current = 1 });
                             sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                         }
                         hasBeenProcessed = true;
@@ -1741,7 +1740,7 @@ namespace Poker
                                 power = (Reserve[tc] / 4) * 4 + Reserve[i + 1] / 4 + current * 100;
                             }
 
-                            Win.Add(new Type() { Power = power, Current = 1 });
+                            Win.Add(new Type { Power = power, Current = 1 });
                             sorted = Win.OrderByDescending(op => op.Current).ThenByDescending(op => op.Power).First();
                         }
                         hasBeenProcessed = true;
@@ -1761,12 +1760,12 @@ namespace Poker
                 {
                     power = Reserve[i + 1] / 4;
                 }
-                Win.Add(new Type() { Power = power, Current = -1 });
+                Win.Add(new Type { Power = power, Current = -1 });
 
                 if (Reserve[i] / 4 == 0 || Reserve[i + 1] / 4 == 0)
                 {
                     power = 13;
-                    Win.Add(new Type() { Power = power, Current = -1 });
+                    Win.Add(new Type { Power = power, Current = -1 });
                 }
                 sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
             }
@@ -1845,38 +1844,38 @@ namespace Poker
                     if (CheckWinners.Contains("Player"))
                     {
                         Chips += int.Parse(potChips.Text) / winners;
-                        tbChips.Text = Chips.ToString();
+                        tableChips.Text = Chips.ToString();
                         //playerPanel.Visible = true;
 
                     }
                     if (CheckWinners.Contains("Bot 1"))
                     {
                         firstBotChips += int.Parse(potChips.Text) / winners;
-                        tbBotChips1.Text = firstBotChips.ToString();
+                        tableBotChips1.Text = firstBotChips.ToString();
                         //firstBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 2"))
                     {
                         secondBotChips += int.Parse(potChips.Text) / winners;
-                        tbBotChips2.Text = secondBotChips.ToString();
+                        tableBotChips2.Text = secondBotChips.ToString();
                         //secondBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 3"))
                     {
                         thirdBotChips += int.Parse(potChips.Text) / winners;
-                        tbBotChips3.Text = thirdBotChips.ToString();
+                        tableBotChips3.Text = thirdBotChips.ToString();
                         //thirdBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 4"))
                     {
                         fourthBotChips += int.Parse(potChips.Text) / winners;
-                        tbBotChips4.Text = fourthBotChips.ToString();
+                        tableBotChips4.Text = fourthBotChips.ToString();
                         //fourthBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 5"))
                     {
                         fifthBotChips += int.Parse(potChips.Text) / winners;
-                        tbBotChips5.Text = fifthBotChips.ToString();
+                        tableBotChips5.Text = fifthBotChips.ToString();
                         //fifthBotPanel.Visible = true;
                     }
                     //await Finish(1);
@@ -1951,7 +1950,7 @@ namespace Poker
                         call = 0;
                         raisedTurn = 123;
                         rounds++;
-                        if (!PFturn)
+                        if (!PlayerFirstTurn)
                             playerStatus.Text = "";
                         if (!B1Fturn)
                             firstBotStatus.Text = "";
@@ -2039,7 +2038,7 @@ namespace Poker
                 if (!playerStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Player";
-                    Rules(0, 1, "Player", ref playerType, ref playerPower, PFturn);
+                    Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
                 }
                 if (!firstBotStatus.Text.Contains("Fold"))
                 {
@@ -2075,7 +2074,7 @@ namespace Poker
                 Winner(fifthBotType, fifthBotPower, "Bot 5", fifthBotChips, fixedLast);
                 restart = true;
                 playerTurn = true;
-                PFturn = false;
+                PlayerFirstTurn = false;
                 B1Fturn = false;
                 B2Fturn = false;
                 B3Fturn = false;
@@ -2093,7 +2092,7 @@ namespace Poker
                         thirdBotChips += f2.a;
                         fourthBotChips += f2.a;
                         fifthBotChips += f2.a;
-                        PFturn = false;
+                        PlayerFirstTurn = false;
                         playerTurn = true;
                         raiseButton.Enabled = true;
                         foldButton.Enabled = true;
@@ -2296,42 +2295,42 @@ namespace Poker
                 if (index == 0)
                 {
                     Chips += int.Parse(potChips.Text);
-                    tbChips.Text = Chips.ToString();
+                    tableChips.Text = Chips.ToString();
                     playerPanel.Visible = true;
                     MessageBox.Show("Player Wins");
                 }
                 if (index == 1)
                 {
                     firstBotChips += int.Parse(potChips.Text);
-                    tbChips.Text = firstBotChips.ToString();
+                    tableChips.Text = firstBotChips.ToString();
                     firstBotPanel.Visible = true;
                     MessageBox.Show("Bot 1 Wins");
                 }
                 if (index == 2)
                 {
                     secondBotChips += int.Parse(potChips.Text);
-                    tbChips.Text = secondBotChips.ToString();
+                    tableChips.Text = secondBotChips.ToString();
                     secondBotPanel.Visible = true;
                     MessageBox.Show("Bot 2 Wins");
                 }
                 if (index == 3)
                 {
                     thirdBotChips += int.Parse(potChips.Text);
-                    tbChips.Text = thirdBotChips.ToString();
+                    tableChips.Text = thirdBotChips.ToString();
                     thirdBotPanel.Visible = true;
                     MessageBox.Show("Bot 3 Wins");
                 }
                 if (index == 4)
                 {
                     fourthBotChips += int.Parse(potChips.Text);
-                    tbChips.Text = fourthBotChips.ToString();
+                    tableChips.Text = fourthBotChips.ToString();
                     fourthBotPanel.Visible = true;
                     MessageBox.Show("Bot 4 Wins");
                 }
                 if (index == 5)
                 {
                     fifthBotChips += int.Parse(potChips.Text);
-                    tbChips.Text = fifthBotChips.ToString();
+                    tableChips.Text = fifthBotChips.ToString();
                     fifthBotPanel.Visible = true;
                     MessageBox.Show("Bot 5 Wins");
                 }
@@ -2413,7 +2412,7 @@ namespace Poker
             b4Folded = false;
             b5Folded = false;
 
-            PFturn = false;
+            PlayerFirstTurn = false;
             playerTurn = true;
             restart = false;
             isRaising = false;
@@ -2477,7 +2476,7 @@ namespace Poker
                     thirdBotChips += f2.a;
                     fourthBotChips += f2.a;
                     fifthBotChips += f2.a;
-                    PFturn = false;
+                    PlayerFirstTurn = false;
                     playerTurn = true;
                     raiseButton.Enabled = true;
                     foldButton.Enabled = true;
@@ -2509,7 +2508,7 @@ namespace Poker
             if (!playerStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Player";
-                Rules(0, 1, "Player", ref playerType, ref playerPower, PFturn);
+                Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             }
             if (!firstBotStatus.Text.Contains("Fold"))
             {
@@ -3064,53 +3063,53 @@ namespace Poker
         #region UI
         private async void timer_Tick(object sender, object e)
         {
-            if (pbTimer.Value <= 0)
+            if (progressBarTimer.Value <= 0)
             {
-                PFturn = true;
+                PlayerFirstTurn = true;
                 await Turns();
             }
             if (t > 0)
             {
                 t--;
-                pbTimer.Value = (t / 6) * 100;
+                progressBarTimer.Value = (t / 6) * 100;
             }
         }
         private void Update_Tick(object sender, object e)
         {
             if (Chips <= 0)
             {
-                tbChips.Text = "Chips : 0";
+                tableChips.Text = "Chips : 0";
             }
             if (firstBotChips <= 0)
             {
-                tbBotChips1.Text = "Chips : 0";
+                tableBotChips1.Text = "Chips : 0";
             }
             if (secondBotChips <= 0)
             {
-                tbBotChips2.Text = "Chips : 0";
+                tableBotChips2.Text = "Chips : 0";
             }
             if (thirdBotChips <= 0)
             {
-                tbBotChips3.Text = "Chips : 0";
+                tableBotChips3.Text = "Chips : 0";
             }
             if (fourthBotChips <= 0)
             {
-                tbBotChips4.Text = "Chips : 0";
+                tableBotChips4.Text = "Chips : 0";
             }
             if (fifthBotChips <= 0)
             {
-                tbBotChips5.Text = "Chips : 0";
+                tableBotChips5.Text = "Chips : 0";
             }
-            tbChips.Text = "Chips : " + Chips.ToString();
-            tbBotChips1.Text = "Chips : " + firstBotChips.ToString();
-            tbBotChips2.Text = "Chips : " + secondBotChips.ToString();
-            tbBotChips3.Text = "Chips : " + thirdBotChips.ToString();
-            tbBotChips4.Text = "Chips : " + fourthBotChips.ToString();
-            tbBotChips5.Text = "Chips : " + fifthBotChips.ToString();
+            tableChips.Text = "Chips : " + Chips;
+            tableBotChips1.Text = "Chips : " + firstBotChips;
+            tableBotChips2.Text = "Chips : " + secondBotChips;
+            tableBotChips3.Text = "Chips : " + thirdBotChips;
+            tableBotChips4.Text = "Chips : " + fourthBotChips;
+            tableBotChips5.Text = "Chips : " + fifthBotChips;
             if (Chips <= 0)
             {
                 playerTurn = false;
-                PFturn = true;
+                PlayerFirstTurn = true;
                 callButton.Enabled = false;
                 raiseButton.Enabled = false;
                 foldButton.Enabled = false;
@@ -3122,7 +3121,7 @@ namespace Poker
             }
             if (Chips >= call)
             {
-                callButton.Text = "Call " + call.ToString();
+                callButton.Text = "Call " + call;
             }
             else
             {
@@ -3165,7 +3164,7 @@ namespace Poker
         {
             playerStatus.Text = "Fold";
             playerTurn = false;
-            PFturn = true;
+            PlayerFirstTurn = true;
             await Turns();
         }
         private async void bCheck_Click(object sender, EventArgs e)
@@ -3185,11 +3184,11 @@ namespace Poker
         }
         private async void bCall_Click(object sender, EventArgs e)
         {
-            Rules(0, 1, "Player", ref playerType, ref playerPower, PFturn);
+            Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             if (Chips >= call)
             {
                 Chips -= call;
-                tbChips.Text = "Chips : " + Chips.ToString();
+                tableChips.Text = "Chips : " + Chips;
                 if (potChips.Text != "")
                 {
                     potChips.Text = (int.Parse(potChips.Text) + call).ToString();
@@ -3207,7 +3206,7 @@ namespace Poker
                 potChips.Text = (int.Parse(potChips.Text) + Chips).ToString();
                 playerStatus.Text = "All in " + Chips;
                 Chips = 0;
-                tbChips.Text = "Chips : " + Chips.ToString();
+                tableChips.Text = "Chips : " + Chips;
                 playerTurn = false;
                 foldButton.Enabled = false;
                 playerCall = Chips;
@@ -3216,7 +3215,7 @@ namespace Poker
         }
         private async void bRaise_Click(object sender, EventArgs e)
         {
-            Rules(0, 1, "Player", ref playerType, ref playerPower, PFturn);
+            Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             int parsedValue;
             if (tbRaise.Text != "" && int.TryParse(tbRaise.Text, out parsedValue))
             {
@@ -3228,31 +3227,28 @@ namespace Poker
                         MessageBox.Show("You must raise atleast twice as the current raise !");
                         return;
                     }
+                    if (Chips >= int.Parse(tbRaise.Text))
+                    {
+                        call = int.Parse(tbRaise.Text);
+                        raise = int.Parse(tbRaise.Text);
+                        playerStatus.Text = "raise " + call;
+                        potChips.Text = (int.Parse(potChips.Text) + call).ToString();
+                        callButton.Text = "Call";
+                        Chips -= int.Parse(tbRaise.Text);
+                        isRaising = true;
+                        last = 0;
+                        playerRise = Convert.ToInt32(raise);
+                    }
                     else
                     {
-                        if (Chips >= int.Parse(tbRaise.Text))
-                        {
-                            call = int.Parse(tbRaise.Text);
-                            raise = int.Parse(tbRaise.Text);
-                            playerStatus.Text = "raise " + call.ToString();
-                            potChips.Text = (int.Parse(potChips.Text) + call).ToString();
-                            callButton.Text = "Call";
-                            Chips -= int.Parse(tbRaise.Text);
-                            isRaising = true;
-                            last = 0;
-                            playerRise = Convert.ToInt32(raise);
-                        }
-                        else
-                        {
-                            call = Chips;
-                            raise = Chips;
-                            potChips.Text = (int.Parse(potChips.Text) + Chips).ToString();
-                            playerStatus.Text = "raise " + call.ToString();
-                            Chips = 0;
-                            isRaising = true;
-                            last = 0;
-                            playerRise = Convert.ToInt32(raise);
-                        }
+                        call = Chips;
+                        raise = Chips;
+                        potChips.Text = (int.Parse(potChips.Text) + Chips).ToString();
+                        playerStatus.Text = "raise " + call;
+                        Chips = 0;
+                        isRaising = true;
+                        last = 0;
+                        playerRise = Convert.ToInt32(raise);
                     }
                 }
             }
@@ -3269,14 +3265,23 @@ namespace Poker
             if (numberOfChipsToAdd.Text == "") { }
             else
             {
-                Chips += int.Parse(numberOfChipsToAdd.Text);
-                firstBotChips += int.Parse(numberOfChipsToAdd.Text);
-                secondBotChips += int.Parse(numberOfChipsToAdd.Text);
-                thirdBotChips += int.Parse(numberOfChipsToAdd.Text);
-                fourthBotChips += int.Parse(numberOfChipsToAdd.Text);
-                fifthBotChips += int.Parse(numberOfChipsToAdd.Text);
+                try
+                {
+                    Chips += int.Parse(numberOfChipsToAdd.Text);
+                    firstBotChips += int.Parse(numberOfChipsToAdd.Text);
+                    secondBotChips += int.Parse(numberOfChipsToAdd.Text);
+                    thirdBotChips += int.Parse(numberOfChipsToAdd.Text);
+                    fourthBotChips += int.Parse(numberOfChipsToAdd.Text);
+                    fifthBotChips += int.Parse(numberOfChipsToAdd.Text);
+                }
+                catch (FormatException)
+                {
+
+                    MessageBox.Show("Wrong value", "ARE YOU MAD");
+                }
+               
             }
-            tbChips.Text = "Chips : " + Chips.ToString();
+            tableChips.Text = "Chips : " + Chips;
         }
         private void bOptions_Click(object sender, EventArgs e)
         {
@@ -3359,8 +3364,8 @@ namespace Poker
         }
         private void Layout_Change(object sender, LayoutEventArgs e)
         {
-            width = this.Width;
-            height = this.Height;
+            width = Width;
+            height = Height;
         }
         #endregion
 
@@ -3378,13 +3383,13 @@ namespace Poker
         {
             if (tbRaise.Text=="GODMODE")
             {
-                this.addChipsButton.Visible = true;
+                addChipsButton.Visible = true;
                 numberOfChipsToAdd.Visible = true;
                 
             }
             else
             {
-                this.addChipsButton.Visible = false;
+                addChipsButton.Visible = false;
                 numberOfChipsToAdd.Visible = false;
             }
         }
