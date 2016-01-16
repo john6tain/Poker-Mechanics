@@ -2652,71 +2652,90 @@ namespace Poker
         #endregion
 
         #region Tsvetelin
-        private void Straight(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
+        //botChips/sChips = the current bot's chips
+        //isOnTurn/sTurn = the bot is on turn
+        //isFinalTurn/sFTurn = the final hand for the game is played (all five cards on table are shown)
+        //hasFolded/sStatus = checks if the bot has folded the game
+        //botIndex/name = used for Bot indexing, name = 0 is bot 1, name = 1 is Bot 2 and etc.
+
+        private void Straight(ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+            int botIndex, double botPower)
         {
-            Random str = new Random();
-            int sCall = str.Next(3, 6);
-            int sRaise = str.Next(3, 8);
+            Random straightRandomGenerator = new Random();
+            int chanceToCall = straightRandomGenerator.Next(3, 6);
+            int chanceToRaise = straightRandomGenerator.Next(3, 8);
+
+            //Трите if-а могат да се заменят с един, който ще проверява дали botPower >= 404 && botPower <= 480
+            //тъй като и в трите случая извикват един и същи метод с едни и същи параметри
             if (botPower <= 480 && botPower >= 410)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, sCall, sRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
             if (botPower <= 409 && botPower >= 407)//10  8
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, sCall, sRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
             if (botPower < 407 && botPower >= 404)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, sCall, sRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
         }
-        private void Flush(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
+
+        private void Flush(ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+            int botIndex, double botPower)
         {
-            Random fsh = new Random();
-            int fCall = fsh.Next(2, 6);
-            int fRaise = fsh.Next(3, 7);
-            ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, fCall, fRaise);
+            Random flushRandomGenerator = new Random();
+            int chanceToCall = flushRandomGenerator.Next(2, 6);
+            int chanceToRaise = flushRandomGenerator.Next(3, 7);
+            ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
         }
-        private void FullHouse(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
+
+        private void FullHouse(ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+            int botIndex, double botPower)
         {
-            Random flh = new Random();
-            int fhCall = flh.Next(1, 5);
-            int fhRaise = flh.Next(2, 6);
+            Random fullHouseRandomGenerator = new Random();
+            int chanceToCall = fullHouseRandomGenerator.Next(1, 5);
+            int chanceToRaise = fullHouseRandomGenerator.Next(2, 6);
             if (botPower <= 626 && botPower >= 620)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, fhCall, fhRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
             if (botPower < 620 && botPower >= 602)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, fhCall, fhRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
         }
-        private void FourOfAKind(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
+
+        private void FourOfAKind(ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+            int botIndex, double botPower)
         {
-            Random fk = new Random();
-            int fkCall = fk.Next(1, 4);
-            int fkRaise = fk.Next(2, 5);
+            Random fourOfAKindRandomGenerator = new Random();
+            int chanceToCall = fourOfAKindRandomGenerator.Next(1, 4);
+            int chanceToRaise = fourOfAKindRandomGenerator.Next(2, 5);
             if (botPower <= 752 && botPower >= 704)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, fkCall, fkRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
         }
-        private void StraightFlush(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name, double botPower)
+
+        private void StraightFlush(ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+            int botIndex, double botPower)
         {
-            Random sf = new Random();
-            int sfCall = sf.Next(1, 3);
-            int sfRaise = sf.Next(1, 3);
+            Random straightFlushRandomGenerator = new Random();
+            int chanceToCall = straightFlushRandomGenerator.Next(1, 3);
+            int chanceToRaise = straightFlushRandomGenerator.Next(1, 3);
             if (botPower <= 913 && botPower >= 804)
             {
-                ChooseBotsMoveThirdWay(ref sChips, ref sTurn, ref sFTurn, sStatus, name, sfCall, sfRaise);
+                ChooseBotsMoveThirdWay(ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
         }
-        private void Fold(ref bool sTurn, ref bool sFTurn, Label sStatus)
+
+        private void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label sStatus)
         {
             isRaising = false;
             sStatus.Text = "Fold";
-            sTurn = false;
-            sFTurn = true;
+            isOnTurn = false;
+            isFinalTurn = true;
         }
         #endregion
 

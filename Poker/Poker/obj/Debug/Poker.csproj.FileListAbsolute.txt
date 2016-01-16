@@ -78,3 +78,13 @@ C:\Users\ff\Documents\123456\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChip
 C:\Users\ff\Documents\123456\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
 C:\Users\ff\Documents\123456\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\ff\Documents\123456\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
