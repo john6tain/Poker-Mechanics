@@ -15,11 +15,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Poker
 {
+
     public partial class Form1 : Form
     {
+
         #region Variables
         readonly Panel playerPanel = new Panel();
         readonly Panel firstBotPanel = new Panel();
@@ -3364,6 +3367,11 @@ namespace Poker
         private void tbBotChips2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

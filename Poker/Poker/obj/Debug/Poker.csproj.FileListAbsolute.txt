@@ -102,3 +102,4 @@ C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.r
 C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\Tsvetelin\Documents\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 >>>>>>> 6ef468f27d6130af9b28d6636ac0a9be91b18972
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
