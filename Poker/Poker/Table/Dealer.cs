@@ -1,6 +1,6 @@
 ﻿namespace Poker.Table
 {
-    public class Dealer
+    public static class Dealer
     {
          
     }

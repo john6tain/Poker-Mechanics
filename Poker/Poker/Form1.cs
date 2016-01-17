@@ -24,7 +24,7 @@ namespace Poker
         public Form1()
         {
             //bools.Add(PlayerFirstTurn); bools.Add(botOneFirstTurn); bools.Add(botTwoTurn); bools.Add(botThreeFirstTurn); bools.Add(botFourFirstTurn); bools.Add(botFiveFirstTurn);
-            call = bb;
+            call = bigBlind;
             MaximizeBox = false;
             MinimizeBox = false;
 
@@ -67,7 +67,7 @@ namespace Poker
             smallBlindSum.Visible = false;
             bigBlindButton.Visible = false;
             smallBlindButton.Visible = false;
-            tbRaise.Text = (bb*2).ToString();
+            tbRaise.Text = (bigBlind*2).ToString();
         }
 
         //this method is shuffling the cards
@@ -807,8 +807,8 @@ namespace Poker
 
         private int t = 60;
         private int i;
-        private int bb = 500;
-        private int sb = 250;
+        private int bigBlind = 500;
+        private int smallBlind = 250;
         private int up = 10000000;
         private int turnCount;
         private ProgressBar progressBar = new ProgressBar();
@@ -818,14 +818,14 @@ namespace Poker
         #region Saki
 
         /// <summary>
-        /// This method sets the game rulles by determining the strenght of the diferent card combinations;
+        /// This method sets the game rulles by determining the strenght of the different card combinations;
         /// </summary>
         /// <param name="card1">first card in hand</param>
         /// <param name="card2">second card in hand</param>
         /// <param name="currentText"></param>
         /// <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
         /// <param name="power"></param>
-        /// <param name="foldedTurn">bool variable determins if player has folder or not</param>
+        /// <param name="foldedTurn">bool variable determins if player has folded or not</param>
         private void SetGameRules(
             int card1, 
             int card2, 
@@ -855,21 +855,21 @@ namespace Poker
                 littleStraight[3] = bigStraight[5] = Reserve[15];
                 littleStraight[4] = bigStraight[6] = Reserve[16];
 
-                int[] straightOfFour = bigStraight.Where(o => o % 4 == 0).ToArray();
-                int[] straightOfFive = bigStraight.Where(o => o % 4 == 1).ToArray();
-                int[] straightOfSix = bigStraight.Where(o => o % 4 == 2).ToArray();
-                int[] straightOfSeven = bigStraight.Where(o => o % 4 == 3).ToArray();
+                int[] straightOfClubs = bigStraight.Where(o => o % 4 == 0).ToArray();
+                int[] straightOfDiamonds = bigStraight.Where(o => o % 4 == 1).ToArray();
+                int[] straightOfHearts = bigStraight.Where(o => o % 4 == 2).ToArray();
+                int[] straightOfSpades = bigStraight.Where(o => o % 4 == 3).ToArray();
 
-                int[] straightOfFourValue = straightOfFour.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfFiveValue = straightOfFive.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfSixValue = straightOfSix.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfSevenValue = straightOfSeven.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfClubsValue = straightOfClubs.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfDiamondsValue = straightOfDiamonds.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfHeartsValue = straightOfHearts.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfSpadesValue = straightOfSpades.Select(o => o / 4).Distinct().ToArray();
 
                 Array.Sort(bigStraight);
-                Array.Sort(straightOfFourValue);
-                Array.Sort(straightOfFiveValue);
-                Array.Sort(straightOfSixValue);
-                Array.Sort(straightOfSevenValue);
+                Array.Sort(straightOfClubsValue);
+                Array.Sort(straightOfDiamondsValue);
+                Array.Sort(straightOfHeartsValue);
+                Array.Sort(straightOfSpadesValue);
 
                 const int CardsOnTable = 16;
                 
@@ -898,7 +898,6 @@ namespace Poker
                         //Flush curentCardsValue = 5 || 5.5
                         rFlush(ref curentCardsValue, ref power, ref vf, littleStraight);
                         
-
                         //Full House curentCardsValue = 6
                         rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
                         
@@ -906,7 +905,7 @@ namespace Poker
                         rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
                         
                         //Straight Flush curentCardsValue = 8 || 9
-                        rStraightFlush(ref curentCardsValue, ref power, straightOfFourValue, straightOfFiveValue, straightOfSixValue, straightOfSevenValue);
+                        CheckForStraightFlush(ref curentCardsValue, ref power, straightOfClubsValue, straightOfDiamondsValue, straightOfHeartsValue, straightOfSpadesValue);
                         
                         //High Card curentCardsValue = -1
                         CheckForHighCard(ref curentCardsValue, ref power);
@@ -915,75 +914,90 @@ namespace Poker
             }
         }
 
-        private void rStraightFlush(ref double current, ref double Power, int[] st1, int[] st2, int[] st3, int[] st4)
+        /// <summary>
+        /// This method checks player's cards for Straight Flush
+        /// </summary>
+        /// <param name="currentCardsValue">players cards</param>
+        /// <param name="cardsPower">cards weight</param>
+        /// <param name="straightOfClubs">Checks if the pleyer has straight of Clubs</param>
+        /// <param name="straightOfDiamonds">Checks if the pleyer has straight of Diamonds</param>
+        /// <param name="straightOfHearts">Checks if the pleyer has straight of Hearts</param>
+        /// <param name="straightOfSpades">Checks if the pleyer has straight of Spades</param>
+        private void CheckForStraightFlush(
+            ref double currentCardsValue, 
+            ref double cardsPower, 
+            int[] straightOfClubs, 
+            int[] straightOfDiamonds, 
+            int[] straightOfHearts, 
+            int[] straightOfSpades)
         {
-            if (current >= -1)
+            if (currentCardsValue >= -1)
             {
-                if (st1.Length >= 5)
+                if (straightOfClubs.Length >= 5)
                 {
-                    if (st1[0] + 4 == st1[4])
+                    if (straightOfClubs[0] + 4 == straightOfClubs[4])
                     {
-                        current = 8;
-                        Power = st1.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 8});
+                        currentCardsValue = 8;
+                        cardsPower = straightOfClubs.Max() / 4 + currentCardsValue * 100;
+                        Win.Add(new Type {Power = cardsPower, Current = 8});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
-                    if (st1[0] == 0 && st1[1] == 9 && st1[2] == 10 && st1[3] == 11 && st1[0] + 12 == st1[4])
+                    if (straightOfClubs[0] == 0 && straightOfClubs[1] == 9 && straightOfClubs[2] == 10 && straightOfClubs[3] == 11 && straightOfClubs[0] + 12 == straightOfClubs[4])
                     {
-                        current = 9;
-                        Power = st1.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 9});
+                        currentCardsValue = 9;
+                        cardsPower = straightOfClubs.Max()/4 + currentCardsValue * 100;
+                        Win.Add(new Type {Power = cardsPower, Current = 9});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
-                if (st2.Length >= 5)
+                if (straightOfDiamonds.Length >= 5)
                 {
-                    if (st2[0] + 4 == st2[4])
+                    if (straightOfDiamonds[0] + 4 == straightOfDiamonds[4])
                     {
-                        current = 8;
-                        Power = st2.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 8});
+                        currentCardsValue = 8;
+                        cardsPower = straightOfDiamonds.Max()/4 + currentCardsValue*100;
+                        Win.Add(new Type {Power = cardsPower, Current = 8});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
-                    if (st2[0] == 0 && st2[1] == 9 && st2[2] == 10 && st2[3] == 11 && st2[0] + 12 == st2[4])
+                    if (straightOfDiamonds[0] == 0 && straightOfDiamonds[1] == 9 && straightOfDiamonds[2] == 10 && straightOfDiamonds[3] == 11 && straightOfDiamonds[0] + 12 == straightOfDiamonds[4])
                     {
-                        current = 9;
-                        Power = st2.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 9});
+                        currentCardsValue = 9;
+                        cardsPower = straightOfDiamonds.Max()/4 + currentCardsValue*100;
+                        Win.Add(new Type {Power = cardsPower, Current = 9});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
-                if (st3.Length >= 5)
+                if (straightOfHearts.Length >= 5)
                 {
-                    if (st3[0] + 4 == st3[4])
+                    if (straightOfHearts[0] + 4 == straightOfHearts[4])
                     {
-                        current = 8;
-                        Power = st3.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 8});
+                        currentCardsValue = 8;
+                        cardsPower = straightOfHearts.Max()/4 + currentCardsValue*100;
+                        Win.Add(new Type {Power = cardsPower, Current = 8});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
-                    if (st3[0] == 0 && st3[1] == 9 && st3[2] == 10 && st3[3] == 11 && st3[0] + 12 == st3[4])
+                    if (straightOfHearts[0] == 0 && straightOfHearts[1] == 9 && straightOfHearts[2] == 10 && straightOfHearts[3] == 11 && straightOfHearts[0] + 12 == straightOfHearts[4])
                     {
-                        current = 9;
-                        Power = st3.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 9});
+                        currentCardsValue = 9;
+                        cardsPower = straightOfHearts.Max()/4 + currentCardsValue*100;
+                        Win.Add(new Type {Power = cardsPower, Current = 9});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
-                if (st4.Length >= 5)
+                if (straightOfSpades.Length >= 5)
                 {
-                    if (st4[0] + 4 == st4[4])
+                    if (straightOfSpades[0] + 4 == straightOfSpades[4])
                     {
-                        current = 8;
-                        Power = st4.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 8});
+                        currentCardsValue = 8;
+                        cardsPower = straightOfSpades.Max()/4 + currentCardsValue*100;
+                        Win.Add(new Type {Power = cardsPower, Current = 8});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
-                    if (st4[0] == 0 && st4[1] == 9 && st4[2] == 10 && st4[3] == 11 && st4[0] + 12 == st4[4])
+                    if (straightOfSpades[0] == 0 && straightOfSpades[1] == 9 && straightOfSpades[2] == 10 && straightOfSpades[3] == 11 && straightOfSpades[0] + 12 == straightOfSpades[4])
                     {
-                        current = 9;
-                        Power = st4.Max()/4 + current*100;
-                        Win.Add(new Type {Power = Power, Current = 9});
+                        currentCardsValue = 9;
+                        cardsPower = straightOfSpades.Max() / 4 + currentCardsValue * 100;
+                        Win.Add(new Type {Power = cardsPower, Current = 9});
                         sorted = Win.OrderByDescending(op1 => op1.Current).ThenByDescending(op1 => op1.Power).First();
                     }
                 }
@@ -2246,7 +2260,7 @@ namespace Poker
                 fifthBotRise = 0;
 
                 last = 0;
-                call = bb;
+                call = bigBlind;
                 raise = 0;
                 ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
                 bools.Clear();
@@ -2498,7 +2512,7 @@ namespace Poker
             fourthBotPanel.Visible = false;
             fifthBotPanel.Visible = false;
 
-            call = bb;
+            call = bigBlind;
             raise = 0;
             foldedPlayers = 5;
             type = 0;
@@ -2683,7 +2697,7 @@ namespace Poker
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
         /// <param name="name">The name.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         /// <param name="botCurrent">The bot curentCardsValue.</param>
         private void AI(int firstCall, int secondCall, ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus,
             int name, double botPower, double botCurrent)
@@ -2744,7 +2758,7 @@ namespace Poker
         /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         private void HighCard(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             ChooseBotsMoveFirstWay(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower, 20, 25);
@@ -2756,7 +2770,7 @@ namespace Poker
         /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         private void PairTable(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             ChooseBotsMoveFirstWay(ref sChips, ref sTurn, ref sFTurn, sStatus, botPower, 16, 25);
@@ -2769,7 +2783,7 @@ namespace Poker
         /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         private void PairHand(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             var pairHandRandom = new Random();
@@ -2796,7 +2810,7 @@ namespace Poker
         /// <param name="sTurn">if set to <c>true</c> [s turn].</param>
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         private void TwoPairs(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, double botPower)
         {
             var twoPairsRandom = new Random();
@@ -2825,7 +2839,7 @@ namespace Poker
         /// <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
         /// <param name="sStatus">The s status.</param>
         /// <param name="name">The name.</param>
-        /// <param name="botPower">The bot power.</param>
+        /// <param name="botPower">The bot cardsPower.</param>
         private void ThreeOfAKind(ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus, int name,
             double botPower)
         {
@@ -3445,8 +3459,8 @@ namespace Poker
 
         private void bOptions_Click(object sender, EventArgs e)
         {
-            bigBlindSum.Text = bb.ToString();
-            smallBlindSum.Text = sb.ToString();
+            bigBlindSum.Text = bigBlind.ToString();
+            smallBlindSum.Text = smallBlind.ToString();
             if (bigBlindSum.Visible == false)
             {
                 bigBlindSum.Visible = true;
@@ -3469,19 +3483,19 @@ namespace Poker
             if (smallBlindSum.Text.Contains(",") || smallBlindSum.Text.Contains("."))
             {
                 MessageBox.Show("The Small Blind can be only round number !");
-                smallBlindSum.Text = sb.ToString();
+                smallBlindSum.Text = smallBlind.ToString();
                 return;
             }
             if (!int.TryParse(smallBlindSum.Text, out parsedValue))
             {
                 MessageBox.Show("This is a number only field");
-                smallBlindSum.Text = sb.ToString();
+                smallBlindSum.Text = smallBlind.ToString();
                 return;
             }
             if (int.Parse(smallBlindSum.Text) > 100000)
             {
                 MessageBox.Show("The maximum of the Small Blind is 100 000 $");
-                smallBlindSum.Text = sb.ToString();
+                smallBlindSum.Text = smallBlind.ToString();
             }
             if (int.Parse(smallBlindSum.Text) < 250)
             {
@@ -3489,7 +3503,7 @@ namespace Poker
             }
             if (int.Parse(smallBlindSum.Text) >= 250 && int.Parse(smallBlindSum.Text) <= 100000)
             {
-                sb = int.Parse(smallBlindSum.Text);
+                smallBlind = int.Parse(smallBlindSum.Text);
                 MessageBox.Show("The changes have been saved ! They will become available the next hand you play. ");
             }
         }
@@ -3500,19 +3514,19 @@ namespace Poker
             if (bigBlindSum.Text.Contains(",") || bigBlindSum.Text.Contains("."))
             {
                 MessageBox.Show("The Big Blind can be only round number !");
-                bigBlindSum.Text = bb.ToString();
+                bigBlindSum.Text = bigBlind.ToString();
                 return;
             }
             if (!int.TryParse(smallBlindSum.Text, out parsedValue))
             {
                 MessageBox.Show("This is a number only field");
-                smallBlindSum.Text = bb.ToString();
+                smallBlindSum.Text = bigBlind.ToString();
                 return;
             }
             if (int.Parse(bigBlindSum.Text) > 200000)
             {
                 MessageBox.Show("The maximum of the Big Blind is 200 000");
-                bigBlindSum.Text = bb.ToString();
+                bigBlindSum.Text = bigBlind.ToString();
             }
             if (int.Parse(bigBlindSum.Text) < 500)
             {
@@ -3520,7 +3534,7 @@ namespace Poker
             }
             if (int.Parse(bigBlindSum.Text) >= 500 && int.Parse(bigBlindSum.Text) <= 200000)
             {
-                bb = int.Parse(bigBlindSum.Text);
+                bigBlind = int.Parse(bigBlindSum.Text);
                 MessageBox.Show("The changes have been saved ! They will become available the next hand you play. ");
             }
         }

@@ -26,6 +26,17 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:Poker.Form1.SetGameRules(System.Int32,System.Int32,System.String,System.Double@,System.Double@,System.Boolean)">
+            <summary>
+            This method sets the game rulles by determining the strenght of the different card combinations;
+            </summary>
+            <param name="card1">first card in hand</param>
+            <param name="card2">second card in hand</param>
+            <param name="currentText"></param>
+            <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
+            <param name="power"></param>
+            <param name="foldedTurn">bool variable determins if player has folded or not</param>
+        </member>
         <member name="M:Poker.Form1.CheckRaise(System.Int32,System.Int32)">
             <summary>
             </summary>
@@ -67,7 +78,7 @@
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
             <param name="name">The name.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
             <param name="botCurrent">The bot curentCardsValue.</param>
         </member>
         <member name="M:Poker.Form1.HighCard(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
@@ -77,7 +88,7 @@
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
         </member>
         <member name="M:Poker.Form1.PairTable(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
@@ -86,7 +97,7 @@
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
         </member>
         <member name="M:Poker.Form1.PairHand(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
@@ -96,7 +107,7 @@
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
         </member>
         <member name="M:Poker.Form1.TwoPairs(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
@@ -105,7 +116,7 @@
             <param name="sTurn">if set to <c>true</c> [s turn].</param>
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
         </member>
         <member name="M:Poker.Form1.ThreeOfAKind(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double)">
             <summary>
@@ -116,7 +127,7 @@
             <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
             <param name="sStatus">The s status.</param>
             <param name="name">The name.</param>
-            <param name="botPower">The bot power.</param>
+            <param name="botPower">The bot cardsPower.</param>
         </member>
         <member name="F:Poker.Form1.components">
             <summary>
