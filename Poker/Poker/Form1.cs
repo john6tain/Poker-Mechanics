@@ -26,28 +26,34 @@ namespace Poker
             call = bb;
             MaximizeBox = false;
             MinimizeBox = false;
+
             Updates.Start();
             InitializeComponent();
-            width = Width;
-            height = Height;
+
+            this.width = Width;
+            this.height = Height;
+
             Shuffle();
+
             potChips.Enabled = false;
             tableChips.Enabled = false;
-            tableBotChips1.Enabled = false;
-            tableBotChips2.Enabled = false;
-            tableBotChips3.Enabled = false;
-            tableBotChips4.Enabled = false;
-            tableBotChips5.Enabled = false;
+            tableBot1Chips.Enabled = false;
+            tableBot2Chips.Enabled = false;
+            tableBot3Chips.Enabled = false;
+            tableBot4Chips.Enabled = false;
+            tableBot5Chips.Enabled = false;
+
             tableChips.Text = "Chips : " + Chips;
-            tableBotChips1.Text = "Chips : " + firstBotChips;
-            tableBotChips2.Text = "Chips : " + secondBotChips;
-            tableBotChips3.Text = "Chips : " + thirdBotChips;
-            tableBotChips4.Text = "Chips : " + fourthBotChips;
-            tableBotChips5.Text = "Chips : " + fifthBotChips;
+            tableBot1Chips.Text = "Chips : " + firstBotChips;
+            tableBot2Chips.Text = "Chips : " + secondBotChips;
+            tableBot3Chips.Text = "Chips : " + thirdBotChips;
+            tableBot4Chips.Text = "Chips : " + fourthBotChips;
+            tableBot5Chips.Text = "Chips : " + fifthBotChips;
             timer.Interval = 1*1*1000;
             timer.Tick += timer_Tick;
             Updates.Interval = 1*1*100;
             Updates.Tick += Update_Tick;
+
             bigBlindSum.Visible = true;
             smallBlindSum.Visible = true;
             bigBlindButton.Visible = true;
@@ -810,34 +816,39 @@ namespace Poker
 
         #region Saki
 
-        private void Rules(int c1, int c2, string currentText, ref double current, ref double Power, bool foldedTurn)
+        private void Rules(int card1, int card2, string currentText, ref double current, ref double Power, bool foldedTurn)
         {
-            if (c1 == 0 && c2 == 1)
+            if (card1 == 0 && card2 == 1)
             {
             }
-            if (!foldedTurn || c1 == 0 && c2 == 1 && playerStatus.Text.Contains("Fold") == false)
+            if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
             {
                 #region Variables
 
-                bool done = false, vf = false;
-                var Straight1 = new int[5];
-                var Straight = new int[7];
-                Straight[0] = Reserve[c1];
-                Straight[1] = Reserve[c2];
-                Straight1[0] = Straight[2] = Reserve[12];
-                Straight1[1] = Straight[3] = Reserve[13];
-                Straight1[2] = Straight[4] = Reserve[14];
-                Straight1[3] = Straight[5] = Reserve[15];
-                Straight1[4] = Straight[6] = Reserve[16];
-                var a = Straight.Where(o => o%4 == 0).ToArray();
-                var b = Straight.Where(o => o%4 == 1).ToArray();
-                var c = Straight.Where(o => o%4 == 2).ToArray();
-                var d = Straight.Where(o => o%4 == 3).ToArray();
-                var st1 = a.Select(o => o/4).Distinct().ToArray();
-                var st2 = b.Select(o => o/4).Distinct().ToArray();
-                var st3 = c.Select(o => o/4).Distinct().ToArray();
-                var st4 = d.Select(o => o/4).Distinct().ToArray();
-                Array.Sort(Straight);
+                bool done = false;
+                bool vf = false;
+
+                var straight1 = new int[5];
+                var straight = new int[7];
+
+                straight[0] = Reserve[card1];
+                straight[1] = Reserve[card2];
+                straight1[0] = straight[2] = Reserve[12];
+                straight1[1] = straight[3] = Reserve[13];
+                straight1[2] = straight[4] = Reserve[14];
+                straight1[3] = straight[5] = Reserve[15];
+                straight1[4] = straight[6] = Reserve[16];
+
+                var a = straight.Where(o => o % 4 == 0).ToArray();
+                var b = straight.Where(o => o % 4 == 1).ToArray();
+                var c = straight.Where(o => o % 4 == 2).ToArray();
+                var d = straight.Where(o => o % 4 == 3).ToArray();
+                var st1 = a.Select(o => o / 4).Distinct().ToArray();
+                var st2 = b.Select(o => o / 4).Distinct().ToArray();
+                var st3 = c.Select(o => o / 4).Distinct().ToArray();
+                var st4 = d.Select(o => o / 4).Distinct().ToArray();
+
+                Array.Sort(straight);
                 Array.Sort(st1);
                 Array.Sort(st2);
                 Array.Sort(st3);
@@ -847,8 +858,8 @@ namespace Poker
 
                 for (i = 0; i < 16; i++)
                 {
-                    if (Reserve[i] == int.Parse(Holder[c1].Tag.ToString()) &&
-                        Reserve[i + 1] == int.Parse(Holder[c2].Tag.ToString()))
+                    if (Reserve[i] == int.Parse(Holder[card1].Tag.ToString()) &&
+                        Reserve[i + 1] == int.Parse(Holder[card2].Tag.ToString()))
                     {
                         //Pair from Hand current = 1
 
@@ -868,31 +879,31 @@ namespace Poker
 
                         #region Three of a kind current = 3
 
-                        CheckForThreeOfAKind(ref current, ref Power, Straight);
+                        CheckForThreeOfAKind(ref current, ref Power, straight);
 
                         #endregion
 
                         #region Straight current = 4
 
-                        rStraight(ref current, ref Power, Straight);
+                        rStraight(ref current, ref Power, straight);
 
                         #endregion
 
                         #region Flush current = 5 || 5.5
 
-                        rFlush(ref current, ref Power, ref vf, Straight1);
+                        rFlush(ref current, ref Power, ref vf, straight1);
 
                         #endregion
 
                         #region Full House current = 6
 
-                        rFullHouse(ref current, ref Power, ref done, Straight);
+                        rFullHouse(ref current, ref Power, ref done, straight);
 
                         #endregion
 
                         #region Four of a Kind current = 7
 
-                        rFourOfAKind(ref current, ref Power, Straight);
+                        rFourOfAKind(ref current, ref Power, straight);
 
                         #endregion
 
@@ -1968,31 +1979,31 @@ namespace Poker
                     if (CheckWinners.Contains("Bot 1"))
                     {
                         firstBotChips += int.Parse(potChips.Text)/winners;
-                        tableBotChips1.Text = firstBotChips.ToString();
+                        tableBot1Chips.Text = firstBotChips.ToString();
                         //firstBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 2"))
                     {
                         secondBotChips += int.Parse(potChips.Text)/winners;
-                        tableBotChips2.Text = secondBotChips.ToString();
+                        tableBot2Chips.Text = secondBotChips.ToString();
                         //secondBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 3"))
                     {
                         thirdBotChips += int.Parse(potChips.Text)/winners;
-                        tableBotChips3.Text = thirdBotChips.ToString();
+                        tableBot3Chips.Text = thirdBotChips.ToString();
                         //thirdBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 4"))
                     {
                         fourthBotChips += int.Parse(potChips.Text)/winners;
-                        tableBotChips4.Text = fourthBotChips.ToString();
+                        tableBot4Chips.Text = fourthBotChips.ToString();
                         //fourthBotPanel.Visible = true;
                     }
                     if (CheckWinners.Contains("Bot 5"))
                     {
                         fifthBotChips += int.Parse(potChips.Text)/winners;
-                        tableBotChips5.Text = fifthBotChips.ToString();
+                        tableBot5Chips.Text = fifthBotChips.ToString();
                         //fifthBotPanel.Visible = true;
                     }
                     //await Finish(1);
@@ -3226,30 +3237,30 @@ namespace Poker
             }
             if (firstBotChips <= 0)
             {
-                tableBotChips1.Text = "Chips : 0";
+                tableBot1Chips.Text = "Chips : 0";
             }
             if (secondBotChips <= 0)
             {
-                tableBotChips2.Text = "Chips : 0";
+                tableBot2Chips.Text = "Chips : 0";
             }
             if (thirdBotChips <= 0)
             {
-                tableBotChips3.Text = "Chips : 0";
+                tableBot3Chips.Text = "Chips : 0";
             }
             if (fourthBotChips <= 0)
             {
-                tableBotChips4.Text = "Chips : 0";
+                tableBot4Chips.Text = "Chips : 0";
             }
             if (fifthBotChips <= 0)
             {
-                tableBotChips5.Text = "Chips : 0";
+                tableBot5Chips.Text = "Chips : 0";
             }
             tableChips.Text = "Chips : " + Chips;
-            tableBotChips1.Text = "Chips : " + firstBotChips;
-            tableBotChips2.Text = "Chips : " + secondBotChips;
-            tableBotChips3.Text = "Chips : " + thirdBotChips;
-            tableBotChips4.Text = "Chips : " + fourthBotChips;
-            tableBotChips5.Text = "Chips : " + fifthBotChips;
+            tableBot1Chips.Text = "Chips : " + firstBotChips;
+            tableBot2Chips.Text = "Chips : " + secondBotChips;
+            tableBot3Chips.Text = "Chips : " + thirdBotChips;
+            tableBot4Chips.Text = "Chips : " + fourthBotChips;
+            tableBot5Chips.Text = "Chips : " + fifthBotChips;
             if (Chips <= 0)
             {
                 playerTurn = false;

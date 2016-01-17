@@ -9,3 +9,7 @@ C:\Users\ff\Documents\5678\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Propertie
 C:\Users\ff\Documents\5678\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\ff\Documents\5678\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
 C:\Users\ff\Documents\5678\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
