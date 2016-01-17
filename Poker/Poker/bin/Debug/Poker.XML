@@ -26,6 +26,37 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:Poker.Character.Character.Fold(System.Boolean@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Fold can be used for both player and bot it means "give up"
+            </summary>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="sStatus">The s status.</param>
+        </member>
+        <member name="M:Poker.Character.Character.ChangeStatusToChecking(System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Changes the status label of the bot when it is checking the community cards
+            </summary>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Calls the specified value in chips
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Raises the bet
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
         <member name="M:Poker.Form1.SetGameRules(System.Int32,System.Int32,System.String,System.Double@,System.Double@,System.Boolean)">
             <summary>
             This method sets the game rulles by determining the strenght of the different card combinations;
@@ -36,6 +67,17 @@
             <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
             <param name="power"></param>
             <param name="foldedTurn">bool variable determins if player has folded or not</param>
+        </member>
+        <member name="M:Poker.Form1.CheckForStraightFlush(System.Double@,System.Double@,System.Int32[],System.Int32[],System.Int32[],System.Int32[])">
+            <summary>
+            This method checks player's cards for Straight Flush
+            </summary>
+            <param name="currentCardsValue">players cards</param>
+            <param name="cardsPower">cards weight</param>
+            <param name="straightOfClubs">Checks if the pleyer has straight of Clubs</param>
+            <param name="straightOfDiamonds">Checks if the pleyer has straight of Diamonds</param>
+            <param name="straightOfHearts">Checks if the pleyer has straight of Hearts</param>
+            <param name="straightOfSpades">Checks if the pleyer has straight of Spades</param>
         </member>
         <member name="M:Poker.Form1.CheckRaise(System.Int32,System.Int32)">
             <summary>

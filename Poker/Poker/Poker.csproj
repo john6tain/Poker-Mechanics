@@ -52,6 +52,7 @@
       <DependentUpon>AddChips.cs</DependentUpon>
     </Compile>
     <Compile Include="Character\Character.cs" />
+    <Compile Include="Character\DecisionMaker.cs" />
     <Compile Include="Character\Player.cs" />
     <Compile Include="Character\Bot.cs" />
     <Compile Include="DataBase\DataBase.cs" />
@@ -64,9 +65,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfacees\ICard.cs" />
-    <Compile Include="Interfacees\ICharacter.cs" />
-    <Compile Include="Interfacees\IDatabase.cs" />
+    <Compile Include="Interfaces\ICard.cs" />
+    <Compile Include="Interfaces\ICharacter.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBars.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

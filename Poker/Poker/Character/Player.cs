@@ -1,7 +1,6 @@
 ﻿namespace Poker.Character
 {
-    public class Player:Character
+    public class Player : Character
     {
-         
     }
 }
