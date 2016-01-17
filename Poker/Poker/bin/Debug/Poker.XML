@@ -68,7 +68,7 @@
             <param name="sStatus">The s status.</param>
             <param name="name">The name.</param>
             <param name="botPower">The bot power.</param>
-            <param name="botCurrent">The bot current.</param>
+            <param name="botCurrent">The bot curentCardsValue.</param>
         </member>
         <member name="M:Poker.Form1.HighCard(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>

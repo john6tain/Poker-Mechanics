@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -519,7 +520,7 @@ namespace Poker
                     {
                         FixCall(firstBotStatus, ref firstBotCall, ref firstBotRise, 1);
                         FixCall(firstBotStatus, ref firstBotCall, ref firstBotRise, 2);
-                        Rules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                        SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
                         MessageBox.Show("Bot 1's Turn");
                         AI(2, 3, ref firstBotChips, ref B1turn, ref botOneFirstTurn, firstBotStatus, 0, firstBotPower,
                             firstBotType);
@@ -547,7 +548,7 @@ namespace Poker
                     {
                         FixCall(secondBotStatus, ref secondBotCall, ref secondBotRise, 1);
                         FixCall(secondBotStatus, ref secondBotCall, ref secondBotRise, 2);
-                        Rules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                        SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
                         MessageBox.Show("Bot 2's Turn");
                         AI(4, 5, ref secondBotChips, ref B2turn, ref botTwoTurn, secondBotStatus, 1, secondBotPower,
                             secondBotType);
@@ -575,7 +576,7 @@ namespace Poker
                     {
                         FixCall(thirdBotStatus, ref thirdBotCall, ref thirdBotRise, 1);
                         FixCall(thirdBotStatus, ref thirdBotCall, ref thirdBotRise, 2);
-                        Rules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                        SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
                         MessageBox.Show("Bot 3's Turn");
                         AI(6, 7, ref thirdBotChips, ref B3turn, ref botThreeFirstTurn, thirdBotStatus, 2, thirdBotPower,
                             thirdBotType);
@@ -603,7 +604,7 @@ namespace Poker
                     {
                         FixCall(fourthBotStatus, ref fourthBotCall, ref fourthBotRise, 1);
                         FixCall(fourthBotStatus, ref fourthBotCall, ref fourthBotRise, 2);
-                        Rules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                        SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
                         MessageBox.Show("Bot 4's Turn");
                         AI(8, 9, ref fourthBotChips, ref B4turn, ref botFourFirstTurn, fourthBotStatus, 3,
                             fourthBotPower, fourthBotType);
@@ -631,7 +632,7 @@ namespace Poker
                     {
                         FixCall(fifthBotStatus, ref fifthBotCall, ref fifthBotRise, 1);
                         FixCall(fifthBotStatus, ref fifthBotCall, ref fifthBotRise, 2);
-                        Rules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                        SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
                         MessageBox.Show("Bot 5's Turn");
                         AI(10, 11, ref fifthBotChips, ref B5turn, ref botFiveFirstTurn, fifthBotStatus, 4, fifthBotPower,
                             fifthBotType);
@@ -816,11 +817,26 @@ namespace Poker
 
         #region Saki
 
-        private void Rules(int card1, int card2, string currentText, ref double current, ref double Power, bool foldedTurn)
+        /// <summary>
+        /// This method sets the game rulles by determining the strenght of the diferent card combinations;
+        /// </summary>
+        /// <param name="card1">first card in hand</param>
+        /// <param name="card2">second card in hand</param>
+        /// <param name="currentText"></param>
+        /// <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
+        /// <param name="power"></param>
+        /// <param name="foldedTurn">bool variable determins if player has folder or not</param>
+        private void SetGameRules(
+            int card1, 
+            int card2, 
+            string currentText, 
+            ref double curentCardsValue, 
+            ref double power, 
+            bool foldedTurn)
         {
-            if (card1 == 0 && card2 == 1)
-            {
-            }
+            //if (card1 == 0 && card2 == 1)
+            //{
+            //}
             if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
             {
                 #region Variables
@@ -828,96 +844,72 @@ namespace Poker
                 bool done = false;
                 bool vf = false;
 
-                var straight1 = new int[5];
-                var straight = new int[7];
+                int[] littleStraight = new int[5];
+                int[] bigStraight = new int[7];
 
-                straight[0] = Reserve[card1];
-                straight[1] = Reserve[card2];
-                straight1[0] = straight[2] = Reserve[12];
-                straight1[1] = straight[3] = Reserve[13];
-                straight1[2] = straight[4] = Reserve[14];
-                straight1[3] = straight[5] = Reserve[15];
-                straight1[4] = straight[6] = Reserve[16];
+                bigStraight[0] = Reserve[card1];
+                bigStraight[1] = Reserve[card2];
+                littleStraight[0] = bigStraight[2] = Reserve[12];
+                littleStraight[1] = bigStraight[3] = Reserve[13];
+                littleStraight[2] = bigStraight[4] = Reserve[14];
+                littleStraight[3] = bigStraight[5] = Reserve[15];
+                littleStraight[4] = bigStraight[6] = Reserve[16];
 
-                var a = straight.Where(o => o % 4 == 0).ToArray();
-                var b = straight.Where(o => o % 4 == 1).ToArray();
-                var c = straight.Where(o => o % 4 == 2).ToArray();
-                var d = straight.Where(o => o % 4 == 3).ToArray();
-                var st1 = a.Select(o => o / 4).Distinct().ToArray();
-                var st2 = b.Select(o => o / 4).Distinct().ToArray();
-                var st3 = c.Select(o => o / 4).Distinct().ToArray();
-                var st4 = d.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfFour = bigStraight.Where(o => o % 4 == 0).ToArray();
+                int[] straightOfFive = bigStraight.Where(o => o % 4 == 1).ToArray();
+                int[] straightOfSix = bigStraight.Where(o => o % 4 == 2).ToArray();
+                int[] straightOfSeven = bigStraight.Where(o => o % 4 == 3).ToArray();
 
-                Array.Sort(straight);
-                Array.Sort(st1);
-                Array.Sort(st2);
-                Array.Sort(st3);
-                Array.Sort(st4);
+                int[] straightOfFourValue = straightOfFour.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfFiveValue = straightOfFive.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfSixValue = straightOfSix.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfSevenValue = straightOfSeven.Select(o => o / 4).Distinct().ToArray();
 
+                Array.Sort(bigStraight);
+                Array.Sort(straightOfFourValue);
+                Array.Sort(straightOfFiveValue);
+                Array.Sort(straightOfSixValue);
+                Array.Sort(straightOfSevenValue);
+
+                const int CardsOnTable = 16;
+                
                 #endregion
 
-                for (i = 0; i < 16; i++)
+                for (i = 0; i < CardsOnTable; i++)
                 {
                     if (Reserve[i] == int.Parse(Holder[card1].Tag.ToString()) &&
                         Reserve[i + 1] == int.Parse(Holder[card2].Tag.ToString()))
                     {
-                        //Pair from Hand current = 1
+                        //Pair from Hand curentCardsValue = 1
+                        CheckForPairFromHand(ref curentCardsValue, ref power);
 
-                        CheckForPairFromHand(ref current, ref Power);
+                        //Pair or Two Pairs from Table curentCardsValue = 2 || 0
+                        CheckForPairTwoPair(ref curentCardsValue, ref power);
 
-                        #region Pair or Two Pair from Table current = 2 || 0
+                        //Two Pairs curentCardsValue = 2
+                        CheckForTwoPair(ref curentCardsValue, ref power);
 
-                        CheckForPairTwoPair(ref current, ref Power);
+                        //Three of a kind curentCardsValue = 3
+                        CheckForThreeOfAKind(ref curentCardsValue, ref power, bigStraight);
 
-                        #endregion
+                        //Straight curentCardsValue = 4
+                        rStraight(ref curentCardsValue, ref power, bigStraight);
 
-                        #region Two Pair current = 2
+                        //Flush curentCardsValue = 5 || 5.5
+                        rFlush(ref curentCardsValue, ref power, ref vf, littleStraight);
+                        
 
-                        CheckForTwoPair(ref current, ref Power);
-
-                        #endregion
-
-                        #region Three of a kind current = 3
-
-                        CheckForThreeOfAKind(ref current, ref Power, straight);
-
-                        #endregion
-
-                        #region Straight current = 4
-
-                        rStraight(ref current, ref Power, straight);
-
-                        #endregion
-
-                        #region Flush current = 5 || 5.5
-
-                        rFlush(ref current, ref Power, ref vf, straight1);
-
-                        #endregion
-
-                        #region Full House current = 6
-
-                        rFullHouse(ref current, ref Power, ref done, straight);
-
-                        #endregion
-
-                        #region Four of a Kind current = 7
-
-                        rFourOfAKind(ref current, ref Power, straight);
-
-                        #endregion
-
-                        #region Straight Flush current = 8 || 9
-
-                        rStraightFlush(ref current, ref Power, st1, st2, st3, st4);
-
-                        #endregion
-
-                        #region High Card current = -1
-
-                        CheckForHighCard(ref current, ref Power);
-
-                        #endregion
+                        //Full House curentCardsValue = 6
+                        rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
+                        
+                        //Four of a Kind curentCardsValue = 7
+                        rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
+                        
+                        //Straight Flush curentCardsValue = 8 || 9
+                        rStraightFlush(ref curentCardsValue, ref power, straightOfFourValue, straightOfFiveValue, straightOfSixValue, straightOfSevenValue);
+                        
+                        //High Card curentCardsValue = -1
+                        CheckForHighCard(ref curentCardsValue, ref power);
                     }
                 }
             }
@@ -2171,32 +2163,32 @@ namespace Poker
                 if (!playerStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Player";
-                    Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+                    SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
                 }
                 if (!firstBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 1";
-                    Rules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                    SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
                 }
                 if (!secondBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 2";
-                    Rules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                    SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
                 }
                 if (!thirdBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 3";
-                    Rules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                    SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
                 }
                 if (!fourthBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 4";
-                    Rules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                    SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
                 }
                 if (!fifthBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 5";
-                    Rules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                    SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
                 }
 
                 Winner(playerType, playerPower, "Player", Chips, fixedLast);
@@ -2641,32 +2633,32 @@ namespace Poker
             if (!playerStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Player";
-                Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+                SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             }
             if (!firstBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 1";
-                Rules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
             }
             if (!secondBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 2";
-                Rules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
             }
             if (!thirdBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 3";
-                Rules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
             }
             if (!fourthBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 4";
-                Rules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
             }
             if (!fifthBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 5";
-                Rules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
             }
 
             Winner(playerType, playerPower, "Player", Chips, fixedLast);
@@ -2692,7 +2684,7 @@ namespace Poker
         /// <param name="sStatus">The s status.</param>
         /// <param name="name">The name.</param>
         /// <param name="botPower">The bot power.</param>
-        /// <param name="botCurrent">The bot current.</param>
+        /// <param name="botCurrent">The bot curentCardsValue.</param>
         private void AI(int firstCall, int secondCall, ref int sChips, ref bool sTurn, ref bool sFTurn, Label sStatus,
             int name, double botPower, double botCurrent)
         {
@@ -2858,7 +2850,7 @@ namespace Poker
 
         #region Tsvetelin
 
-        //botChips/sChips = the current bot's chips
+        //botChips/sChips = the curentCardsValue bot's chips
         //isOnTurn/sTurn = the bot is on turn
         //isFinalTurn/sFTurn = the final hand for the game is played (all five cards on table are shown)
         //hasFolded/sStatus = checks if the bot has folded the game
@@ -3342,7 +3334,7 @@ namespace Poker
 
         private async void bCall_Click(object sender, EventArgs e)
         {
-            Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+            SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             if (Chips >= call)
             {
                 Chips -= call;
@@ -3374,7 +3366,7 @@ namespace Poker
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
-            Rules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+            SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             int parsedValue;
             if (tbRaise.Text != "" && int.TryParse(tbRaise.Text, out parsedValue))
             {
@@ -3383,7 +3375,7 @@ namespace Poker
                     if (raise*2 > int.Parse(tbRaise.Text))
                     {
                         tbRaise.Text = (raise*2).ToString();
-                        MessageBox.Show("You must raise atleast twice as the current raise !");
+                        MessageBox.Show("You must raise atleast twice as the curentCardsValue raise !");
                         return;
                     }
                     if (Chips >= int.Parse(tbRaise.Text))
