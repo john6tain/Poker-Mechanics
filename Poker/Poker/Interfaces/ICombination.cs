@@ -7,6 +7,8 @@ namespace Poker.Interfaces
     public interface ICombination
     {
         IList<ICard> TheOtherCardsFromTheHandNotIncludedInTheCombination { get; set; }
+        IList<ICard> TheCombinationCards { get; set; }
+
         double Power { get; set; }
         CombinationType Type { get; set; }
         double BehaviourPower { get; set; }

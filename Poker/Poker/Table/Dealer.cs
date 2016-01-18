@@ -11,6 +11,8 @@ namespace Poker.Table
     {
         private const double HighCardBehaviourPower = -1;
         private const double ThreeOfAKindBehaviourPower = 3;
+        private const double PairFromHandBehaviourPower = 1;
+
 
 
         //This method checks if the character has card combination "Three of a kind"
@@ -31,7 +33,7 @@ namespace Poker.Table
 
                     if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.ThreeOfAKind)
                     {
-                        character.CardsCombination = new Combination(power, CombinationType.ThreeOfAKind, ThreeOfAKindBehaviourPower, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                        character.CardsCombination = new Combination(power, CombinationType.ThreeOfAKind, ThreeOfAKindBehaviourPower, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination);
                     }
 
                     return true;
@@ -57,10 +59,107 @@ namespace Poker.Table
 
             if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.HighCard)
             {
-                character.CardsCombination = new Combination(power, CombinationType.HighCard, HighCardBehaviourPower, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                character.CardsCombination = new Combination(power, CombinationType.HighCard, HighCardBehaviourPower, combinationCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
             }
 
             return true;
+        }
+
+        //This method checks if the two cards which the character has make a pair or if one of the character's cards makes a pair with one card from the table.
+        private static bool CheckForPairFromHand(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character)
+        {
+            bool hasPairFromHand = false;
+
+            hasPairFromHand = CheckIfTheCharactersCardsMakeAPair(charactersCardsCollection, tableCardsCollection, character, hasPairFromHand);
+
+            foreach (var element in tableCardsCollection)
+            {
+                hasPairFromHand = CheckIfTheFirstCharactersCardMakesAPairWithOneFromTheTable(charactersCardsCollection, tableCardsCollection, character, element, hasPairFromHand);
+
+                hasPairFromHand = CheckIfTheOtherCharactersCardMakesAPairWithOneFromTheTable(charactersCardsCollection, tableCardsCollection, character, element, hasPairFromHand);
+            }
+
+            return hasPairFromHand;
+        }
+
+        private static bool CheckIfTheOtherCharactersCardMakesAPairWithOneFromTheTable(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character, ICard element, bool hasPairFromHand)
+        {
+            if (charactersCardsCollection[1].Rank == element.Rank)
+            {
+                if (charactersCardsCollection[1].Rank == element.Rank)
+                {
+                    double power = (int) charactersCardsCollection[1].Rank*4 + PairFromHandBehaviourPower*100;
+
+                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                        tableCardsCollection.Where(x => x != element).ToList();
+                    theOtherCardsFromTheHandNotIncludedInTheCombination.Add(charactersCardsCollection[0]);
+
+                    IList<ICard> combinationCards = new List<ICard>();
+                    combinationCards.Add(element);
+                    combinationCards.Add(charactersCardsCollection[1]);
+
+                    if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.OnePair ||
+                        character.CardsCombination.Power < power)
+                    {
+                        character.CardsCombination = new Combination(power, CombinationType.OnePair, PairFromHandBehaviourPower,
+                            combinationCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                    }
+                }
+
+                hasPairFromHand = true;
+            }
+            return hasPairFromHand;
+        }
+
+        private static bool CheckIfTheFirstCharactersCardMakesAPairWithOneFromTheTable(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character, ICard element, bool hasPairFromHand)
+        {
+            if (charactersCardsCollection[0].Rank == element.Rank)
+            {
+                double power = (int) charactersCardsCollection[0].Rank*4 + PairFromHandBehaviourPower*100;
+
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                    tableCardsCollection.Where(x => x != element).ToList();
+                theOtherCardsFromTheHandNotIncludedInTheCombination.Add(charactersCardsCollection[1]);
+
+                IList<ICard> combinationCards = new List<ICard>();
+                combinationCards.Add(element);
+                combinationCards.Add(charactersCardsCollection[0]);
+
+                if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.OnePair ||
+                    character.CardsCombination.Power < power)
+                {
+                    character.CardsCombination = new Combination(power, CombinationType.OnePair, PairFromHandBehaviourPower,
+                        combinationCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                }
+
+                hasPairFromHand = true;
+            }
+            return hasPairFromHand;
+        }
+
+        private static bool CheckIfTheCharactersCardsMakeAPair(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+            ICharacter character, bool hasPairFromHand)
+        {
+            if (charactersCardsCollection[0].Rank == charactersCardsCollection[1].Rank)
+            {
+                double power = (int) charactersCardsCollection[0].Rank*4 + PairFromHandBehaviourPower*100;
+
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = tableCardsCollection;
+
+                if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.OnePair ||
+                    character.CardsCombination.Power < power)
+                {
+                    character.CardsCombination = new Combination(power, CombinationType.OnePair, PairFromHandBehaviourPower,
+                        charactersCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                }
+
+                hasPairFromHand = true;
+            }
+
+            return hasPairFromHand;
         }
     }
 }
