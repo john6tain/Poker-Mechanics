@@ -1,13 +1,9 @@
-﻿using System;
+﻿using Poker.Interfacees;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Poker.Interfacees;
 
 namespace Poker.Interfaces
 {
-    interface ICombination
+    public interface ICombination
     {
         IList<ICard> TheOtherCardsFromTheHandNotIncludedInTheCombination { get; set; }
         string CharacterName { get; set; }

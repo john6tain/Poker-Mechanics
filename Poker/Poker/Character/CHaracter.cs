@@ -27,6 +27,8 @@ namespace Poker.Character
         private double raise = 0;
         #endregion
 
+        public ICombination CardsCombination { get; set; }
+
         /// <summary>
         /// Fold can be used for both player and bot it means "give up"
         /// </summary>
