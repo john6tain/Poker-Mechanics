@@ -67,11 +67,14 @@
     </Compile>
     <Compile Include="Interfaces\ICard.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
+    <Compile Include="Interfaces\ICombination.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBars.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table\Card.cs" />
+    <Compile Include="Table\Combination.cs" />
     <Compile Include="Table\Dealer.cs" />
     <Compile Include="Table\Table.cs" />
     <Compile Include="Type.cs" />

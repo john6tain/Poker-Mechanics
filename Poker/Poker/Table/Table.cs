@@ -1,7 +1,11 @@
-﻿namespace Poker.Table
+﻿using System.Collections.Generic;
+using Poker.Interfacees;
+using Poker.Interfaces;
+
+namespace Poker.Table
 {
-    public class Table
+    public class Table : ITable
     {
-         
+        public IList<ICard> TableCardsCollection { get; set; }
     }
 }
