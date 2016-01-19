@@ -57,17 +57,6 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Form1.SetGameRules(System.Int32,System.Int32,System.String,System.Double@,System.Double@,System.Boolean)">
-            <summary>
-            This method sets the game rulles by determining the strenght of the different card combinations;
-            </summary>
-            <param name="card1">first card in hand</param>
-            <param name="card2">second card in hand</param>
-            <param name="currentText"></param>
-            <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
-            <param name="power"></param>
-            <param name="foldedTurn">bool variable determins if player has folded or not</param>
-        </member>
         <member name="M:Poker.Form1.CheckForStraightFlush(System.Double@,System.Double@,System.Int32[],System.Int32[],System.Int32[],System.Int32[])">
             <summary>
             This method checks player's cards for Straight Flush

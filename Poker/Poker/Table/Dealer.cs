@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Poker.Enumerations;
 using Poker.Interfacees;
 using Poker.Interfaces;
@@ -13,7 +15,100 @@ namespace Poker.Table
         private const double ThreeOfAKindBehaviourPower = 3;
         private const double PairFromHandBehaviourPower = 1;
 
+        private static readonly int[] AllCardsOnTable = new int[17];
 
+        private static Label playerStatus;
+
+        private static readonly PictureBox[] Holder = new PictureBox[52];
+
+        
+
+        public static void SetGameRules(
+            int card1,
+            int card2,
+            string playerName,
+            ref double currentCardsValue,
+            ref double power,
+            bool foldedTurn, 
+            IList<ICard> charactersCardCollection,
+            IList<ICard> tableCardsCollection,
+            ICharacter character)
+        {
+            
+            if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
+            {
+                #region Variables
+
+                bool done = false;
+                bool vf = false;
+
+                int[] littleStraight = new int[5];
+                int[] bigStraight = new int[7];
+
+                bigStraight[0] = AllCardsOnTable[card1];
+                bigStraight[1] = AllCardsOnTable[card2];
+                littleStraight[0] = bigStraight[2] = AllCardsOnTable[12];
+                littleStraight[1] = bigStraight[3] = AllCardsOnTable[13];
+                littleStraight[2] = bigStraight[4] = AllCardsOnTable[14];
+                littleStraight[3] = bigStraight[5] = AllCardsOnTable[15];
+                littleStraight[4] = bigStraight[6] = AllCardsOnTable[16];
+
+                int[] straightOfClubs = bigStraight.Where(o => o % 4 == 0).ToArray();
+                int[] straightOfDiamonds = bigStraight.Where(o => o % 4 == 1).ToArray();
+                int[] straightOfHearts = bigStraight.Where(o => o % 4 == 2).ToArray();
+                int[] straightOfSpades = bigStraight.Where(o => o % 4 == 3).ToArray();
+
+                int[] straightOfClubsValue = straightOfClubs.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfDiamondsValue = straightOfDiamonds.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfHeartsValue = straightOfHearts.Select(o => o / 4).Distinct().ToArray();
+                int[] straightOfSpadesValue = straightOfSpades.Select(o => o / 4).Distinct().ToArray();
+
+                Array.Sort(bigStraight);
+                Array.Sort(straightOfClubsValue);
+                Array.Sort(straightOfDiamondsValue);
+                Array.Sort(straightOfHeartsValue);
+                Array.Sort(straightOfSpadesValue);
+
+                #endregion
+
+                for (int i = 1; i < AllCardsOnTable.Length; i++)
+                {
+                    if (AllCardsOnTable[i] == int.Parse(Holder[card1].Tag.ToString()) &&
+                        AllCardsOnTable[i + 1] == int.Parse(Holder[card2].Tag.ToString()))
+                    {
+                        //Pair from Hand curentCardsValue = 1
+                        //CheckForPairFromHand(ref curentCardsValue, ref power);
+
+                        //Pair or Two Pairs from Table curentCardsValue = 2 || 0
+                        //CheckForPairTwoPair(ref curentCardsValue, ref power);
+
+                        //Two Pairs curentCardsValue = 2
+                        //CheckForTwoPair(ref curentCardsValue, ref power);
+
+                        //Three of a kind curentCardsValue = 3
+                        CheckForThreeOfAKind(charactersCardCollection, tableCardsCollection, character);
+
+                        //Straight curentCardsValue = 4
+                        //rStraight(ref curentCardsValue, ref power, bigStraight);
+
+                        //Flush curentCardsValue = 5 || 5.5
+                        //rFlush(ref curentCardsValue, ref power, ref vf, littleStraight);
+
+                        //Full House curentCardsValue = 6
+                        //rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
+
+                        //Four of a Kind curentCardsValue = 7
+                        //rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
+
+                        //Straight Flush curentCardsValue = 8 || 9
+                        //CheckForStraightFlush(ref curentCardsValue, ref power, straightOfClubsValue, straightOfDiamondsValue, straightOfHeartsValue, straightOfSpadesValue);
+
+                        //High Card curentCardsValue = -1
+                        CheckForHighCard(charactersCardCollection, tableCardsCollection, character);
+                    }
+                }
+            }
+        }
 
         //This method checks if the character has card combination "Three of a kind"
         private static bool CheckForThreeOfAKind(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)

@@ -9,6 +9,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
@@ -16,6 +17,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Poker.Interfacees;
+using Poker.Table;
 
 namespace Poker
 {
@@ -520,7 +523,7 @@ namespace Poker
                     {
                         FixCall(firstBotStatus, ref firstBotCall, ref firstBotRise, 1);
                         FixCall(firstBotStatus, ref firstBotCall, ref firstBotRise, 2);
-                        SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                        Rules_ToBeDeleted_NewName_SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
                         MessageBox.Show("Bot 1's Turn");
                         AI(2, 3, ref firstBotChips, ref B1turn, ref botOneFirstTurn, firstBotStatus, 0, firstBotPower,
                             firstBotType);
@@ -548,7 +551,7 @@ namespace Poker
                     {
                         FixCall(secondBotStatus, ref secondBotCall, ref secondBotRise, 1);
                         FixCall(secondBotStatus, ref secondBotCall, ref secondBotRise, 2);
-                        SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                        Rules_ToBeDeleted_NewName_SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
                         MessageBox.Show("Bot 2's Turn");
                         AI(4, 5, ref secondBotChips, ref B2turn, ref botTwoTurn, secondBotStatus, 1, secondBotPower,
                             secondBotType);
@@ -576,7 +579,7 @@ namespace Poker
                     {
                         FixCall(thirdBotStatus, ref thirdBotCall, ref thirdBotRise, 1);
                         FixCall(thirdBotStatus, ref thirdBotCall, ref thirdBotRise, 2);
-                        SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                        Rules_ToBeDeleted_NewName_SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
                         MessageBox.Show("Bot 3's Turn");
                         AI(6, 7, ref thirdBotChips, ref B3turn, ref botThreeFirstTurn, thirdBotStatus, 2, thirdBotPower,
                             thirdBotType);
@@ -604,7 +607,7 @@ namespace Poker
                     {
                         FixCall(fourthBotStatus, ref fourthBotCall, ref fourthBotRise, 1);
                         FixCall(fourthBotStatus, ref fourthBotCall, ref fourthBotRise, 2);
-                        SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                        Rules_ToBeDeleted_NewName_SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
                         MessageBox.Show("Bot 4's Turn");
                         AI(8, 9, ref fourthBotChips, ref B4turn, ref botFourFirstTurn, fourthBotStatus, 3,
                             fourthBotPower, fourthBotType);
@@ -632,7 +635,7 @@ namespace Poker
                     {
                         FixCall(fifthBotStatus, ref fifthBotCall, ref fifthBotRise, 1);
                         FixCall(fifthBotStatus, ref fifthBotCall, ref fifthBotRise, 2);
-                        SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                        Rules_ToBeDeleted_NewName_SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
                         MessageBox.Show("Bot 5's Turn");
                         AI(10, 11, ref fifthBotChips, ref B5turn, ref botFiveFirstTurn, fifthBotStatus, 4, fifthBotPower,
                             fifthBotType);
@@ -817,21 +820,12 @@ namespace Poker
 
         #region Saki
 
-        /// <summary>
-        /// This method sets the game rulles by determining the strenght of the different card combinations;
-        /// </summary>
-        /// <param name="card1">first card in hand</param>
-        /// <param name="card2">second card in hand</param>
-        /// <param name="currentText"></param>
-        /// <param name="curentCardsValue">The strenght ofthe cards represented as an integer number</param>
-        /// <param name="power"></param>
-        /// <param name="foldedTurn">bool variable determins if player has folded or not</param>
-        private void SetGameRules(
-            int card1, 
-            int card2, 
-            string currentText, 
-            ref double curentCardsValue, 
-            ref double power, 
+        private void Rules_ToBeDeleted_NewName_SetGameRules(
+            int card1,
+            int card2,
+            string currentText,
+            ref double curentCardsValue,
+            ref double power,
             bool foldedTurn)
         {
             //if (card1 == 0 && card2 == 1)
@@ -872,7 +866,7 @@ namespace Poker
                 Array.Sort(straightOfSpadesValue);
 
                 const int CardsOnTable = 16;
-                
+
                 #endregion
 
                 for (i = 0; i < CardsOnTable; i++)
@@ -897,16 +891,16 @@ namespace Poker
 
                         //Flush curentCardsValue = 5 || 5.5
                         rFlush(ref curentCardsValue, ref power, ref vf, littleStraight);
-                        
+
                         //Full House curentCardsValue = 6
                         rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
-                        
+
                         //Four of a Kind curentCardsValue = 7
                         rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
-                        
+
                         //Straight Flush curentCardsValue = 8 || 9
                         CheckForStraightFlush(ref curentCardsValue, ref power, straightOfClubsValue, straightOfDiamondsValue, straightOfHeartsValue, straightOfSpadesValue);
-                        
+
                         //High Card curentCardsValue = -1
                         CheckForHighCard(ref curentCardsValue, ref power);
                     }
@@ -1715,7 +1709,7 @@ namespace Poker
             }
         }
 
-        private void CheckForPairTwoPair(ref double current, ref double power)
+        public void CheckForPairTwoPair(ref double current, ref double power)
         {
             if (current >= -1)
             {
@@ -2177,32 +2171,32 @@ namespace Poker
                 if (!playerStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Player";
-                    SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
                 }
                 if (!firstBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 1";
-                    SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
                 }
                 if (!secondBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 2";
-                    SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
                 }
                 if (!thirdBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 3";
-                    SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
                 }
                 if (!fourthBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 4";
-                    SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
                 }
                 if (!fifthBotStatus.Text.Contains("Fold"))
                 {
                     fixedLast = "Bot 5";
-                    SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                    Rules_ToBeDeleted_NewName_SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
                 }
 
                 Winner(playerType, playerPower, "Player", Chips, fixedLast);
@@ -2647,32 +2641,32 @@ namespace Poker
             if (!playerStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Player";
-                SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             }
             if (!firstBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 1";
-                SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(2, 3, "Bot 1", ref firstBotType, ref firstBotPower, botOneFirstTurn);
             }
             if (!secondBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 2";
-                SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(4, 5, "Bot 2", ref secondBotType, ref secondBotPower, botTwoTurn);
             }
             if (!thirdBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 3";
-                SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(6, 7, "Bot 3", ref thirdBotType, ref thirdBotPower, botThreeFirstTurn);
             }
             if (!fourthBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 4";
-                SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(8, 9, "Bot 4", ref fourthBotType, ref fourthBotPower, botFourFirstTurn);
             }
             if (!fifthBotStatus.Text.Contains("Fold"))
             {
                 fixedLast = "Bot 5";
-                SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
+                Rules_ToBeDeleted_NewName_SetGameRules(10, 11, "Bot 5", ref fifthBotType, ref fifthBotPower, botFiveFirstTurn);
             }
 
             Winner(playerType, playerPower, "Player", Chips, fixedLast);
@@ -3348,7 +3342,7 @@ namespace Poker
 
         private async void bCall_Click(object sender, EventArgs e)
         {
-            SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+            Rules_ToBeDeleted_NewName_SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             if (Chips >= call)
             {
                 Chips -= call;
@@ -3380,7 +3374,7 @@ namespace Poker
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
-            SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
+            Rules_ToBeDeleted_NewName_SetGameRules(0, 1, "Player", ref playerType, ref playerPower, PlayerFirstTurn);
             int parsedValue;
             if (tbRaise.Text != "" && int.TryParse(tbRaise.Text, out parsedValue))
             {
