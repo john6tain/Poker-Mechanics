@@ -14,6 +14,8 @@ namespace Poker.Table
         private const double HighCardBehaviourPower = -1;
         private const double ThreeOfAKindBehaviourPower = 3;
         private const double PairFromHandBehaviourPower = 1;
+        private const double FullHouseBehaviourPower = 6; 
+       
 
         private static readonly int[] AllCardsOnTable = new int[17];
 
@@ -109,6 +111,102 @@ namespace Poker.Table
                 }
             }
         }
+
+        //This method checks if the character has card combination "Full House"
+        private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+            ICharacter character)
+        {
+            bool hasFullHouse = false;
+
+            List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
+
+            bool characterHasThreeOfAKind = CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection,
+                character);
+
+            List<ICard> threeOfAKindCards = new List<ICard>();
+
+            int threeOfAKindRank = -1;
+
+            if (characterHasThreeOfAKind)
+            {
+                threeOfAKindRank = GetThreeOfAKindCardRank(charactersCardsCollection, tableCardsCollection);
+
+                //removes the three-of-a-kind cards from the joinedCardCollection (hand+table cards)
+                // and adds them to the threeOfAKindCards list
+                foreach (ICard card in joinedCardCollection)
+                {
+                    if ((int) card.Rank == threeOfAKindRank)
+                    {
+                        threeOfAKindCards.Add(card);
+                        joinedCardCollection.Remove(card);
+                    }
+                }
+
+                //checks if there is a pair in the remaining collection
+                //if yes -> the player has a full house combination
+                int maxPairRank = -1;
+                foreach (ICard card in joinedCardCollection)
+                {
+                    List<ICard> remainingEqualRankCards =
+                        joinedCardCollection.Where(x => x.Rank == card.Rank).ToList();
+
+                    if (remainingEqualRankCards.Count == 2)
+                    {
+                        hasFullHouse = true;
+
+                        //This is a check for multiple pairs in the remaining cards
+                        //If there is more than one pair, the highest one is taken
+                        if (card.Rank == 0 || maxPairRank == 0)
+                        {
+                            maxPairRank = 0; // because -> rank 0 is ACE (strongest card)
+                        }
+                        else
+                        {
+                            maxPairRank = Math.Max(maxPairRank, (int)card.Rank); // if neither pair is ACE -> take the one with the higher rank
+                        }
+
+                        List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                            joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
+
+                        List<ICard> fullHouseCards = threeOfAKindCards;
+                        fullHouseCards.AddRange(remainingEqualRankCards);
+
+                        double power = 0;  //TODO: figure how to calculate power...
+
+                        if (character.CardsCombination == null ||
+                            character.CardsCombination.Type < CombinationType.FullHouse)
+                        {
+                            character.CardsCombination = new Combination(power, CombinationType.FullHouse, FullHouseBehaviourPower, fullHouseCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                        }
+
+                    }
+                }
+            }
+
+            return hasFullHouse;
+        }
+
+        //This method gets the rank (number) of the cards that make up a three-of-a-kind
+        private static int GetThreeOfAKindCardRank(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection)
+        {
+            int cardRank = -1;
+
+            IList<ICard> joinedCardCollection =
+                charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
+
+            foreach (var element in joinedCardCollection)
+            {
+                IList<ICard> sameRankCardsCollection = joinedCardCollection.Where(x => x.Rank == element.Rank).ToList();
+
+                if (sameRankCardsCollection.Count == 3)
+                {
+                    cardRank = (int)element.Rank;
+                }
+            }
+
+            return cardRank;
+        }
+
 
         //This method checks if the character has card combination "Three of a kind"
         private static bool CheckForThreeOfAKind(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
