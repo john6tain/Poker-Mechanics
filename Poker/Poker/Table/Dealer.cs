@@ -7,6 +7,7 @@ using Poker.Enumerations;
 using Poker.Interfacees;
 using Poker.Interfaces;
 
+
 namespace Poker.Table
 {
     public static class Dealer

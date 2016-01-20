@@ -1,8 +1,14 @@
+
 ﻿using System.Collections;
 using System.Windows.Forms;
 
-namespace Poker.Interfaces
+
+
+﻿namespace Poker.Interfaces
+
 {
+    using System.Windows.Forms;
+
     public interface ICharacter
     {
         ICombination CardsCombination { get; set; }

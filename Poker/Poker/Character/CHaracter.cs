@@ -3,7 +3,7 @@
 // Class Author     : Alex
 //
 // Last Modified By : Alex
-// Last Modified On : 17 Jan 2016
+// Last Modified On : 20 Jan 2016
 // ***********************************************************************
 // <copyright file="Character.cs" team="Currant">
 //     Copyright ©  2016
@@ -11,40 +11,33 @@
 // <summary></summary>
 // ***********************************************************************
 
-using Poker.Interfaces;
-using System;
-using System.Windows.Forms;
-
 namespace Poker.Character
 {
+    using Interfaces;
+    using System;
+    using System.Windows.Forms;
+
     public abstract class Character : ICharacter
     {
-        #region Variables   
-        //TODO: potChips may not be null     
-        private bool isRaising;
-        private int call = 500;
-        private readonly TextBox potChips = null;
-        private double raise = 0;
-        #endregion
-
         public ICombination CardsCombination { get; set; }
 
+        private bool isRaising;
         /// <summary>
-        /// Fold can be used for both player and bot it means "give up"
+        /// Fold tell us who is giving up
         /// </summary>
         /// <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
-        /// <param name="sStatus">The s status.</param>
-        public void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label sStatus)
+        /// <param name="hasFolded">The has folded.</param>
+        public void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded)
         {
             isRaising = false;
-            sStatus.Text = "Fold";
+            hasFolded.Text = "Fold";
             isOnTurn = false;
             isFinalTurn = true;
         }
 
         /// <summary>
-        /// Changes the status label of the bot when it is checking the community cards
+        /// Changes the label status to checking.
         /// </summary>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
@@ -55,8 +48,10 @@ namespace Poker.Character
             isRaising = false;
         }
 
+        private readonly TextBox potChips = null;
+        private int call = 500;
         /// <summary>
-        /// Calls the specified value in chips
+        /// You call the required amount of chips to continue playing the game
         /// </summary>
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
@@ -70,8 +65,9 @@ namespace Poker.Character
             potChips.Text = (int.Parse(potChips.Text) + call).ToString();
         }
 
+        private double raise = 0;
         /// <summary>
-        /// Raises the bet
+        /// Raises the bet.
         /// </summary>
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
@@ -79,7 +75,7 @@ namespace Poker.Character
         public void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel)
         {
             botChips -= Convert.ToInt32(raise);
-            statusLabel.Text = "raise " + raise;
+            statusLabel.Text = "Raise " + raise;
             potChips.Text = (int.Parse(potChips.Text) + Convert.ToInt32(raise)).ToString();
             call = Convert.ToInt32(raise);
             isRaising = true;
