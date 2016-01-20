@@ -28,22 +28,22 @@
         </member>
         <member name="M:Poker.Character.Character.Fold(System.Boolean@,System.Boolean@,System.Windows.Forms.Label)">
             <summary>
-            Fold can be used for both player and bot it means "give up"
+            Fold tell us who is giving up
             </summary>
             <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
             <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
-            <param name="sStatus">The s status.</param>
+            <param name="hasFolded">The has folded.</param>
         </member>
         <member name="M:Poker.Character.Character.ChangeStatusToChecking(System.Boolean@,System.Windows.Forms.Label)">
             <summary>
-            Changes the status label of the bot when it is checking the community cards
+            Changes the label status to checking.
             </summary>
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
         <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
             <summary>
-            Calls the specified value in chips
+            You call the required amount of chips to continue playing the game
             </summary>
             <param name="botChips">The bot chips.</param>
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
@@ -51,7 +51,7 @@
         </member>
         <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
             <summary>
-            Raises the bet
+            Raises the bet.
             </summary>
             <param name="botChips">The bot chips.</param>
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
