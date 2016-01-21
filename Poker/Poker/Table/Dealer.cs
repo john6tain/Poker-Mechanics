@@ -18,7 +18,7 @@ namespace Poker.Table
         private const double FullHouseBehaviourPower = 6;
         private const double LittleStraightFlushBehaviourPower = 8;
         private const double BigStraightFlushBehaviourPower = 9;
-       
+
 
         private static readonly int[] AllCardsOnTable = new int[16];
 
@@ -26,7 +26,7 @@ namespace Poker.Table
 
         private static readonly PictureBox[] Holder = new PictureBox[52];
 
-        
+
 
         public static void SetGameRules(
             int card1,
@@ -34,12 +34,12 @@ namespace Poker.Table
             string playerName,
             ref double currentCardsValue,
             ref double power,
-            bool foldedTurn, 
+            bool foldedTurn,
             IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection,
             ICharacter character)
         {
-            
+
             if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
             {
                 #region Variables
@@ -119,47 +119,46 @@ namespace Poker.Table
         }
 
         //this method checks for Straight Flush of clubs
-        private static bool CheckForStraightFlushOfClubs(IList<ICard> charactersCardsCollection, 
+        private static bool CheckForStraightFlushOfClubs(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
 
-            foreach (var card in joinedCardCollection)
-            {
-                List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == (card.Suit = CardSuit.Clubs)).ToList();
+            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Clubs).ToList();
 
-                straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+            straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+
+            if (straightFlushCardsCollection.Count <= 5)
+            {
+                return false;
+            }
+            else
+            {
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                 double power = 0;
-                if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[0].Rank == CardRank.King &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Queen && straightFlushCardsCollection[0].Rank == CardRank.Jack &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Ten)
+                for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
-
-                    if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
+                    if ((int)straightFlushCardsCollection[i].Rank - 1 == (int)straightFlushCardsCollection[i + 1].Rank)
                     {
-                        character.CardsCombination = new Combination(
-                            power,
-                            CombinationType.StraightFlush,
-                            BigStraightFlushBehaviourPower,
-                            straightFlushCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination);
+
+                        if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[1].Rank == CardRank.King &&
+                            straightFlushCardsCollection[2].Rank == CardRank.Queen && straightFlushCardsCollection[3].Rank == CardRank.Jack &&
+                            straightFlushCardsCollection[4].Rank == CardRank.Ten)
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        else
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        hasStraightFlush = true;
                     }
 
-                    hasStraightFlush = true;
-                }
-
-                if (straightFlushCardsCollection.Count >= 5)
-                {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
-                    
                     if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
                     {
                         character.CardsCombination = new Combination(
@@ -170,7 +169,6 @@ namespace Poker.Table
                             theOtherCardsFromTheHandNotIncludedInTheCombination);
                     }
 
-                    hasStraightFlush = true;
                 }
             }
 
@@ -178,48 +176,45 @@ namespace Poker.Table
         }
 
         // This method checks for straight flush of Diamonds
-        private static bool CheckForStraightFlushOfDiamonds(
-            IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, 
-            ICharacter character)
+        private static bool CheckForStraightFlushOfDiamonds(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
 
-            foreach (var card in joinedCardCollection)
-            {
-                List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == (card.Suit = CardSuit.Diamonds)).ToList();
+            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Diamonds).ToList();
 
-                straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+            straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+
+            if (straightFlushCardsCollection.Count <= 5)
+            {
+                return false;
+            }
+            else
+            {
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                 double power = 0;
-                if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[0].Rank == CardRank.King &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Queen && straightFlushCardsCollection[0].Rank == CardRank.Jack &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Ten)
+                for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
-
-                    if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
+                    if ((int)straightFlushCardsCollection[i].Rank - 1 == (int)straightFlushCardsCollection[i + 1].Rank)
                     {
-                        character.CardsCombination = new Combination(
-                            power,
-                            CombinationType.StraightFlush,
-                            BigStraightFlushBehaviourPower,
-                            straightFlushCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination);
+
+                        if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[1].Rank == CardRank.King &&
+                            straightFlushCardsCollection[2].Rank == CardRank.Queen && straightFlushCardsCollection[3].Rank == CardRank.Jack &&
+                            straightFlushCardsCollection[4].Rank == CardRank.Ten)
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        else
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        hasStraightFlush = true;
                     }
-
-                    hasStraightFlush = true;
-                }
-
-                if (straightFlushCardsCollection.Count >= 5)
-                {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                     if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
                     {
@@ -231,7 +226,6 @@ namespace Poker.Table
                             theOtherCardsFromTheHandNotIncludedInTheCombination);
                     }
 
-                    hasStraightFlush = true;
                 }
             }
 
@@ -239,48 +233,45 @@ namespace Poker.Table
         }
 
         //this method checks for straight club of hearts
-        private static bool CheckForStraightFlushOfHearts(
-            IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection,
-            ICharacter character)
+        private static bool CheckForStraightFlushOfHearts(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
 
-            foreach (var card in joinedCardCollection)
-            {
-                List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == (card.Suit = CardSuit.Hearts)).ToList();
+            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Hearts).ToList();
 
-                straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+            straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+
+            if (straightFlushCardsCollection.Count <= 5)
+            {
+                return false;
+            }
+            else
+            {
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                 double power = 0;
-                if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[0].Rank == CardRank.King &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Queen && straightFlushCardsCollection[0].Rank == CardRank.Jack &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Ten)
+                for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
-
-                    if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
+                    if ((int)straightFlushCardsCollection[i].Rank - 1 == (int)straightFlushCardsCollection[i + 1].Rank)
                     {
-                        character.CardsCombination = new Combination(
-                            power,
-                            CombinationType.StraightFlush,
-                            BigStraightFlushBehaviourPower,
-                            straightFlushCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination);
+
+                        if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[1].Rank == CardRank.King &&
+                            straightFlushCardsCollection[2].Rank == CardRank.Queen && straightFlushCardsCollection[3].Rank == CardRank.Jack &&
+                            straightFlushCardsCollection[4].Rank == CardRank.Ten)
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        else
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        hasStraightFlush = true;
                     }
-
-                    hasStraightFlush = true;
-                }
-
-                if (straightFlushCardsCollection.Count >= 5)
-                {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                     if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
                     {
@@ -292,55 +283,51 @@ namespace Poker.Table
                             theOtherCardsFromTheHandNotIncludedInTheCombination);
                     }
 
-                    hasStraightFlush = true;
                 }
             }
 
             return hasStraightFlush;
         }
 
-        private static bool CheckForStraightFlushOfSpades(
-            IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection,
-            ICharacter character)
+        private static bool CheckForStraightFlushOfSpades(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.isVisible)).ToList();
 
-            foreach (var card in joinedCardCollection)
-            {
-                List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == (card.Suit = CardSuit.Spades)).ToList();
+            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Spades).ToList();
 
-                straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+            straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
+
+            if (straightFlushCardsCollection.Count <= 5)
+            {
+                return false;
+            }
+            else
+            {
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                 double power = 0;
-                if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[0].Rank == CardRank.King &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Queen && straightFlushCardsCollection[0].Rank == CardRank.Jack &&
-                    straightFlushCardsCollection[0].Rank == CardRank.Ten)
+                for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
-
-                    if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
+                    if ((int)straightFlushCardsCollection[i].Rank - 1 == (int)straightFlushCardsCollection[i + 1].Rank)
                     {
-                        character.CardsCombination = new Combination(
-                            power,
-                            CombinationType.StraightFlush,
-                            BigStraightFlushBehaviourPower,
-                            straightFlushCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination);
+
+                        if (straightFlushCardsCollection[0].Rank == CardRank.Ace && straightFlushCardsCollection[1].Rank == CardRank.King &&
+                            straightFlushCardsCollection[2].Rank == CardRank.Queen && straightFlushCardsCollection[3].Rank == CardRank.Jack &&
+                            straightFlushCardsCollection[4].Rank == CardRank.Ten)
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        else
+                        {
+                            power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
+                        }
+
+                        hasStraightFlush = true;
                     }
-
-                    hasStraightFlush = true;
-                }
-
-                if (straightFlushCardsCollection.Count >= 5)
-                {
-                    power = (int)straightFlushCardsCollection[0].Rank + LittleStraightFlushBehaviourPower * 100;
-
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !straightFlushCardsCollection.Contains(x)).ToList();
 
                     if (character.CardsCombination == null || character.CardsCombination.Type < CombinationType.StraightFlush)
                     {
@@ -352,7 +339,6 @@ namespace Poker.Table
                             theOtherCardsFromTheHandNotIncludedInTheCombination);
                     }
 
-                    hasStraightFlush = true;
                 }
             }
 
@@ -382,7 +368,7 @@ namespace Poker.Table
                 // and adds them to the threeOfAKindCards list
                 foreach (ICard card in joinedCardCollection)
                 {
-                    if ((int) card.Rank == threeOfAKindRank)
+                    if ((int)card.Rank == threeOfAKindRank)
                     {
                         threeOfAKindCards.Add(card);
                         joinedCardCollection.Remove(card);
@@ -530,7 +516,7 @@ namespace Poker.Table
             {
                 if (charactersCardsCollection[1].Rank == element.Rank)
                 {
-                    double power = (int) charactersCardsCollection[1].Rank*4 + PairFromHandBehaviourPower*100;
+                    double power = (int)charactersCardsCollection[1].Rank * 4 + PairFromHandBehaviourPower * 100;
 
                     IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                         tableCardsCollection.Where(x => x != element).ToList();
@@ -558,7 +544,7 @@ namespace Poker.Table
         {
             if (charactersCardsCollection[0].Rank == element.Rank)
             {
-                double power = (int) charactersCardsCollection[0].Rank*4 + PairFromHandBehaviourPower*100;
+                double power = (int)charactersCardsCollection[0].Rank * 4 + PairFromHandBehaviourPower * 100;
 
                 IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                     tableCardsCollection.Where(x => x != element).ToList();
@@ -585,7 +571,7 @@ namespace Poker.Table
         {
             if (charactersCardsCollection[0].Rank == charactersCardsCollection[1].Rank)
             {
-                double power = (int) charactersCardsCollection[0].Rank*4 + PairFromHandBehaviourPower*100;
+                double power = (int)charactersCardsCollection[0].Rank * 4 + PairFromHandBehaviourPower * 100;
 
                 IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = tableCardsCollection;
 
