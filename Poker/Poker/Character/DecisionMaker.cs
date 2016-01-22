@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.Windows.Forms;
 
-    public class DecisionMaker
+    public class DecisionMaker : IDecisionMaker
     {
         #region help out
         //botChips/sChips = the current bot's chips
@@ -141,7 +141,10 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         /// <param name="behaviourPower">The bot current.</param>
-        public void DecisionManager(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower)
+        public void MakeDecision(ICharacter character, IList<ICard> cardCollection,
+                                 int firstCard, int secondCard, ref int botChips, ref bool isOnTurn,
+                                 ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
+                                 double behaviourPower)
         {
             if (!isFinalTurn)
             {

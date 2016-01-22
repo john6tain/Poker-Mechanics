@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICombination.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
+    <Compile Include="Interfaces\IDecisionMaker.cs" />
     <Compile Include="Interfaces\ITable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBars.cs" />
