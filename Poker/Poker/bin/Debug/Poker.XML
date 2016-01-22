@@ -361,6 +361,66 @@
             The main entry point for the application.
             </summary>
         </member>
+        <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfClubs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method determins if straight flush of clubs combination is available 
+            </summary>
+            <param name="charactersCardsCollection">
+            Player's cards
+            </param>
+            <param name="tableCardsCollection">
+            All cards visible on the table
+            </param>
+            <param name="character">
+            current player
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfDiamonds(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method determins if straight flush of diamonds combination is available 
+            </summary>
+            <param name="charactersCardsCollection">
+            Player's cards
+            </param>
+            <param name="tableCardsCollection">
+            All cards visible on the table
+            </param>
+            <param name="character">
+            current player
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfHearts(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method determins if straight flush of hearts combination is available 
+            </summary>
+            <param name="charactersCardsCollection">
+            Player's cards
+            </param>
+            <param name="tableCardsCollection">
+            All cards visible on the table
+            </param>
+            <param name="character">
+            current player
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfSpades(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method determins if straight flush of spades combination is available 
+            </summary>
+            <param name="charactersCardsCollection">
+            Player's cards
+            </param>
+            <param name="tableCardsCollection">
+            All cards visible on the table
+            </param>
+            <param name="character">
+            current player
+            </param>
+            <returns></returns>
+        </member>
         <member name="T:Poker.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
