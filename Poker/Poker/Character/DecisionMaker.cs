@@ -140,48 +140,48 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        /// <param name="botCurrent">The bot current.</param>
-        public void DecisionManager(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double botCurrent)
+        /// <param name="behaviourPower">The bot current.</param>
+        public void DecisionManager(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower)
         {
             if (!isFinalTurn)
             {
-                if (botCurrent == -1)
+                if (behaviourPower == -1)
                 {
                     HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (botCurrent == 0)
+                if (behaviourPower == 0)
                 {
                     PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (botCurrent == 1)
+                if (behaviourPower == 1)
                 {
                     PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (botCurrent == 2)
+                if (behaviourPower == 2)
                 {
                     TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (botCurrent == 3)
+                if (behaviourPower == 3)
                 {
                     ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (botCurrent == 4)
+                if (behaviourPower == 4)
                 {
                     Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (botCurrent == 5 || botCurrent == 5.5)
+                if (behaviourPower == 5 || behaviourPower == 5.5)
                 {
                     Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (botCurrent == 6)
+                if (behaviourPower == 6)
                 {
                     FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (botCurrent == 7)
+                if (behaviourPower == 7)
                 {
                     FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (botCurrent == 8 || botCurrent == 9)
+                if (behaviourPower == 8 || behaviourPower == 9)
                 {
                     StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
@@ -511,7 +511,7 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="behaviourFactor">The behaviour factor.</param>
         /// <param name="r">The r.</param>
-        void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label botStatus, int botIndex, int behaviourFactor, int r)
+        private void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label botStatus, int botIndex, int behaviourFactor, int r)
         {
             Random randomCombination = new Random();
             int combination = randomCombination.Next(1, 3);
