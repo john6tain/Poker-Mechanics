@@ -898,10 +898,10 @@ namespace Poker
                         rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
 
                         //Four of a Kind curentCardsValue = 7
-                        rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
+                        CheckForFourOfAKind(ref curentCardsValue, ref power, bigStraight);
 
                         //Straight Flush curentCardsValue = 8 || 9
-                        CheckForStraightFlush(ref curentCardsValue, ref power, straightOfClubsValue, straightOfDiamondsValue, straightOfHeartsValue, straightOfSpadesValue);
+                        CheckForStraightFlush_ToBeDeleted_NewMethodsInstead(ref curentCardsValue, ref power, straightOfClubsValue, straightOfDiamondsValue, straightOfHeartsValue, straightOfSpadesValue);
 
                         //High Card curentCardsValue = -1
                         CheckForHighCard(ref curentCardsValue, ref power);
@@ -910,16 +910,8 @@ namespace Poker
             }
         }
 
-        /// <summary>
-        /// This method checks player's cards for Straight Flush
-        /// </summary>
-        /// <param name="currentCardsValue">players cards</param>
-        /// <param name="cardsPower">cards weight</param>
-        /// <param name="straightOfClubs">Checks if the pleyer has straight of Clubs</param>
-        /// <param name="straightOfDiamonds">Checks if the pleyer has straight of Diamonds</param>
-        /// <param name="straightOfHearts">Checks if the pleyer has straight of Hearts</param>
-        /// <param name="straightOfSpades">Checks if the pleyer has straight of Spades</param>
-        private void CheckForStraightFlush(
+        
+        private void CheckForStraightFlush_ToBeDeleted_NewMethodsInstead(
             ref double currentCardsValue, 
             ref double cardsPower, 
             int[] straightOfClubs, 
@@ -1000,7 +992,7 @@ namespace Poker
             }
         }
 
-        private void rFourOfAKind(ref double current, ref double Power, int[] Straight)
+        private void CheckForFourOfAKind(ref double current, ref double Power, int[] Straight)
         {
             if (current >= -1)
             {

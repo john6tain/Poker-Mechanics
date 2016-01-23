@@ -14,5 +14,6 @@ namespace Poker.GameConstants
         public const double FullHouseBehaviourPower = 6;
         public const double LittleStraightFlushBehaviourPower = 8;
         public const double BigStraightFlushBehaviourPower = 9;
+        public const double FourOfAKindBehavourPower = 7;
     }
 }

@@ -17,6 +17,7 @@ namespace Poker.Table
         private const double ThreeOfAKindBehaviourPower = 3;
         private const double PairFromHandBehaviourPower = 1;
         private const double FullHouseBehaviourPower = 6;
+        private const double FourOfAKindBehaviourPower = 7;
         private const double LittleStraightFlushBehaviourPower = 8;
         private const double BigStraightFlushBehaviourPower = 9;
 
@@ -402,6 +403,47 @@ namespace Poker.Table
 
             return hasStraightFlush;
         }
+
+        /// <summary>
+        /// This method cheks for forur of a kind combination
+        /// </summary>
+        /// <param name="charactersCardsCollection">
+        /// Cards in player's hand
+        /// </param>
+        /// <param name="tableCardsCollection">
+        /// Cards on table
+        /// </param>
+        /// <param name="character">
+        /// player whose cards are checked
+        /// </param>
+        /// <returns></returns>
+        private static bool CheckForFourOfAKind(
+            IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, 
+            ICharacter character)
+        {
+            IList<ICard> joinedCardCollection =
+                charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
+
+            foreach (var element in joinedCardCollection)
+            {
+                IList<ICard> sameRankCardsCollection = joinedCardCollection.Where(x => x.Rank == element.Rank).ToList();
+
+                if (sameRankCardsCollection.Count == 4)
+                {
+                    double power = (int)sameRankCardsCollection[0].Rank * 4 + FourOfAKindBehaviourPower * 100;
+
+                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                        joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).ToList();
+
+                    RegisterCombinationToCharacter(character, power, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.FourOfAKind, Constants.FourOfAKindBehavourPower);
+
+                    return true;
+                }
+            }
+
+            return false;}
+    
 
         //This method checks if the character has card combination "Full House"
         private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
