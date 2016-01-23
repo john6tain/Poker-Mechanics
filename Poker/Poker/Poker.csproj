@@ -66,6 +66,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameConstants\Constants.cs" />
     <Compile Include="Interfaces\ICard.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICombination.cs" />
@@ -113,63 +114,66 @@
     <None Include="Resources\poker-table - Copy.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Cards\10_of_clubs.png" />
-    <Content Include="Resources\Cards\10_of_diamonds.png" />
-    <Content Include="Resources\Cards\10_of_hearts.png" />
-    <Content Include="Resources\Cards\10_of_spades.png" />
-    <Content Include="Resources\Cards\11-of_clubs.png" />
-    <Content Include="Resources\Cards\11-of_diamonds.png" />
-    <Content Include="Resources\Cards\11-of_hearts.png" />
-    <Content Include="Resources\Cards\11-of_spades.png" />
-    <Content Include="Resources\Cards\12-of_clubs.png" />
-    <Content Include="Resources\Cards\12-of_diamonds.png" />
-    <Content Include="Resources\Cards\12-of_hearts.png" />
-    <Content Include="Resources\Cards\12-of_spades.png" />
-    <Content Include="Resources\Cards\13-of_clubs.png" />
-    <Content Include="Resources\Cards\13-of_diamonds.png" />
-    <Content Include="Resources\Cards\13-of_hearts.png" />
-    <Content Include="Resources\Cards\13-of_spades.png" />
-    <Content Include="Resources\Cards\1_of_clubs.png" />
-    <Content Include="Resources\Cards\1_of_diamonds.png" />
-    <Content Include="Resources\Cards\1_of_hearts.png" />
-    <Content Include="Resources\Cards\1_of_spades.png" />
-    <Content Include="Resources\Cards\2_of_clubs.png" />
-    <Content Include="Resources\Cards\2_of_diamonds.png" />
-    <Content Include="Resources\Cards\2_of_hearts.png" />
-    <Content Include="Resources\Cards\2_of_spades.png" />
-    <Content Include="Resources\Cards\3_of_clubs.png" />
-    <Content Include="Resources\Cards\3_of_diamonds.png" />
-    <Content Include="Resources\Cards\3_of_hearts.png" />
-    <Content Include="Resources\Cards\3_of_spades.png" />
-    <Content Include="Resources\Cards\4_of_clubs.png" />
-    <Content Include="Resources\Cards\4_of_diamonds.png" />
-    <Content Include="Resources\Cards\4_of_hearts.png" />
-    <Content Include="Resources\Cards\4_of_spades.png" />
-    <Content Include="Resources\Cards\5_of_clubs.png" />
-    <Content Include="Resources\Cards\5_of_diamonds.png" />
-    <Content Include="Resources\Cards\5_of_hearts.png" />
-    <Content Include="Resources\Cards\5_of_spades.png" />
-    <Content Include="Resources\Cards\6_of_clubs.png" />
-    <Content Include="Resources\Cards\6_of_diamonds.png" />
-    <Content Include="Resources\Cards\6_of_hearts.png" />
-    <Content Include="Resources\Cards\6_of_spades.png" />
-    <Content Include="Resources\Cards\7_of_clubs.png" />
-    <Content Include="Resources\Cards\7_of_diamonds.png" />
-    <Content Include="Resources\Cards\7_of_hearts.png" />
-    <Content Include="Resources\Cards\7_of_spades.png" />
-    <Content Include="Resources\Cards\8_of_clubs.png" />
-    <Content Include="Resources\Cards\8_of_diamonds.png" />
-    <Content Include="Resources\Cards\8_of_hearts.png" />
-    <Content Include="Resources\Cards\8_of_spades.png" />
-    <Content Include="Resources\Cards\9_of_clubs.png" />
-    <Content Include="Resources\Cards\9_of_diamonds.png" />
-    <Content Include="Resources\Cards\9_of_hearts.png" />
-    <Content Include="Resources\Cards\9_of_spades.png" />
     <None Include="Resources\clover-playing-card-gambling-clubs-suit-deck-1-128.ico" />
     <None Include="Resources\icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Cards\AceClubs.png" />
+    <Content Include="Resources\Cards\AceDiamonds.png" />
+    <Content Include="Resources\Cards\AceHearts.png" />
+    <Content Include="Resources\Cards\AceSpades.png" />
+    <Content Include="Resources\Cards\Back.png" />
+    <Content Include="Resources\Cards\EightClubs.png" />
+    <Content Include="Resources\Cards\EightDiamonds.png" />
+    <Content Include="Resources\Cards\EightHearts.png" />
+    <Content Include="Resources\Cards\EightSpades.png" />
+    <Content Include="Resources\Cards\FiveClubs.png" />
+    <Content Include="Resources\Cards\FiveDiamonds.png" />
+    <Content Include="Resources\Cards\FiveHearts.png" />
+    <Content Include="Resources\Cards\FiveSpades.png" />
+    <Content Include="Resources\Cards\FourClubs.png" />
+    <Content Include="Resources\Cards\FourDiamonds.png" />
+    <Content Include="Resources\Cards\FourHearts.png" />
+    <Content Include="Resources\Cards\FourSpades.png" />
+    <Content Include="Resources\Cards\JackClubs.png" />
+    <Content Include="Resources\Cards\JackDiamonds.png" />
+    <Content Include="Resources\Cards\JackHearts.png" />
+    <Content Include="Resources\Cards\JackSpades.png" />
+    <Content Include="Resources\Cards\KingClubs.png" />
+    <Content Include="Resources\Cards\KingDiamonds.png" />
+    <Content Include="Resources\Cards\KingHearts.png" />
+    <Content Include="Resources\Cards\KingSpades.png" />
+    <Content Include="Resources\Cards\NineClubs.png" />
+    <Content Include="Resources\Cards\NineDiamonds.png" />
+    <Content Include="Resources\Cards\NineHearts.png" />
+    <Content Include="Resources\Cards\NineSpades.png" />
+    <Content Include="Resources\Cards\QueenClubs.png" />
+    <Content Include="Resources\Cards\QueenDiamonds.png" />
+    <Content Include="Resources\Cards\QueenHearts.png" />
+    <Content Include="Resources\Cards\QueenSpades.png" />
+    <Content Include="Resources\Cards\SevenClubs.png" />
+    <Content Include="Resources\Cards\SevenDiamonds.png" />
+    <Content Include="Resources\Cards\SevenHearts.png" />
+    <Content Include="Resources\Cards\SevenSpades.png" />
+    <Content Include="Resources\Cards\SixClubs.png" />
+    <Content Include="Resources\Cards\SixDiamonds.png" />
+    <Content Include="Resources\Cards\SixHearts.png" />
+    <Content Include="Resources\Cards\SixSpades.png" />
+    <Content Include="Resources\Cards\TenClubs.png" />
+    <Content Include="Resources\Cards\TenDiamonds.png" />
+    <Content Include="Resources\Cards\TenHearts.png" />
+    <Content Include="Resources\Cards\TenSpades.png" />
+    <Content Include="Resources\Cards\ThreeClubs.png" />
+    <Content Include="Resources\Cards\ThreeDiamonds.png" />
+    <Content Include="Resources\Cards\ThreeHearts.png" />
+    <Content Include="Resources\Cards\ThreeSpades.png" />
+    <Content Include="Resources\Cards\TwoClubs.png" />
+    <Content Include="Resources\Cards\TwoDiamonds.png" />
+    <Content Include="Resources\Cards\TwoHearts.png" />
+    <Content Include="Resources\Cards\TwoSpades.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,6 +4,6 @@ namespace Poker.Interfacees
 {
     public interface IDatabase
     {
-        IList<ICard> Deck { get; set; }
+        IEnumerable<ICard> Deck { get; }
     }
 }

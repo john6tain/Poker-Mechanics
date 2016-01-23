@@ -117,7 +117,7 @@
             <param name="botIndex">Index of the bot.</param>
             <param name="botPower">The bot power.</param>
         </member>
-        <member name="M:Poker.Character.DecisionMaker.DecisionManager(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
+        <member name="M:Poker.Character.DecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
             <summary>
             Decision manager decide who has biggest winning combination
             </summary>
@@ -131,7 +131,7 @@
             <param name="hasFolded">The has folded.</param>
             <param name="botIndex">Index of the bot.</param>
             <param name="botPower">The bot power.</param>
-            <param name="botCurrent">The bot current.</param>
+            <param name="behaviourPower">The bot current.</param>
         </member>
         <member name="M:Poker.Character.DecisionMaker.HighCard(Poker.Interfaces.ICharacter,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
             <summary>
@@ -235,6 +235,27 @@
              <param name="botIndex">Index of the bot.</param>
              <param name="behaviourFactor">The behaviour factor.</param>
              <param name="r">The r.</param>
+        </member>
+        <member name="M:Poker.Character.Bot.#ctor">
+            <summary>
+            Initializes a new instance of DecisionMaker class.
+            </summary>
+        </member>
+        <member name="M:Poker.Character.Bot.Decide(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
+            <summary>
+            Decides the winning combination.
+            </summary>
+            <param name="character">The character.</param>
+            <param name="cardCollection">The card collection.</param>
+            <param name="firstCard">The first card.</param>
+            <param name="secondCard">The second card.</param>
+            <param name="botChips">The bot chips.</param>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="hasFolded">The has folded.</param>
+            <param name="botIndex">Index of the bot.</param>
+            <param name="botPower">The bot power.</param>
+            <param name="behaviourPower">The behaviour power.</param>
         </member>
         <member name="M:Poker.Form1.CheckForStraightFlush(System.Double@,System.Double@,System.Int32[],System.Int32[],System.Int32[],System.Int32[])">
             <summary>

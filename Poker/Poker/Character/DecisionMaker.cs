@@ -191,8 +191,8 @@
             }
             if (isFinalTurn)
             {
-                cardCollection[firstCard].isVisible = false;
-                cardCollection[secondCard].isVisible = false;
+                cardCollection[firstCard].IsVisible = false;
+                cardCollection[secondCard].IsVisible = false;
             }
         }
 

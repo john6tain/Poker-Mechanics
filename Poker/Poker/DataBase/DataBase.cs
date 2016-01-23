@@ -1,32 +1,44 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using Poker.Enumerations;
 using Poker.Interfacees;
+using Poker.Table;
 
 namespace Poker.DataBase
 {
     public class DataBase:IDatabase
     {
+        private readonly IList<ICard> deck;
+
         public DataBase()
         {
-            this.Deck = new List<ICard>();
-            //this.InitializeCards();
+            this.deck = new List<ICard>();
+            this.InitializeDeck();
         }
 
-        public IList<ICard> Deck { get; set; }
+        public IEnumerable<ICard> Deck
+        {
+            get { return this.deck; }
+        }
 
         //Trying to initialize the full Deck of cards. Not sure if this is the right way. Ask.
-        //public void InitializeCards()
-        //{
-        //    var values = Enum.GetValues(typeof(CardSuit));
-        //    var valuesTwo = Enum.GetValues(typeof(CardRank));
+        private void InitializeDeck()
+        {
+            var values = Enum.GetValues(typeof(CardSuit));
+            var valuesTwo = Enum.GetValues(typeof(CardRank));
 
 
-        //    foreach (var element in values)
-        //    {
-        //        foreach (var element2 in valuesTwo)
-        //        {
-        //            Deck.Add(new Card((CardSuit)element, (CardRank)element2));
-        //        }
-        //    }
-        //}   
+            foreach (var element in values)
+            {
+                foreach (var element2 in valuesTwo)
+                {
+                    string cardPath = "..\\..\\Resources\\Cards\\" + (CardRank)element2 + (CardSuit)element + ".png";
+                    Image cardImage = Image.FromFile(cardPath);
+
+                    this.deck.Add(new Card((CardSuit)element, (CardRank)element2, cardImage));
+                }
+            }
+        }
     }
 }

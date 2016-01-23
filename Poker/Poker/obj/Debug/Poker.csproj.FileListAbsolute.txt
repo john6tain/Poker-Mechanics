@@ -64,3 +64,14 @@ C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChi
 C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
 C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb

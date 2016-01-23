@@ -709,6 +709,8 @@ namespace Poker
         private readonly Panel fourthBotPanel = new Panel();
         private readonly Panel fifthBotPanel = new Panel();
 
+        DataBase.DataBase a = new DataBase.DataBase();
+
         private int Nm;
         private int call = 500;
         private int foldedPlayers = 5;
