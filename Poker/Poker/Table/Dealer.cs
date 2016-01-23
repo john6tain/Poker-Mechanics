@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Poker.Enumerations;
 using Poker.GameConstants;
@@ -20,6 +21,8 @@ namespace Poker.Table
         private const double FourOfAKindBehaviourPower = 7;
         private const double LittleStraightFlushBehaviourPower = 8;
         private const double BigStraightFlushBehaviourPower = 9;
+        private const double BigFlushBehaviourPower = 5.5;
+        private const double LittleFlushBehaviourPower = 5;
 
 
         private static readonly int[] AllCardsOnTable = new int[16];
@@ -372,8 +375,6 @@ namespace Poker.Table
                     {
                         return false;
                     }
-
-                    
                 }
 
                 if (straightFlushCardsCollection[0].Rank == CardRank.Ace)
@@ -403,6 +404,127 @@ namespace Poker.Table
 
             return hasStraightFlush;
         }
+
+
+        private static bool CheckForFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+            ICharacter character)
+        {
+            List<ICard> joinedCardCollection =
+                charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
+
+            bool hasFlush = false;
+            int requiredCardsForFlush = 5;
+
+            List<ICard> cardsThatMakeUpFlush = new List<ICard>();
+
+            foreach (ICard card in joinedCardCollection)
+            {
+                List<ICard> sameSuitCardsCollection = joinedCardCollection.Where(x => x.Suit == card.Suit).ToList();
+
+                if (sameSuitCardsCollection.Count >= requiredCardsForFlush)
+                {
+                    hasFlush = true;
+                    cardsThatMakeUpFlush = sameSuitCardsCollection;
+                    break;
+                }            
+            }
+            if (hasFlush)
+            {
+                List<ICard> tableCardsThatMakeUpFlush = cardsThatMakeUpFlush;
+
+                tableCardsThatMakeUpFlush.RemoveAll(x => charactersCardsCollection.Contains(x));
+
+                if (tableCardsThatMakeUpFlush.Count == requiredCardsForFlush)
+                {
+                    return CheckForFlushIfTableCardsMakeFlush(charactersCardsCollection, tableCardsThatMakeUpFlush, joinedCardCollection,
+                        character);
+                }
+                else 
+                {
+                    if (cardsThatMakeUpFlush.Count > requiredCardsForFlush)
+                    {                      
+                        int lowestCardInFlush = (int)cardsThatMakeUpFlush.Min(x => x.Rank);
+                        cardsThatMakeUpFlush.RemoveAll(x => (int)x.Rank == lowestCardInFlush);
+                    }
+
+                    int highestCardInFlush = (int)cardsThatMakeUpFlush.Max(x => x.Rank);
+                    double currentFlushBehaviourPower = Constants.LittleFlushBehaviourPower;
+                    
+                    //Check if character has Ace in his hand that is part of the flush
+                    //If they do -> the behaviour power is different (greater)
+                    foreach (ICard card in charactersCardsCollection)
+                    {
+                        if (card.Suit == cardsThatMakeUpFlush[0].Suit && card.Rank == CardRank.Ace)
+                        {
+                            currentFlushBehaviourPower = Constants.BigFlushBehaviourPower;
+                        }
+                    }
+
+                    double power = highestCardInFlush + currentFlushBehaviourPower * 100;
+                    List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                        joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
+
+                    RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
+                }                      
+            }
+            return hasFlush;
+        }
+
+        private static bool CheckForFlushIfTableCardsMakeFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsThatMakeUpFlush, IList<ICard> joinedCardCollection, ICharacter character)
+        {
+            List<ICard> characterCardsInFlush =
+                charactersCardsCollection.Where(x => x.Suit == tableCardsThatMakeUpFlush[0].Suit).ToList();
+            List<ICard> cardsThatMakeUpFlush = characterCardsInFlush.Union(tableCardsThatMakeUpFlush).ToList();
+            int maxCharaterCardInFlushRank = 0;
+
+            //Check if the cards in the character's hand are the same suit as the flush suit
+            //If yes -> get the bigger one (if both are same suit) or only the one that is the same suit
+            if (characterCardsInFlush.Count == 0)
+            {
+                return false;
+            }
+            else if (characterCardsInFlush.Count == 2)
+            {
+                maxCharaterCardInFlushRank = ((int) characterCardsInFlush[0].Rank > (int) characterCardsInFlush[1].Rank)
+                    ? (int) characterCardsInFlush[0].Rank
+                    : (int) characterCardsInFlush[1].Rank;         
+            }
+            else
+            {
+                maxCharaterCardInFlushRank = (int) characterCardsInFlush[0].Rank;
+            }
+
+            int lowestCardInTableFlush = (int)tableCardsThatMakeUpFlush.Min(x => x.Rank);
+            double currentFlushBehaviourPower = Constants.LittleFlushBehaviourPower;
+            double power = 0;
+
+            if (maxCharaterCardInFlushRank > lowestCardInTableFlush)
+            {
+                if (maxCharaterCardInFlushRank == (int) CardRank.Ace)
+                {
+                    currentFlushBehaviourPower = Constants.BigFlushBehaviourPower;
+                }
+                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower*100;
+            }
+            else
+            {
+                power = lowestCardInTableFlush + currentFlushBehaviourPower*100;
+            }
+
+            while (cardsThatMakeUpFlush.Count > 5)
+            {
+                int lowestCardInFlush = (int)cardsThatMakeUpFlush.Min(x => x.Rank);
+                cardsThatMakeUpFlush.RemoveAll(x => (int)x.Rank == lowestCardInFlush);
+            }
+
+            List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                       joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
+            RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
+
+            return true;
+        }
+
+
 
         /// <summary>
         /// This method cheks for forur of a kind combination

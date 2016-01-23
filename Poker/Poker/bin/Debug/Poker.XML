@@ -257,17 +257,6 @@
             <param name="botPower">The bot power.</param>
             <param name="behaviourPower">The behaviour power.</param>
         </member>
-        <member name="M:Poker.Form1.CheckForStraightFlush(System.Double@,System.Double@,System.Int32[],System.Int32[],System.Int32[],System.Int32[])">
-            <summary>
-            This method checks player's cards for Straight Flush
-            </summary>
-            <param name="currentCardsValue">players cards</param>
-            <param name="cardsPower">cards weight</param>
-            <param name="straightOfClubs">Checks if the pleyer has straight of Clubs</param>
-            <param name="straightOfDiamonds">Checks if the pleyer has straight of Diamonds</param>
-            <param name="straightOfHearts">Checks if the pleyer has straight of Hearts</param>
-            <param name="straightOfSpades">Checks if the pleyer has straight of Spades</param>
-        </member>
         <member name="M:Poker.Form1.CheckRaise(System.Int32,System.Int32)">
             <summary>
             </summary>
@@ -439,6 +428,21 @@
             </param>
             <param name="character">
             current player
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForFourOfAKind(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method cheks for forur of a kind combination
+            </summary>
+            <param name="charactersCardsCollection">
+            Cards in player's hand
+            </param>
+            <param name="tableCardsCollection">
+            Cards on table
+            </param>
+            <param name="character">
+            player whose cards are checked
             </param>
             <returns></returns>
         </member>
