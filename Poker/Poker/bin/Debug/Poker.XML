@@ -375,6 +375,11 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Poker.Interfaces.IDecisionMaker">
+            <summary>
+            The decision maker is artificial inteligence of the bot
+            </summary>
+        </member>
         <member name="M:Poker.Program.Main">
             <summary>
             The main entry point for the application.

@@ -9,7 +9,6 @@
     {
         private IDecisionMaker decisionMaker;
 
-
         /// <summary>
         /// Initializes a new instance of DecisionMaker class.
         /// </summary>
@@ -17,7 +16,6 @@
         {
             this.decisionMaker = new DecisionMaker();
         }
-
 
         /// <summary>
         /// Decides the winning combination.
