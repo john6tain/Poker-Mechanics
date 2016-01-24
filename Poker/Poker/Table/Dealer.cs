@@ -28,6 +28,7 @@ namespace Poker.Table
         private const double BigStraightFlushBehaviourPower = 9;
         private const double BigFlushBehaviourPower = 5.5;
         private const double LittleFlushBehaviourPower = 5;
+        private const double StraightBehaviourPower = 4;
 
 
         private static readonly int[] AllCardsOnTable = new int[16];
@@ -960,6 +961,50 @@ namespace Poker.Table
             return hasStraightFlush;
         }
 
+        private static bool CheckForStraight(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+            ICharacter character)
+        {
+            List<ICard> joinedCardCollection =
+                charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
+            joinedCardCollection = new List<ICard>(joinedCardCollection.OrderByDescending(x => x.Rank));
+            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int) x.Rank).Distinct().OrderByDescending(x => x).ToList();
+
+            int endBorderOfStraight = 4; // if a number is the beginning of a straight, then the end is '4' numbers later (straight must be 5 cards))
+            bool hasStraight = false;
+            double power = 0;
+
+            for (int currentCardIndex = 0; currentCardIndex < distinctCardRanks.Count - endBorderOfStraight; currentCardIndex++)
+            {
+                if (distinctCardRanks[currentCardIndex] - endBorderOfStraight == distinctCardRanks[currentCardIndex + endBorderOfStraight])
+                {
+                    hasStraight = true;
+                    int highestCardInStraight = distinctCardRanks[currentCardIndex];
+                    power = highestCardInStraight + Constants.StraightBehaviourPower*100;
+                    break;
+                }
+            }
+
+            if (hasStraight)
+            {
+                List<ICard> straightCombinationCards = new List<ICard>();
+
+                foreach (int distinctRank in distinctCardRanks)
+                {
+                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int) card.Rank == distinctRank);
+                    straightCombinationCards.Add(cardToBeAdded);
+                }
+                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                    joinedCardCollection.Where(x => !straightCombinationCards.Contains(x)).ToList();
+
+                RegisterCombinationToCharacter(character, power, straightCombinationCards,
+                    theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Straight,
+                    Constants.StraightBehaviourPower);
+            }
+
+            return hasStraight;
+
+        }
+
 
         private static bool CheckForFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
@@ -1166,15 +1211,8 @@ namespace Poker.Table
 
                         //This is a check for multiple pairs in the remaining cards
                         //If there is more than one pair, the highest one is taken
-                        if (card.Rank == 0 || maxPairRank == 0)
-                        {
-                            maxPairRank = 0; // because -> rank 0 is ACE (strongest card)
-                        }
-                        else
-                        {
-                            maxPairRank = Math.Max(maxPairRank, (int)card.Rank); // if neither pair is ACE -> take the one with the higher rank
-                        }
-
+                        maxPairRank = Math.Max(maxPairRank, (int)card.Rank); //  take the one with the higher rank
+                        
                         List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                             joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
 
