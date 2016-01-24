@@ -75,3 +75,7 @@ C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\P
 C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
 C:\Users\ff\Documents\Project_23.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\Tsvetelin\Desktop\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\Tsvetelin\Desktop\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\Tsvetelin\Desktop\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\Tsvetelin\Desktop\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
