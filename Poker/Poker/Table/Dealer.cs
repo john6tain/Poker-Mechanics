@@ -1257,7 +1257,6 @@ namespace Poker.Table
 
 
         //This method checks if the character has card combination "Three of a kind"
-        //This method checks if the character has card combination "Three of a kind"
         private static bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             IList<ICard> joinedCardCollection =
@@ -1560,6 +1559,58 @@ namespace Poker.Table
             }
 
             return isHoldingAPairHand;
+        }
+
+        private static void DetermineTheWinner(IList<ICharacter> gamePlayers)
+        {
+            gamePlayers = gamePlayers.OrderByDescending(x => x.CardsCombination.Type).ToList();
+
+            IList<ICharacter> playersWithTheSameType = gamePlayers.Where(x => x.CardsCombination.Type == gamePlayers[0].CardsCombination.Type).ToList();
+
+            if (playersWithTheSameType.Count == 1)
+            {
+                MessageBox.Show("" + "characterName" + " " + playersWithTheSameType[0].CardsCombination.Type);
+            }
+            else
+            {
+                bool equalScore = true;
+
+                equalScore = DetermineIfEqual(playersWithTheSameType, equalScore);
+
+                if (equalScore)
+                {
+                    //var winnerNames = playersWithTheSameType.All()
+                    MessageBox.Show("Equal score" + "winners names" + playersWithTheSameType[0].CardsCombination.Type);
+                }
+                else
+                {
+                    playersWithTheSameType =
+                        playersWithTheSameType.OrderByDescending(x => x.CardsCombination.Hand[0].Rank).
+                            ThenByDescending(x => x.CardsCombination.Hand[1].Rank).
+                            ThenByDescending(x => x.CardsCombination.Hand[2].Rank).
+                            ThenByDescending(x => x.CardsCombination.Hand[3].Rank).
+                            ThenByDescending(x => x.CardsCombination.Hand[4].Rank).ToList();
+
+                    MessageBox.Show("" + "characterName" + " " + playersWithTheSameType[0].CardsCombination.Type);
+                }
+            }
+        }
+
+
+        private static bool DetermineIfEqual(IList<ICharacter> playersWithTheSameType, bool equalScore)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < playersWithTheSameType.Count - 1; j++)
+                {
+                    if (playersWithTheSameType[j].CardsCombination.Hand[i].Rank !=
+                        playersWithTheSameType[j + 1].CardsCombination.Hand[i].Rank)
+                    {
+                        equalScore = false;
+                    }
+                }
+            }
+            return equalScore;
         }
     }
 }

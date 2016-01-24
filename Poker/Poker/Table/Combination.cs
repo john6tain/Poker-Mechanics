@@ -22,6 +22,15 @@ namespace Poker.Table
 
         public IList<ICard> TheOtherCardsFromTheHandNotIncludedInTheCombination { get; set; }
         public IList<ICard> TheCombinationCards { get; set; }
+
+        public IList<ICard> Hand
+        {
+            get
+            {
+                IList<ICard> hand = this.TheCombinationCards.Union(this.TheOtherCardsFromTheHandNotIncludedInTheCombination).ToList();
+                return hand;
+            }
+        }
         public double Power { get; set; }
         public CombinationType Type { get; set; }
         public double BehaviourPower { get; set; }

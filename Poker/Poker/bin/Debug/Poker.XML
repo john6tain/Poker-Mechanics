@@ -223,6 +223,15 @@
              <param name="behaviourFactorBasedOnBotPower">The behaviour factor based on bot power.</param>
              <param name="callBehaviourFactor">The call behaviour factor.</param>
         </member>
+        <member name="M:Poker.Character.DecisionMaker.FixCall(Poker.Interfaces.ICharacter,System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            
+            </summary>
+            <param name="character"></param>
+            <param name="botChips"></param>
+            <param name="isBotsTurn"></param>
+            <param name="labelStatus"></param>
+        </member>
         <member name="M:Poker.Character.DecisionMaker.ChooseBotsMoveThirdWay(Poker.Interfaces.ICharacter,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Int32,System.Int32)">
              <summary>
             Chooses the bot's move if it has a "ThreeOfAKind", "Straight", "FullHouse", "Flush", "FourOfAKind" or "StraightFlush" combination - not sure about the combinations??? 
