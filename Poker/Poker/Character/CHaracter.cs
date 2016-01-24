@@ -81,5 +81,7 @@ namespace Poker.Character
             isRaising = true;
             isBotsTurn = false;
         }
+
+        
     }
 }

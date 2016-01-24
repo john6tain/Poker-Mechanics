@@ -5,6 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+    using Poker.GameConstants;
 
     public class DecisionMaker : IDecisionMaker
     {
@@ -148,7 +149,7 @@
         {
             if (!isFinalTurn)
             {
-                if (behaviourPower == -1)
+                if (behaviourPower == Constants.HighCardBehaviourPower)
                 {
                     HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
@@ -156,7 +157,7 @@
                 {
                     PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (behaviourPower == 1)
+                if (behaviourPower == Constants.PairFromHandBehaviourPower)
                 {
                     PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
@@ -172,7 +173,7 @@
                 {
                     Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (behaviourPower == 5 || behaviourPower == 5.5)
+                if (behaviourPower == Constants.LittleFlushBehaviourPower || behaviourPower == Constants.BigFlushBehaviourPower)
                 {
                     Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
@@ -184,7 +185,7 @@
                 {
                     FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (behaviourPower == 8 || behaviourPower == 9)
+                if (behaviourPower == Constants.LittleStraightFlushBehaviourPower || behaviourPower == Constants.BigStraightFlushBehaviourPower)
                 {
                     StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
@@ -501,6 +502,32 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="botChips"></param>
+        /// <param name="isBotsTurn"></param>
+        /// <param name="labelStatus"></param>
+        private void FixCall(ICharacter character, ref int botChips, ref bool isBotsTurn, Label labelStatus)
+        {
+            if (rounds != 4)
+            {
+                if (labelStatus.Text.Contains("Raise"))
+                {
+                    character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                }
+                if (labelStatus.Text.Contains("Call"))
+                {
+                    character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                }
+                if (labelStatus.Text.Contains("Check"))
+                {
+                    character.ChangeStatusToChecking(ref isBotsTurn, labelStatus);
+                }
+            }
+        }
+        
         private readonly TextBox potChips;
         private bool isRaising;
         /// <summary>
