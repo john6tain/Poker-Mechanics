@@ -1,17 +1,20 @@
-
-﻿using System.Collections;
-using System.Windows.Forms;
-
-
-
-﻿namespace Poker.Interfaces
-
+namespace Poker.Interfaces
 {
+    using Poker.Interfacees;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     public interface ICharacter
     {
+        int Chips { get; set; }
+
+        string Name { get; set; }
+
+        bool HasFolded { get; set; }
+
         ICombination CardsCombination { get; set; }
+
+        IList<ICard> CharacterCardsCollection { get; set; }
 
         void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label sStatus);
 

@@ -11,23 +11,23 @@ namespace Poker.Table
 {
     class Combination : ICombination
     {
-        public Combination(double power, CombinationType type, double behaviourPower, IList<ICard> theCombinationCards, IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination)
+        public Combination(double power, CombinationType type, double behaviourPower, IList<ICard> combinationCardsCollection, IList<ICard> kickersCollection)
         {
             this.Power = power;
             this.Type = type;
             this.BehaviourPower = behaviourPower;
-            this.TheCombinationCards = theCombinationCards;
-            this.TheOtherCardsFromTheHandNotIncludedInTheCombination = theOtherCardsFromTheHandNotIncludedInTheCombination;
+            this.CombinationCardsCollection = combinationCardsCollection;
+            this.KickersCollection = kickersCollection;
         }
 
-        public IList<ICard> TheOtherCardsFromTheHandNotIncludedInTheCombination { get; set; }
-        public IList<ICard> TheCombinationCards { get; set; }
+        public IList<ICard> KickersCollection { get; set; }
+        public IList<ICard> CombinationCardsCollection { get; set; }
 
         public IList<ICard> Hand
         {
             get
             {
-                IList<ICard> hand = this.TheCombinationCards.Union(this.TheOtherCardsFromTheHandNotIncludedInTheCombination).ToList();
+                IList<ICard> hand = this.CombinationCardsCollection.Union(this.KickersCollection).ToList();
                 return hand;
             }
         }

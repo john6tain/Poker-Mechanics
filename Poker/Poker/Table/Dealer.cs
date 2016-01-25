@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poker.Enumerations;
@@ -967,7 +968,7 @@ namespace Poker.Table
             List<ICard> joinedCardCollection =
                 charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
             joinedCardCollection = new List<ICard>(joinedCardCollection.OrderByDescending(x => x.Rank));
-            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int) x.Rank).Distinct().OrderByDescending(x => x).ToList();
+            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int)x.Rank).Distinct().OrderByDescending(x => x).ToList();
 
             int endBorderOfStraight = 4; // if a number is the beginning of a straight, then the end is '4' numbers later (straight must be 5 cards))
             bool hasStraight = false;
@@ -979,7 +980,7 @@ namespace Poker.Table
                 {
                     hasStraight = true;
                     int highestCardInStraight = distinctCardRanks[currentCardIndex];
-                    power = highestCardInStraight + Constants.StraightBehaviourPower*100;
+                    power = highestCardInStraight + Constants.StraightBehaviourPower * 100;
                     break;
                 }
             }
@@ -990,13 +991,13 @@ namespace Poker.Table
 
                 foreach (int distinctRank in distinctCardRanks)
                 {
-                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int) card.Rank == distinctRank);
+                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int)card.Rank == distinctRank);
                     straightCombinationCards.Add(cardToBeAdded);
                 }
                 IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                     joinedCardCollection.Where(x => !straightCombinationCards.Contains(x)).ToList();
 
-                RegisterCombinationToCharacter(character, power, straightCombinationCards,
+                RegisterCombination(character, power, straightCombinationCards,
                     theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Straight,
                     Constants.StraightBehaviourPower);
             }
@@ -1026,7 +1027,7 @@ namespace Poker.Table
                     hasFlush = true;
                     cardsThatMakeUpFlush = sameSuitCardsCollection;
                     break;
-                }            
+                }
             }
             if (hasFlush)
             {
@@ -1039,17 +1040,17 @@ namespace Poker.Table
                     return CheckForFlushIfTableCardsMakeFlush(charactersCardsCollection, tableCardsThatMakeUpFlush, joinedCardCollection,
                         character);
                 }
-                else 
+                else
                 {
                     if (cardsThatMakeUpFlush.Count > requiredCardsForFlush)
-                    {                      
+                    {
                         int lowestCardInFlush = (int)cardsThatMakeUpFlush.Min(x => x.Rank);
                         cardsThatMakeUpFlush.RemoveAll(x => (int)x.Rank == lowestCardInFlush);
                     }
 
                     int highestCardInFlush = (int)cardsThatMakeUpFlush.Max(x => x.Rank);
                     double currentFlushBehaviourPower = Constants.LittleFlushBehaviourPower;
-                    
+
                     //Check if character has Ace in his hand that is part of the flush
                     //If they do -> the behaviour power is different (greater)
                     foreach (ICard card in charactersCardsCollection)
@@ -1064,8 +1065,8 @@ namespace Poker.Table
                     List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                         joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
 
-                    RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
-                }                      
+                    RegisterCombination(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
+                }
             }
             return hasFlush;
         }
@@ -1085,13 +1086,13 @@ namespace Poker.Table
             }
             else if (characterCardsInFlush.Count == 2)
             {
-                maxCharaterCardInFlushRank = ((int) characterCardsInFlush[0].Rank > (int) characterCardsInFlush[1].Rank)
-                    ? (int) characterCardsInFlush[0].Rank
-                    : (int) characterCardsInFlush[1].Rank;         
+                maxCharaterCardInFlushRank = ((int)characterCardsInFlush[0].Rank > (int)characterCardsInFlush[1].Rank)
+                    ? (int)characterCardsInFlush[0].Rank
+                    : (int)characterCardsInFlush[1].Rank;
             }
             else
             {
-                maxCharaterCardInFlushRank = (int) characterCardsInFlush[0].Rank;
+                maxCharaterCardInFlushRank = (int)characterCardsInFlush[0].Rank;
             }
 
             int lowestCardInTableFlush = (int)tableCardsThatMakeUpFlush.Min(x => x.Rank);
@@ -1100,15 +1101,15 @@ namespace Poker.Table
 
             if (maxCharaterCardInFlushRank > lowestCardInTableFlush)
             {
-                if (maxCharaterCardInFlushRank == (int) CardRank.Ace)
+                if (maxCharaterCardInFlushRank == (int)CardRank.Ace)
                 {
                     currentFlushBehaviourPower = Constants.BigFlushBehaviourPower;
                 }
-                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower*100;
+                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower * 100;
             }
             else
             {
-                power = lowestCardInTableFlush + currentFlushBehaviourPower*100;
+                power = lowestCardInTableFlush + currentFlushBehaviourPower * 100;
             }
 
             while (cardsThatMakeUpFlush.Count > 5)
@@ -1119,7 +1120,7 @@ namespace Poker.Table
 
             List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                        joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
-            RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
+            RegisterCombination(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
 
             return true;
         }
@@ -1141,7 +1142,7 @@ namespace Poker.Table
         /// <returns></returns>
         private static bool CheckForFourOfAKind(
             IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, 
+            IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             IList<ICard> joinedCardCollection =
@@ -1158,14 +1159,15 @@ namespace Poker.Table
                     IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                         joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).ToList();
 
-                    RegisterCombinationToCharacter(character, power, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.FourOfAKind, Constants.FourOfAKindBehavourPower);
+                    RegisterCombination(character, power, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.FourOfAKind, Constants.FourOfAKindBehavourPower);
 
                     return true;
                 }
             }
 
-            return false;}
-    
+            return false;
+        }
+
 
         //This method checks if the character has card combination "Full House"
         private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
@@ -1212,7 +1214,7 @@ namespace Poker.Table
                         //This is a check for multiple pairs in the remaining cards
                         //If there is more than one pair, the highest one is taken
                         maxPairRank = Math.Max(maxPairRank, (int)card.Rank); //  take the one with the higher rank
-                        
+
                         List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                             joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
 
@@ -1255,12 +1257,16 @@ namespace Poker.Table
             return cardRank;
         }
 
-
-        //This method checks if the character has card combination "Three of a kind"
+        /// <summary>
+        /// Checks if the character has "Three-of-a-kind" card combination.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         private static bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
-            IList<ICard> joinedCardCollection =
-                charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
+            IList<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
             foreach (var element in joinedCardCollection)
             {
@@ -1270,10 +1276,9 @@ namespace Poker.Table
                 {
                     double power = (int)sameRankCardsCollection[0].Rank * 3 + ThreeOfAKindBehaviourPower * 100;
 
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                        joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).ToList();
+                    IList<ICard> nonCombinationCardsCollection = joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).ToList();
 
-                    RegisterCombinationToCharacter(character, power, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.ThreeOfAKind, Constants.ThreeOfAKindBehaviourPower);
+                    RegisterCombination(character, power, sameRankCardsCollection, nonCombinationCardsCollection, CombinationType.ThreeOfAKind, Constants.ThreeOfAKindBehaviourPower);
 
                     return true;
                 }
@@ -1282,108 +1287,161 @@ namespace Poker.Table
             return false;
         }
 
-        //This method registers the combination which is found to the character
-        private static void RegisterCombinationToCharacter(ICharacter character, double power, IList<ICard> combinationCardsCollection,
-            IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType combinationType, double behaviourPower)
+        /// <summary>
+        /// Registers the combination which is found to the character.
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="power"></param>
+        /// <param name="combinationCardsCollection"></param>
+        /// <param name="nonCombinationCardsCollection"></param>
+        /// <param name="combinationType"></param>
+        /// <param name="behaviourPower"></param>
+        private static void RegisterCombination(ICharacter character, double power, IList<ICard> combinationCardsCollection,
+            IList<ICard> nonCombinationCardsCollection, CombinationType combinationType, double behaviourPower)
         {
+            IList<ICard> kickersCollection = new List<ICard>();
+
             if (character.CardsCombination == null || character.CardsCombination.Type < combinationType || character.CardsCombination.Power < power)
             {
-                character.CardsCombination = new Combination(power, combinationType, behaviourPower, combinationCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                if (combinationCardsCollection.Count < 5)
+                {
+                    int nonCombinationCardsSize = 5 - combinationCardsCollection.Count;
+
+                    nonCombinationCardsCollection = nonCombinationCardsCollection.OrderByDescending(x => x.Rank).ToList();
+
+                    kickersCollection = nonCombinationCardsCollection.Take(nonCombinationCardsSize).ToList();
+                }
+
+                character.CardsCombination = new Combination(power, combinationType, behaviourPower, combinationCardsCollection, kickersCollection);
             }
         }
 
 
-        //This method checks for a "High card" combination
+        /// <summary>
+        /// Checks for a "High card" combination
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         private static bool CheckForHighCard(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             double power = Math.Max((double)charactersCardsCollection[0].Rank, (double)charactersCardsCollection[1].Rank);
 
-            IList<ICard> joinedCardCollection =
-    charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).OrderByDescending(x => x.Rank).ToList();
+            IList<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).OrderByDescending(x => x.Rank).ToList();
 
             IList<ICard> combinationCardsCollection = new List<ICard>();
             combinationCardsCollection.Add(joinedCardCollection[0]);
 
-            IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = joinedCardCollection.Where(x => !combinationCardsCollection.Contains(x)).ToList();
+            IList<ICard> nonCombinationCards = joinedCardCollection.Where(x => !combinationCardsCollection.Contains(x)).ToList();
 
-            RegisterCombinationToCharacter(character, power, combinationCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.HighCard, Constants.HighCardBehaviourPower);
+            RegisterCombination(character, power, combinationCardsCollection, nonCombinationCards, CombinationType.HighCard, Constants.HighCardBehaviourPower);
 
             return true;
         }
 
-        //This method checks if the two cards which the character has make a pair or if one of the character's cards makes a pair with one card from the table.
+        /// <summary>
+        /// Checks if the two character's cards make a "Pair" or if one of the character's cards makes a "Pair" with one card from the table.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         public static bool CheckForPairFromHand(IList<ICard> charactersCardsCollection,
     IList<ICard> tableCardsCollection, ICharacter character)
         {
-
             bool isHoldingAPairHand = CheckIfTheCharactersCardsMakeAPair(charactersCardsCollection, tableCardsCollection, character);
 
-            bool theFirstCharactersCardMakesPairWithOneFromTheTable = false;
-            bool theSecondCharactersCardMakesPairWithOneFromTheTable = false;
+            bool theFirstCharactersCardMakesPairWithOneFromTheTable = CheckForFirstCardPair(charactersCardsCollection, tableCardsCollection, character);
+            bool theSecondCharactersCardMakesPairWithOneFromTheTable = CheckForSecondCardPair(charactersCardsCollection, tableCardsCollection, character);
+
+            bool hasPairFromHand = isHoldingAPairHand || theFirstCharactersCardMakesPairWithOneFromTheTable || theSecondCharactersCardMakesPairWithOneFromTheTable;
+
+            return hasPairFromHand;
+        }
+
+        /// <summary>
+        /// Checks if the second character's card makes a pair with one from the table.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        private static bool CheckForSecondCardPair(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
+        {
+            bool makesAPair = false;
 
             foreach (var element in tableCardsCollection)
             {
-                theFirstCharactersCardMakesPairWithOneFromTheTable = CheckIfTheFirstCharactersCardMakesAPairWithOneFromTheTable(charactersCardsCollection, tableCardsCollection, character, element);
-
-                theSecondCharactersCardMakesPairWithOneFromTheTable = CheckIfTheOtherCharactersCardMakesAPairWithOneFromTheTable(charactersCardsCollection, tableCardsCollection, character, element);
-            }
-
-            return isHoldingAPairHand || theFirstCharactersCardMakesPairWithOneFromTheTable || theSecondCharactersCardMakesPairWithOneFromTheTable;
-        }
-
-        private static bool CheckIfTheOtherCharactersCardMakesAPairWithOneFromTheTable(IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, ICharacter character, ICard element)
-        {
-            bool theSecondCharactersCardMakesPairWithOneFromTheTable = false;
-
-            if (charactersCardsCollection[1].Rank == element.Rank)
-            {
                 if (charactersCardsCollection[1].Rank == element.Rank)
                 {
-                    double power = (int)charactersCardsCollection[1].Rank * 4 + PairFromHandBehaviourPower * 100;
+                    if (charactersCardsCollection[1].Rank == element.Rank)
+                    {
+                        double power = (int)charactersCardsCollection[1].Rank * 4 + PairFromHandBehaviourPower * 100;
 
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                        tableCardsCollection.Where(x => x != element).ToList();
-                    theOtherCardsFromTheHandNotIncludedInTheCombination.Add(charactersCardsCollection[0]);
+                        IList<ICard> nonCombinationCardsCollection = tableCardsCollection.Where(x => x != element).ToList();
+                        nonCombinationCardsCollection.Add(charactersCardsCollection[0]);
+
+
+                        IList<ICard> combinationCardsCollection = new List<ICard>();
+                        combinationCardsCollection.Add(element);
+                        combinationCardsCollection.Add(charactersCardsCollection[1]);
+
+                        RegisterCombination(character, power, combinationCardsCollection, nonCombinationCardsCollection, CombinationType.OnePair, Constants.PairFromHandBehaviourPower);
+                    }
+
+                    makesAPair = true;
+                }
+
+            }
+            return makesAPair;
+        }
+
+        /// <summary>
+        /// Checks if the first character's card makes a pair with one from the table.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        private static bool CheckForFirstCardPair(IList<ICard> charactersCardsCollection,
+            IList<ICard> tableCardsCollection, ICharacter character)
+        {
+            bool makesAPair = false;
+
+            foreach (var element in tableCardsCollection)
+            {
+                if (charactersCardsCollection[0].Rank == element.Rank)
+                {
+                    double power = (int)charactersCardsCollection[0].Rank * 4 + PairFromHandBehaviourPower * 100;
+
+                    IList<ICard> nonCombinationCardsCollection = tableCardsCollection.Where(x => x != element).ToList();
+
+                    nonCombinationCardsCollection.Add(charactersCardsCollection[1]);
 
                     IList<ICard> combinationCardsCollection = new List<ICard>();
                     combinationCardsCollection.Add(element);
-                    combinationCardsCollection.Add(charactersCardsCollection[1]);
+                    combinationCardsCollection.Add(charactersCardsCollection[0]);
 
-                    RegisterCombinationToCharacter(character, power, combinationCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.OnePair, Constants.PairFromHandBehaviourPower);
+                    RegisterCombination(character, power, combinationCardsCollection, nonCombinationCardsCollection, CombinationType.OnePair,
+                        Constants.PairFromHandBehaviourPower);
+
+
+                    makesAPair = true;
+
+                    break;
                 }
-
-                theSecondCharactersCardMakesPairWithOneFromTheTable = true;
             }
-            return theSecondCharactersCardMakesPairWithOneFromTheTable;
+            return makesAPair;
         }
 
-        private static bool CheckIfTheFirstCharactersCardMakesAPairWithOneFromTheTable(IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, ICharacter character, ICard element)
-        {
-            bool theFirstCharactersCardMakesPairWithOneFromTheTable = false;
-
-            if (charactersCardsCollection[0].Rank == element.Rank)
-            {
-                double power = (int)charactersCardsCollection[0].Rank * 4 + PairFromHandBehaviourPower * 100;
-
-                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                    tableCardsCollection.Where(x => x != element).ToList();
-                theOtherCardsFromTheHandNotIncludedInTheCombination.Add(charactersCardsCollection[1]);
-
-                IList<ICard> combinationCardsCollection = new List<ICard>();
-                combinationCardsCollection.Add(element);
-                combinationCardsCollection.Add(charactersCardsCollection[0]);
-
-                RegisterCombinationToCharacter(character, power, combinationCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.OnePair, Constants.PairFromHandBehaviourPower);
-
-
-                theFirstCharactersCardMakesPairWithOneFromTheTable = true;
-            }
-            return theFirstCharactersCardMakesPairWithOneFromTheTable;
-        }
-
-        //This method checks if the character has two pairs and at least one of the cards is in their hand
+        /// <summary>
+        /// Checks if the character has two pairs and at least one of the pair cards is in the character's hand.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         private static bool CheckForTwoPairsFromHand(IList<ICard> charactersCardsCollection,
      IList<ICard> tableCardsCollection, ICharacter character)
         {
@@ -1394,32 +1452,29 @@ namespace Poker.Table
 
             if (hasOnePairFromHand)
             {
-                IList<ICard> cardsOnTheTableNotIncludingThePair =
-                    tableCardsCollection.Where(x => !character.CardsCombination.TheCombinationCards.Contains(x))
+                IList<ICard> nonCombinationTableCards = tableCardsCollection.Where(x => !character.CardsCombination.CombinationCardsCollection.Contains(x))
                         .ToList();
 
-                foreach (var element in cardsOnTheTableNotIncludingThePair)
+                foreach (var element in nonCombinationTableCards)
                 {
-                    IList<ICard> sameRankCardsCollection = character.CardsCombination.TheOtherCardsFromTheHandNotIncludedInTheCombination.Where(x => x.Rank == element.Rank).ToList();
+                    IList<ICard> sameRankCardsCollection = character.CardsCombination.KickersCollection.Where(x => x.Rank == element.Rank).ToList();
 
-                    if (sameRankCardsCollection.Count >= 2 && sameRankCardsCollection[0].Rank != character.CardsCombination.TheCombinationCards[0].Rank)
+                    if (sameRankCardsCollection.Count >= 2 && sameRankCardsCollection[0].Rank != character.CardsCombination.CombinationCardsCollection[0].Rank)
                     {
                         sameRankCardsCollection =
                             sameRankCardsCollection.OrderByDescending(x => x.Rank).Take(2).ToList();
 
-                        var power = DetermineTheCombinationsCardsPowerInCaseOfTwoPairs(character, sameRankCardsCollection);
+                        var power = DetermineTwoPairsPower(character, sameRankCardsCollection);
 
                         sameRankCardsCollection =
-                            sameRankCardsCollection.Union(character.CardsCombination.TheCombinationCards)
+                            sameRankCardsCollection.Union(character.CardsCombination.CombinationCardsCollection)
                                 .OrderByDescending(x => x.Rank)
                                 .ToList();
 
-                        IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                            character.CardsCombination.TheOtherCardsFromTheHandNotIncludedInTheCombination.Where(
+                        IList<ICard> nonCombinationCardsCollection = character.CardsCombination.KickersCollection.Where(
                                 x => !sameRankCardsCollection.Contains(x)).ToList();
 
-                        RegisterCombinationToCharacter(character, power, sameRankCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.TwoPair,
+                        RegisterCombination(character, power, sameRankCardsCollection, nonCombinationCardsCollection, CombinationType.TwoPair,
                             TwoPairsBehaviourPower);
 
                         hasTwoPairsFromHand = true;
@@ -1432,7 +1487,13 @@ namespace Poker.Table
             return hasTwoPairsFromHand;
         }
 
-        //This method checks if there are two pairs in the cards on the table
+        /// <summary>
+        /// Checks if there are two pairs in the table cards.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         private static bool CheckForTwoPairsFromTable(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
@@ -1444,32 +1505,31 @@ namespace Poker.Table
             if (thereIsOnePairOnTheTable)
             {
 
-                IList<ICard> cardsOnTheTableNotIncludingThePair =
-    tableCardsCollection.Where(x => !character.CardsCombination.TheCombinationCards.Contains(x))
+                IList<ICard> cardsOnTheTableNotIncludingThePair = tableCardsCollection.Where(x => !character.CardsCombination.CombinationCardsCollection.Contains(x))
         .ToList();
 
                 foreach (var element in cardsOnTheTableNotIncludingThePair)
                 {
                     IList<ICard> sameRankCardsCollection = cardsOnTheTableNotIncludingThePair.Where(x => x.Rank == element.Rank).ToList();
 
-                    if (sameRankCardsCollection.Count >= 2 && sameRankCardsCollection[0].Rank != character.CardsCombination.TheCombinationCards[0].Rank)
+                    if (sameRankCardsCollection.Count >= 2 && sameRankCardsCollection[0].Rank != character.CardsCombination.CombinationCardsCollection[0].Rank)
                     {
                         sameRankCardsCollection =
                             sameRankCardsCollection.OrderByDescending(x => x.Rank).Take(2).ToList();
 
-                        var power = DetermineTheCombinationsCardsPowerInCaseOfTwoPairs(character, sameRankCardsCollection);
+                        var power = DetermineTwoPairsPower(character, sameRankCardsCollection);
 
                         sameRankCardsCollection =
-                            sameRankCardsCollection.Union(character.CardsCombination.TheCombinationCards)
+                            sameRankCardsCollection.Union(character.CardsCombination.CombinationCardsCollection)
                                 .OrderByDescending(x => x.Rank)
                                 .ToList();
 
-                        IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                            character.CardsCombination.TheOtherCardsFromTheHandNotIncludedInTheCombination.Where(
+                        IList<ICard> nonCombinationCardsCollection =
+                            character.CardsCombination.KickersCollection.Where(
                                 x => !sameRankCardsCollection.Contains(x)).ToList();
 
-                        RegisterCombinationToCharacter(character, power, sameRankCardsCollection,
-                            theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.TwoPair,
+                        RegisterCombination(character, power, sameRankCardsCollection,
+                            nonCombinationCardsCollection, CombinationType.TwoPair,
                             TwoPairsBehaviourPower);
 
                         hasTwoPairsFromHand = true;
@@ -1482,18 +1542,23 @@ namespace Poker.Table
             return hasTwoPairsFromHand;
         }
 
-        private static double DetermineTheCombinationsCardsPowerInCaseOfTwoPairs(ICharacter character,
-    IList<ICard> sameRankCardsCollection)
+        /// <summary>
+        /// Determines the power of the hand in case of two pairs.
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="sameRankCardsCollection"></param>
+        /// <returns></returns>
+        private static double DetermineTwoPairsPower(ICharacter character, IList<ICard> sameRankCardsCollection)
         {
             double power = 0;
 
-            if (character.CardsCombination.TheCombinationCards[0].Rank == CardRank.Ace)
+            if (character.CardsCombination.CombinationCardsCollection[0].Rank == CardRank.Ace)
             {
                 power = (int)sameRankCardsCollection[0].Rank * 4 +
                         (int)sameRankCardsCollection[1].Rank * 2 +
                         TwoPairsBehaviourPower * 100;
             }
-            else if (character.CardsCombination.TheCombinationCards[1].Rank == CardRank.Ace)
+            else if (character.CardsCombination.CombinationCardsCollection[1].Rank == CardRank.Ace)
             {
                 power = (int)sameRankCardsCollection[1].Rank * 4 +
                         (int)sameRankCardsCollection[0].Rank * 2 +
@@ -1507,7 +1572,6 @@ namespace Poker.Table
             return power;
         }
 
-        //This method checks if there is one pair in the cards on the table
         private static bool CheckForPairFromTable(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             IList<ICard> joinedCardCollection =
@@ -1530,10 +1594,9 @@ namespace Poker.Table
                         power = (int)charactersCardsCollection[1].Rank + (int)sameRankCardsCollection[0].Rank * 100;
                     }
 
-                    IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
-                        joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).OrderByDescending(x => x.Rank).ToList();
+                    IList<ICard> nonCombinationCardsCollection = joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).OrderByDescending(x => x.Rank).ToList();
 
-                    RegisterCombinationToCharacter(character, power, sameRankCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.OnePair, PairFromTableBehaviourPower);
+                    RegisterCombination(character, power, sameRankCardsCollection, nonCombinationCardsCollection, CombinationType.OnePair, PairFromTableBehaviourPower);
 
                     return true;
                 }
@@ -1541,7 +1604,13 @@ namespace Poker.Table
 
             return false;
         }
-
+        /// <summary>
+        /// Checks if the two cards the participant is holding make a pair.
+        /// </summary>
+        /// <param name="charactersCardsCollection"></param>
+        /// <param name="tableCardsCollection"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         private static bool CheckIfTheCharactersCardsMakeAPair(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
@@ -1551,9 +1620,9 @@ namespace Poker.Table
             {
                 double power = (int)charactersCardsCollection[0].Rank * 4 + PairFromHandBehaviourPower * 100;
 
-                IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination = tableCardsCollection;
+                IList<ICard> nonCombinationCardsCollection = tableCardsCollection;
 
-                RegisterCombinationToCharacter(character, power, charactersCardsCollection, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.OnePair, Constants.PairFromHandBehaviourPower);
+                RegisterCombination(character, power, charactersCardsCollection, nonCombinationCardsCollection, CombinationType.OnePair, Constants.PairFromHandBehaviourPower);
 
                 isHoldingAPairHand = true;
             }
@@ -1561,78 +1630,132 @@ namespace Poker.Table
             return isHoldingAPairHand;
         }
 
-        //After all cards are down, this method chooses the winner
-        private static void DetermineTheWinner(IList<ICharacter> gamePlayers, int pot)
+        /// <summary>
+        /// After all cards are down, this method chooses the winner
+        /// </summary>
+        /// <param name="gameCharacters">All particialnts in the game.</param>
+        /// <param name="pot">The pot chips.</param>
+        private static void DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
         {
-            gamePlayers = gamePlayers.OrderByDescending(x => x.CardsCombination.Type).ToList();
+            IList<ICharacter> activeParticiapnts = gameCharacters.Where(x => !x.HasFolded).ToList();
 
-            IList<ICharacter> playersWithTheSameType = gamePlayers.Where(x => x.CardsCombination.Type == gamePlayers[0].CardsCombination.Type).ToList();
+            activeParticiapnts = activeParticiapnts.OrderByDescending(x => x.CardsCombination.Type).ToList();
 
-            if (playersWithTheSameType.Count == 1)
+            IList<ICharacter> topCombinationCharactersCollection = activeParticiapnts.Where(x => x.CardsCombination.Type == activeParticiapnts[0].CardsCombination.Type).ToList();
+
+            //If there is only 1 participant with the highest combination, he/she wins.
+            if (topCombinationCharactersCollection.Count == 1)
             {
-                MessageBox.Show("" + "characterName" + " " + playersWithTheSameType[0].CardsCombination.Type);
+                ICharacter winner = topCombinationCharactersCollection[0];
+                MessageBox.Show("" + winner.Name + " " + winner.CardsCombination.Type + "wins");
             }
             else
             {
                 bool equalScore = true;
 
-                equalScore = DetermineIfEqual(playersWithTheSameType, equalScore);
+                equalScore = DetermineIfEqual(topCombinationCharactersCollection, equalScore);
 
                 if (equalScore)
                 {
-                    //var winnerNames = playersWithTheSameType.All()
-                    MessageBox.Show("Equal score" + "winners names" + playersWithTheSameType[0].CardsCombination.Type);
+                    //All participants who have the top combination, also have the same 'kickers'. Therefore, all of them are winners.
+                    DeclareWinners(topCombinationCharactersCollection);
 
-                    PayPrizeToTheWinners(pot, playersWithTheSameType);
-
+                    PayPrizeToTheWinners(pot, topCombinationCharactersCollection);
                 }
                 else
                 {
-                    playersWithTheSameType =
-                        playersWithTheSameType.OrderByDescending(x => x.CardsCombination.Hand[0].Rank).
-                            ThenByDescending(x => x.CardsCombination.Hand[1].Rank).
-                            ThenByDescending(x => x.CardsCombination.Hand[2].Rank).
-                            ThenByDescending(x => x.CardsCombination.Hand[3].Rank).
-                            ThenByDescending(x => x.CardsCombination.Hand[4].Rank).ToList();
-
-                    MessageBox.Show("" + "characterName" + " " + playersWithTheSameType[0].CardsCombination.Type);
-
-                    ICharacter winner = playersWithTheSameType[0];
-
+                    //The 'kickers' have different ranks, so they will determine the winner.
+                    ICharacter winner = ChooseTheWinnerByTheKickers(topCombinationCharactersCollection);
                     PayPrizeToTheWinner(pot, winner);
                 }
             }
         }
 
-        private static void PayPrizeToTheWinner(int pot, ICharacter winner)
+        /// <summary>
+        /// Chooses the winner, comparing the 'kickers' ranks.
+        /// </summary>
+        /// <param name="topCombinationCharactersCollection"></param>
+        /// <returns></returns>
+        private static ICharacter ChooseTheWinnerByTheKickers(IList<ICharacter> topCombinationCharactersCollection)
         {
-            throw new NotImplementedException();
+            topCombinationCharactersCollection =
+                topCombinationCharactersCollection.OrderByDescending(x => x.CardsCombination.Hand[0].Rank).
+                    ThenByDescending(x => x.CardsCombination.Hand[1].Rank).
+                    ThenByDescending(x => x.CardsCombination.Hand[2].Rank).
+                    ThenByDescending(x => x.CardsCombination.Hand[3].Rank).
+                    ThenByDescending(x => x.CardsCombination.Hand[4].Rank).ToList();
+
+            ICharacter winner = topCombinationCharactersCollection[0];
+
+            MessageBox.Show("" + winner.Name + " " + winner.CardsCombination.Type + "wins");
+            return winner;
         }
 
-        private static void PayPrizeToTheWinners(int pot, IList<ICharacter> playersWithTheSameType)
+        /// <summary>
+        /// Gets the names of the winners and prints them to the user.
+        /// </summary>
+        /// <param name="topCombinationCharactersCollection"></param>
+        private static void DeclareWinners(IList<ICharacter> topCombinationCharactersCollection)
         {
-            int prizePerPlayer = pot/playersWithTheSameType.Count;
+            StringBuilder sb = new StringBuilder();
 
-            foreach (var element in playersWithTheSameType)
+            for (int i = 0; i < topCombinationCharactersCollection.Count; i++)
             {
-                //element.Chips += prizePerPlayer;
-                throw new NotImplementedException();
+                sb.Append(topCombinationCharactersCollection[i].Name);
+                sb.Append(", ");
             }
 
-            int fractionPart = pot%playersWithTheSameType.Count;
+            string winnersNames = sb.ToString().Substring(0, sb.Length - 2);
 
-            //playersWithTheSameType[0].Chips += fractionPart;
+            MessageBox.Show("Equal score: " + winnersNames + topCombinationCharactersCollection[0].CardsCombination.Type);
         }
 
-
-        private static bool DetermineIfEqual(IList<ICharacter> playersWithTheSameType, bool equalScore)
+        /// <summary>
+        /// Increases the winner's chips with the pot.
+        /// </summary>
+        /// <param name="pot"></param>
+        /// <param name="winner"></param>
+        private static void PayPrizeToTheWinner(int pot, ICharacter winner)
         {
-            for (int i = 0; i < 5; i++)
+            winner.Chips += pot;
+        }
+
+        /// <summary>
+        /// Divides the pot equally between the winners. 
+        /// </summary>
+        /// <param name="pot"></param>
+        /// <param name="topCombinationCharactersCollection"></param>
+        private static void PayPrizeToTheWinners(int pot, IList<ICharacter> topCombinationCharactersCollection)
+        {
+            int chipsPerCharacter = pot / topCombinationCharactersCollection.Count;
+
+            foreach (var element in topCombinationCharactersCollection)
             {
-                for (int j = 0; j < playersWithTheSameType.Count - 1; j++)
+                element.Chips += chipsPerCharacter;
+            }
+
+            //If there is a fraction part, it goes to the participant closer to the dealer.
+            int fractionPart = pot % topCombinationCharactersCollection.Count;
+
+            topCombinationCharactersCollection = topCombinationCharactersCollection.OrderByDescending(x => x.Name).ToList();
+
+            topCombinationCharactersCollection[0].Chips += fractionPart;
+        }
+
+        /// <summary>
+        /// Checks if the participants with the same top combination have alse the same 5 cards as ranks.
+        /// </summary> 
+        /// <param name="topCombinationCharactersCollection"></param>
+        /// <param name="equalScore"></param>
+        /// <returns></returns>
+        private static bool DetermineIfEqual(IList<ICharacter> topCombinationCharactersCollection, bool equalScore)
+        {
+            for (int cardNumber = 0; cardNumber < 5; cardNumber++)
+            {
+                for (int characterNumber = 0; characterNumber < topCombinationCharactersCollection.Count - 1; characterNumber++)
                 {
-                    if (playersWithTheSameType[j].CardsCombination.Hand[i].Rank !=
-                        playersWithTheSameType[j + 1].CardsCombination.Hand[i].Rank)
+                    if (topCombinationCharactersCollection[characterNumber].CardsCombination.Hand[cardNumber].Rank !=
+                        topCombinationCharactersCollection[characterNumber + 1].CardsCombination.Hand[cardNumber].Rank)
                     {
                         equalScore = false;
                     }

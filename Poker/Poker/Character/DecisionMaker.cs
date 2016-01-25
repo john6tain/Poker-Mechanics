@@ -2,21 +2,13 @@
 {
     using Interfacees;
     using Interfaces;
+    using Poker.GameConstants;
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
-    using Poker.GameConstants;
 
     public class DecisionMaker : IDecisionMaker
     {
-        #region help out
-        //botChips/sChips = the current bot's chips
-        //isOnTurn/sTurn = the bot is on turn
-        //isFinalTurn/sFTurn = the final hand for the game is played (all five cards on table are shown)
-        //hasFolded/sStatus = checks if the bot has folded the game
-        //botIndex/name = used for Bot indexing, name = 0 is bot 1, name = 1 is Bot 2 and etc.
-        #endregion
-
         /// <summary>
         /// Tell us the specified straight combination.
         /// </summary>
@@ -527,7 +519,7 @@
                 }
             }
         }
-        
+
         private readonly TextBox potChips;
         private bool isRaising;
         /// <summary>
