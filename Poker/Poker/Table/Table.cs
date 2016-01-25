@@ -7,5 +7,7 @@ namespace Poker.Table
     public class Table : ITable
     {
         public IList<ICard> TableCardsCollection { get; set; }
+
+        public int Pot { get; set; }
     }
 }

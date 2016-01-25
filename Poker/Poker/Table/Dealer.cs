@@ -1282,6 +1282,7 @@ namespace Poker.Table
             return false;
         }
 
+        //This method registers the combination which is found to the character
         private static void RegisterCombinationToCharacter(ICharacter character, double power, IList<ICard> combinationCardsCollection,
             IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType combinationType, double behaviourPower)
         {
@@ -1479,7 +1480,6 @@ namespace Poker.Table
             }
 
             return hasTwoPairsFromHand;
-
         }
 
         private static double DetermineTheCombinationsCardsPowerInCaseOfTwoPairs(ICharacter character,
@@ -1561,7 +1561,8 @@ namespace Poker.Table
             return isHoldingAPairHand;
         }
 
-        private static void DetermineTheWinner(IList<ICharacter> gamePlayers)
+        //After all cards are down, this method chooses the winner
+        private static void DetermineTheWinner(IList<ICharacter> gamePlayers, int pot)
         {
             gamePlayers = gamePlayers.OrderByDescending(x => x.CardsCombination.Type).ToList();
 
@@ -1581,6 +1582,9 @@ namespace Poker.Table
                 {
                     //var winnerNames = playersWithTheSameType.All()
                     MessageBox.Show("Equal score" + "winners names" + playersWithTheSameType[0].CardsCombination.Type);
+
+                    PayPrizeToTheWinners(pot, playersWithTheSameType);
+
                 }
                 else
                 {
@@ -1592,8 +1596,32 @@ namespace Poker.Table
                             ThenByDescending(x => x.CardsCombination.Hand[4].Rank).ToList();
 
                     MessageBox.Show("" + "characterName" + " " + playersWithTheSameType[0].CardsCombination.Type);
+
+                    ICharacter winner = playersWithTheSameType[0];
+
+                    PayPrizeToTheWinner(pot, winner);
                 }
             }
+        }
+
+        private static void PayPrizeToTheWinner(int pot, ICharacter winner)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void PayPrizeToTheWinners(int pot, IList<ICharacter> playersWithTheSameType)
+        {
+            int prizePerPlayer = pot/playersWithTheSameType.Count;
+
+            foreach (var element in playersWithTheSameType)
+            {
+                //element.Chips += prizePerPlayer;
+                throw new NotImplementedException();
+            }
+
+            int fractionPart = pot%playersWithTheSameType.Count;
+
+            //playersWithTheSameType[0].Chips += fractionPart;
         }
 
 

@@ -10,5 +10,6 @@ namespace Poker.Interfaces
     interface ITable
     {
         IList<ICard> TableCardsCollection { get; set; }
+        int Pot { get; set; }
     }
 }
