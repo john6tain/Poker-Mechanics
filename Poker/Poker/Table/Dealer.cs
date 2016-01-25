@@ -35,8 +35,6 @@ namespace Poker.Table
 
         public static readonly PictureBox[] Holder = new PictureBox[52];
 
-        #region Tsvetelin
-
         private static readonly List<bool?> bools = new List<bool?>();
 
         private static string[] ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
@@ -98,7 +96,51 @@ namespace Poker.Table
         private static double rounds;
         private static double raise;
 
-        public static async Task Shuffle()
+        //Finish fields
+        private static int bigBlind = 500;
+        private static double type;
+        private static double firstBotPower;
+        private static double secondBotPower;
+        private static double thirdBotPower;
+        private static double fourthBotPower;
+        private static double fifthBotPower;
+        private static double playerPower;
+        private static double playerType = -1;
+        private static double firstBotType = -1;
+        private static double secondBotType = -1;
+        private static double thirdBotType = -1;
+        private static double fourthBotType = -1;
+        private static double fifthBotType = -1;
+        private static bool B1turn;
+        private static bool B2turn;
+        private static bool B3turn;
+        private static bool B4turn;
+        private static bool B5turn;
+        private static bool playerFolded;
+        private static bool botOneFolded;
+        private static bool botTwoFolded;
+        private static bool botThreeFolded;
+        private static bool b4Folded;
+        private static bool b5Folded;
+        private static bool isRaising;
+        private static int height;
+        private static int width;
+        private static int winners;
+        private static int Flop = 1;
+        private static int Turn = 2;
+        private static int River = 3;
+        private static int End = 4;
+        private static int maxLeft = 6;
+        private static int last = 123;
+        private static int raisedTurn = 1;
+        private static Label fifthBotStatus;
+        private static Label fourthBotStatus;
+        private static Label thirdBotStatus;
+        private static Label firstBotStatus;
+        private static Label secondBotStatus;
+        private static int Chips = 10000;
+
+        private static async Task Shuffle()
         {
             bools.Add(PlayerFirstTurn);
             bools.Add(botOneFirstTurn);
@@ -543,6 +585,143 @@ namespace Poker.Table
             }
         }
 
+        private static async Task Finish(int n)
+        {
+            if (n == 2)
+            {
+                //FixWinners();
+            }
+            playerPanel.Visible = false;
+            firstBotPanel.Visible = false;
+            secondBotPanel.Visible = false;
+            thirdBotPanel.Visible = false;
+            fourthBotPanel.Visible = false;
+            fifthBotPanel.Visible = false;
+
+            call = bigBlind;
+            raise = 0;
+            foldedPlayers = 5;
+            type = 0;
+            rounds = 0;
+
+            firstBotPower = 0;
+            secondBotPower = 0;
+            thirdBotPower = 0;
+            fourthBotPower = 0;
+            fifthBotPower = 0;
+            playerPower = 0;
+
+            playerType = -1;
+            raise = 0;
+
+            firstBotType = -1;
+            secondBotType = -1;
+            thirdBotType = -1;
+            fourthBotType = -1;
+            fifthBotType = -1;
+
+            B1turn = false;
+            B2turn = false;
+            B3turn = false;
+            B4turn = false;
+            B5turn = false;
+            botOneFirstTurn = false;
+            botTwoFirstTurn = false;
+            botThreeFirstTurn = false;
+            botFourFirstTurn = false;
+            botFiveFirstTurn = false;
+
+            playerFolded = false;
+            botOneFolded = false;
+            botTwoFolded = false;
+            botThreeFolded = false;
+            b4Folded = false;
+            b5Folded = false;
+
+            PlayerFirstTurn = false;
+            playerTurn = true;
+            restart = false;
+            isRaising = false;
+
+            playerCall = 0;
+            firstBotCall = 0;
+            secondBotCall = 0;
+            thirdBotCall = 0;
+            fourthBotCall = 0;
+            fifthBotCall = 0;
+
+            playerRise = 0;
+            firstBotRise = 0;
+            secondBotRise = 0;
+            thirdBotRise = 0;
+            fourthBotRise = 0;
+            fifthBotRise = 0;
+
+            height = 0;
+            width = 0;
+
+            winners = 0;
+
+            Flop = 1;
+            Turn = 2;
+            River = 3;
+            End = 4;
+            maxLeft = 6;
+
+            last = 123;
+            raisedTurn = 1;
+
+            bools.Clear();
+            //CheckWinners.Clear();
+            //ints.Clear();
+            //Win.Clear();
+            //sorted.Current = 0;
+            //sorted.Power = 0;
+            //potChips.Text = "0";
+
+            t = 60;
+            up = 10000000;
+            turnCount = 0;
+
+            playerStatus.Text = "";
+            firstBotStatus.Text = "";
+            secondBotStatus.Text = "";
+            thirdBotStatus.Text = "";
+            fourthBotStatus.Text = "";
+            fifthBotStatus.Text = "";
+
+            if (Chips <= 0)
+            {
+                var f2 = new AddChips();
+                f2.ShowDialog();
+                if (f2.a != 0)
+                {
+                    Chips = f2.a;
+                    firstBotChips += f2.a;
+                    secondBotChips += f2.a;
+                    thirdBotChips += f2.a;
+                    fourthBotChips += f2.a;
+                    fifthBotChips += f2.a;
+                    PlayerFirstTurn = false;
+                    playerTurn = true;
+                    raiseButton.Enabled = true;
+                    foldButton.Enabled = true;
+                    checkButton.Enabled = true;
+                    raiseButton.Text = "raise";
+                }
+            }
+
+            ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
+            for (var os = 0; os < 17; os++)
+            {
+                Holder[os].Image = null;
+                Holder[os].Invalidate();
+                Holder[os].Visible = false;
+            }
+            await Shuffle();
+            //await Turns();
+        }
+
         private static void FixCall(Label status, ref int cCall, ref int cRaise, int options)
         {
             if (rounds != 4)
@@ -584,8 +763,6 @@ namespace Poker.Table
                 }
             }
         }
-
-        #endregion
 
         public static void SetGameRules(
             int card1,
