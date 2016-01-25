@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Poker.Interfaces
 {
     using Poker.Interfacees;
@@ -15,6 +17,8 @@ namespace Poker.Interfaces
         ICombination CardsCombination { get; set; }
 
         IList<ICard> CharacterCardsCollection { get; set; }
+
+        Task AllIn();
 
         void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label sStatus);
 

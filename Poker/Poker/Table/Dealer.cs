@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using Poker.Enumerations;
+using Poker.GameConstants;
+using Poker.Interfacees;
+using Poker.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Poker.Enumerations;
-using Poker.GameConstants;
-using Poker.Interfacees;
-using Poker.Interfaces;
 
 
 namespace Poker.Table
@@ -35,9 +33,7 @@ namespace Poker.Table
 
         private static Label playerStatus;
 
-        private static readonly PictureBox[] Holder = new PictureBox[52];
-
-        #region Tsvetelin
+        public static readonly PictureBox[] Holder = new PictureBox[52];
 
         private static readonly List<bool?> bools = new List<bool?>();
 
@@ -99,6 +95,50 @@ namespace Poker.Table
 
         private static double rounds;
         private static double raise;
+
+        //Finish fields
+        private static int bigBlind = 500;
+        private static double type;
+        private static double firstBotPower;
+        private static double secondBotPower;
+        private static double thirdBotPower;
+        private static double fourthBotPower;
+        private static double fifthBotPower;
+        private static double playerPower;
+        private static double playerType = -1;
+        private static double firstBotType = -1;
+        private static double secondBotType = -1;
+        private static double thirdBotType = -1;
+        private static double fourthBotType = -1;
+        private static double fifthBotType = -1;
+        private static bool B1turn;
+        private static bool B2turn;
+        private static bool B3turn;
+        private static bool B4turn;
+        private static bool B5turn;
+        private static bool playerFolded;
+        private static bool botOneFolded;
+        private static bool botTwoFolded;
+        private static bool botThreeFolded;
+        private static bool b4Folded;
+        private static bool b5Folded;
+        private static bool isRaising;
+        private static int height;
+        private static int width;
+        private static int winners;
+        private static int Flop = 1;
+        private static int Turn = 2;
+        private static int River = 3;
+        private static int End = 4;
+        private static int maxLeft = 6;
+        private static int last = 123;
+        private static int raisedTurn = 1;
+        private static Label fifthBotStatus;
+        private static Label fourthBotStatus;
+        private static Label thirdBotStatus;
+        private static Label firstBotStatus;
+        private static Label secondBotStatus;
+        private static int Chips = 10000;
 
         private static async Task Shuffle()
         {
@@ -545,6 +585,143 @@ namespace Poker.Table
             }
         }
 
+        private static async Task Finish(int n)
+        {
+            if (n == 2)
+            {
+                //FixWinners();
+            }
+            playerPanel.Visible = false;
+            firstBotPanel.Visible = false;
+            secondBotPanel.Visible = false;
+            thirdBotPanel.Visible = false;
+            fourthBotPanel.Visible = false;
+            fifthBotPanel.Visible = false;
+
+            call = bigBlind;
+            raise = 0;
+            foldedPlayers = 5;
+            type = 0;
+            rounds = 0;
+
+            firstBotPower = 0;
+            secondBotPower = 0;
+            thirdBotPower = 0;
+            fourthBotPower = 0;
+            fifthBotPower = 0;
+            playerPower = 0;
+
+            playerType = -1;
+            raise = 0;
+
+            firstBotType = -1;
+            secondBotType = -1;
+            thirdBotType = -1;
+            fourthBotType = -1;
+            fifthBotType = -1;
+
+            B1turn = false;
+            B2turn = false;
+            B3turn = false;
+            B4turn = false;
+            B5turn = false;
+            botOneFirstTurn = false;
+            botTwoFirstTurn = false;
+            botThreeFirstTurn = false;
+            botFourFirstTurn = false;
+            botFiveFirstTurn = false;
+
+            playerFolded = false;
+            botOneFolded = false;
+            botTwoFolded = false;
+            botThreeFolded = false;
+            b4Folded = false;
+            b5Folded = false;
+
+            PlayerFirstTurn = false;
+            playerTurn = true;
+            restart = false;
+            isRaising = false;
+
+            playerCall = 0;
+            firstBotCall = 0;
+            secondBotCall = 0;
+            thirdBotCall = 0;
+            fourthBotCall = 0;
+            fifthBotCall = 0;
+
+            playerRise = 0;
+            firstBotRise = 0;
+            secondBotRise = 0;
+            thirdBotRise = 0;
+            fourthBotRise = 0;
+            fifthBotRise = 0;
+
+            height = 0;
+            width = 0;
+
+            winners = 0;
+
+            Flop = 1;
+            Turn = 2;
+            River = 3;
+            End = 4;
+            maxLeft = 6;
+
+            last = 123;
+            raisedTurn = 1;
+
+            bools.Clear();
+            //CheckWinners.Clear();
+            //ints.Clear();
+            //Win.Clear();
+            //sorted.Current = 0;
+            //sorted.Power = 0;
+            //potChips.Text = "0";
+
+            t = 60;
+            up = 10000000;
+            turnCount = 0;
+
+            playerStatus.Text = "";
+            firstBotStatus.Text = "";
+            secondBotStatus.Text = "";
+            thirdBotStatus.Text = "";
+            fourthBotStatus.Text = "";
+            fifthBotStatus.Text = "";
+
+            if (Chips <= 0)
+            {
+                var f2 = new AddChips();
+                f2.ShowDialog();
+                if (f2.a != 0)
+                {
+                    Chips = f2.a;
+                    firstBotChips += f2.a;
+                    secondBotChips += f2.a;
+                    thirdBotChips += f2.a;
+                    fourthBotChips += f2.a;
+                    fifthBotChips += f2.a;
+                    PlayerFirstTurn = false;
+                    playerTurn = true;
+                    raiseButton.Enabled = true;
+                    foldButton.Enabled = true;
+                    checkButton.Enabled = true;
+                    raiseButton.Text = "raise";
+                }
+            }
+
+            ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
+            for (var os = 0; os < 17; os++)
+            {
+                Holder[os].Image = null;
+                Holder[os].Invalidate();
+                Holder[os].Visible = false;
+            }
+            await Shuffle();
+            //await Turns();
+        }
+
         private static void FixCall(Label status, ref int cCall, ref int cRaise, int options)
         {
             if (rounds != 4)
@@ -586,8 +763,6 @@ namespace Poker.Table
                 }
             }
         }
-
-        #endregion
 
         public static void SetGameRules(
             int card1,
@@ -925,7 +1100,7 @@ namespace Poker.Table
             List<ICard> joinedCardCollection =
                 charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
             joinedCardCollection = new List<ICard>(joinedCardCollection.OrderByDescending(x => x.Rank));
-            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int) x.Rank).Distinct().OrderByDescending(x => x).ToList();
+            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int)x.Rank).Distinct().OrderByDescending(x => x).ToList();
 
             int endBorderOfStraight = 4; // if a number is the beginning of a straight, then the end is '4' numbers later (straight must be 5 cards))
             bool hasStraight = false;
@@ -937,7 +1112,7 @@ namespace Poker.Table
                 {
                     hasStraight = true;
                     int highestCardInStraight = distinctCardRanks[currentCardIndex];
-                    power = highestCardInStraight + Constants.StraightBehaviourPower*100;
+                    power = highestCardInStraight + Constants.StraightBehaviourPower * 100;
                     break;
                 }
             }
@@ -948,7 +1123,7 @@ namespace Poker.Table
 
                 foreach (int distinctRank in distinctCardRanks)
                 {
-                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int) card.Rank == distinctRank);
+                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int)card.Rank == distinctRank);
                     straightCombinationCards.Add(cardToBeAdded);
                 }
                 IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
@@ -984,7 +1159,7 @@ namespace Poker.Table
                     hasFlush = true;
                     cardsThatMakeUpFlush = sameSuitCardsCollection;
                     break;
-                }            
+                }
             }
             if (hasFlush)
             {
@@ -997,17 +1172,17 @@ namespace Poker.Table
                     return CheckForFlushIfTableCardsMakeFlush(charactersCardsCollection, tableCardsThatMakeUpFlush, joinedCardCollection,
                         character);
                 }
-                else 
+                else
                 {
                     if (cardsThatMakeUpFlush.Count > requiredCardsForFlush)
-                    {                      
+                    {
                         int lowestCardInFlush = (int)cardsThatMakeUpFlush.Min(x => x.Rank);
                         cardsThatMakeUpFlush.RemoveAll(x => (int)x.Rank == lowestCardInFlush);
                     }
 
                     int highestCardInFlush = (int)cardsThatMakeUpFlush.Max(x => x.Rank);
                     double currentFlushBehaviourPower = Constants.LittleFlushBehaviourPower;
-                    
+
                     //Check if character has Ace in his hand that is part of the flush
                     //If they do -> the behaviour power is different (greater)
                     foreach (ICard card in charactersCardsCollection)
@@ -1023,7 +1198,7 @@ namespace Poker.Table
                         joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
 
                     RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
-                }                      
+                }
             }
             return hasFlush;
         }
@@ -1043,13 +1218,13 @@ namespace Poker.Table
             }
             else if (characterCardsInFlush.Count == 2)
             {
-                maxCharaterCardInFlushRank = ((int) characterCardsInFlush[0].Rank > (int) characterCardsInFlush[1].Rank)
-                    ? (int) characterCardsInFlush[0].Rank
-                    : (int) characterCardsInFlush[1].Rank;         
+                maxCharaterCardInFlushRank = ((int)characterCardsInFlush[0].Rank > (int)characterCardsInFlush[1].Rank)
+                    ? (int)characterCardsInFlush[0].Rank
+                    : (int)characterCardsInFlush[1].Rank;
             }
             else
             {
-                maxCharaterCardInFlushRank = (int) characterCardsInFlush[0].Rank;
+                maxCharaterCardInFlushRank = (int)characterCardsInFlush[0].Rank;
             }
 
             int lowestCardInTableFlush = (int)tableCardsThatMakeUpFlush.Min(x => x.Rank);
@@ -1058,15 +1233,15 @@ namespace Poker.Table
 
             if (maxCharaterCardInFlushRank > lowestCardInTableFlush)
             {
-                if (maxCharaterCardInFlushRank == (int) CardRank.Ace)
+                if (maxCharaterCardInFlushRank == (int)CardRank.Ace)
                 {
                     currentFlushBehaviourPower = Constants.BigFlushBehaviourPower;
                 }
-                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower*100;
+                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower * 100;
             }
             else
             {
-                power = lowestCardInTableFlush + currentFlushBehaviourPower*100;
+                power = lowestCardInTableFlush + currentFlushBehaviourPower * 100;
             }
 
             while (cardsThatMakeUpFlush.Count > 5)
@@ -1099,7 +1274,7 @@ namespace Poker.Table
         /// <returns></returns>
         private static bool CheckForFourOfAKind(
             IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, 
+            IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             IList<ICard> joinedCardCollection =
@@ -1122,8 +1297,9 @@ namespace Poker.Table
                 }
             }
 
-            return false;}
-    
+            return false;
+        }
+
 
         //This method checks if the character has card combination "Full House"
         private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
@@ -1170,7 +1346,7 @@ namespace Poker.Table
                         //This is a check for multiple pairs in the remaining cards
                         //If there is more than one pair, the highest one is taken
                         maxPairRank = Math.Max(maxPairRank, (int)card.Rank); //  take the one with the higher rank
-                        
+
                         List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                             joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
 

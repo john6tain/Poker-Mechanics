@@ -26,6 +26,12 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:Poker.Character.Character.AllIn">
+            <summary>
+            All characters can call an AllIn to play all the money they got
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Poker.Character.Character.Fold(System.Boolean@,System.Boolean@,System.Windows.Forms.Label)">
             <summary>
             Fold tell us who is giving up
