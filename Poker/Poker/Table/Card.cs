@@ -25,6 +25,6 @@ namespace Poker.Table
         public Image FrontImage { get; }
         public Image BackImage { get; }
         public CardSuit Suit { get; }
-        public CardRank Rank { get; }
+        public CardRank Rank { get; set; }
     }
 }

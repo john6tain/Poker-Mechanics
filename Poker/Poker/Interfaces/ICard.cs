@@ -9,6 +9,6 @@ namespace Poker.Interfacees
         Image FrontImage { get; }
         Image BackImage { get; }
         CardSuit Suit { get; }
-        CardRank Rank { get; }
+        CardRank Rank { get; set; }
     }
 }
