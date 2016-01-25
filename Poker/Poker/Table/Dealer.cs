@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using Poker.Enumerations;
+using Poker.GameConstants;
+using Poker.Interfacees;
+using Poker.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Poker.Enumerations;
-using Poker.GameConstants;
-using Poker.Interfacees;
-using Poker.Interfaces;
 
 
 namespace Poker.Table
@@ -35,7 +33,7 @@ namespace Poker.Table
 
         private static Label playerStatus;
 
-        private static readonly PictureBox[] Holder = new PictureBox[52];
+        public static readonly PictureBox[] Holder = new PictureBox[52];
 
         #region Tsvetelin
 
@@ -100,7 +98,7 @@ namespace Poker.Table
         private static double rounds;
         private static double raise;
 
-        private static async Task Shuffle()
+        public static async Task Shuffle()
         {
             bools.Add(PlayerFirstTurn);
             bools.Add(botOneFirstTurn);
@@ -967,7 +965,7 @@ namespace Poker.Table
             List<ICard> joinedCardCollection =
                 charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
             joinedCardCollection = new List<ICard>(joinedCardCollection.OrderByDescending(x => x.Rank));
-            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int) x.Rank).Distinct().OrderByDescending(x => x).ToList();
+            List<int> distinctCardRanks = joinedCardCollection.Select(x => (int)x.Rank).Distinct().OrderByDescending(x => x).ToList();
 
             int endBorderOfStraight = 4; // if a number is the beginning of a straight, then the end is '4' numbers later (straight must be 5 cards))
             bool hasStraight = false;
@@ -979,7 +977,7 @@ namespace Poker.Table
                 {
                     hasStraight = true;
                     int highestCardInStraight = distinctCardRanks[currentCardIndex];
-                    power = highestCardInStraight + Constants.StraightBehaviourPower*100;
+                    power = highestCardInStraight + Constants.StraightBehaviourPower * 100;
                     break;
                 }
             }
@@ -990,7 +988,7 @@ namespace Poker.Table
 
                 foreach (int distinctRank in distinctCardRanks)
                 {
-                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int) card.Rank == distinctRank);
+                    ICard cardToBeAdded = joinedCardCollection.Find(card => (int)card.Rank == distinctRank);
                     straightCombinationCards.Add(cardToBeAdded);
                 }
                 IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
@@ -1026,7 +1024,7 @@ namespace Poker.Table
                     hasFlush = true;
                     cardsThatMakeUpFlush = sameSuitCardsCollection;
                     break;
-                }            
+                }
             }
             if (hasFlush)
             {
@@ -1039,17 +1037,17 @@ namespace Poker.Table
                     return CheckForFlushIfTableCardsMakeFlush(charactersCardsCollection, tableCardsThatMakeUpFlush, joinedCardCollection,
                         character);
                 }
-                else 
+                else
                 {
                     if (cardsThatMakeUpFlush.Count > requiredCardsForFlush)
-                    {                      
+                    {
                         int lowestCardInFlush = (int)cardsThatMakeUpFlush.Min(x => x.Rank);
                         cardsThatMakeUpFlush.RemoveAll(x => (int)x.Rank == lowestCardInFlush);
                     }
 
                     int highestCardInFlush = (int)cardsThatMakeUpFlush.Max(x => x.Rank);
                     double currentFlushBehaviourPower = Constants.LittleFlushBehaviourPower;
-                    
+
                     //Check if character has Ace in his hand that is part of the flush
                     //If they do -> the behaviour power is different (greater)
                     foreach (ICard card in charactersCardsCollection)
@@ -1065,7 +1063,7 @@ namespace Poker.Table
                         joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
 
                     RegisterCombinationToCharacter(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
-                }                      
+                }
             }
             return hasFlush;
         }
@@ -1085,13 +1083,13 @@ namespace Poker.Table
             }
             else if (characterCardsInFlush.Count == 2)
             {
-                maxCharaterCardInFlushRank = ((int) characterCardsInFlush[0].Rank > (int) characterCardsInFlush[1].Rank)
-                    ? (int) characterCardsInFlush[0].Rank
-                    : (int) characterCardsInFlush[1].Rank;         
+                maxCharaterCardInFlushRank = ((int)characterCardsInFlush[0].Rank > (int)characterCardsInFlush[1].Rank)
+                    ? (int)characterCardsInFlush[0].Rank
+                    : (int)characterCardsInFlush[1].Rank;
             }
             else
             {
-                maxCharaterCardInFlushRank = (int) characterCardsInFlush[0].Rank;
+                maxCharaterCardInFlushRank = (int)characterCardsInFlush[0].Rank;
             }
 
             int lowestCardInTableFlush = (int)tableCardsThatMakeUpFlush.Min(x => x.Rank);
@@ -1100,15 +1098,15 @@ namespace Poker.Table
 
             if (maxCharaterCardInFlushRank > lowestCardInTableFlush)
             {
-                if (maxCharaterCardInFlushRank == (int) CardRank.Ace)
+                if (maxCharaterCardInFlushRank == (int)CardRank.Ace)
                 {
                     currentFlushBehaviourPower = Constants.BigFlushBehaviourPower;
                 }
-                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower*100;
+                power = maxCharaterCardInFlushRank + currentFlushBehaviourPower * 100;
             }
             else
             {
-                power = lowestCardInTableFlush + currentFlushBehaviourPower*100;
+                power = lowestCardInTableFlush + currentFlushBehaviourPower * 100;
             }
 
             while (cardsThatMakeUpFlush.Count > 5)
@@ -1141,7 +1139,7 @@ namespace Poker.Table
         /// <returns></returns>
         private static bool CheckForFourOfAKind(
             IList<ICard> charactersCardsCollection,
-            IList<ICard> tableCardsCollection, 
+            IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             IList<ICard> joinedCardCollection =
@@ -1164,8 +1162,9 @@ namespace Poker.Table
                 }
             }
 
-            return false;}
-    
+            return false;
+        }
+
 
         //This method checks if the character has card combination "Full House"
         private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
@@ -1212,7 +1211,7 @@ namespace Poker.Table
                         //This is a check for multiple pairs in the remaining cards
                         //If there is more than one pair, the highest one is taken
                         maxPairRank = Math.Max(maxPairRank, (int)card.Rank); //  take the one with the higher rank
-                        
+
                         List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                             joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
 

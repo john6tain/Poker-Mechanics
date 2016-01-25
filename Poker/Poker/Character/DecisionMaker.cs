@@ -141,7 +141,7 @@
         {
             if (!isFinalTurn)
             {
-                if (behaviourPower == Constants.HighCardBehaviourPower)
+                if (behaviourPower == (Constants.HighCardBehaviourPower))
                 {
                     HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
@@ -157,11 +157,11 @@
                 {
                     TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
                 }
-                if (behaviourPower == 3)
+                if (behaviourPower == Constants.ThreeOfAKindBehaviourPower)
                 {
                     ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (behaviourPower == 4)
+                if (behaviourPower == Constants.StraightBehaviourPower)
                 {
                     Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
@@ -169,11 +169,11 @@
                 {
                     Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (behaviourPower == 6)
+                if (behaviourPower == Constants.FullHouseBehaviourPower)
                 {
                     FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
-                if (behaviourPower == 7)
+                if (behaviourPower == Constants.FourOfAKindBehavourPower)
                 {
                     FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
                 }
