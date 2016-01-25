@@ -20,3 +20,14 @@ C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\P
 C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.Form1.resources
 C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache

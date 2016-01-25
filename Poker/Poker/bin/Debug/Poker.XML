@@ -495,7 +495,7 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-        <member name="M:Poker.Table.Dealer.CheckForPairFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+        <member name="M:Poker.Table.Dealer.CheckForOnePair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter,System.Boolean)">
             <summary>
             Checks if the two character's cards make a "Pair" or if one of the character's cards makes a "Pair" with one card from the table.
             </summary>
@@ -504,36 +504,9 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-        <member name="M:Poker.Table.Dealer.CheckForSecondCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+        <member name="M:Poker.Table.Dealer.CheckForTwoPairs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
-            Checks if the second character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForFirstCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the first character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the character has two pairs and at least one of the pair cards is in the character's hand.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromTable(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if there are two pairs in the table cards.
+            Checks if the character has two pairs.
             </summary>
             <param name="charactersCardsCollection"></param>
             <param name="tableCardsCollection"></param>
@@ -546,15 +519,6 @@
             </summary>
             <param name="character"></param>
             <param name="sameRankCardsCollection"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckIfTheCharactersCardsMakeAPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the two cards the participant is holding make a pair.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
             <returns></returns>
         </member>
         <member name="M:Poker.Table.Dealer.DetermineTheWinner(System.Collections.Generic.IList{Poker.Interfaces.ICharacter},System.Int32)">
