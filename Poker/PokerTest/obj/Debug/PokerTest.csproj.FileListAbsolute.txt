@@ -1,0 +1,8 @@
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb

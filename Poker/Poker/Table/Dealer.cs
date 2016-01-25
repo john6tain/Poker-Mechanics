@@ -603,76 +603,34 @@ namespace Poker.Table
 
             if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
             {
-                #region Variables
-
-                bool done = false;
-                bool vf = false;
-
-                int[] littleStraight = new int[5];
-                int[] bigStraight = new int[7];
-
-                bigStraight[0] = AllCardsOnTable[card1];
-                bigStraight[1] = AllCardsOnTable[card2];
-                littleStraight[0] = bigStraight[2] = AllCardsOnTable[12];
-                littleStraight[1] = bigStraight[3] = AllCardsOnTable[13];
-                littleStraight[2] = bigStraight[4] = AllCardsOnTable[14];
-                littleStraight[3] = bigStraight[5] = AllCardsOnTable[15];
-                littleStraight[4] = bigStraight[6] = AllCardsOnTable[16];
-
-                int[] straightOfClubs = bigStraight.Where(o => o % 4 == 0).ToArray();
-                int[] straightOfDiamonds = bigStraight.Where(o => o % 4 == 1).ToArray();
-                int[] straightOfHearts = bigStraight.Where(o => o % 4 == 2).ToArray();
-                int[] straightOfSpades = bigStraight.Where(o => o % 4 == 3).ToArray();
-
-                int[] straightOfClubsValue = straightOfClubs.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfDiamondsValue = straightOfDiamonds.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfHeartsValue = straightOfHearts.Select(o => o / 4).Distinct().ToArray();
-                int[] straightOfSpadesValue = straightOfSpades.Select(o => o / 4).Distinct().ToArray();
-
-                Array.Sort(bigStraight);
-                Array.Sort(straightOfClubsValue);
-                Array.Sort(straightOfDiamondsValue);
-                Array.Sort(straightOfHeartsValue);
-                Array.Sort(straightOfSpadesValue);
-
-                #endregion
 
                 for (int i = 0; i < AllCardsOnTable.Length; i++)
                 {
                     if (AllCardsOnTable[i] == int.Parse(Holder[card1].Tag.ToString()) &&
                         AllCardsOnTable[i + 1] == int.Parse(Holder[card2].Tag.ToString()))
                     {
-                        //Pair from Hand curentCardsValue = 1
-                        //CheckForPairFromHand(ref curentCardsValue, ref power);
 
-                        //Pair or Two Pairs from Table curentCardsValue = 2 || 0
-                        //CheckForPairTwoPair(ref curentCardsValue, ref power);
+                        CheckForPairFromHand(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Two Pairs curentCardsValue = 2
-                        //CheckForTwoPair(ref curentCardsValue, ref power);
+                        CheckForTwoPairsFromHand(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Three of a kind curentCardsValue = 3
+                        CheckForTwoPairsFromTable(charactersCardsCollection, tableCardsCollection, character);
+
                         CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Straight curentCardsValue = 4
-                        //rStraight(ref curentCardsValue, ref power, bigStraight);
+                        CheckForStraight(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Flush curentCardsValue = 5 || 5.5
-                        //rFlush(ref curentCardsValue, ref power, ref vf, littleStraight);
+                        CheckForFlush(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Full House curentCardsValue = 6
-                        //rFullHouse(ref curentCardsValue, ref power, ref done, bigStraight);
+                        CheckForFullHouse(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Four of a Kind curentCardsValue = 7
-                        //rFourOfAKind(ref curentCardsValue, ref power, bigStraight);
+                        CheckForFourOfAKind(charactersCardsCollection, tableCardsCollection, character);
 
-                        //Straight Flush curentCardsValue = 8 || 9
                         CheckForStraightFlushOfSpades(charactersCardsCollection, tableCardsCollection, character);
                         CheckForStraightFlushOfDiamonds(charactersCardsCollection, tableCardsCollection, character);
                         CheckForStraightFlushOfHearts(charactersCardsCollection, tableCardsCollection, character);
                         CheckForStraightFlushOfClubs(charactersCardsCollection, tableCardsCollection, character);
 
-                        //High Card curentCardsValue = -1
                         CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
                     }
                 }
