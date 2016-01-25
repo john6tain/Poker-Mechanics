@@ -6,3 +6,11 @@ C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\PokerTest.dll
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\PokerTest.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.exe
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.xml
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.dll
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.pdb
