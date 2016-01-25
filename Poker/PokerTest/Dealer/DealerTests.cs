@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using System.Net.Mime;
+using Poker.Character;
+using Poker.Interfaces;
 
 namespace PokerTest.Dealer
 {
@@ -12,149 +15,35 @@ namespace PokerTest.Dealer
     [TestClass]
     public class DealerTests
     {
-        private IList<ICard> cardsCollection;
+        private IList<ICard> characterCardsCollection;
+        private IList<ICard> tableCardsCollection;
+        private ICharacter character;
 
         [TestInitialize]
         public void InitializeList()
         {
-            this.cardsCollection = new List<ICard>();
+            this.characterCardsCollection = new List<ICard>();
+            this.tableCardsCollection = new List<ICard>();
+            this.character = new Player();
         }
 
         [TestMethod]
-        public void Test_CheckPairFromHand_ShoudPass()
+        public void Check_ThreeOfAKindCollection_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Two));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Two));
+            bool hasThreeOfAKind = true;
+            characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
 
-            CardRank firstPlayersCard = this.cardsCollection[0].Rank;
-            CardRank secondPlayersCard = this.cardsCollection[1].Rank;
+            tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+            tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
+            tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
 
-            Assert.AreEqual(firstPlayersCard, secondPlayersCard, "Cards in player's hand should be with equal rank");
-        }
-
-        [TestMethod]
-        public void Test_CheckPairFromHand_ShouldFail()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
-
-            CardRank firstPlayerCard = this.cardsCollection[0].Rank;
-            CardRank secondPlayerCard = this.cardsCollection[1].Rank;
-
-            Assert.AreNotEqual(firstPlayerCard, secondPlayerCard, "Cards with different ranc cannot form pair");
-        }
-
-        [TestMethod]
-        public void Test_CheckingPlayerMakingPairWihtTable_ShouldPass()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
-
-            bool hasPair = false;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        hasPair = true;
-                    }
-                }
-            }
-
-            Assert.IsTrue(hasPair, "If there are two cards with same rank player forms pair");
-        }
-
-        [TestMethod]
-        public void Test_CheckingIfPlayerDoesntMakePair_ShouldPass()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
-
-            bool hasPair = false;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        hasPair = true;
-                    }
-                }
-            }
-
-            Assert.IsFalse(hasPair, "If there aren't two cards with same rank player doesn't forms pair");
-        }
-
-        [TestMethod]
-        public void Test_CheckIfPlayerFormsTwoPairs_ShouldPass()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
-
-            int count = 0;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        count++;
-                    }
-                }
-            }
-
-            Assert.AreEqual(count, 2, "If there are two different cases of cards with same rank, player forms two pairs");
-        }
-
-        [TestMethod]
-        public void Test_CheckIfPlayerFormsTwoPairs_ShouldFail()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Jack));
-
-            int count = 0;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        count++;
-                    }
-                }
-            }
-
-            Assert.AreNotEqual(count, 2, "If there are not two different cases of cards with same rank, player doesn't form two pairs");
-        }
-
-        [TestMethod]
-        public void Test_CheckIfPlayerFormsThreeOfAKind_ShouldPass()
-        {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Jack));
-
-            int cards = 0;
-            foreach (var card in cardsCollection)
-            {
-                IList<ICard> threeOfAKindCollection = cardsCollection.Where(x => x.Rank == card.Rank).ToList();
-                cards = threeOfAKindCollection.Count;
-            }
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
             
-            Assert.AreEqual(cards, 3, "If player has three cards with same rank, he forms three of a kind combination");
+            Assert.AreEqual(Dealer.CheckForThreeOfAKind(characterCardsCollection, tableCardsCollection, character),
+                hasThreeOfAKind, "Player should form three of a kind");
         }
 
 

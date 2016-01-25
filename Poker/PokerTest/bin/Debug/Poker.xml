@@ -466,6 +466,139 @@
             </param>
             <returns></returns>
         </member>
+        <member name="M:Poker.Table.Dealer.CheckForThreeOfAKind(System.Collections.Generic.IEnumerable{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the character has "Three-of-a-kind" card combination.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.RegisterCombination(Poker.Interfaces.ICharacter,System.Double,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Enumerations.CombinationType,System.Double)">
+            <summary>
+            Registers the combination which is found to the character.
+            </summary>
+            <param name="character"></param>
+            <param name="power"></param>
+            <param name="combinationCardsCollection"></param>
+            <param name="nonCombinationCardsCollection"></param>
+            <param name="combinationType"></param>
+            <param name="behaviourPower"></param>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForHighCard(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks for a "High card" combination
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForPairFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the two character's cards make a "Pair" or if one of the character's cards makes a "Pair" with one card from the table.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForSecondCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the second character's card makes a pair with one from the table.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForFirstCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the first character's card makes a pair with one from the table.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the character has two pairs and at least one of the pair cards is in the character's hand.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromTable(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if there are two pairs in the table cards.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.DetermineTwoPairsPower(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard})">
+            <summary>
+            Determines the power of the hand in case of two pairs.
+            </summary>
+            <param name="character"></param>
+            <param name="sameRankCardsCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckIfTheCharactersCardsMakeAPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the two cards the participant is holding make a pair.
+            </summary>
+            <param name="charactersCardsCollection"></param>
+            <param name="tableCardsCollection"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.DetermineTheWinner(System.Collections.Generic.IList{Poker.Interfaces.ICharacter},System.Int32)">
+            <summary>
+            After all cards are down, this method chooses the winner
+            </summary>
+            <param name="gameCharacters">All particialnts in the game.</param>
+            <param name="pot">The pot chips.</param>
+        </member>
+        <member name="M:Poker.Table.Dealer.ChooseTheWinnerByTheKickers(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
+            <summary>
+            Chooses the winner, comparing the 'kickers' ranks.
+            </summary>
+            <param name="topCombinationCharactersCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.DeclareWinners(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
+            <summary>
+            Gets the names of the winners and prints them to the user.
+            </summary>
+            <param name="topCombinationCharactersCollection"></param>
+        </member>
+        <member name="M:Poker.Table.Dealer.PayPrizeToTheWinner(System.Int32,Poker.Interfaces.ICharacter)">
+            <summary>
+            Increases the winner's chips with the pot.
+            </summary>
+            <param name="pot"></param>
+            <param name="winner"></param>
+        </member>
+        <member name="M:Poker.Table.Dealer.PayPrizeToTheWinners(System.Int32,System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
+            <summary>
+            Divides the pot equally between the winners. 
+            </summary>
+            <param name="pot"></param>
+            <param name="topCombinationCharactersCollection"></param>
+        </member>
+        <member name="M:Poker.Table.Dealer.DetermineIfEqual(System.Collections.Generic.IList{Poker.Interfaces.ICharacter},System.Boolean)">
+            <summary>
+            Checks if the participants with the same top combination have alse the same 5 cards as ranks.
+            </summary> 
+            <param name="topCombinationCharactersCollection"></param>
+            <param name="equalScore"></param>
+            <returns></returns>
+        </member>
         <member name="T:Poker.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.

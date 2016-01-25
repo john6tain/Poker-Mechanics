@@ -1399,7 +1399,7 @@ namespace Poker.Table
         /// <param name="tableCardsCollection"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        private static bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
+        public static bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             IList<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
