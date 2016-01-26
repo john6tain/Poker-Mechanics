@@ -451,6 +451,15 @@
             </param>
             <returns></returns>
         </member>
+        <member name="M:Poker.Table.Dealer.CheckForStraight(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks for straight.
+            </summary>
+            <param name="charactersCardsCollection">The characters cards collection.</param>
+            <param name="tableCardsCollection">The table cards collection.</param>
+            <param name="character">The character.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
         <member name="M:Poker.Table.Dealer.CheckForFourOfAKind(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             This method cheks for forur of a kind combination
@@ -465,6 +474,15 @@
             player whose cards are checked
             </param>
             <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForFullHouse(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method checks if the character has card combination "Full House"
+            </summary>
+            <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+            <param name="tableCardsCollection">The collection of cards on the table.</param>
+            <param name="character">The character that holds the cards.</param>
+            <returns><c>true</c> if the character has a Full House, <c>false</c> if they don't.</returns>
         </member>
         <member name="M:Poker.Table.Dealer.CheckForThreeOfAKind(System.Collections.Generic.IEnumerable{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>

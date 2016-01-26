@@ -1096,6 +1096,13 @@ namespace Poker.Table
             return hasStraightFlush;
         }
 
+        /// <summary>
+        /// This method checks if the character has card combination "Straight"
+        /// </summary>
+        /// <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+        /// <param name="tableCardsCollection">The collection of cards on the table.</param>
+        /// <param name="character">The character that holds the cards.</param>
+        /// <returns><c>true</c> if the character has a Straight, <c>false</c> if they don't.</returns>
         private static bool CheckForStraight(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
@@ -1139,8 +1146,14 @@ namespace Poker.Table
             return hasStraight;
 
         }
-
-
+       
+        /// <summary>
+        /// This method checks if the character has card combination "Flush"
+        /// </summary>
+        /// <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+        /// <param name="tableCardsCollection">The collection of cards on the table.</param>
+        /// <param name="character">The character that holds the cards.</param>
+        /// <returns><c>true</c> if the character has a Flush, <c>false</c> if they don't.</returns>
         private static bool CheckForFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
@@ -1206,6 +1219,14 @@ namespace Poker.Table
             return hasFlush;
         }
 
+        /// <summary>
+        /// Checks if the cards on the table make a flush without the cards from the characters hand.
+        /// </summary>
+        /// <param name="charactersCardsCollection">The cards in the characters hand.</param>
+        /// <param name="tableCardsThatMakeUpFlush">The table cards that make up flush.</param>
+        /// <param name="joinedCardCollection">The collection of all table cards and the character's hand cards.</param>
+        /// <param name="character">The character.</param>
+        /// <returns><c>true</c> if the table cards make a Flush, <c>false</c> if they dont.</returns>
         private static bool CheckForFlushIfTableCardsMakeFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsThatMakeUpFlush, IList<ICard> joinedCardCollection, ICharacter character)
         {
             List<ICard> characterCardsInFlush =
@@ -1299,12 +1320,19 @@ namespace Poker.Table
                     return true;
                 }
             }
-
+            
             return false;
         }
 
+        
 
-        //This method checks if the character has card combination "Full House"
+        /// <summary>
+        /// This method checks if the character has card combination "Full House"
+        /// </summary>
+        /// <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+        /// <param name="tableCardsCollection">The collection of cards on the table.</param>
+        /// <param name="character">The character that holds the cards.</param>
+        /// <returns><c>true</c> if the character has a Full House, <c>false</c> if they don't.</returns>
         private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
@@ -1356,12 +1384,12 @@ namespace Poker.Table
                         List<ICard> fullHouseCards = threeOfAKindCards;
                         fullHouseCards.AddRange(remainingEqualRankCards);
 
-                        double power = 0;  //TODO: figure how to calculate power...
+                        double power = maxPairRank*2 + FullHouseBehaviourPower*100;
 
                         if (character.CardsCombination == null ||
                             character.CardsCombination.Type < CombinationType.FullHouse)
                         {
-                            character.CardsCombination = new Combination(power, CombinationType.FullHouse, FullHouseBehaviourPower, fullHouseCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
+                            character.CardsCombination = new Combination(power, CombinationType.FullHouse, Constants.FullHouseBehaviourPower, fullHouseCards, theOtherCardsFromTheHandNotIncludedInTheCombination);
                         }
 
                     }
