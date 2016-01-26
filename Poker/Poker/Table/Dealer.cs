@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -586,7 +585,7 @@ namespace Poker.Table
             }
         }
 
-        private static async Task Finish(int n)
+        public static async Task Finish(int n)
         {
             if (n == 2)
             {
@@ -1504,7 +1503,7 @@ namespace Poker.Table
                     RegisterTwoPairs(character, combinationsCollection);
                 }
             }
-            else 
+            else
             {
                 if (combinationsCollection.Count >= 1)
                 {
@@ -1553,7 +1552,7 @@ namespace Poker.Table
 
                 if (sameRankCardsCollection.Count == 2)
                 {
-                    double power = (int) sameRankCardsCollection[0].Rank*2 + OnePairBehaviourPower*100;
+                    double power = (int)sameRankCardsCollection[0].Rank * 2 + OnePairBehaviourPower * 100;
 
                     IList<ICard> nonCombinationCardsCollection =
                         joinedCardCollection.Where(x => !sameRankCardsCollection.Contains(x)).ToList();

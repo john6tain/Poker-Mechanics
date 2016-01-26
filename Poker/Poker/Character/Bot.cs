@@ -1,7 +1,7 @@
 ﻿namespace Poker.Character
 {
-    using Poker.Interfacees;
-    using Poker.Interfaces;
+    using Interfacees;
+    using Interfaces;
     using System.Collections.Generic;
     using System.Windows.Forms;
 

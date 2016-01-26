@@ -381,6 +381,43 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:Poker.Interfaces.ICharacter.AllIn">
+            <summary>
+            You bet all the money you have.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.Fold(System.Boolean@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            You can exit the game.
+            </summary>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="sStatus">The s status.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.ChangeStatusToChecking(System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Changes the status label to checking.
+            </summary>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Calls the specified chips.
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Raises the bet.
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
         <member name="T:Poker.Interfaces.IDecisionMaker">
             <summary>
             The decision maker is artificial inteligence of the bot
