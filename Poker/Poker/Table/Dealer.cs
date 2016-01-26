@@ -1320,12 +1320,12 @@ namespace Poker.Table
         {
             bool hasFullHouse = false;
 
-            List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
+            IList<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
             bool characterHasThreeOfAKind = CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection,
                 character);
 
-            List<ICard> threeOfAKindCards = new List<ICard>();
+            IList<ICard> threeOfAKindCards = new List<ICard>();
 
             int threeOfAKindRank = -1;
 
@@ -1351,7 +1351,7 @@ namespace Poker.Table
                 int maxPairRank = -1;
                 foreach (ICard card in joinedCardCollection)
                 {
-                    List<ICard> remainingEqualRankCards =
+                    IList<ICard> remainingEqualRankCards =
                         joinedCardCollection.Where(x => x.Rank == card.Rank).ToList();
 
                     if (remainingEqualRankCards.Count == 2)
@@ -1362,11 +1362,12 @@ namespace Poker.Table
                         //If there is more than one pair, the highest one is taken
                         maxPairRank = Math.Max(maxPairRank, (int)card.Rank); //  take the one with the higher rank
 
-                        List<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
+                        IList<ICard> theOtherCardsFromTheHandNotIncludedInTheCombination =
                             joinedCardCollection.Where(x => x != remainingEqualRankCards[0]).ToList();
 
-                        List<ICard> fullHouseCards = threeOfAKindCards;
-                        fullHouseCards.AddRange(remainingEqualRankCards);
+                        IList<ICard> fullHouseCards = threeOfAKindCards;
+                        fullHouseCards = fullHouseCards.Union(remainingEqualRankCards).ToList();
+                        
 
                         double power = maxPairRank*2 + FullHouseBehaviourPower*100;
 
