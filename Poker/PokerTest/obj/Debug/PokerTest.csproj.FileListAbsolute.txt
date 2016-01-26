@@ -6,31 +6,3 @@ C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
-<<<<<<< HEAD
->>>>>>> c6c78165e3ed82a6db9ab94511903397fdb7a0ef
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
-C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
-=======
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\PokerTest.dll
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\PokerTest.pdb
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.exe
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.pdb
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\bin\Debug\Poker.xml
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.dll
-C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\PokerTest\obj\Debug\PokerTest.pdb
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
-C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
->>>>>>> 6e8ed2c1cb1bf35e714a3bd52f6e5085a474b3ed

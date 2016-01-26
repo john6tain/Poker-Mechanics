@@ -377,5 +377,143 @@
             Assert.AreEqual(false, result, "Player doesn't registers combination of Flush");
         }
 
+        [TestMethod]
+        public void Test_CheckForFourOfAKind_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Four));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFourOfAKind",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination Four of a kind");
+        }
+
+        [TestMethod]
+        public void Test_CheckForFourOfAKind_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Four));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFourOfAKind",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Player doesn't register combination Four of a kind");
+        }
+
+        [TestMethod]
+        public void Test_CheckForFullHouse_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.King));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFullHouse",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers Full House combination");
+        }
+
+        [TestMethod]
+        public void Test_CheckForFullHouse_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Jack));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFullHouse",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Player doesn't register Full House combination");
+        }
+
+        [TestMethod]
+        public void Test_CheckForThreeOfAKind_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Jack));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForThreeOfAKind",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers Three of a Kind combination");
+        }
+
+        [TestMethod]
+        public void Test_CheckForThreeOfAKind_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Nine));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Jack));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForThreeOfAKind",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Player doesn't registers Three of a Kind combination");
+        }
+
+        [TestMethod]
+        private void Test_CheckForHighCard_ShouldPass()
+        {
+            
+        }
+        
     }
 }

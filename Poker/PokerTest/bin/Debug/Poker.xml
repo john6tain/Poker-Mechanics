@@ -490,12 +490,31 @@
         </member>
         <member name="M:Poker.Table.Dealer.CheckForStraight(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
-            Checks for straight.
+            This method checks if the character has card combination "Straight"
             </summary>
-            <param name="charactersCardsCollection">The characters cards collection.</param>
-            <param name="tableCardsCollection">The table cards collection.</param>
+            <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+            <param name="tableCardsCollection">The collection of cards on the table.</param>
+            <param name="character">The character that holds the cards.</param>
+            <returns><c>true</c> if the character has a Straight, <c>false</c> if they don't.</returns>     
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForFlush(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            This method checks if the character has card combination "Flush"
+            </summary>
+            <param name="charactersCardsCollection">The collection of cards in the characters hand.</param>
+            <param name="tableCardsCollection">The collection of cards on the table.</param>
+            <param name="character">The character that holds the cards.</param>
+            <returns><c>true</c> if the character has a Flush, <c>false</c> if they don't.</returns>
+        </member>
+        <member name="M:Poker.Table.Dealer.CheckForFlushIfTableCardsMakeFlush(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Checks if the cards on the table make a flush without the cards from the characters hand.
+            </summary>
+            <param name="charactersCardsCollection">The cards in the characters hand.</param>
+            <param name="tableCardsThatMakeUpFlush">The table cards that make up flush.</param>
+            <param name="joinedCardCollection">The collection of all table cards and the character's hand cards.</param>
             <param name="character">The character.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            <returns><c>true</c> if the table cards make a Flush, <c>false</c> if they dont.</returns>    
         </member>
         <member name="M:Poker.Table.Dealer.CheckForFourOfAKind(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
@@ -512,7 +531,6 @@
             </param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
         <member name="M:Poker.Table.Dealer.CheckForFullHouse(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             This method checks if the character has card combination "Full House"
@@ -522,8 +540,6 @@
             <param name="character">The character that holds the cards.</param>
             <returns><c>true</c> if the character has a Full House, <c>false</c> if they don't.</returns>
         </member>
-=======
->>>>>>> 6e8ed2c1cb1bf35e714a3bd52f6e5085a474b3ed
         <member name="M:Poker.Table.Dealer.CheckForThreeOfAKind(System.Collections.Generic.IEnumerable{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             Checks if the character has "Three-of-a-kind" card combination.
@@ -553,11 +569,7 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
-        <member name="M:Poker.Table.Dealer.CheckForPairFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-=======
         <member name="M:Poker.Table.Dealer.CheckForOnePair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter,System.Boolean)">
->>>>>>> 6e8ed2c1cb1bf35e714a3bd52f6e5085a474b3ed
             <summary>
             Checks if the two character's cards make a "Pair" or if one of the character's cards makes a "Pair" with one card from the table.
             </summary>
@@ -566,42 +578,9 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
-        <member name="M:Poker.Table.Dealer.CheckForSecondCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the second character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForFirstCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the first character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the character has two pairs and at least one of the pair cards is in the character's hand.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromTable(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if there are two pairs in the table cards.
-=======
         <member name="M:Poker.Table.Dealer.CheckForTwoPairs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             Checks if the character has two pairs.
->>>>>>> 6e8ed2c1cb1bf35e714a3bd52f6e5085a474b3ed
             </summary>
             <param name="charactersCardsCollection"></param>
             <param name="tableCardsCollection"></param>
@@ -616,18 +595,6 @@
             <param name="sameRankCardsCollection"></param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
-        <member name="M:Poker.Table.Dealer.CheckIfTheCharactersCardsMakeAPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the two cards the participant is holding make a pair.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-=======
->>>>>>> 6e8ed2c1cb1bf35e714a3bd52f6e5085a474b3ed
         <member name="M:Poker.Table.Dealer.DetermineTheWinner(System.Collections.Generic.IList{Poker.Interfaces.ICharacter},System.Int32)">
             <summary>
             After all cards are down, this method chooses the winner
