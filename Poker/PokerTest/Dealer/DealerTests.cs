@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace PokerTest.Dealer
+﻿namespace PokerTest.Dealer
 {
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
@@ -8,173 +6,376 @@ namespace PokerTest.Dealer
     using Poker.Enumerations;
     using Poker.Interfacees;
     using Poker.Table;
+    using System;
+    using Poker.Character;
+    using Poker.Interfaces;
 
     [TestClass]
     public class DealerTests
     {
-        private IList<ICard> cardsCollection;
+        private IList<ICard> characterCardsCollection;
+        private IList<ICard> tableCardsCollection;
+        private ICharacter character;
 
         [TestInitialize]
         public void InitializeList()
         {
-            this.cardsCollection = new List<ICard>();
+            this.characterCardsCollection = new List<ICard>();
+            this.tableCardsCollection = new List<ICard>();
+            this.character = new Player();
         }
 
         [TestMethod]
-        public void Test_CheckPairFromHand_ShoudPass()
+        public void Test_CheckForRoyalStraightFlushOfClubs_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Two));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Two));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            CardRank firstPlayersCard = this.cardsCollection[0].Rank;
-            CardRank secondPlayersCard = this.cardsCollection[1].Rank;
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.King));
 
-            Assert.AreEqual(firstPlayersCard, secondPlayersCard, "Cards in player's hand should be with equal rank");
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfClubs",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Royal Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckPairFromHand_ShouldFail()
+        public void Test_CheckForStraightFlushOfClubs_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            CardRank firstPlayerCard = this.cardsCollection[0].Rank;
-            CardRank secondPlayerCard = this.cardsCollection[1].Rank;
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Two));
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Three));
 
-            Assert.AreNotEqual(firstPlayerCard, secondPlayerCard, "Cards with different ranc cannot form pair");
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Four));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Five));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Six));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfClubs",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckingPlayerMakingPairWihtTable_ShouldPass()
+        public void Test_CheckForStraightFlushOfClubs_ShouldFail()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            bool hasPair = false;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        hasPair = true;
-                    }
-                }
-            }
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.King));
 
-            Assert.IsTrue(hasPair, "If there are two cards with same rank player forms pair");
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
+            this.tableCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfClubs",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Combination is not Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckingIfPlayerDoesntMakePair_ShouldPass()
+        public void Test_CheckForRoyalStraightFlushOfDiamonds_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            bool hasPair = false;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        hasPair = true;
-                    }
-                }
-            }
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.King));
 
-            Assert.IsFalse(hasPair, "If there aren't two cards with same rank player doesn't forms pair");
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfDiamonds",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Royal Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckIfPlayerFormsTwoPairs_ShouldPass()
+        public void Test_CheckForStraightFlushOfDiamonds_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            int count = 0;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        count++;
-                    }
-                }
-            }
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Two));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Three));
 
-            Assert.AreEqual(count, 2, "If there are two different cases of cards with same rank, player forms two pairs");
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Four));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Six));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfDiamonds",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckIfPlayerFormsTwoPairs_ShouldFail()
+        public void Test_CheckForStraightFlushOfDiamonds_ShouldFail()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Jack));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            int count = 0;
-            for (int i = 0; i < this.cardsCollection.Count - 1; i++)
-            {
-                for (int j = i + 1; j < this.cardsCollection.Count; j++)
-                {
-                    if (cardsCollection[i].Rank == cardsCollection[j].Rank)
-                    {
-                        count++;
-                    }
-                }
-            }
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.King));
 
-            Assert.AreNotEqual(count, 2, "If there are not two different cases of cards with same rank, player doesn't form two pairs");
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfDiamonds",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Combination is not Straight Flush");
         }
 
         [TestMethod]
-        public void Test_CheckIfPlayerFormsThreeOfAKind_ShouldPass()
+        public void Test_CheckForRoyalStraightFlushOfHearts_ShouldPass()
         {
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Eight));
-            this.cardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            this.cardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Jack));
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-            int cards = 0;
-            foreach (var card in cardsCollection)
-            {
-                IList<ICard> threeOfAKindCollection = cardsCollection.Where(x => x.Rank == card.Rank).ToList();
-                cards = threeOfAKindCollection.Count;
-            }
-            
-            Assert.AreEqual(cards, 3, "If player has three cards with same rank, he forms three of a kind combination");
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.King));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfHearts",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Royal Straight Flush");
         }
 
+        [TestMethod]
+        public void Test_CheckForStraightFlushOfHearts_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Two));
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Three));
 
-        //CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection, character);
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Five));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Six));
 
-        //CheckForStraight(charactersCardsCollection, tableCardsCollection, character);
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
 
-        //CheckForFlush(charactersCardsCollection, tableCardsCollection, character);
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfHearts",
+                characterCardsCollection, tableCardsCollection, character));
 
-        //CheckForFullHouse(charactersCardsCollection, tableCardsCollection, character);
+            Assert.AreEqual(true, result, "Player registers combination of Straight Flush");
+        }
 
-        //CheckForFourOfAKind(charactersCardsCollection, tableCardsCollection, character);
+        [TestMethod]
+        public void Test_CheckForStraightFlushOfHearts_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
 
-        // CheckForStraightFlushOfSpades(charactersCardsCollection, tableCardsCollection, character);
-        //CheckForStraightFlushOfDiamonds(charactersCardsCollection, tableCardsCollection, character);
-        // CheckForStraightFlushOfHearts(charactersCardsCollection, tableCardsCollection, character);
-        // CheckForStraightFlushOfClubs(charactersCardsCollection, tableCardsCollection, character);
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.King));
 
-        //CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Eight));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfHearts",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Combination is not Straight Flush");
+        }
+
+        [TestMethod]
+        public void Test_CheckForRoyalStraightFlushOfSpades_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfSpades",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Royal Straight Flush");
+        }
+
+        [TestMethod]
+        public void Test_CheckForStraightFlushOfSpades_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Two));
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Three));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Four));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Five));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Six));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfSpades",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Straight Flush");
+        }
+
+        [TestMethod]
+        public void Test_CheckForStraightFlushOfSpades_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.King));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Eight));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraightFlushOfSpades",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Combination is not Straight Flush");
+        }
+
+        [TestMethod]
+        public void Test_CheckForStraight_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.King));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraight",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Straight");
+        }
+
+        [TestMethod]
+        public void Test_CheckForStraight_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.King));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
+            this.tableCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Two));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForStraight",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Player doesn't registers combination of Straight");
+        }
+
+        [TestMethod]
+        public void Test_CheckForFlush_ShouldPass()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Jack));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Six));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Four));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFlush",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(true, result, "Player registers combination of Flush");
+        }
+
+        [TestMethod]
+        public void Test_CheckForFlush_ShouldFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            this.characterCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Jack));
+
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Nine));
+            this.tableCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Six));
+            this.tableCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Four));
+
+            tableCardsCollection[0].IsVisible = true;
+            tableCardsCollection[1].IsVisible = true;
+            tableCardsCollection[2].IsVisible = true;
+
+            bool result = Convert.ToBoolean(obj.Invoke("CheckForFlush",
+                characterCardsCollection, tableCardsCollection, character));
+
+            Assert.AreEqual(false, result, "Player doesn't registers combination of Flush");
+        }
 
     }
 }

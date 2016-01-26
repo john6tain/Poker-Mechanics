@@ -3,23 +3,21 @@
 // Class Author     : Alex
 //
 // Last Modified By : Alex
-// Last Modified On : 25 Jan 2016
+// Last Modified On : 26 Jan 2016
 // ***********************************************************************
 // <copyright file="Character.cs" team="Currant">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-
-using System;
-using System.Linq;
-
 namespace Poker.Character
 {
     using Interfaces;
     using Poker.Interfacees;
     using Poker.Table;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -45,22 +43,21 @@ namespace Poker.Character
         /// <returns></returns>
         public async Task AllIn()
         {
-            #region All in
-            bool intsadded = false;
+            bool isWinning = false;
             Label playerStatus = new Label();
-            if (this.Chips <= 0 && !intsadded)
+            if (this.Chips <= 0 && !isWinning)
             {
                 if (playerStatus.Text.Contains("raise") && playerStatus.Text.Contains("Call"))
                 {
                     playerChips.Add(Chips);
                 }
             }
+
             int firstBotChips = 10000;
             bool botOneFirstTurn = false;
-
             if (firstBotChips <= 0 && !botOneFirstTurn)
             {
-                if (!intsadded)
+                if (!isWinning)
                 {
                     playerChips.Add(firstBotChips);
                 }
@@ -70,7 +67,7 @@ namespace Poker.Character
             bool botTwoTurn = false;
             if (secondBotChips <= 0 && !botTwoTurn)
             {
-                if (!intsadded)
+                if (!isWinning)
                 {
                     playerChips.Add(secondBotChips);
                 }
@@ -80,7 +77,7 @@ namespace Poker.Character
             bool botThreeFirstTurn = false;
             if (thirdBotChips <= 0 && !botThreeFirstTurn)
             {
-                if (!intsadded)
+                if (!isWinning)
                 {
                     playerChips.Add(thirdBotChips);
                 }
@@ -90,7 +87,7 @@ namespace Poker.Character
             bool botFourFirstTurn = false;
             if (fourthBotChips <= 0 && !botFourFirstTurn)
             {
-                if (!intsadded)
+                if (!isWinning)
                 {
                     playerChips.Add(fourthBotChips);
                 }
@@ -100,7 +97,7 @@ namespace Poker.Character
             bool botFiveFirstTurn = false;
             if (fifthBotChips <= 0 && !botFiveFirstTurn)
             {
-                if (!intsadded)
+                if (!isWinning)
                 {
                     playerChips.Add(fifthBotChips);
                 }
@@ -110,18 +107,14 @@ namespace Poker.Character
 
             if (playerChips.ToArray().Length == maxLeft)
             {
-                //    await Finish(2);
+                await Dealer.Finish(2);
             }
             else
             {
                 playerChips.Clear();
             }
 
-            #endregion
-
             var winner = characterTurn.Count(x => x == false);
-
-            #region LastManStanding
             if (winner == 1)
             {
                 var index = characterTurn.IndexOf(false);
@@ -169,23 +162,19 @@ namespace Poker.Character
                     MessageBox.Show("Bot 5 Wins");
                 }
 
-                for (var j = 0; j <= 16; j++)
+                for (int j = 0; j <= 16; j++)
                 {
                     Dealer.Holder[j].Visible = false;
                 }
-                //  await Finish(1);
+                await Dealer.Finish(1);
             }
 
-            #endregion
-
-            #region FiveOrLessLeft
             double rounds = 0;
             int End = 4;
             if (winner < 6 && winner > 1 && rounds >= End)
             {
-                //          await Finish(2);
+                await Dealer.Finish(2);
             }
-            #endregion
         }
 
         private bool isRaising;

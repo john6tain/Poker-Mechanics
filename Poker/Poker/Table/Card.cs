@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 using Poker.Enumerations;
 using Poker.Interfacees;
 
@@ -18,6 +19,7 @@ namespace Poker.Table
             //Can we make it to private readonly or const?
             this.BackCardPath = "..\\..\\Resources\\Cards\\Back.png";
             this.BackImage = Image.FromFile(BackCardPath);
+            this.CardPictureBox = new PictureBox();
         }
 
         public bool IsVisible { get; set; }
@@ -26,5 +28,6 @@ namespace Poker.Table
         public Image BackImage { get; }
         public CardSuit Suit { get; }
         public CardRank Rank { get; set; }
+        public PictureBox CardPictureBox { get; set; }
     }
 }

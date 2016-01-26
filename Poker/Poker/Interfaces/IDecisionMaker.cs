@@ -1,6 +1,6 @@
 ﻿namespace Poker.Interfaces
 {
-    using Poker.Interfacees;
+    using Interfacees;
     using System.Collections.Generic;
     using System.Windows.Forms;
 
