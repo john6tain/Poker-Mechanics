@@ -10,11 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Poker.Character;
 
 
 namespace Poker.Table
 {
-    public static class Dealer
+    public class Dealer
     {
         private const double HighCardBehaviourPower = -1;
         private const double ThreeOfAKindBehaviourPower = 3;
@@ -29,9 +30,7 @@ namespace Poker.Table
         private const double StraightBehaviourPower = 4;
 
 
-        private static readonly int[] AllCardsOnTable = new int[16];
-
-        private static Label playerStatus;
+       private static Label playerStatus;
 
         public static readonly PictureBox[] Holder = new PictureBox[52];
 
@@ -140,6 +139,7 @@ namespace Poker.Table
         private static Label secondBotStatus;
         private static int Chips = 10000;
 
+        
         private static async Task Shuffle()
         {
             bools.Add(PlayerFirstTurn);
@@ -764,49 +764,33 @@ namespace Poker.Table
             }
         }
 
-        public static void SetGameRules(
-            int card1,
-            int card2,
-            string playerName,
-            ref double currentCardsValue,
-            ref double power,
-            bool foldedTurn,
+        public void SetGameRules(
             IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection,
             ICharacter character)
         {
-
-            if (!foldedTurn || card1 == 0 && card2 == 1 && playerStatus.Text.Contains("Fold") == false)
+            if (!playerStatus.Contains(new Control("Fold")))
             {
+                CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
 
-                for (int i = 0; i < AllCardsOnTable.Length; i++)
-                {
-                    if (AllCardsOnTable[i] == int.Parse(Holder[card1].Tag.ToString()) &&
-                        AllCardsOnTable[i + 1] == int.Parse(Holder[card2].Tag.ToString()))
-                    {
+                CheckForTwoPairs(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
+                CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForTwoPairs(charactersCardsCollection, tableCardsCollection, character);
+                CheckForStraight(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForThreeOfAKind(charactersCardsCollection, tableCardsCollection, character);
+                CheckForFlush(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForStraight(charactersCardsCollection, tableCardsCollection, character);
+                CheckForFullHouse(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForFlush(charactersCardsCollection, tableCardsCollection, character);
+                CheckForFourOfAKind(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForFullHouse(charactersCardsCollection, tableCardsCollection, character);
+                CheckForStraightFlushOfSpades(charactersCardsCollection, tableCardsCollection, character);
+                CheckForStraightFlushOfDiamonds(charactersCardsCollection, tableCardsCollection, character);
+                CheckForStraightFlushOfHearts(charactersCardsCollection, tableCardsCollection, character);
+                CheckForStraightFlushOfClubs(charactersCardsCollection, tableCardsCollection, character);
 
-                        CheckForFourOfAKind(charactersCardsCollection, tableCardsCollection, character);
-
-                        CheckForStraightFlushOfSpades(charactersCardsCollection, tableCardsCollection, character);
-                        CheckForStraightFlushOfDiamonds(charactersCardsCollection, tableCardsCollection, character);
-                        CheckForStraightFlushOfHearts(charactersCardsCollection, tableCardsCollection, character);
-                        CheckForStraightFlushOfClubs(charactersCardsCollection, tableCardsCollection, character);
-
-                        CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
-                    }
-                }
+                CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
             }
         }
 
@@ -823,14 +807,14 @@ namespace Poker.Table
         /// current player
         /// </param>
         /// <returns></returns>
-        private static bool CheckForStraightFlushOfClubs(IList<ICard> charactersCardsCollection,
+        private bool CheckForStraightFlushOfClubs(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
-            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Clubs).ToList();
+            List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == CardSuit.Clubs).ToList();
 
             straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
 
@@ -894,14 +878,14 @@ namespace Poker.Table
         /// current player
         /// </param>
         /// <returns></returns>
-        private static bool CheckForStraightFlushOfDiamonds(IList<ICard> charactersCardsCollection,
+        private bool CheckForStraightFlushOfDiamonds(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
-            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Diamonds).ToList();
+            List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == CardSuit.Diamonds).ToList();
 
             straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
 
@@ -965,14 +949,14 @@ namespace Poker.Table
         /// current player
         /// </param>
         /// <returns></returns>
-        private static bool CheckForStraightFlushOfHearts(IList<ICard> charactersCardsCollection,
+        private bool CheckForStraightFlushOfHearts(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
-            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Hearts).ToList();
+            List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == CardSuit.Hearts).ToList();
 
             straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
 
@@ -1036,14 +1020,14 @@ namespace Poker.Table
         /// current player
         /// </param>
         /// <returns></returns>
-        private static bool CheckForStraightFlushOfSpades(IList<ICard> charactersCardsCollection,
+        private bool CheckForStraightFlushOfSpades(IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasStraightFlush = false;
 
             List<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
-            List<ICard> straightFlushCardsCollection = (List<ICard>)joinedCardCollection.Where(c => c.Suit == CardSuit.Spades).ToList();
+            List<ICard> straightFlushCardsCollection = joinedCardCollection.Where(c => c.Suit == CardSuit.Spades).ToList();
 
             straightFlushCardsCollection = new List<ICard>(straightFlushCardsCollection.OrderByDescending(c => c.Rank));
 
@@ -1092,7 +1076,7 @@ namespace Poker.Table
             return hasStraightFlush;
         }
 
-        private static bool CheckForStraight(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+        private bool CheckForStraight(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             List<ICard> joinedCardCollection =
@@ -1137,7 +1121,7 @@ namespace Poker.Table
         }
 
 
-        private static bool CheckForFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+        private bool CheckForFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             List<ICard> joinedCardCollection =
@@ -1202,7 +1186,7 @@ namespace Poker.Table
             return hasFlush;
         }
 
-        private static bool CheckForFlushIfTableCardsMakeFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsThatMakeUpFlush, IList<ICard> joinedCardCollection, ICharacter character)
+        private bool CheckForFlushIfTableCardsMakeFlush(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsThatMakeUpFlush, IList<ICard> joinedCardCollection, ICharacter character)
         {
             List<ICard> characterCardsInFlush =
                 charactersCardsCollection.Where(x => x.Suit == tableCardsThatMakeUpFlush[0].Suit).ToList();
@@ -1255,8 +1239,7 @@ namespace Poker.Table
 
             return true;
         }
-
-
+        
 
         /// <summary>
         /// This method cheks for forur of a kind combination
@@ -1271,7 +1254,7 @@ namespace Poker.Table
         /// player whose cards are checked
         /// </param>
         /// <returns></returns>
-        private static bool CheckForFourOfAKind(
+        private bool CheckForFourOfAKind(
             IList<ICard> charactersCardsCollection,
             IList<ICard> tableCardsCollection,
             ICharacter character)
@@ -1301,7 +1284,7 @@ namespace Poker.Table
 
 
         //This method checks if the character has card combination "Full House"
-        private static bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
+        private bool CheckForFullHouse(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection,
             ICharacter character)
         {
             bool hasFullHouse = false;
@@ -1368,7 +1351,7 @@ namespace Poker.Table
         }
 
         //This method gets the rank (number) of the cards that make up a three-of-a-kind
-        private static int GetThreeOfAKindCardRank(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection)
+        private int GetThreeOfAKindCardRank(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection)
         {
             int cardRank = -1;
 
@@ -1395,7 +1378,7 @@ namespace Poker.Table
         /// <param name="tableCardsCollection"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        public static bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
+        private bool CheckForThreeOfAKind(IEnumerable<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             IList<ICard> joinedCardCollection = charactersCardsCollection.Union(tableCardsCollection.Where(x => x.IsVisible)).ToList();
 
@@ -1427,7 +1410,7 @@ namespace Poker.Table
         /// <param name="nonCombinationCardsCollection"></param>
         /// <param name="combinationType"></param>
         /// <param name="behaviourPower"></param>
-        private static void RegisterCombination(ICharacter character, double power, IList<ICard> combinationCardsCollection,
+        private void RegisterCombination(ICharacter character, double power, IList<ICard> combinationCardsCollection,
             IList<ICard> nonCombinationCardsCollection, CombinationType combinationType, double behaviourPower)
         {
             IList<ICard> kickersCollection = new List<ICard>();
@@ -1455,7 +1438,7 @@ namespace Poker.Table
         /// <param name="tableCardsCollection"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        private static bool CheckForHighCard(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
+        private bool CheckForHighCard(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character)
         {
             double power = Math.Max((double)charactersCardsCollection[0].Rank, (double)charactersCardsCollection[1].Rank);
 
@@ -1478,7 +1461,7 @@ namespace Poker.Table
         /// <param name="tableCardsCollection"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        public static bool CheckForOnePair(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character, bool isCheckingForASecondPair)
+        private bool CheckForOnePair(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character, bool isCheckingForASecondPair)
         {
             IList<ICombination> combinationsCollection = new List<ICombination>();
 
@@ -1517,7 +1500,7 @@ namespace Poker.Table
             return foundAPairOrPairs;
         }
 
-        private static void RegisterOnePair(ICharacter character, IList<ICombination> combinationsCollection)
+        private void RegisterOnePair(ICharacter character, IList<ICombination> combinationsCollection)
         {
             double power = combinationsCollection[0].Power;
 
@@ -1529,7 +1512,7 @@ namespace Poker.Table
                 CombinationType.OnePair, OnePairBehaviourPower);
         }
 
-        private static void RegisterTwoPairs(ICharacter character, IList<ICombination> combinationsCollection)
+        private void RegisterTwoPairs(ICharacter character, IList<ICombination> combinationsCollection)
         {
             IList<ICard> sameRankCardsCollection =
                 character.CardsCombination.CombinationCardsCollection.Union(
@@ -1544,7 +1527,7 @@ namespace Poker.Table
                 CombinationType.TwoPair, TwoPairsBehaviourPower);
         }
 
-        private static void FindAllOnePairCombinations(IList<ICard> joinedCardCollection, IList<ICombination> combinationsCollection)
+        private void FindAllOnePairCombinations(IList<ICard> joinedCardCollection, IList<ICombination> combinationsCollection)
         {
             foreach (var element in joinedCardCollection)
             {
@@ -1570,8 +1553,8 @@ namespace Poker.Table
         /// <param name="tableCardsCollection"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        public static bool CheckForTwoPairs(IList<ICard> charactersCardsCollection,
-IList<ICard> tableCardsCollection, ICharacter character)
+        private bool CheckForTwoPairs(IList<ICard> charactersCardsCollection,
+        IList<ICard> tableCardsCollection, ICharacter character)
         {
             bool hasOnePair = CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
 
@@ -1596,7 +1579,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// <param name="character"></param>
         /// <param name="sameRankCardsCollection"></param>
         /// <returns></returns>
-        private static double DetermineTwoPairsPower(ICharacter character, IList<ICard> sameRankCardsCollection)
+        private double DetermineTwoPairsPower(ICharacter character, IList<ICard> sameRankCardsCollection)
         {
             double power = 0;
 
@@ -1625,7 +1608,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// </summary>
         /// <param name="gameCharacters">All particialnts in the game.</param>
         /// <param name="pot">The pot chips.</param>
-        private static void DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
+        private void DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
         {
             IList<ICharacter> activeParticiapnts = gameCharacters.Where(x => !x.HasFolded).ToList();
 
@@ -1666,7 +1649,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// </summary>
         /// <param name="topCombinationCharactersCollection"></param>
         /// <returns></returns>
-        private static ICharacter ChooseTheWinnerByTheKickers(IList<ICharacter> topCombinationCharactersCollection)
+        private ICharacter ChooseTheWinnerByTheKickers(IList<ICharacter> topCombinationCharactersCollection)
         {
             topCombinationCharactersCollection =
                 topCombinationCharactersCollection.OrderByDescending(x => x.CardsCombination.Hand[0].Rank).
@@ -1685,7 +1668,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// Gets the names of the winners and prints them to the user.
         /// </summary>
         /// <param name="topCombinationCharactersCollection"></param>
-        private static void DeclareWinners(IList<ICharacter> topCombinationCharactersCollection)
+        private void DeclareWinners(IList<ICharacter> topCombinationCharactersCollection)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -1705,7 +1688,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// </summary>
         /// <param name="pot"></param>
         /// <param name="winner"></param>
-        private static void PayPrizeToTheWinner(int pot, ICharacter winner)
+        private void PayPrizeToTheWinner(int pot, ICharacter winner)
         {
             winner.Chips += pot;
         }
@@ -1715,7 +1698,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// </summary>
         /// <param name="pot"></param>
         /// <param name="topCombinationCharactersCollection"></param>
-        private static void PayPrizeToTheWinners(int pot, IList<ICharacter> topCombinationCharactersCollection)
+        private void PayPrizeToTheWinners(int pot, IList<ICharacter> topCombinationCharactersCollection)
         {
             int chipsPerCharacter = pot / topCombinationCharactersCollection.Count;
 
@@ -1738,7 +1721,7 @@ IList<ICard> tableCardsCollection, ICharacter character)
         /// <param name="topCombinationCharactersCollection"></param>
         /// <param name="equalScore"></param>
         /// <returns></returns>
-        private static bool DetermineIfEqual(IList<ICharacter> topCombinationCharactersCollection, bool equalScore)
+        private bool DetermineIfEqual(IList<ICharacter> topCombinationCharactersCollection, bool equalScore)
         {
             for (int cardNumber = 0; cardNumber < 5; cardNumber++)
             {

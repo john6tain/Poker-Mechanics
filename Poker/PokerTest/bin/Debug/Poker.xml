@@ -381,6 +381,43 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:Poker.Interfaces.ICharacter.AllIn">
+            <summary>
+            You bet all the money you have.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.Fold(System.Boolean@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            You can exit the game.
+            </summary>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="sStatus">The s status.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.ChangeStatusToChecking(System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Changes the status label to checking.
+            </summary>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Calls the specified chips.
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+            <summary>
+            Raises the bet.
+            </summary>
+            <param name="botChips">The bot chips.</param>
+            <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
+            <param name="statusLabel">The status label.</param>
+        </member>
         <member name="T:Poker.Interfaces.IDecisionMaker">
             <summary>
             The decision maker is artificial inteligence of the bot
@@ -495,7 +532,7 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-        <member name="M:Poker.Table.Dealer.CheckForPairFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+        <member name="M:Poker.Table.Dealer.CheckForOnePair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter,System.Boolean)">
             <summary>
             Checks if the two character's cards make a "Pair" or if one of the character's cards makes a "Pair" with one card from the table.
             </summary>
@@ -504,36 +541,9 @@
             <param name="character"></param>
             <returns></returns>
         </member>
-        <member name="M:Poker.Table.Dealer.CheckForSecondCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+        <member name="M:Poker.Table.Dealer.CheckForTwoPairs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
-            Checks if the second character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForFirstCardPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the first character's card makes a pair with one from the table.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromHand(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the character has two pairs and at least one of the pair cards is in the character's hand.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckForTwoPairsFromTable(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if there are two pairs in the table cards.
+            Checks if the character has two pairs.
             </summary>
             <param name="charactersCardsCollection"></param>
             <param name="tableCardsCollection"></param>
@@ -546,15 +556,6 @@
             </summary>
             <param name="character"></param>
             <param name="sameRankCardsCollection"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Table.Dealer.CheckIfTheCharactersCardsMakeAPair(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
-            <summary>
-            Checks if the two cards the participant is holding make a pair.
-            </summary>
-            <param name="charactersCardsCollection"></param>
-            <param name="tableCardsCollection"></param>
-            <param name="character"></param>
             <returns></returns>
         </member>
         <member name="M:Poker.Table.Dealer.DetermineTheWinner(System.Collections.Generic.IList{Poker.Interfaces.ICharacter},System.Int32)">
