@@ -896,7 +896,7 @@ namespace Poker.Table
             else
             {
                 straightFlushCardsCollection = straightFlushCardsCollection.Take(5).ToList();
-
+                
                 double power = 0;
                 for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
@@ -1335,14 +1335,16 @@ namespace Poker.Table
 
                 //removes the three-of-a-kind cards from the joinedCardCollection (hand+table cards)
                 // and adds them to the threeOfAKindCards list
-                foreach (ICard card in joinedCardCollection)
+                for (int i = 0; i < joinedCardCollection.Count; i++)
                 {
-                    if ((int)card.Rank == threeOfAKindRank)
+                    if ((int) joinedCardCollection[i].Rank == threeOfAKindRank)
                     {
-                        threeOfAKindCards.Add(card);
-                        joinedCardCollection.Remove(card);
+                        threeOfAKindCards.Add(joinedCardCollection[i]);
+                        joinedCardCollection.RemoveAt(i);
+                        i--;
                     }
                 }
+                
 
                 //checks if there is a pair in the remaining collection
                 //if yes -> the player has a full house combination

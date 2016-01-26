@@ -67,6 +67,7 @@ namespace Poker
             bigBlindButton.Visible = false;
             smallBlindButton.Visible = false;
             tbRaise.Text = (bigBlind * 2).ToString();
+
         }
 
         //this method is shuffling the cards
