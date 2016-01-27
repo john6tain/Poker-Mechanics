@@ -26,7 +26,7 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:Poker.Character.Character.AllIn">
+        <member name="M:Poker.Character.Character.AllIn(System.Windows.Forms.TextBox)">
             <summary>
             All characters can call an AllIn to play all the money they got
             </summary>
@@ -47,7 +47,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             You call the required amount of chips to continue playing the game
             </summary>
@@ -55,7 +55,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Raises the bet.
             </summary>
@@ -381,7 +381,7 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.AllIn">
+        <member name="M:Poker.Interfaces.ICharacter.AllIn(System.Windows.Forms.TextBox)">
             <summary>
             You bet all the money you have.
             </summary>
@@ -402,7 +402,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Calls the specified chips.
             </summary>
@@ -410,7 +410,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Raises the bet.
             </summary>
