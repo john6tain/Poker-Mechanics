@@ -337,7 +337,7 @@
                 {
                     if (call <= CalculateMaximumBidAbilityOfTheBot(botChips, carefulBehaviourFactor))
                     {
-                        character.Call(ref botChips, ref isBotsTurn, statusLabel);
+                        character.Call(ref botChips, ref isBotsTurn, statusLabel, potChips);
                     }
                     else
                     {
@@ -349,7 +349,7 @@
                 {
                     if (call <= CalculateMaximumBidAbilityOfTheBot(botChips, riskyBehaviourFactor))
                     {
-                        character.Call(ref botChips, ref isBotsTurn, statusLabel);
+                        character.Call(ref botChips, ref isBotsTurn, statusLabel, potChips);
                     }
                     else
                     {
@@ -364,14 +364,14 @@
                 if (raise == 0)
                 {
                     raise = call * 2;
-                    character.RaiseBet(ref botChips, ref isBotsTurn, statusLabel);
+                    character.RaiseBet(ref botChips, ref isBotsTurn, statusLabel, potChips);
                 }
                 else
                 {
                     if (raise <= CalculateMaximumBidAbilityOfTheBot(botChips, carefulBehaviourFactor))
                     {
                         raise = call * 2;
-                        character.RaiseBet(ref botChips, ref isBotsTurn, statusLabel);
+                        character.RaiseBet(ref botChips, ref isBotsTurn, statusLabel, potChips);
                     }
                     else
                     {
@@ -422,23 +422,23 @@
                     {
                         if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor) && call <= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower))
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
                         }
                         if (raise <= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor) && raise >= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor)) / 2)
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
                         }
                         if (raise <= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor)) / 2)
                         {
                             if (raise > 0)
                             {
                                 raise = CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor);
-                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                             }
                             else
                             {
                                 raise = call * 2;
-                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                             }
                         }
 
@@ -461,23 +461,23 @@
                     {
                         if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber) && call <= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower - randomNumber))
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
                         }
                         if (raise <= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber) && raise >= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber)) / 2)
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
                         }
                         if (raise <= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber)) / 2)
                         {
                             if (raise > 0)
                             {
                                 raise = CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber);
-                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                             }
                             else
                             {
                                 raise = call * 2;
-                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                                character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                             }
                         }
                     }
@@ -485,7 +485,7 @@
                 if (call <= 0)
                 {
                     raise = CalculateMaximumBidAbilityOfTheBot(botChips, callBehaviourFactor - randomNumber);
-                    character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                    character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                 }
             }
             if (botChips <= 0)
@@ -507,11 +507,11 @@
             {
                 if (labelStatus.Text.Contains("Raise"))
                 {
-                    character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus);
+                    character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                 }
                 if (labelStatus.Text.Contains("Call"))
                 {
-                    character.Call(ref botChips, ref isBotsTurn, labelStatus);
+                    character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
                 }
                 if (labelStatus.Text.Contains("Check"))
                 {
@@ -548,7 +548,7 @@
                 {
                     if (botChips > call)
                     {
-                        character.Call(ref botChips, ref isBotsTurn, botStatus);
+                        character.Call(ref botChips, ref isBotsTurn, botStatus, potChips);
                     }
                     else if (botChips <= call)
                     {
@@ -566,17 +566,17 @@
                         if (botChips >= raise * 2)
                         {
                             raise *= 2;
-                            character.RaiseBet(ref botChips, ref isBotsTurn, botStatus);
+                            character.RaiseBet(ref botChips, ref isBotsTurn, botStatus, potChips);
                         }
                         else
                         {
-                            character.Call(ref botChips, ref isBotsTurn, botStatus);
+                            character.Call(ref botChips, ref isBotsTurn, botStatus, potChips);
                         }
                     }
                     else
                     {
                         raise = call * 2;
-                        character.RaiseBet(ref botChips, ref isBotsTurn, botStatus);
+                        character.RaiseBet(ref botChips, ref isBotsTurn, botStatus, potChips);
                     }
                 }
             }
