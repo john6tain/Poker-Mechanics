@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poker.Character;
+using Poker.GameConstants;
 using Poker.Interfacees;
 using Poker.Table;
 
@@ -42,17 +43,18 @@ namespace Poker
             InitializeGameObjects();
             //dealer.SetupGame(database, player, bot1, bot2, bot3, bot4, bot5, table);
             Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
+
             //RotateTimer.Start();
         }
 
         private void InitializeGameObjects()
         {
-            this.Bot1 = new Bot();
-            this.Bot2 = new Bot();
-            this.Bot3 = new Bot();
-            this.Bot4 = new Bot();
-            this.Bot5 = new Bot();
-            this.Player = new Player();
+            this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX,Constants.FirstBotCoordinateY), Constants.CardWidth);
+            this.Bot2 = new Bot(new Point(Constants.SecondBotCoordinateX, Constants.SecondBotCoordinateY), Constants.CardWidth);
+            this.Bot3 = new Bot(new Point(Constants.ThirdBotCoordinateX, Constants.ThirdBotCoordinateY), Constants.CardWidth);
+            this.Bot4 = new Bot(new Point(Constants.FourthBotCoordinateX, Constants.FourthBotCoordinateY), Constants.CardWidth);
+            this.Bot5 = new Bot(new Point(Constants.FifthBotCoordinateX, Constants.FifthBotCoordinateY), Constants.CardWidth);
+            this.Player = new Player(new Point(Constants.PlayerCoordinateX, Constants.PlayerCoordinateY), Constants.CardWidth);
             this.GameDatabase = new DataBase.DataBase();
             this.DecisionMaker = new DecisionMaker();
             this.Table = new Table.Table();

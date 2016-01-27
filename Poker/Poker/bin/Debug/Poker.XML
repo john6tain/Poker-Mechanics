@@ -229,7 +229,7 @@
              <param name="behaviourFactor">The behaviour factor.</param>
              <param name="r">The r.</param>
         </member>
-        <member name="M:Poker.Character.Bot.#ctor">
+        <member name="M:Poker.Character.Bot.#ctor(System.Drawing.Point,System.Int32)">
             <summary>
             Initializes a new instance of DecisionMaker class.
             </summary>
@@ -490,14 +490,14 @@
         </member>
         <member name="M:Poker.Table.Dealer.ChooseTheWinnerByTheCardsRank(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
             <summary>
-            Chooses the winner, comparing the 'kickers' ranks.
+            Chooses the winner, comparing the ranks.
             </summary>
             <param name="topCombinationCharactersCollection"></param>
             <returns></returns>
         </member>
         <member name="M:Poker.Table.Dealer.ConstructWinnersMessage(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
             <summary>
-            Gets the names of the winners and prints them to the user.
+            Gets the names of the winners.
             </summary>
             <param name="topCombinationCharactersCollection"></param>
         </member>

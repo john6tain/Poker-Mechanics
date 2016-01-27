@@ -1,4 +1,6 @@
-﻿namespace Poker.Character
+﻿using System.Drawing;
+
+namespace Poker.Character
 {
     using Interfacees;
     using Interfaces;
@@ -12,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of DecisionMaker class.
         /// </summary>
-        public Bot()
+        public Bot(Point firstCardLocation, int cardWidth) : base(firstCardLocation, cardWidth)
         {
             this.decisionMaker = new DecisionMaker();
         }
