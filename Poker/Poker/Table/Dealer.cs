@@ -692,7 +692,8 @@ namespace Poker.Table
 
             if (Chips <= 0)
             {
-                var f2 = new AddChips();
+
+               /* var f2 = new AddChips();
                 f2.ShowDialog();
                 if (f2.a != 0)
                 {
@@ -708,7 +709,7 @@ namespace Poker.Table
                     foldButton.Enabled = true;
                     checkButton.Enabled = true;
                     raiseButton.Text = "raise";
-                }
+                }*/
             }
 
             ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);

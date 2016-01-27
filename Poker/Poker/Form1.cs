@@ -689,11 +689,29 @@ namespace Poker
             {
                 addChipsButton.Visible = true;
                 numberOfChipsToAdd.Visible = true;
+                bigBlindSum.Text = bigBlind.ToString();
+                smallBlindSum.Text = smallBlind.ToString();
+                if (bigBlindSum.Visible == false)
+                {
+                    bigBlindSum.Visible = true;
+                    smallBlindSum.Visible = true;
+                    bigBlindButton.Visible = true;
+                    smallBlindButton.Visible = true;
+
+
+
+                }
+
             }
             else
             {
+
                 addChipsButton.Visible = false;
                 numberOfChipsToAdd.Visible = false;
+                bigBlindSum.Visible = false;
+                smallBlindSum.Visible = false;
+                bigBlindButton.Visible = false;
+                smallBlindButton.Visible = false;
             }
         }
 
@@ -2206,7 +2224,7 @@ namespace Poker
                 botFiveFirstTurn = false;
                 if (Chips <= 0)
                 {
-                    var f2 = new AddChips();
+                   /* var f2 = new AddChips();
                     f2.ShowDialog();
                     if (f2.a != 0)
                     {
@@ -2222,7 +2240,7 @@ namespace Poker
                         foldButton.Enabled = true;
                         checkButton.Enabled = true;
                         raiseButton.Text = "raise";
-                    }
+                    }*/
                 }
                 playerPanel.Visible = false;
                 firstBotPanel.Visible = false;
@@ -2591,7 +2609,8 @@ namespace Poker
 
             if (Chips <= 0)
             {
-                var f2 = new AddChips();
+                this.tbRaise.Text = "GODMODE";
+                /* var f2 = new AddChips();
                 f2.ShowDialog();
                 if (f2.a != 0)
                 {
@@ -2607,7 +2626,7 @@ namespace Poker
                     foldButton.Enabled = true;
                     checkButton.Enabled = true;
                     raiseButton.Text = "raise";
-                }
+                }*/
             }
 
             ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
@@ -3440,26 +3459,6 @@ namespace Poker
                 }
             }
             tableChips.Text = "Chips : " + Chips;
-        }
-
-        private void bOptions_Click(object sender, EventArgs e)
-        {
-            bigBlindSum.Text = bigBlind.ToString();
-            smallBlindSum.Text = smallBlind.ToString();
-            if (bigBlindSum.Visible == false)
-            {
-                bigBlindSum.Visible = true;
-                smallBlindSum.Visible = true;
-                bigBlindButton.Visible = true;
-                smallBlindButton.Visible = true;
-            }
-            else
-            {
-                bigBlindSum.Visible = false;
-                smallBlindSum.Visible = false;
-                bigBlindButton.Visible = false;
-                smallBlindButton.Visible = false;
-            }
         }
 
         private void bSB_Click(object sender, EventArgs e)

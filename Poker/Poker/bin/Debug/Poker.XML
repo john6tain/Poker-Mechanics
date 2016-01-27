@@ -4,28 +4,6 @@
         <name>Poker</name>
     </assembly>
     <members>
-        <member name="T:Poker.AddChips">
-            <summary>
-            Adding Chips
-            </summary>
-        </member>
-        <member name="F:Poker.AddChips.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Poker.AddChips.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Poker.AddChips.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="M:Poker.Character.Character.AllIn">
             <summary>
             All characters can call an AllIn to play all the money they got

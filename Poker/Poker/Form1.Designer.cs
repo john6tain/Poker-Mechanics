@@ -46,7 +46,6 @@ namespace Poker
             this.tableBot2Chips = new System.Windows.Forms.TextBox();
             this.tableBot1Chips = new System.Windows.Forms.TextBox();
             this.potChips = new System.Windows.Forms.TextBox();
-            this.bOptions = new System.Windows.Forms.Button();
             this.bigBlindButton = new System.Windows.Forms.Button();
             this.smallBlindSum = new System.Windows.Forms.TextBox();
             this.smallBlindButton = new System.Windows.Forms.Button();
@@ -65,7 +64,7 @@ namespace Poker
             // 
             this.foldButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.foldButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.foldButton.Location = new System.Drawing.Point(223, 536);
+            this.foldButton.Location = new System.Drawing.Point(317, 612);
             this.foldButton.Name = "foldButton";
             this.foldButton.Size = new System.Drawing.Size(114, 49);
             this.foldButton.TabIndex = 0;
@@ -77,7 +76,7 @@ namespace Poker
             // 
             this.checkButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkButton.Location = new System.Drawing.Point(362, 536);
+            this.checkButton.Location = new System.Drawing.Point(456, 612);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(111, 49);
             this.checkButton.TabIndex = 2;
@@ -89,7 +88,7 @@ namespace Poker
             // 
             this.callButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.callButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.callButton.Location = new System.Drawing.Point(493, 537);
+            this.callButton.Location = new System.Drawing.Point(587, 613);
             this.callButton.Name = "callButton";
             this.callButton.Size = new System.Drawing.Size(111, 48);
             this.callButton.TabIndex = 3;
@@ -101,7 +100,7 @@ namespace Poker
             // 
             this.raiseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.raiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.raiseButton.Location = new System.Drawing.Point(643, 537);
+            this.raiseButton.Location = new System.Drawing.Point(737, 613);
             this.raiseButton.Name = "raiseButton";
             this.raiseButton.Size = new System.Drawing.Size(111, 48);
             this.raiseButton.TabIndex = 4;
@@ -113,7 +112,7 @@ namespace Poker
             // 
             this.progressBarTimer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.progressBarTimer.BackColor = System.Drawing.SystemColors.Control;
-            this.progressBarTimer.Location = new System.Drawing.Point(223, 507);
+            this.progressBarTimer.Location = new System.Drawing.Point(317, 583);
             this.progressBarTimer.Maximum = 1000;
             this.progressBarTimer.Name = "progressBarTimer";
             this.progressBarTimer.Size = new System.Drawing.Size(667, 23);
@@ -124,7 +123,7 @@ namespace Poker
             // 
             this.tableChips.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tableChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableChips.Location = new System.Drawing.Point(727, 478);
+            this.tableChips.Location = new System.Drawing.Point(821, 554);
             this.tableChips.Name = "tableChips";
             this.tableChips.Size = new System.Drawing.Size(163, 23);
             this.tableChips.TabIndex = 6;
@@ -133,7 +132,7 @@ namespace Poker
             // addChipsButton
             // 
             this.addChipsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addChipsButton.Location = new System.Drawing.Point(265, 368);
+            this.addChipsButton.Location = new System.Drawing.Point(262, 404);
             this.addChipsButton.Name = "addChipsButton";
             this.addChipsButton.Size = new System.Drawing.Size(75, 25);
             this.addChipsButton.TabIndex = 7;
@@ -144,7 +143,7 @@ namespace Poker
             // numberOfChipsToAdd
             // 
             this.numberOfChipsToAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numberOfChipsToAdd.Location = new System.Drawing.Point(248, 339);
+            this.numberOfChipsToAdd.Location = new System.Drawing.Point(245, 375);
             this.numberOfChipsToAdd.Name = "numberOfChipsToAdd";
             this.numberOfChipsToAdd.Size = new System.Drawing.Size(92, 20);
             this.numberOfChipsToAdd.TabIndex = 8;
@@ -153,7 +152,7 @@ namespace Poker
             // 
             this.tableBot5Chips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableBot5Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableBot5Chips.Location = new System.Drawing.Point(1008, 507);
+            this.tableBot5Chips.Location = new System.Drawing.Point(1196, 583);
             this.tableBot5Chips.Name = "tableBot5Chips";
             this.tableBot5Chips.Size = new System.Drawing.Size(152, 23);
             this.tableBot5Chips.TabIndex = 9;
@@ -163,7 +162,7 @@ namespace Poker
             // 
             this.tableBot4Chips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tableBot4Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableBot4Chips.Location = new System.Drawing.Point(1044, 3);
+            this.tableBot4Chips.Location = new System.Drawing.Point(1232, 3);
             this.tableBot4Chips.Name = "tableBot4Chips";
             this.tableBot4Chips.Size = new System.Drawing.Size(116, 23);
             this.tableBot4Chips.TabIndex = 10;
@@ -173,7 +172,7 @@ namespace Poker
             // 
             this.tableBot3Chips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tableBot3Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableBot3Chips.Location = new System.Drawing.Point(630, 3);
+            this.tableBot3Chips.Location = new System.Drawing.Point(818, 3);
             this.tableBot3Chips.Name = "tableBot3Chips";
             this.tableBot3Chips.Size = new System.Drawing.Size(125, 23);
             this.tableBot3Chips.TabIndex = 11;
@@ -193,7 +192,7 @@ namespace Poker
             // 
             this.tableBot1Chips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableBot1Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableBot1Chips.Location = new System.Drawing.Point(12, 509);
+            this.tableBot1Chips.Location = new System.Drawing.Point(12, 585);
             this.tableBot1Chips.Name = "tableBot1Chips";
             this.tableBot1Chips.Size = new System.Drawing.Size(142, 23);
             this.tableBot1Chips.TabIndex = 13;
@@ -203,26 +202,15 @@ namespace Poker
             // 
             this.potChips.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.potChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.potChips.Location = new System.Drawing.Point(506, 169);
+            this.potChips.Location = new System.Drawing.Point(600, 207);
             this.potChips.Name = "potChips";
             this.potChips.Size = new System.Drawing.Size(125, 23);
             this.potChips.TabIndex = 14;
             this.potChips.Text = "0";
             // 
-            // bOptions
-            // 
-            this.bOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bOptions.Location = new System.Drawing.Point(248, 169);
-            this.bOptions.Name = "bOptions";
-            this.bOptions.Size = new System.Drawing.Size(75, 36);
-            this.bOptions.TabIndex = 15;
-            this.bOptions.Text = "BB/SB";
-            this.bOptions.UseVisualStyleBackColor = true;
-            this.bOptions.Click += new System.EventHandler(this.bOptions_Click);
-            // 
             // bigBlindButton
             // 
-            this.bigBlindButton.Location = new System.Drawing.Point(248, 266);
+            this.bigBlindButton.Location = new System.Drawing.Point(245, 226);
             this.bigBlindButton.Name = "bigBlindButton";
             this.bigBlindButton.Size = new System.Drawing.Size(75, 23);
             this.bigBlindButton.TabIndex = 16;
@@ -232,7 +220,7 @@ namespace Poker
             // 
             // smallBlindSum
             // 
-            this.smallBlindSum.Location = new System.Drawing.Point(248, 240);
+            this.smallBlindSum.Location = new System.Drawing.Point(245, 200);
             this.smallBlindSum.Name = "smallBlindSum";
             this.smallBlindSum.Size = new System.Drawing.Size(75, 20);
             this.smallBlindSum.TabIndex = 17;
@@ -240,7 +228,7 @@ namespace Poker
             // 
             // smallBlindButton
             // 
-            this.smallBlindButton.Location = new System.Drawing.Point(248, 211);
+            this.smallBlindButton.Location = new System.Drawing.Point(245, 171);
             this.smallBlindButton.Name = "smallBlindButton";
             this.smallBlindButton.Size = new System.Drawing.Size(75, 23);
             this.smallBlindButton.TabIndex = 18;
@@ -250,7 +238,7 @@ namespace Poker
             // 
             // bigBlindSum
             // 
-            this.bigBlindSum.Location = new System.Drawing.Point(248, 295);
+            this.bigBlindSum.Location = new System.Drawing.Point(245, 255);
             this.bigBlindSum.Name = "bigBlindSum";
             this.bigBlindSum.Size = new System.Drawing.Size(75, 20);
             this.bigBlindSum.TabIndex = 19;
@@ -259,7 +247,7 @@ namespace Poker
             // fifthBotStatus
             // 
             this.fifthBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fifthBotStatus.Location = new System.Drawing.Point(1008, 533);
+            this.fifthBotStatus.Location = new System.Drawing.Point(1196, 609);
             this.fifthBotStatus.Name = "fifthBotStatus";
             this.fifthBotStatus.Size = new System.Drawing.Size(152, 32);
             this.fifthBotStatus.TabIndex = 26;
@@ -267,7 +255,7 @@ namespace Poker
             // fourthBotStatus
             // 
             this.fourthBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fourthBotStatus.Location = new System.Drawing.Point(1075, 29);
+            this.fourthBotStatus.Location = new System.Drawing.Point(1263, 29);
             this.fourthBotStatus.Name = "fourthBotStatus";
             this.fourthBotStatus.Size = new System.Drawing.Size(73, 32);
             this.fourthBotStatus.TabIndex = 27;
@@ -275,7 +263,7 @@ namespace Poker
             // thirdBotStatus
             // 
             this.thirdBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.thirdBotStatus.Location = new System.Drawing.Point(640, 29);
+            this.thirdBotStatus.Location = new System.Drawing.Point(828, 29);
             this.thirdBotStatus.Name = "thirdBotStatus";
             this.thirdBotStatus.Size = new System.Drawing.Size(95, 32);
             this.thirdBotStatus.TabIndex = 28;
@@ -283,7 +271,7 @@ namespace Poker
             // firstBotStatus
             // 
             this.firstBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.firstBotStatus.Location = new System.Drawing.Point(12, 535);
+            this.firstBotStatus.Location = new System.Drawing.Point(12, 611);
             this.firstBotStatus.Name = "firstBotStatus";
             this.firstBotStatus.Size = new System.Drawing.Size(142, 32);
             this.firstBotStatus.TabIndex = 29;
@@ -291,7 +279,7 @@ namespace Poker
             // playerStatus
             // 
             this.playerStatus.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.playerStatus.Location = new System.Drawing.Point(757, 536);
+            this.playerStatus.Location = new System.Drawing.Point(851, 612);
             this.playerStatus.Name = "playerStatus";
             this.playerStatus.Size = new System.Drawing.Size(120, 27);
             this.playerStatus.TabIndex = 30;
@@ -307,7 +295,7 @@ namespace Poker
             // 
             this.potLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.potLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.potLabel.Location = new System.Drawing.Point(554, 130);
+            this.potLabel.Location = new System.Drawing.Point(648, 168);
             this.potLabel.Name = "potLabel";
             this.potLabel.Size = new System.Drawing.Size(31, 21);
             this.potLabel.TabIndex = 0;
@@ -316,7 +304,7 @@ namespace Poker
             // tbRaise
             // 
             this.tbRaise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbRaise.Location = new System.Drawing.Point(760, 566);
+            this.tbRaise.Location = new System.Drawing.Point(854, 642);
             this.tbRaise.Name = "tbRaise";
             this.tbRaise.Size = new System.Drawing.Size(108, 20);
             this.tbRaise.TabIndex = 0;
@@ -324,14 +312,12 @@ namespace Poker
             // 
             // Form1
             // 
-            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AutoSize = true;
             this.BackgroundImage = global::Poker.Properties.Resources.poker_table___Copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1160, 611);
+            this.ClientSize = new System.Drawing.Size(1348, 687);
             this.Controls.Add(this.tbRaise);
             this.Controls.Add(this.potLabel);
             this.Controls.Add(this.secondBotStatus);
@@ -344,7 +330,6 @@ namespace Poker
             this.Controls.Add(this.smallBlindButton);
             this.Controls.Add(this.smallBlindSum);
             this.Controls.Add(this.bigBlindButton);
-            this.Controls.Add(this.bOptions);
             this.Controls.Add(this.potChips);
             this.Controls.Add(this.tableBot1Chips);
             this.Controls.Add(this.tableBot2Chips);
@@ -362,11 +347,12 @@ namespace Poker
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1366, 768);
+            this.MinimumSize = new System.Drawing.Size(1364, 726);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GLS Texas Poker";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Layout_Change);
             this.ResumeLayout(false);
@@ -390,7 +376,6 @@ namespace Poker
         private TextBox tableBot2Chips;
         private TextBox tableBot1Chips;
         private TextBox potChips;
-        private Button bOptions;
         private Button bigBlindButton;
         private TextBox smallBlindSum;
         private Button smallBlindButton;
