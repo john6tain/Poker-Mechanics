@@ -957,8 +957,6 @@ namespace Poker.Table
             IList<ICard> tableCardsCollection,
             ICharacter character)
         {
-            if (!playerStatus.Contains(new Control("Fold")))
-            {
                 CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
 
                 CheckForTwoPairs(charactersCardsCollection, tableCardsCollection, character);
@@ -980,7 +978,6 @@ namespace Poker.Table
 
                 CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
             }
-        }
 
         /// <summary>
         /// This method determins if straight flush of clubs combination is available 
