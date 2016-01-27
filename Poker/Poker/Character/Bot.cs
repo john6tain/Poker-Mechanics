@@ -1,4 +1,6 @@
-﻿namespace Poker.Character
+﻿using System.Drawing;
+
+namespace Poker.Character
 {
     using Interfacees;
     using Interfaces;
@@ -12,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of DecisionMaker class.
         /// </summary>
-        public Bot()
+        public Bot(Point firstCardLocation, int cardWidth) : base(firstCardLocation, cardWidth)
         {
             this.decisionMaker = new DecisionMaker();
         }
@@ -31,13 +33,13 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         /// <param name="behaviourPower">The behaviour power.</param>
-        public void Decide(ICharacter character, IList<ICard> cardCollection,
-            int firstCard, int secondCard, ref int botChips, ref bool isOnTurn,
-            ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
+        public override void Decide(ICharacter character, IList<ICard> cardCollection,
+            int firstCard, int secondCard, int botChips,
+            bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
             double behaviourPower)
         {
-            this.decisionMaker.MakeDecision(character, cardCollection,
-                                            firstCard, secondCard, ref botChips, ref isOnTurn,
+            this.decisionMaker.MakeDecision(character,
+                                            firstCard, secondCard, ref botChips, this.IsOnTurn,
                                             ref isFinalTurn, hasFolded, botIndex, botPower,
                                             behaviourPower);
         }

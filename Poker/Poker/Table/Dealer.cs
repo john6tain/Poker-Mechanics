@@ -30,7 +30,7 @@ namespace Poker.Table
         private const double StraightBehaviourPower = 4;
 
 
-       private static Label playerStatus;
+        private static Label playerStatus;
 
         public static readonly PictureBox[] Holder = new PictureBox[52];
 
@@ -139,10 +139,7 @@ namespace Poker.Table
         private static Label secondBotStatus;
         private static int Chips = 10000;
 
-        //public Task SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
 
         public async Task SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls)
         {
@@ -152,6 +149,8 @@ namespace Poker.Table
             ShuffleCards(shuffledDeck);
 
             DealCards(shuffledDeck, player, bot1, bot2, bot3, bot4, bot5, table, Controls);
+
+
 
             #region Code to be assesed and removed...
 
@@ -608,49 +607,22 @@ namespace Poker.Table
 
             player.CharacterCardsCollection.Clear();
 
-            int playerX = 580;
-            int playerY = 480;
+            
 
-            GiveCard(player, 0, shuffledDeck, 0);
+            GiveCard(player, 0, shuffledDeck, 0, Controls);
+            GiveCard(player, 1, shuffledDeck, 1, Controls);
 
-            player.CharacterCardsCollection.Add(shuffledDeck[0]);
-            player.CharacterCardsCollection[0].CardPictureBox.Height = Constants.CardHeight;
-            player.CharacterCardsCollection[0].CardPictureBox.Width = Constants.CardWidth;
-            player.CharacterCardsCollection[0].CardPictureBox.Image = player.CharacterCardsCollection[0].FrontImage;
-            player.CharacterCardsCollection[0].CardPictureBox.Location = new Point(playerX, playerY);
-            Controls.Add(player.CharacterCardsCollection[0].CardPictureBox);
-
-            player.CharacterCardsCollection.Add(shuffledDeck[1]);
-            player.CharacterCardsCollection[1].CardPictureBox.Height = Constants.CardHeight;
-            player.CharacterCardsCollection[1].CardPictureBox.Width = Constants.CardWidth;
-            player.CharacterCardsCollection[1].CardPictureBox.Image = player.CharacterCardsCollection[1].FrontImage;
-            player.CharacterCardsCollection[1].CardPictureBox.Location = new Point(playerX + Constants.CardWidth, 480);
-            Controls.Add(player.CharacterCardsCollection[1].CardPictureBox);
 
             #endregion
 
             #region Bots
 
-            int bot1X = 15;
-            int bot1Y = 420;
 
-            int bot2X = 75;
-            int bot2Y = 65;
-
-            int bot3X = 590;
-            int bot3Y = 25;
-
-            int bot4X = 1115;
-            int bot4Y = 65;
-
-            int bot5X = 1160;
-            int bot5Y = 420;
-
-            DealCardsToBot(bot1, 2, 3, bot1X, bot1Y, shuffledDeck, Controls);
-            DealCardsToBot(bot2, 4, 5, bot2X, bot2Y, shuffledDeck, Controls);
-            DealCardsToBot(bot3, 6, 7, bot3X, bot3Y, shuffledDeck, Controls);
-            DealCardsToBot(bot4, 8, 9, bot4X, bot4Y, shuffledDeck, Controls);
-            DealCardsToBot(bot5, 10, 11, bot5X, bot5Y, shuffledDeck, Controls);
+            DealCardsToBot(bot1, 2, 3, shuffledDeck, Controls);
+            DealCardsToBot(bot2, 4, 5, shuffledDeck, Controls);
+            DealCardsToBot(bot3, 6, 7, shuffledDeck, Controls);
+            DealCardsToBot(bot4, 8, 9, shuffledDeck, Controls);
+            DealCardsToBot(bot5, 10, 11, shuffledDeck, Controls);
 
             #endregion
 
@@ -661,15 +633,42 @@ namespace Poker.Table
             #endregion
         }
 
-        private void GiveCard(ICharacter character, int handCardIndex, IList<ICard> shuffledDeck, int v2)
+        private void GiveCard(ICharacter character, int handCardIndex, IList<ICard> shuffledDeck, int deckCardIndex, Control.ControlCollection controls)
         {
-            /////////////// TODO: this...
+            character.CharacterCardsCollection.Add(shuffledDeck[deckCardIndex]);
+
+            character.CharacterCardsCollection[handCardIndex].CardPictureBox.Height = Constants.CardHeight;
+            character.CharacterCardsCollection[handCardIndex].CardPictureBox.Width = Constants.CardWidth;
+
+
+            if (character.CharacterCardsCollection[handCardIndex].IsVisible)
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image =  character.CharacterCardsCollection[0].FrontImage;
+            }
+            else
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image = character.CharacterCardsCollection[0].BackImage;
+            }
+        
+
+            if (handCardIndex == 0)
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.FirstCardLocation;
+            }
+            else
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.SecondCardLocation;
+            }
+            
+
+            controls.Add(character.CharacterCardsCollection[handCardIndex].CardPictureBox);
+
         }
 
         private void DealCardsToTable(ITable table, int startingDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
         {
-            int currentTableX = 410;
-            int currentTableY = 265;
+            int currentTableX = Constants.TableCoordinateX;
+            int currentTableY = Constants.TableCoordinateY;
 
             int distanceBetweenCards = Constants.CardWidth + (Constants.CardWidth / 2);
 
@@ -698,44 +697,26 @@ namespace Poker.Table
             }
         }
 
-        private void DealCardsToBot(ICharacter bot, int firstDeckCardIndex, int secondDeckCardIndex, int botX, int botY, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
-        {
-            int cardHeight = 130;
-            int cardWidth = 80;
-
+        private void DealCardsToBot(ICharacter bot, int firstDeckCardIndex, int secondDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
+        {      
             bot.CharacterCardsCollection.Clear();
-            bot.CharacterCardsCollection.Add(shuffledDeck[firstDeckCardIndex]);
-            bot.CharacterCardsCollection.Add(shuffledDeck[secondDeckCardIndex]);
+            GiveCard(bot, 0, shuffledDeck, firstDeckCardIndex, Controls);
+            GiveCard(bot, 1, shuffledDeck, secondDeckCardIndex, Controls);
+            #region backup Code
+            //bot.CharacterCardsCollection.Add(shuffledDeck[firstDeckCardIndex]);
+            //bot.CharacterCardsCollection[0].CardPictureBox.Height = Constants.CardHeight;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Width = Constants.CardWidth;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Location = bot.FirstCardLocation;
+            //Controls.Add(bot.CharacterCardsCollection[0].CardPictureBox
 
-            bot.CharacterCardsCollection[0].CardPictureBox.Height = cardHeight;
-            bot.CharacterCardsCollection[0].CardPictureBox.Width = cardWidth;
-            bot.CharacterCardsCollection[1].CardPictureBox.Height = cardHeight;
-            bot.CharacterCardsCollection[1].CardPictureBox.Width = cardWidth;
-
-
-
-            if (bot.CharacterCardsCollection[0].IsVisible)
-            {
-                bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].FrontImage;
-            }
-            else
-            {
-                bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
-            }
-            if (bot.CharacterCardsCollection[1].IsVisible)
-            {
-                bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].FrontImage;
-            }
-            else
-            {
-                bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
-            }
-
-            bot.CharacterCardsCollection[0].CardPictureBox.Location = new Point(botX, botY);
-            bot.CharacterCardsCollection[1].CardPictureBox.Location = new Point(botX + cardWidth, botY);
-
-            Controls.Add(bot.CharacterCardsCollection[0].CardPictureBox);
-            Controls.Add(bot.CharacterCardsCollection[1].CardPictureBox);
+            //bot.CharacterCardsCollection.Add(shuffledDeck[secondDeckCardIndex]);
+            //bot.CharacterCardsCollection[1].CardPictureBox.Height = Constants.CardHeight;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Width = Constants.CardWidth;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Location = bot.SecondCardLocation;
+            //Controls.Add(bot.CharacterCardsCollection[1].CardPictureBox);
+            #endregion
         }
 
         private void ShuffleCards(IList<ICard> deckToBeShuffled)
@@ -863,23 +844,23 @@ namespace Poker.Table
             if (Chips <= 0)
             {
 
-               /* var f2 = new AddChips();
-                f2.ShowDialog();
-                if (f2.a != 0)
-                {
-                    Chips = f2.a;
-                    firstBotChips += f2.a;
-                    secondBotChips += f2.a;
-                    thirdBotChips += f2.a;
-                    fourthBotChips += f2.a;
-                    fifthBotChips += f2.a;
-                    PlayerFirstTurn = false;
-                    playerTurn = true;
-                    raiseButton.Enabled = true;
-                    foldButton.Enabled = true;
-                    checkButton.Enabled = true;
-                    raiseButton.Text = "raise";
-                }*/
+                /* var f2 = new AddChips();
+                 f2.ShowDialog();
+                 if (f2.a != 0)
+                 {
+                     Chips = f2.a;
+                     firstBotChips += f2.a;
+                     secondBotChips += f2.a;
+                     thirdBotChips += f2.a;
+                     fourthBotChips += f2.a;
+                     fifthBotChips += f2.a;
+                     PlayerFirstTurn = false;
+                     playerTurn = true;
+                     raiseButton.Enabled = true;
+                     foldButton.Enabled = true;
+                     checkButton.Enabled = true;
+                     raiseButton.Text = "raise";
+                 }*/
             }
 
             ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
@@ -1067,7 +1048,7 @@ namespace Poker.Table
             else
             {
                 straightFlushCardsCollection = straightFlushCardsCollection.Take(5).ToList();
-                
+
                 double power = 0;
                 for (int i = 0; i < straightFlushCardsCollection.Count - 1; i++)
                 {
@@ -1299,7 +1280,7 @@ namespace Poker.Table
 
         }
 
-       
+
         /// <summary>
         /// This method checks if the character has card combination "Flush"
         /// </summary>
@@ -1434,7 +1415,7 @@ namespace Poker.Table
 
             return true;
         }
-        
+
 
         /// <summary>
         /// This method cheks for forur of a kind combination
@@ -1473,11 +1454,11 @@ namespace Poker.Table
                     return true;
                 }
             }
-            
+
             return false;
         }
 
-        
+
 
         /// <summary>
         /// This method checks if the character has card combination "Full House"
@@ -1508,14 +1489,14 @@ namespace Poker.Table
                 // and adds them to the threeOfAKindCards list
                 for (int i = 0; i < joinedCardCollection.Count; i++)
                 {
-                    if ((int) joinedCardCollection[i].Rank == threeOfAKindRank)
+                    if ((int)joinedCardCollection[i].Rank == threeOfAKindRank)
                     {
                         threeOfAKindCards.Add(joinedCardCollection[i]);
                         joinedCardCollection.RemoveAt(i);
                         i--;
                     }
                 }
-                
+
 
                 //checks if there is a pair in the remaining collection
                 //if yes -> the player has a full house combination
@@ -1538,9 +1519,9 @@ namespace Poker.Table
 
                         IList<ICard> fullHouseCards = threeOfAKindCards;
                         fullHouseCards = fullHouseCards.Union(remainingEqualRankCards).ToList();
-                        
 
-                        double power = maxPairRank*2 + FullHouseBehaviourPower*100;
+
+                        double power = maxPairRank * 2 + FullHouseBehaviourPower * 100;
 
                         if (character.CardsCombination == null ||
                             character.CardsCombination.Type < CombinationType.FullHouse)
@@ -1808,12 +1789,32 @@ namespace Poker.Table
             return power;
         }
 
+        public void DeclareWinner(IList<ICharacter> gameCharacters, int pot)
+        {
+            string winMessage = DetermineTheWinner(gameCharacters, pot);
+
+            if (winMessage.Contains(","))
+            {
+                PrintSeveralWinnersMessage(winMessage);
+            }
+            else
+            {
+                PrintOneWinnerMessage(winMessage);
+            }
+
+        }
+
+        private void PrintSeveralWinnersMessage(string winMessage)
+        {
+            MessageBox.Show("The winners are:" + winMessage);
+        }
+
         /// <summary>
         /// After all cards are down, this method chooses the winner
         /// </summary>
         /// <param name="gameCharacters">All particialnts in the game.</param>
         /// <param name="pot">The pot chips.</param>
-        private void DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
+        private string DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
         {
             IList<ICharacter> activeParticiapnts = gameCharacters.Where(x => !x.HasFolded).ToList();
 
@@ -1825,7 +1826,12 @@ namespace Poker.Table
             if (topCombinationCharactersCollection.Count == 1)
             {
                 ICharacter winner = topCombinationCharactersCollection[0];
-                MessageBox.Show("" + winner.Name + " " + winner.CardsCombination.Type + "wins");
+
+                string winMessage = winner.Name + " " + winner.CardsCombination.Type;
+
+                PayPrizeToTheWinner(pot, winner);
+
+                return winMessage;
             }
             else
             {
@@ -1835,26 +1841,36 @@ namespace Poker.Table
 
                 if (equalScore)
                 {
-                    //All participants who have the top combination, also have the same 'kickers'. Therefore, all of them are winners.
-                    DeclareWinners(topCombinationCharactersCollection);
-
+                    //All participants who have the top combination, have all equal cards. Therefore, all of them are winners.
                     PayPrizeToTheWinners(pot, topCombinationCharactersCollection);
+
+                    string winMessage = ConstructWinnersMessage(topCombinationCharactersCollection);
+
+                    return winMessage;
                 }
                 else
                 {
-                    //The 'kickers' have different ranks, so they will determine the winner.
-                    ICharacter winner = ChooseTheWinnerByTheKickers(topCombinationCharactersCollection);
+                    ICharacter winner = ChooseTheWinnerByTheCardsRank(topCombinationCharactersCollection);
+                    string winMessage = winner.Name + " " + winner.CardsCombination.Type;
+
                     PayPrizeToTheWinner(pot, winner);
+
+                    return winMessage;
                 }
             }
         }
 
+        private void PrintOneWinnerMessage(string winMessage)
+        {
+            MessageBox.Show("The winner is:" + winMessage);
+        }
+
         /// <summary>
-        /// Chooses the winner, comparing the 'kickers' ranks.
+        /// Chooses the winner, comparing the ranks.
         /// </summary>
         /// <param name="topCombinationCharactersCollection"></param>
         /// <returns></returns>
-        private ICharacter ChooseTheWinnerByTheKickers(IList<ICharacter> topCombinationCharactersCollection)
+        private ICharacter ChooseTheWinnerByTheCardsRank(IList<ICharacter> topCombinationCharactersCollection)
         {
             topCombinationCharactersCollection =
                 topCombinationCharactersCollection.OrderByDescending(x => x.CardsCombination.Hand[0].Rank).
@@ -1865,15 +1881,14 @@ namespace Poker.Table
 
             ICharacter winner = topCombinationCharactersCollection[0];
 
-            MessageBox.Show("" + winner.Name + " " + winner.CardsCombination.Type + "wins");
             return winner;
         }
 
         /// <summary>
-        /// Gets the names of the winners and prints them to the user.
+        /// Gets the names of the winners.
         /// </summary>
         /// <param name="topCombinationCharactersCollection"></param>
-        private void DeclareWinners(IList<ICharacter> topCombinationCharactersCollection)
+        private string ConstructWinnersMessage(IList<ICharacter> topCombinationCharactersCollection)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -1883,9 +1898,9 @@ namespace Poker.Table
                 sb.Append(", ");
             }
 
-            string winnersNames = sb.ToString().Substring(0, sb.Length - 2);
+            string winnersParameters = sb.ToString().Substring(0, sb.Length - 2);
 
-            MessageBox.Show("Equal score: " + winnersNames + topCombinationCharactersCollection[0].CardsCombination.Type);
+            return winnersParameters;
         }
 
         /// <summary>
@@ -1942,6 +1957,6 @@ namespace Poker.Table
             return equalScore;
         }
 
-        
+
     }
 }
