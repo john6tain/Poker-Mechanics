@@ -19,7 +19,8 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void Straight(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
+        private void Straight(ICharacter character, ref int botChips,
+            ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
             int botIndex, double botPower)
         {
             Random straightRandomGenerator = new Random();
@@ -30,8 +31,8 @@
             {
                 ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
             }
-        }
 
+        }
         /// <summary>
         /// Tell us the specified flush combination.
         /// </summary>
@@ -198,7 +199,9 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void HighCard(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower)
+        private void HighCard(ICharacter character, ref int botChips,
+                              ref bool isOnTurn, ref bool isFinalTurn,
+                              Label hasFolded, double botPower)
         {
             ChooseBotsMoveFirstWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, 20, 25);
         }
