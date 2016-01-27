@@ -23,7 +23,7 @@ using Poker.Table;
 
 namespace Poker
 {
-    public partial class Form1 : Form
+    public partial class TexasPoker : Form
     {
         private ICharacter bot1;
         private ICharacter bot2;
@@ -37,7 +37,7 @@ namespace Poker
         private IDealer dealer;
 
 
-        public Form1()
+        public TexasPoker()
         {
             InitializeComponent();
             InitializeGameObjects();

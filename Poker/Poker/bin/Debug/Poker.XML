@@ -292,18 +292,18 @@
             The decision maker is artificial inteligence of the bot
             </summary>
         </member>
-        <member name="F:Poker.Form1.components">
+        <member name="F:Poker.TexasPoker.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:Poker.Form1.Dispose(System.Boolean)">
+        <member name="M:Poker.TexasPoker.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:Poker.Form1.InitializeComponent">
+        <member name="M:Poker.TexasPoker.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
