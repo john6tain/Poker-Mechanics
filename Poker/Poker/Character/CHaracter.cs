@@ -26,14 +26,16 @@ namespace Poker.Character
 
     public abstract class Character : ICharacter
     {
-        public int Chips { get; set; }
-        public string Name { get; set; }
-        public bool HasFolded { get; set; }
-        public bool IsOnTurn { get; set; }
-        public ICombination CardsCombination { get; set; }
-        public IList<ICard> CharacterCardsCollection { get; set; }
-        public Point FirstCardLocation { get; set; }
-        public Point SecondCardLocation { get; set; }
+        public int chips;
+        public string name;
+        public bool hasFolded;
+        public bool isOnTurn;
+        public ICombination cardsCombination;
+        public IList<ICard> characterCardsCollection;
+        public Point firstCardLocation;
+        public Point secondCardLocation;
+
+
 
         private readonly Panel playerPanel = new Panel();
         private readonly Panel firstBotPanel = new Panel();
@@ -44,16 +46,105 @@ namespace Poker.Character
         private readonly List<int> playerChips = new List<int>();
         private readonly List<bool?> characterTurn = new List<bool?>();
 
-
-
-        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower);
-
         public Character(Point firstCardLocation, int cardWidth)
         {
             this.CharacterCardsCollection = new List<ICard>();
             this.FirstCardLocation = firstCardLocation;
             this.SecondCardLocation = GetSecondCardLocation(firstCardLocation, cardWidth);
         }
+
+
+        public int Chips
+        {
+            get { return this.chips; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Chips cannot be negative!"); //TODO: CUSTOM Exception: ChipsOutOfRangeException
+                }
+                if (value > int.MaxValue)
+                {
+                    this.chips = int.MaxValue;
+                }
+                this.chips = value;
+            }
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Character name cannot be null or empty!"); //TODO: CUSTOM Exception:
+                }
+            }
+        }
+
+        public bool HasFolded
+        {
+            get { return this.hasFolded; }
+            set { this.hasFolded = value; }
+        }
+
+        public bool IsOnTurn
+        {
+            get { return this.isOnTurn; }
+            set { this.isOnTurn = value; }
+        }
+
+        public ICombination CardsCombination
+        {
+            get { return this.cardsCombination; }
+            set { this.cardsCombination = value; }
+        }
+
+        public IList<ICard> CharacterCardsCollection
+        {
+            get { return this.characterCardsCollection; }
+            set { this.characterCardsCollection = value; }
+        }
+
+        public Point FirstCardLocation
+        {
+            get { return this.firstCardLocation; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException("First Card Location of Character cannot be null");  //TODO: CUSTOM Exception:
+                }
+                if (value.X < 0 || value.Y < 0)
+                {
+                    throw new ArgumentOutOfRangeException("First Card Coordinates of Character cannot be negative");    //TODO: CUSTOM Exception:
+                }
+                this.firstCardLocation = value;
+            }
+        }
+
+        public Point SecondCardLocation
+        {
+            get { return this.secondCardLocation; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException("Second Card Location of Character cannot be null");  //TODO: CUSTOM Exception:
+                }
+                if (value.X < 0 || value.Y < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Second Card Coordinates of Character cannot be negative");    //TODO: CUSTOM Exception:
+                }
+                this.secondCardLocation = value;
+            }
+        }
+
+
+        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower);
+
+        
 
         
         /// <summary>
