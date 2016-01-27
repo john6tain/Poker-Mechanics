@@ -292,18 +292,18 @@
             The decision maker is artificial inteligence of the bot
             </summary>
         </member>
-        <member name="F:Poker.Form1.components">
+        <member name="F:Poker.GLSTexasPoker.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:Poker.Form1.Dispose(System.Boolean)">
+        <member name="M:Poker.GLSTexasPoker.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:Poker.Form1.InitializeComponent">
+        <member name="M:Poker.GLSTexasPoker.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -313,20 +313,6 @@
             <summary>
             The main entry point for the application.
             </summary>
-        </member>
-        <member name="M:Poker.Table.Dealer.SetupGame(Poker.Interfacees.IDatabase,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ITable,System.Windows.Forms.Control.ControlCollection)">
-            <summary>
-            Deals the shuffled cards to the players and on the table.
-            </summary>
-            <param name="database">The database.</param>
-            <param name="player">The player.</param>
-            <param name="bot1">The first bot.</param>
-            <param name="bot2">The second bot.</param>
-            <param name="bot3">The third bot.</param>
-            <param name="bot4">The fourth bot.</param>
-            <param name="bot5">The fifth bot.</param>
-            <param name="table">The table.</param>
-            <param name="controls">The array of objects to be drawn.</param>
         </member>
         <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfClubs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>

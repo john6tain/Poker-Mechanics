@@ -13,16 +13,13 @@ namespace Poker
         {
             try
             {
-              
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());
+                Application.Run(new GLSTexasPoker());
             }
             catch (Exception e)
             {
-                string message = e.Message.ToString();
-
-                MessageBox.Show(message,  "There was an error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //TODO: figure out this one ...
             }
         }
     }

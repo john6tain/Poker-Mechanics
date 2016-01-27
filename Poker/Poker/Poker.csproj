@@ -54,11 +54,11 @@
     <Compile Include="Resources\Enumerations\CardRank.cs" />
     <Compile Include="Resources\Enumerations\CardSuit.cs" />
     <Compile Include="Resources\Enumerations\CombinationType.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="GLSTexasPoker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GLSTexasPoker.Designer.cs">
+      <DependentUpon>GLSTexasPoker.cs</DependentUpon>
     </Compile>
     <Compile Include="GameConstants\Constants.cs" />
     <Compile Include="Interfaces\ICard.cs" />
@@ -75,8 +75,8 @@
     <Compile Include="Table\Dealer.cs" />
     <Compile Include="Table\Table.cs" />
     <Compile Include="Type.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="GLSTexasPoker.resx">
+      <DependentUpon>GLSTexasPoker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
