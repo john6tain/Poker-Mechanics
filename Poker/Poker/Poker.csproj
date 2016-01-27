@@ -51,6 +51,7 @@
     <Compile Include="Character\Bot.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Interfaces\IDealer.cs" />
     <Compile Include="Resources\Enumerations\CardRank.cs" />
     <Compile Include="Resources\Enumerations\CardSuit.cs" />
     <Compile Include="Resources\Enumerations\CombinationType.cs" />

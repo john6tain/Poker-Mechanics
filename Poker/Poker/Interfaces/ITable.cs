@@ -7,7 +7,7 @@ using Poker.Interfacees;
 
 namespace Poker.Interfaces
 {
-    interface ITable
+    public interface ITable
     {
         IList<ICard> TableCardsCollection { get; set; }
         int Pot { get; set; }

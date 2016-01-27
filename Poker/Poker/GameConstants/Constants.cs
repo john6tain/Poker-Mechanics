@@ -12,5 +12,7 @@
         public const double BigFlushBehaviourPower = 5.5;
         public const double LittleFlushBehaviourPower = 5;
         public const double StraightBehaviourPower = 4;
+        public const int CardHeight = 130;
+        public const int CardWidth = 80;
     }
 }
