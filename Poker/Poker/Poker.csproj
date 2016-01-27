@@ -57,9 +57,9 @@
     <Compile Include="Character\Bot.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="Engine\Engine.cs" />
-    <Compile Include="Enumerations\CardRank.cs" />
-    <Compile Include="Enumerations\CardSuit.cs" />
-    <Compile Include="Enumerations\CombinationType.cs" />
+    <Compile Include="Resources\Enumerations\CardRank.cs" />
+    <Compile Include="Resources\Enumerations\CardSuit.cs" />
+    <Compile Include="Resources\Enumerations\CombinationType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
