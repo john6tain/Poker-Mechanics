@@ -37,6 +37,8 @@ namespace Poker.Character
         private readonly Panel fifthBotPanel = new Panel();
         private readonly List<int> playerChips = new List<int>();
         private readonly List<bool?> characterTurn = new List<bool?>();
+
+        
         /// <summary>
         /// All characters can call an AllIn to play all the money they got
         /// </summary>
