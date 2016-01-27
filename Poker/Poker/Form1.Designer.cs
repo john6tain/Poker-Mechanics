@@ -31,6 +31,7 @@ namespace Poker
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.foldButton = new System.Windows.Forms.Button();
             this.checkButton = new System.Windows.Forms.Button();
@@ -58,11 +59,13 @@ namespace Poker
             this.secondBotStatus = new System.Windows.Forms.Label();
             this.potLabel = new System.Windows.Forms.Label();
             this.tbRaise = new System.Windows.Forms.TextBox();
+            this.RotateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // foldButton
             // 
             this.foldButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.foldButton.Enabled = false;
             this.foldButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.foldButton.Location = new System.Drawing.Point(317, 612);
             this.foldButton.Name = "foldButton";
@@ -75,6 +78,7 @@ namespace Poker
             // checkButton
             // 
             this.checkButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkButton.Enabled = false;
             this.checkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkButton.Location = new System.Drawing.Point(456, 612);
             this.checkButton.Name = "checkButton";
@@ -87,6 +91,7 @@ namespace Poker
             // callButton
             // 
             this.callButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.callButton.Enabled = false;
             this.callButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.callButton.Location = new System.Drawing.Point(587, 613);
             this.callButton.Name = "callButton";
@@ -99,6 +104,7 @@ namespace Poker
             // raiseButton
             // 
             this.raiseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.raiseButton.Enabled = false;
             this.raiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.raiseButton.Location = new System.Drawing.Point(737, 613);
             this.raiseButton.Name = "raiseButton";
@@ -310,6 +316,10 @@ namespace Poker
             this.tbRaise.TabIndex = 0;
             this.tbRaise.TextChanged += new System.EventHandler(this.tbRaise_TextChanged);
             // 
+            // RotateTimer
+            // 
+            this.RotateTimer.Tick += new System.EventHandler(this.RotateTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,7 +327,7 @@ namespace Poker
             this.AutoSize = true;
             this.BackgroundImage = global::Poker.Properties.Resources.poker_table___Copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1348, 687);
+            this.ClientSize = new System.Drawing.Size(1284, 688);
             this.Controls.Add(this.tbRaise);
             this.Controls.Add(this.potLabel);
             this.Controls.Add(this.secondBotStatus);
@@ -348,7 +358,7 @@ namespace Poker
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1366, 768);
-            this.MinimumSize = new System.Drawing.Size(1364, 726);
+            this.MinimumSize = new System.Drawing.Size(1278, 726);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -388,9 +398,7 @@ namespace Poker
         private Label secondBotStatus;
         private Label potLabel;
         private TextBox tbRaise;
-
-
-
+        private Timer RotateTimer;
     }
 }
 

@@ -10,6 +10,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System.Drawing;
+
 namespace Poker.Character
 {
     using Interfaces;
@@ -26,8 +29,11 @@ namespace Poker.Character
         public int Chips { get; set; }
         public string Name { get; set; }
         public bool HasFolded { get; set; }
+        public bool IsOnTurn { get; set; }
         public ICombination CardsCombination { get; set; }
         public IList<ICard> CharacterCardsCollection { get; set; }
+        public Point FirstCardLocation { get; set; }
+        public Point SecondCardLocation { get; set; }
 
         private readonly Panel playerPanel = new Panel();
         private readonly Panel firstBotPanel = new Panel();
@@ -37,6 +43,17 @@ namespace Poker.Character
         private readonly Panel fifthBotPanel = new Panel();
         private readonly List<int> playerChips = new List<int>();
         private readonly List<bool?> characterTurn = new List<bool?>();
+
+
+
+        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower);
+
+        public Character(Point firstCardLocation, int cardWidth)
+        {
+            this.CharacterCardsCollection = new List<ICard>();
+            this.FirstCardLocation = firstCardLocation;
+            this.SecondCardLocation = GetSecondCardLocation(firstCardLocation, cardWidth);
+        }
 
         
         /// <summary>
@@ -237,6 +254,16 @@ namespace Poker.Character
             call = Convert.ToInt32(raise);
             isRaising = true;
             isBotsTurn = false;
+        }
+
+        public Point GetSecondCardLocation(Point firstCardLocation, int cardWidth)
+        {
+            Point secondCardLocation = new Point();
+
+            secondCardLocation.Y = firstCardLocation.Y;
+            secondCardLocation.X = (firstCardLocation.X + cardWidth);
+
+            return secondCardLocation;
         }
     }
 }
