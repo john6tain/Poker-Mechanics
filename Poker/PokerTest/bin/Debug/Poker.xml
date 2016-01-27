@@ -4,29 +4,7 @@
         <name>Poker</name>
     </assembly>
     <members>
-        <member name="T:Poker.AddChips">
-            <summary>
-            Adding Chips
-            </summary>
-        </member>
-        <member name="F:Poker.AddChips.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Poker.AddChips.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Poker.AddChips.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:Poker.Character.Character.AllIn">
+        <member name="M:Poker.Character.Character.AllIn(System.Windows.Forms.TextBox)">
             <summary>
             All characters can call an AllIn to play all the money they got
             </summary>
@@ -47,7 +25,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Character.Character.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             You call the required amount of chips to continue playing the game
             </summary>
@@ -55,7 +33,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Character.Character.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Raises the bet.
             </summary>
@@ -272,116 +250,7 @@
             <param name="botPower">The bot power.</param>
             <param name="behaviourPower">The behaviour power.</param>
         </member>
-        <member name="M:Poker.Form1.CheckRaise(System.Int32,System.Int32)">
-            <summary>
-            </summary>
-            <param name="currentTurn"></param>
-            <param name="raiseTurn"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Form1.FixCall(System.Windows.Forms.Label,System.Int32@,System.Int32@,System.Int32)">
-            <summary>
-            </summary>
-            <param name="status"></param>
-            <param name="cCall"></param>
-            <param name="cRaise"></param>
-            <param name="options"></param>
-        </member>
-        <member name="M:Poker.Form1.AllIn">
-            <summary>
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Form1.Finish(System.Int32)">
-            <summary>
-            </summary>
-            <param name="n"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Poker.Form1.FixWinners">
-            <summary>
-            </summary>
-        </member>
-        <member name="M:Poker.Form1.AI(System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
-            <summary>
-                x
-            </summary>
-            <param name="firstCall">The first call.</param>
-            <param name="secondCall">The second call.</param>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="name">The name.</param>
-            <param name="botPower">The bot cardsPower.</param>
-            <param name="botCurrent">The bot curentCardsValue.</param>
-        </member>
-        <member name="M:Poker.Form1.HighCard(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
-            <summary>
-            </summary>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot cardsPower.</param>
-        </member>
-        <member name="M:Poker.Form1.PairTable(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
-            <summary>
-            </summary>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot cardsPower.</param>
-        </member>
-        <member name="M:Poker.Form1.PairHand(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
-            <summary>
-                Pairs the hand.
-            </summary>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot cardsPower.</param>
-        </member>
-        <member name="M:Poker.Form1.TwoPairs(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double)">
-            <summary>
-            </summary>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="botPower">The bot cardsPower.</param>
-        </member>
-        <member name="M:Poker.Form1.ThreeOfAKind(System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double)">
-            <summary>
-                Threes the kind of the of a.
-            </summary>
-            <param name="sChips">The s chips.</param>
-            <param name="sTurn">if set to <c>true</c> [s turn].</param>
-            <param name="sFTurn">if set to <c>true</c> [s f turn].</param>
-            <param name="sStatus">The s status.</param>
-            <param name="name">The name.</param>
-            <param name="botPower">The bot cardsPower.</param>
-        </member>
-        <member name="F:Poker.Form1.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Poker.Form1.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Poker.Form1.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:Poker.Interfaces.ICharacter.AllIn">
+        <member name="M:Poker.Interfaces.ICharacter.AllIn(System.Windows.Forms.TextBox)">
             <summary>
             You bet all the money you have.
             </summary>
@@ -402,7 +271,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Interfaces.ICharacter.Call(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Calls the specified chips.
             </summary>
@@ -410,7 +279,7 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label)">
+        <member name="M:Poker.Interfaces.ICharacter.RaiseBet(System.Int32@,System.Boolean@,System.Windows.Forms.Label,System.Windows.Forms.TextBox)">
             <summary>
             Raises the bet.
             </summary>
@@ -421,6 +290,23 @@
         <member name="T:Poker.Interfaces.IDecisionMaker">
             <summary>
             The decision maker is artificial inteligence of the bot
+            </summary>
+        </member>
+        <member name="F:Poker.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Poker.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Poker.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="M:Poker.Program.Main">
