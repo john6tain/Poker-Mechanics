@@ -9,7 +9,7 @@ using Poker.Interfaces;
 
 namespace Poker.Table
 {
-    class Combination : ICombination
+    public class Combination : ICombination
     {
         public Combination(double power, CombinationType type, double behaviourPower, IList<ICard> combinationCardsCollection, IList<ICard> kickersCollection)
         {

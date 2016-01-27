@@ -22,7 +22,7 @@ namespace Poker.Interfaces
         /// You bet all the money you have.
         /// </summary>
         /// <returns></returns>
-        Task AllIn();
+        Task AllIn(TextBox potChips);
 
         /// <summary>
         /// You can exit the game.
@@ -45,7 +45,7 @@ namespace Poker.Interfaces
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        void Call(ref int botChips, ref bool isBotsTurn, Label statusLabel);
+        void Call(ref int botChips, ref bool isBotsTurn, Label statusLabel, TextBox potChips);
 
         /// <summary>
         /// Raises the bet.
@@ -53,6 +53,6 @@ namespace Poker.Interfaces
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel);
+        void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel, TextBox potChips);
     }
 }

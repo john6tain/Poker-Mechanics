@@ -45,21 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddChips.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddChips.Designer.cs">
-      <DependentUpon>AddChips.cs</DependentUpon>
-    </Compile>
     <Compile Include="Character\Character.cs" />
     <Compile Include="Character\DecisionMaker.cs" />
     <Compile Include="Character\Player.cs" />
     <Compile Include="Character\Bot.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="Engine\Engine.cs" />
-    <Compile Include="Enumerations\CardRank.cs" />
-    <Compile Include="Enumerations\CardSuit.cs" />
-    <Compile Include="Enumerations\CombinationType.cs" />
+    <Compile Include="Resources\Enumerations\CardRank.cs" />
+    <Compile Include="Resources\Enumerations\CardSuit.cs" />
+    <Compile Include="Resources\Enumerations\CombinationType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,9 +75,6 @@
     <Compile Include="Table\Dealer.cs" />
     <Compile Include="Table\Table.cs" />
     <Compile Include="Type.cs" />
-    <EmbeddedResource Include="AddChips.resx">
-      <DependentUpon>AddChips.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,9 +108,7 @@
     <None Include="Resources\clover-playing-card-gambling-clubs-suit-deck-1-128.ico" />
     <None Include="Resources\icon.bmp" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\Cards\AceClubs.png" />
     <Content Include="Resources\Cards\AceDiamonds.png" />

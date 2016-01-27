@@ -37,11 +37,13 @@ namespace Poker.Character
         private readonly Panel fifthBotPanel = new Panel();
         private readonly List<int> playerChips = new List<int>();
         private readonly List<bool?> characterTurn = new List<bool?>();
+
+        
         /// <summary>
         /// All characters can call an AllIn to play all the money they got
         /// </summary>
         /// <returns></returns>
-        public async Task AllIn()
+        public async Task AllIn(TextBox potChips)
         {
             bool isWinning = false;
             Label playerStatus = new Label();
@@ -204,7 +206,6 @@ namespace Poker.Character
             isRaising = false;
         }
 
-        private readonly TextBox potChips = null;
         private int call = 500;
         /// <summary>
         /// You call the required amount of chips to continue playing the game
@@ -212,7 +213,7 @@ namespace Poker.Character
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        public void Call(ref int botChips, ref bool isBotsTurn, Label statusLabel)
+        public void Call(ref int botChips, ref bool isBotsTurn, Label statusLabel,TextBox potChips)
         {
             isRaising = false;
             isBotsTurn = false;
@@ -228,7 +229,7 @@ namespace Poker.Character
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        public void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel)
+        public void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel,TextBox potChips)
         {
             botChips -= Convert.ToInt32(raise);
             statusLabel.Text = "Raise " + raise;
