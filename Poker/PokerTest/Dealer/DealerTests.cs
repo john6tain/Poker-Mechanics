@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Poker.Table;
 
 namespace PokerTest.Dealer
 {
@@ -599,9 +600,9 @@ namespace PokerTest.Dealer
 
             Assert.AreEqual(false, result, "Player doesn't register Pair combination");
         }
-
+        
         [TestMethod]
-        public void Test_CheckDeterminWinner_IfTwoPlayersHaveOnePair_ShouldPass()
+        public void Test_ChooseTheWinnerByTheKickers_IfTwoPlayersHaveOnePair_ShouldPass()
         {
             PrivateObject obj = new PrivateObject(typeof(Dealer));
 
@@ -615,23 +616,68 @@ namespace PokerTest.Dealer
             firstPlayerCombinationCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
             firstPlayerKikcersCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
             firstPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
-            firstPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
+            firstPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
 
             IList<ICard> secondPlayerCombinationCardsCollection = new List<ICard>();
             IList<ICard> secondPlayerKikcersCollection = new List<ICard>();
 
-            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.King));
-            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.King));
+            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
             ICharacter firstPlayer = new Bot();
-            firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0, 
+            firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
-            
+
             ICharacter secondPlayer = new Bot();
-            secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0, 
+            secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
+                secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
+
+            gameCharacters.Add(firstPlayer);
+            gameCharacters.Add(secondPlayer);
+
+            ICharacter winner = gameCharacters[0];
+
+            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheKickers",
+                gameCharacters));
+
+            Assert.AreEqual(result, winner);
+        }
+
+        [TestMethod]
+        public void Test_ChooseTheWinnerByTheKickers_IfTwoPlayersHaveOnePair_ShoudFail()
+        {
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            IList<ICharacter> gameCharacters = new List<ICharacter>();
+            int pot = 1000;
+
+            IList<ICard> firstPlayerCombinationCardsCollection = new List<ICard>();
+            IList<ICard> firstPlayerKikcersCollection = new List<ICard>();
+
+            firstPlayerCombinationCardsCollection.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            firstPlayerCombinationCardsCollection.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+            firstPlayerKikcersCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
+            firstPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
+            firstPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Jack));
+
+            IList<ICard> secondPlayerCombinationCardsCollection = new List<ICard>();
+            IList<ICard> secondPlayerKikcersCollection = new List<ICard>();
+
+            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            secondPlayerCombinationCardsCollection.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            secondPlayerKikcersCollection.Add(new Card(CardSuit.Clubs, CardRank.Eight));
+            secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
+            secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
+
+            ICharacter firstPlayer = new Bot();
+            firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
+                firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
+
+            ICharacter secondPlayer = new Bot();
+            secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
             gameCharacters.Add(secondPlayer);
@@ -639,13 +685,95 @@ namespace PokerTest.Dealer
 
             ICharacter winner = gameCharacters[0];
 
-            ICharacter result = (ICharacter) (obj.Invoke("DetermineTheWinner",
-                gameCharacters, pot));
+            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheKickers",
+                gameCharacters));
 
-            Assert.AreEqual(result, winner);
+            Assert.AreNotEqual(result, winner);
         }
 
-        
+        #region Winning Scenario
 
+        public void Test_WinnerIfOnePlayerHasRoyalStraightFlush()
+        {
+            IDealer dealer = new Dealer();
+            IList<ICharacter> playersOnTable = new List<ICharacter>();
+
+            ICharacter firstPlayer = new Bot();
+            IList<ICard> firstPlayerCards = new List<ICard>();
+            IList<ICard> firstPlayerTableCards = new List<ICard>();
+
+            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.King));
+
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Jack));
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            ICharacter secondPlayer = new Bot();
+            IList<ICard> secondPlayerCards = new List<ICard>();
+            IList<ICard> secondPlayerTableCards = new List<ICard>();
+
+            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
+            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            secondPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            ICharacter thirdPlayer = new Bot();
+            IList<ICard> thirdPlayerCards = new List<ICard>();
+            IList<ICard> thirdPlayerTableCards = new List<ICard>();
+
+            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
+            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
+
+            thirdPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.King));
+            thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+
+            ICharacter fourthPlayer = new Bot();
+            IList<ICard> fourthPlayerCards = new List<ICard>();
+            IList<ICard> fourthPlayerTableCards = new List<ICard>();
+
+            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
+
+            fourthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.King));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+
+            ICharacter fifthPlayer = new Bot();
+            IList<ICard> fifthPlayerCards = new List<ICard>();
+            IList<ICard> fifthPlayerTableCards = new List<ICard>();
+
+            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
+            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Eight));
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Nine));
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
+
+            dealer.SetGameRules(firstPlayerCards, firstPlayerTableCards, firstPlayer);
+            dealer.SetGameRules(secondPlayerCards, secondPlayerTableCards, secondPlayer);
+            dealer.SetGameRules(thirdPlayerCards, thirdPlayerTableCards, thirdPlayer);
+            dealer.SetGameRules(fourthPlayerCards, fourthPlayerTableCards, fourthPlayer);
+            dealer.SetGameRules(fifthPlayerCards, fifthPlayerTableCards, fifthPlayer);
+
+            playersOnTable.Add(fifthPlayer);
+            playersOnTable.Add(secondPlayer);
+            playersOnTable.Add(thirdPlayer);
+            playersOnTable.Add(fourthPlayer);
+            playersOnTable.Add(fifthPlayer);
+
+            int pot = 1000;
+            ICharacter winner = playersOnTable[0];
+            PrivateObject obj = new PrivateObject(typeof(Dealer));
+
+            ICharacter result = (Bot)(obj.Invoke("DetermineTheWinner",
+                playersOnTable, pot));
+
+            Assert.AreNotEqual(result, winner);
+        }
+
+        #endregion
     }
 }
