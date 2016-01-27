@@ -139,10 +139,7 @@ namespace Poker.Table
         private static Label secondBotStatus;
         private static int Chips = 10000;
 
-        //public Task SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
 
         public async Task SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls)
         {
@@ -608,49 +605,22 @@ namespace Poker.Table
 
             player.CharacterCardsCollection.Clear();
 
-            int playerX = 580;
-            int playerY = 480;
+            
 
-            GiveCard(player, 0, shuffledDeck, 0);
+            GiveCard(player, 0, shuffledDeck, 0, Controls);
+            GiveCard(player, 1, shuffledDeck, 1, Controls);
 
-            player.CharacterCardsCollection.Add(shuffledDeck[0]);
-            player.CharacterCardsCollection[0].CardPictureBox.Height = Constants.CardHeight;
-            player.CharacterCardsCollection[0].CardPictureBox.Width = Constants.CardWidth;
-            player.CharacterCardsCollection[0].CardPictureBox.Image = player.CharacterCardsCollection[0].FrontImage;
-            player.CharacterCardsCollection[0].CardPictureBox.Location = new Point(playerX, playerY);
-            Controls.Add(player.CharacterCardsCollection[0].CardPictureBox);
-
-            player.CharacterCardsCollection.Add(shuffledDeck[1]);
-            player.CharacterCardsCollection[1].CardPictureBox.Height = Constants.CardHeight;
-            player.CharacterCardsCollection[1].CardPictureBox.Width = Constants.CardWidth;
-            player.CharacterCardsCollection[1].CardPictureBox.Image = player.CharacterCardsCollection[1].FrontImage;
-            player.CharacterCardsCollection[1].CardPictureBox.Location = new Point(playerX + Constants.CardWidth, 480);
-            Controls.Add(player.CharacterCardsCollection[1].CardPictureBox);
 
             #endregion
 
             #region Bots
 
-            int bot1X = 15;
-            int bot1Y = 420;
 
-            int bot2X = 75;
-            int bot2Y = 65;
-
-            int bot3X = 590;
-            int bot3Y = 25;
-
-            int bot4X = 1115;
-            int bot4Y = 65;
-
-            int bot5X = 1160;
-            int bot5Y = 420;
-
-            DealCardsToBot(bot1, 2, 3, bot1X, bot1Y, shuffledDeck, Controls);
-            DealCardsToBot(bot2, 4, 5, bot2X, bot2Y, shuffledDeck, Controls);
-            DealCardsToBot(bot3, 6, 7, bot3X, bot3Y, shuffledDeck, Controls);
-            DealCardsToBot(bot4, 8, 9, bot4X, bot4Y, shuffledDeck, Controls);
-            DealCardsToBot(bot5, 10, 11, bot5X, bot5Y, shuffledDeck, Controls);
+            DealCardsToBot(bot1, 2, 3, shuffledDeck, Controls);
+            DealCardsToBot(bot2, 4, 5, shuffledDeck, Controls);
+            DealCardsToBot(bot3, 6, 7, shuffledDeck, Controls);
+            DealCardsToBot(bot4, 8, 9, shuffledDeck, Controls);
+            DealCardsToBot(bot5, 10, 11, shuffledDeck, Controls);
 
             #endregion
 
@@ -661,15 +631,42 @@ namespace Poker.Table
             #endregion
         }
 
-        private void GiveCard(ICharacter character, int handCardIndex, IList<ICard> shuffledDeck, int v2)
+        private void GiveCard(ICharacter character, int handCardIndex, IList<ICard> shuffledDeck, int deckCardIndex, Control.ControlCollection controls)
         {
-            /////////////// TODO: this...
+            character.CharacterCardsCollection.Add(shuffledDeck[deckCardIndex]);
+
+            character.CharacterCardsCollection[handCardIndex].CardPictureBox.Height = Constants.CardHeight;
+            character.CharacterCardsCollection[handCardIndex].CardPictureBox.Width = Constants.CardWidth;
+
+
+            if (character.CharacterCardsCollection[handCardIndex].IsVisible)
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image =  character.CharacterCardsCollection[0].FrontImage;
+            }
+            else
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image = character.CharacterCardsCollection[0].BackImage;
+            }
+        
+
+            if (handCardIndex == 0)
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.FirstCardLocation;
+            }
+            else
+            {
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.SecondCardLocation;
+            }
+            
+
+            controls.Add(character.CharacterCardsCollection[handCardIndex].CardPictureBox);
+
         }
 
         private void DealCardsToTable(ITable table, int startingDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
         {
-            int currentTableX = 410;
-            int currentTableY = 265;
+            int currentTableX = Constants.TableCoordinateX;
+            int currentTableY = Constants.TableCoordinateY;
 
             int distanceBetweenCards = Constants.CardWidth + (Constants.CardWidth / 2);
 
@@ -698,44 +695,26 @@ namespace Poker.Table
             }
         }
 
-        private void DealCardsToBot(ICharacter bot, int firstDeckCardIndex, int secondDeckCardIndex, int botX, int botY, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
-        {
-            int cardHeight = 130;
-            int cardWidth = 80;
-
+        private void DealCardsToBot(ICharacter bot, int firstDeckCardIndex, int secondDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection Controls)
+        {      
             bot.CharacterCardsCollection.Clear();
-            bot.CharacterCardsCollection.Add(shuffledDeck[firstDeckCardIndex]);
-            bot.CharacterCardsCollection.Add(shuffledDeck[secondDeckCardIndex]);
+            GiveCard(bot, 0, shuffledDeck, firstDeckCardIndex, Controls);
+            GiveCard(bot, 1, shuffledDeck, secondDeckCardIndex, Controls);
+            #region backup Code
+            //bot.CharacterCardsCollection.Add(shuffledDeck[firstDeckCardIndex]);
+            //bot.CharacterCardsCollection[0].CardPictureBox.Height = Constants.CardHeight;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Width = Constants.CardWidth;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
+            //bot.CharacterCardsCollection[0].CardPictureBox.Location = bot.FirstCardLocation;
+            //Controls.Add(bot.CharacterCardsCollection[0].CardPictureBox
 
-            bot.CharacterCardsCollection[0].CardPictureBox.Height = cardHeight;
-            bot.CharacterCardsCollection[0].CardPictureBox.Width = cardWidth;
-            bot.CharacterCardsCollection[1].CardPictureBox.Height = cardHeight;
-            bot.CharacterCardsCollection[1].CardPictureBox.Width = cardWidth;
-
-
-
-            if (bot.CharacterCardsCollection[0].IsVisible)
-            {
-                bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].FrontImage;
-            }
-            else
-            {
-                bot.CharacterCardsCollection[0].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
-            }
-            if (bot.CharacterCardsCollection[1].IsVisible)
-            {
-                bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].FrontImage;
-            }
-            else
-            {
-                bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
-            }
-
-            bot.CharacterCardsCollection[0].CardPictureBox.Location = new Point(botX, botY);
-            bot.CharacterCardsCollection[1].CardPictureBox.Location = new Point(botX + cardWidth, botY);
-
-            Controls.Add(bot.CharacterCardsCollection[0].CardPictureBox);
-            Controls.Add(bot.CharacterCardsCollection[1].CardPictureBox);
+            //bot.CharacterCardsCollection.Add(shuffledDeck[secondDeckCardIndex]);
+            //bot.CharacterCardsCollection[1].CardPictureBox.Height = Constants.CardHeight;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Width = Constants.CardWidth;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Image = bot.CharacterCardsCollection[0].BackImage;
+            //bot.CharacterCardsCollection[1].CardPictureBox.Location = bot.SecondCardLocation;
+            //Controls.Add(bot.CharacterCardsCollection[1].CardPictureBox);
+            #endregion
         }
 
         private void ShuffleCards(IList<ICard> deckToBeShuffled)

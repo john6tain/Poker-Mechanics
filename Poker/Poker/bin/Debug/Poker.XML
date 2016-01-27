@@ -229,7 +229,7 @@
              <param name="behaviourFactor">The behaviour factor.</param>
              <param name="r">The r.</param>
         </member>
-        <member name="M:Poker.Character.Bot.#ctor">
+        <member name="M:Poker.Character.Bot.#ctor(System.Drawing.Point,System.Int32)">
             <summary>
             Initializes a new instance of DecisionMaker class.
             </summary>

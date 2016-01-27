@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Poker.Interfaces
@@ -18,6 +19,9 @@ namespace Poker.Interfaces
 
         IList<ICard> CharacterCardsCollection { get; set; }
 
+        Point FirstCardLocation { get; set; }
+
+        Point SecondCardLocation { get; set; }
         /// <summary>
         /// You bet all the money you have.
         /// </summary>
@@ -54,5 +58,7 @@ namespace Poker.Interfaces
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
         void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel, TextBox potChips);
+
+        Point GetSecondCardLocation(Point firstCardLocation, int cardWidth);
     }
 }
