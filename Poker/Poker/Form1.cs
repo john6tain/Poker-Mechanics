@@ -39,26 +39,126 @@ namespace Poker
 
         public Form1()
         {
-            InitializeComponent();
-            InitializeGameObjects();
-      
-            Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
+
+            try
+            {
+                InitializeComponent();
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Failed to initialize components!");  // Custom Exception: InitializeComponentErrorException
+            }
+
+            try
+            {
+                InitializeGameObjects();
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Failed to initialize game objects!"); // Custom Exception: InitializeGameObjectsErrorException
+            }
+
+
+            try
+            {
+                Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
+            }
+            catch (ArgumentException e)     // should catch a custom exception
+            {
+                throw new ArgumentException(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Failed to setup game!"); // Custom Exception: InitializeGameObjectsErrorException
+            }
 
             //RotateTimer.Start();
         }
 
         private void InitializeGameObjects()
         {
-            this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX,Constants.FirstBotCoordinateY), Constants.CardWidth);
-            this.Bot2 = new Bot(new Point(Constants.SecondBotCoordinateX, Constants.SecondBotCoordinateY), Constants.CardWidth);
-            this.Bot3 = new Bot(new Point(Constants.ThirdBotCoordinateX, Constants.ThirdBotCoordinateY), Constants.CardWidth);
-            this.Bot4 = new Bot(new Point(Constants.FourthBotCoordinateX, Constants.FourthBotCoordinateY), Constants.CardWidth);
-            this.Bot5 = new Bot(new Point(Constants.FifthBotCoordinateX, Constants.FifthBotCoordinateY), Constants.CardWidth);
-            this.Player = new Player(new Point(Constants.PlayerCoordinateX, Constants.PlayerCoordinateY), Constants.CardWidth);
-            this.GameDatabase = new DataBase.DataBase();
-            this.DecisionMaker = new DecisionMaker();
-            this.Table = new Table.Table();
-            this.Dealer = new Dealer();
+            #region Initialize Characters
+            try
+            {
+                this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX, Constants.FirstBotCoordinateY),
+                    Constants.CardWidth);
+                this.Bot2 = new Bot(new Point(Constants.SecondBotCoordinateX, Constants.SecondBotCoordinateY),
+                    Constants.CardWidth);
+                this.Bot3 = new Bot(new Point(Constants.ThirdBotCoordinateX, Constants.ThirdBotCoordinateY),
+                    Constants.CardWidth);
+                this.Bot4 = new Bot(new Point(Constants.FourthBotCoordinateX, Constants.FourthBotCoordinateY),
+                    Constants.CardWidth);
+                this.Bot5 = new Bot(new Point(Constants.FifthBotCoordinateX, Constants.FifthBotCoordinateY),
+                    Constants.CardWidth);
+                
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Failed to Initialize Bot!"); // Custom Exception: FailedBotInitializeException
+            }
+            try
+            {
+                this.Player = new Player(new Point(Constants.PlayerCoordinateX, Constants.PlayerCoordinateY),
+                    Constants.CardWidth);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Failed to Initialize Player!"); // Custom Exception: FailedPlayerInitializationException
+            }
+            #endregion
+            #region Initialize GameDatabase
+            try
+            {
+                this.GameDatabase = new DataBase.DataBase();
+            }
+            catch (Exception)
+            {
+                
+                throw new ArgumentException("Failed to initialize Game Database!"); // Custom Exception: FailedDataBaseInitializationException
+            }
+            #endregion
+            #region Initialize DecisionMaker
+            try
+            {
+                this.DecisionMaker = new DecisionMaker();
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Failed to initialize DecisionMaker!"); // Custom Exception: FailedDecisionMakerInitializationException
+            }
+            #endregion
+            #region Initialize Table
+            try
+            {
+                throw new Exception();
+                this.Table = new Table.Table();
+            }
+            catch (Exception)
+            {
+                
+                throw new ArgumentException("Failed to initialize Table!"); // Custom Exception: FailedTableInitializationException
+            }
+            #endregion
+            #region Initialize Dealer
+            try
+            {
+                this.Dealer = new Dealer();
+            }
+            catch (Exception)
+            {  
+                throw new ArgumentException("Failed to initialize Dealer!");    // Custom Exception: FailedDealerInitializationException
+            }
+            #endregion
         }
 
         public ICharacter Bot1 { get; set; }
