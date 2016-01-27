@@ -57,7 +57,6 @@ C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
-C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
@@ -89,3 +88,4 @@ C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker-Mechanics\Poker\Poker\obj
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources

@@ -131,6 +131,7 @@ namespace Poker
             this.tableChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableChips.Location = new System.Drawing.Point(878, 661);
             this.tableChips.Name = "tableChips";
+            this.tableChips.ReadOnly = true;
             this.tableChips.Size = new System.Drawing.Size(163, 23);
             this.tableChips.TabIndex = 6;
             this.tableChips.Text = "Chips : 0";
@@ -158,8 +159,9 @@ namespace Poker
             // 
             this.tableBot5Chips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableBot5Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tableBot5Chips.Location = new System.Drawing.Point(1226, 640);
+            this.tableBot5Chips.Location = new System.Drawing.Point(1185, 620);
             this.tableBot5Chips.Name = "tableBot5Chips";
+            this.tableBot5Chips.ReadOnly = true;
             this.tableBot5Chips.Size = new System.Drawing.Size(152, 23);
             this.tableBot5Chips.TabIndex = 9;
             this.tableBot5Chips.Text = "Chips : 0";
@@ -170,7 +172,8 @@ namespace Poker
             this.tableBot4Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableBot4Chips.Location = new System.Drawing.Point(1222, 9);
             this.tableBot4Chips.Name = "tableBot4Chips";
-            this.tableBot4Chips.Size = new System.Drawing.Size(116, 23);
+            this.tableBot4Chips.ReadOnly = true;
+            this.tableBot4Chips.Size = new System.Drawing.Size(104, 23);
             this.tableBot4Chips.TabIndex = 10;
             this.tableBot4Chips.Text = "Chips : 0";
             // 
@@ -180,6 +183,7 @@ namespace Poker
             this.tableBot3Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableBot3Chips.Location = new System.Drawing.Point(784, 9);
             this.tableBot3Chips.Name = "tableBot3Chips";
+            this.tableBot3Chips.ReadOnly = true;
             this.tableBot3Chips.Size = new System.Drawing.Size(125, 23);
             this.tableBot3Chips.TabIndex = 11;
             this.tableBot3Chips.Text = "Chips : 0";
@@ -189,6 +193,7 @@ namespace Poker
             this.tableBot2Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableBot2Chips.Location = new System.Drawing.Point(18, 9);
             this.tableBot2Chips.Name = "tableBot2Chips";
+            this.tableBot2Chips.ReadOnly = true;
             this.tableBot2Chips.Size = new System.Drawing.Size(133, 23);
             this.tableBot2Chips.TabIndex = 12;
             this.tableBot2Chips.Text = "Chips : 0";
@@ -200,6 +205,7 @@ namespace Poker
             this.tableBot1Chips.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableBot1Chips.Location = new System.Drawing.Point(19, 620);
             this.tableBot1Chips.Name = "tableBot1Chips";
+            this.tableBot1Chips.ReadOnly = true;
             this.tableBot1Chips.Size = new System.Drawing.Size(142, 23);
             this.tableBot1Chips.TabIndex = 13;
             this.tableBot1Chips.Text = "Chips : 0";
@@ -254,7 +260,7 @@ namespace Poker
             // fifthBotStatus
             // 
             this.fifthBotStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fifthBotStatus.Location = new System.Drawing.Point(1226, 666);
+            this.fifthBotStatus.Location = new System.Drawing.Point(1185, 652);
             this.fifthBotStatus.Name = "fifthBotStatus";
             this.fifthBotStatus.Size = new System.Drawing.Size(152, 32);
             this.fifthBotStatus.TabIndex = 26;
