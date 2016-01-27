@@ -314,6 +314,20 @@
             The main entry point for the application.
             </summary>
         </member>
+        <member name="M:Poker.Table.Dealer.SetupGame(Poker.Interfacees.IDatabase,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ITable,System.Windows.Forms.Control.ControlCollection)">
+            <summary>
+            Deals the shuffled cards to the players and on the table.
+            </summary>
+            <param name="database">The database.</param>
+            <param name="player">The player.</param>
+            <param name="bot1">The first bot.</param>
+            <param name="bot2">The second bot.</param>
+            <param name="bot3">The third bot.</param>
+            <param name="bot4">The fourth bot.</param>
+            <param name="bot5">The fifth bot.</param>
+            <param name="table">The table.</param>
+            <param name="controls">The array of objects to be drawn.</param>
+        </member>
         <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfClubs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             This method determins if straight flush of clubs combination is available 
