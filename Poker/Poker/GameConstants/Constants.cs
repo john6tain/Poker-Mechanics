@@ -31,8 +31,8 @@ namespace Poker.GameConstants
         public const int FourthBotCoordinateY = 65;
         public const int FifthBotCoordinateX = 1160;
         public const int FifthBotCoordinateY = 420;
-        public const int TableCoordinateX = 410;
-        public const int TableCoordinateY = 265;
+        public const int TableCoordinateX = 410; //410
+        public const int TableCoordinateY = 265; //265
 
 
         

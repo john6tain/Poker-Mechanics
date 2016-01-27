@@ -12,6 +12,6 @@ namespace Poker.Interfaces
     {
         void SetGameRules(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character);
 
-        Task SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls);
+        void SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection Controls);
     }
 }
