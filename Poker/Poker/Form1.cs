@@ -139,8 +139,7 @@ namespace Poker
             #endregion
             #region Initialize Table
             try
-            {
-                throw new Exception();
+            {                 
                 this.Table = new Table.Table();
             }
             catch (Exception)
