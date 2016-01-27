@@ -14,11 +14,15 @@ namespace PokerTest.WinningScenarioTests
     public class WinningTests
     {
         private IList<ICard> firstPlayerCards;
+        private IList<ICard> firstPlayerTableCards;
         private IList<ICard> secondPlayerCards;
+        private IList<ICard> secondPlayerTableCards;
         private IList<ICard> thirdPlayerCards;
+        private IList<ICard> thirdPlayerTableCards;
         private IList<ICard> fourthPlayerCards;
+        private IList<ICard> fourthPlayerTableCards;
         private IList<ICard> fifthPlayerCards;
-        private IList<ICard> tableCards;
+        private IList<ICard> fifthPlayerTableCards;
 
 
         private ICharacter firstPlayer;
@@ -41,124 +45,24 @@ namespace PokerTest.WinningScenarioTests
             this.firstPlayer = new Bot(firstCardLocation, cardWidth);
             this.firstPlayer.Name = "Bot1";
             this.firstPlayerCards = new List<ICard>();
+            this.firstPlayerTableCards = new List<ICard>();
             this.secondPlayer = new Bot(secondCardLocation, cardWidth);
             this.secondPlayer.Name = "Bot2";
             this.secondPlayerCards = new List<ICard>();
+            this.secondPlayerTableCards = new List<ICard>();
             this.thirdPlayer = new Bot(thirdCardLocation, cardWidth);
             this.thirdPlayer.Name = "Bot3";
             this.thirdPlayerCards = new List<ICard>();
+            this.thirdPlayerTableCards = new List<ICard>();
             this.fourthPlayer = new Bot(fourthCardLocation, cardWidth);
             this.fourthPlayer.Name = "Bot4";
             this.fourthPlayerCards = new List<ICard>();
+            this.fourthPlayerTableCards = new List<ICard>();
             this.fifthPlayer = new Bot(fifthCardLocation, cardWidth);
             this.fifthPlayer.Name = "Bot5";
             this.fifthPlayerCards = new List<ICard>();
-            this.tableCards = new List<ICard>();
+            this.fifthPlayerTableCards = new List<ICard>();
 
-        }
-
-        [TestMethod]
-        public void Test_DetermineWinnerByHightCard_TwoPlayersHasThreeOfAKind_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Five));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_DetermineWinnerStrongestFull_TwoPlayersHasFullHouse_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Queen));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
         }
 
         [TestMethod]
@@ -167,622 +71,76 @@ namespace PokerTest.WinningScenarioTests
             IDealer dealer = new Poker.Table.Dealer();
             IList<ICharacter> playersOnTable = new List<ICharacter>();
 
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Jack));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
             firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
             firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.King));
 
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Jack));
+            firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+            firstPlayerTableCards[0].IsVisible = true;
+            firstPlayerTableCards[1].IsVisible = true;
+            firstPlayerTableCards[2].IsVisible = true;
+
             secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
             secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
+
+            secondPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
+            secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
+            secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+            secondPlayerTableCards[0].IsVisible = true;
+            secondPlayerTableCards[1].IsVisible = true;
+            secondPlayerTableCards[2].IsVisible = true;
 
             thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
             thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
 
+            thirdPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.King));
+            thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            thirdPlayerTableCards[0].IsVisible = true;
+            thirdPlayerTableCards[1].IsVisible = true;
+            thirdPlayerTableCards[2].IsVisible = true;
+
             fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
+
+            fourthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.King));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
+            fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
+            fourthPlayerTableCards[0].IsVisible = true;
+            fourthPlayerTableCards[1].IsVisible = true;
+            fourthPlayerTableCards[2].IsVisible = true;
 
             fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
             fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
 
-            
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Eight));
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Nine));
+            fifthPlayerTableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
+            fifthPlayerTableCards[0].IsVisible = true;
+            fifthPlayerTableCards[1].IsVisible = true;
+            fifthPlayerTableCards[2].IsVisible = true;
 
-            playersOnTable.Add(firstPlayer);
+            dealer.SetGameRules(firstPlayerCards, firstPlayerTableCards, firstPlayer);
+            dealer.SetGameRules(secondPlayerCards, secondPlayerTableCards, secondPlayer);
+            dealer.SetGameRules(thirdPlayerCards, thirdPlayerTableCards, thirdPlayer);
+            dealer.SetGameRules(fourthPlayerCards, fourthPlayerTableCards, fourthPlayer);
+            dealer.SetGameRules(fifthPlayerCards, fifthPlayerTableCards, fifthPlayer);
+
+            playersOnTable.Add(fifthPlayer);
             playersOnTable.Add(secondPlayer);
             playersOnTable.Add(thirdPlayer);
             playersOnTable.Add(fourthPlayer);
             playersOnTable.Add(fifthPlayer);
 
             int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
+            string result = playersOnTable[0].Name;
             PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
 
-            string winner = (string) (obj.Invoke("DetermineTheWinner",
+            ICharacter winner = (Bot)(obj.Invoke("DetermineTheWinner",
                 playersOnTable, pot));
 
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasFullHouse_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Queen));
-            firstPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ten));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasRoyalStraightFlush_ShouldFail()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Jack));
-            tableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.King));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Seven));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[1].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreNotEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasStraightFlush_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Three));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-            
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasFlush_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasFourOfAKind_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasThreeOfAKind_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasTwoPairs_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Two));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasOnePair_ShouldPass()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Five));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Three));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[0].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasStraightFlush_ShouldFail()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Three));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[1].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreNotEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasFlush_ShouldFail()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Two));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Five));
-            firstPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Four));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[1].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreNotEqual(result, winner);
-        }
-
-        [TestMethod]
-        public void Test_WinnerIfOnePlayerHasFourOfAKind_ShouldFail()
-        {
-            IDealer dealer = new Poker.Table.Dealer();
-            IList<ICharacter> playersOnTable = new List<ICharacter>();
-
-            tableCards.Add(new Card(CardSuit.Clubs, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ace));
-            tableCards.Add(new Card(CardSuit.Hearts, CardRank.Ten));
-
-            tableCards[0].IsVisible = true;
-            tableCards[1].IsVisible = true;
-            tableCards[2].IsVisible = true;
-
-            firstPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-            firstPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-
-            secondPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.Three));
-            secondPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.Ace));
-
-            thirdPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            thirdPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fourthPlayerCards.Add(new Card(CardSuit.Clubs, CardRank.King));
-            fourthPlayerCards.Add(new Card(CardSuit.Diamonds, CardRank.King));
-
-            fifthPlayerCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
-            fifthPlayerCards.Add(new Card(CardSuit.Hearts, CardRank.Six));
-
-
-            dealer.SetGameRules(firstPlayerCards, tableCards, firstPlayer);
-            dealer.SetGameRules(secondPlayerCards, tableCards, secondPlayer);
-            dealer.SetGameRules(thirdPlayerCards, tableCards, thirdPlayer);
-            dealer.SetGameRules(fourthPlayerCards, tableCards, fourthPlayer);
-            dealer.SetGameRules(fifthPlayerCards, tableCards, fifthPlayer);
-
-            playersOnTable.Add(firstPlayer);
-            playersOnTable.Add(secondPlayer);
-            playersOnTable.Add(thirdPlayer);
-            playersOnTable.Add(fourthPlayer);
-            playersOnTable.Add(fifthPlayer);
-
-            int pot = 1000;
-            string result = playersOnTable[1].Name + " " + playersOnTable[0].CardsCombination.Type;
-            PrivateObject obj = new PrivateObject(typeof(Poker.Table.Dealer));
-
-            string winner = (string)(obj.Invoke("DetermineTheWinner",
-                playersOnTable, pot));
-
-            Assert.AreNotEqual(result, winner);
+            Assert.AreEqual(winner.Name, result);
         }
     }
 }
