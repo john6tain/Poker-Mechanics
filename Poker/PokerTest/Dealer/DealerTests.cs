@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Linq;
-
-namespace PokerTest.Dealer
+﻿namespace PokerTest.Dealer
 {
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Poker.Character;
     using Poker.Enumerations;
     using Poker.Interfacees;
+    using Poker.Interfaces;
     using Poker.Table;
     using System;
-    using Poker.Character;
-    using Poker.Interfaces;
+    using System.Collections.Generic;
 
     [TestClass]
     public class DealerTests
@@ -627,11 +623,11 @@ namespace PokerTest.Dealer
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
             ICharacter firstPlayer = new Bot();
-            firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0, 
+            firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
-            
+
             ICharacter secondPlayer = new Bot();
-            secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0, 
+            secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
             gameCharacters.Add(secondPlayer);
@@ -639,13 +635,13 @@ namespace PokerTest.Dealer
 
             ICharacter winner = gameCharacters[0];
 
-            ICharacter result = (ICharacter) (obj.Invoke("DetermineTheWinner",
+            ICharacter result = (ICharacter)(obj.Invoke("DetermineTheWinner",
                 gameCharacters, pot));
 
             Assert.AreEqual(result, winner);
         }
 
-        
+
 
     }
 }
