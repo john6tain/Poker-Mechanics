@@ -925,7 +925,7 @@ namespace Poker.Table
             IList<ICard> tableCardsCollection,
             ICharacter character)
         {
-            if (!playerStatus.Contains(new Control("Fold")))
+            if (!character.HasFolded)
             {
                 CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
 
@@ -1752,7 +1752,7 @@ namespace Poker.Table
 
             if (hasOnePair)
             {
-                IList<ICard> nonCombinationCards = charactersCardsCollection.Union(tableCardsCollection).Where(x => !character.CardsCombination.CombinationCardsCollection.Contains(x)).ToList();
+                IList<ICard> nonCombinationCards = charactersCardsCollection.Union(tableCardsCollection).Where(x => !character.CardsCombination.CombinationCardsCollection.Contains(x) && x.IsVisible).ToList();
 
                 IList<ICard> emptyCollection = new List<ICard>();
 
@@ -1818,7 +1818,7 @@ namespace Poker.Table
         /// </summary>
         /// <param name="gameCharacters">All particialnts in the game.</param>
         /// <param name="pot">The pot chips.</param>
-        private string DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
+        public string DetermineTheWinner(IList<ICharacter> gameCharacters, int pot)
         {
             IList<ICharacter> activeParticiapnts = gameCharacters.Where(x => !x.HasFolded).ToList();
 

@@ -27,9 +27,12 @@ namespace Poker.Character
     public abstract class Character : ICharacter
     {
         public int Chips { get; set; }
+        public Label StatusLabel { get; set; }
         public string Name { get; set; }
         public bool HasFolded { get; set; }
         public bool IsOnTurn { get; set; }
+
+
         public ICombination CardsCombination { get; set; }
         public IList<ICard> CharacterCardsCollection { get; set; }
         public Point FirstCardLocation { get; set; }
@@ -46,7 +49,12 @@ namespace Poker.Character
 
 
 
-        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower);
+        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower, int callSum);
+
+        private void UpdateStatus(string statusText)
+        {
+            this.StatusLabel.Text = statusText;
+        }
 
         public Character(Point firstCardLocation, int cardWidth)
         {
@@ -203,12 +211,11 @@ namespace Poker.Character
         /// <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
-        public void Fold(ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded)
+        public void Fold(Label hasFolded)
         {
             isRaising = false;
             hasFolded.Text = "Fold";
-            isOnTurn = false;
-            isFinalTurn = true;
+            this.IsOnTurn = false;
         }
 
         /// <summary>
@@ -216,10 +223,10 @@ namespace Poker.Character
         /// </summary>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        public void ChangeStatusToChecking(ref bool isBotsTurn, Label statusLabel)
+        public void ChangeStatusToChecking(Label statusLabel)
         {
             statusLabel.Text = "Check";
-            isBotsTurn = false;
+            this.IsOnTurn = false;
             isRaising = false;
         }
 
@@ -229,14 +236,12 @@ namespace Poker.Character
         /// </summary>
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
-        /// <param name="statusLabel">The status label.</param>
-        public void Call(ref int botChips, ref bool isBotsTurn, Label statusLabel,TextBox potChips)
+        /// <param name="characterStatusLabel">The status label.</param>
+        public void Call(int callSum)
         {
             isRaising = false;
-            isBotsTurn = false;
-            botChips -= call;
-            statusLabel.Text = "Call " + call;
-            potChips.Text = (int.Parse(potChips.Text) + call).ToString();
+            this.IsOnTurn = false;
+            this.Chips -= callSum;
         }
 
         private double raise = 0;

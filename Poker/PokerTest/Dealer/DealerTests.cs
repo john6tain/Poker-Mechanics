@@ -1,6 +1,7 @@
 
 ﻿using System.Collections;
-using System.Linq;
+﻿using System.Drawing;
+﻿using System.Linq;
 using Poker.Table;
 
 namespace PokerTest.Dealer
@@ -27,8 +28,9 @@ namespace PokerTest.Dealer
         {
             this.characterCardsCollection = new List<ICard>();
             this.tableCardsCollection = new List<ICard>();
-            this.character = new Player();
+            this.character = new Player(new Point(0,0),10 );
         }
+
 
         [TestMethod]
         public void Test_CheckForRoyalStraightFlushOfClubs_ShouldPass()
@@ -628,11 +630,11 @@ namespace PokerTest.Dealer
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
-            ICharacter firstPlayer = new Bot();
+            ICharacter firstPlayer = new Bot(new Point(0,0),10 );
             firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
 
-            ICharacter secondPlayer = new Bot();
+            ICharacter secondPlayer = new Bot(new Point(0, 0), 10);
             secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
@@ -641,7 +643,7 @@ namespace PokerTest.Dealer
 
             ICharacter winner = gameCharacters[0];
 
-            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheKickers",
+            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheCardsRank",
                 gameCharacters));
 
             Assert.AreEqual(result, winner);
@@ -673,11 +675,11 @@ namespace PokerTest.Dealer
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
-            ICharacter firstPlayer = new Bot();
+            ICharacter firstPlayer = new Bot(new Point(0, 0),10 );
             firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
 
-            ICharacter secondPlayer = new Bot();
+            ICharacter secondPlayer = new Bot(new Point(0, 0), 10);
             secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
@@ -687,7 +689,7 @@ namespace PokerTest.Dealer
             ICharacter winner = gameCharacters[0];
 
 
-            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheKickers",
+            ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheCardsRank",
                 gameCharacters));
 
 
@@ -702,7 +704,7 @@ namespace PokerTest.Dealer
             IDealer dealer = new Dealer();
             IList<ICharacter> playersOnTable = new List<ICharacter>();
 
-            ICharacter firstPlayer = new Bot();
+            ICharacter firstPlayer = new Bot(new Point(0, 0), 10);
             IList<ICard> firstPlayerCards = new List<ICard>();
             IList<ICard> firstPlayerTableCards = new List<ICard>();
 
@@ -713,7 +715,7 @@ namespace PokerTest.Dealer
             firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Jack));
             firstPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
 
-            ICharacter secondPlayer = new Bot();
+            ICharacter secondPlayer = new Bot(new Point(0, 0), 10);
             IList<ICard> secondPlayerCards = new List<ICard>();
             IList<ICard> secondPlayerTableCards = new List<ICard>();
 
@@ -724,7 +726,7 @@ namespace PokerTest.Dealer
             secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ace));
             secondPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
 
-            ICharacter thirdPlayer = new Bot();
+            ICharacter thirdPlayer = new Bot(new Point(0, 0), 10);
             IList<ICard> thirdPlayerCards = new List<ICard>();
             IList<ICard> thirdPlayerTableCards = new List<ICard>();
 
@@ -735,7 +737,7 @@ namespace PokerTest.Dealer
             thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
             thirdPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
 
-            ICharacter fourthPlayer = new Bot();
+            ICharacter fourthPlayer = new Bot(new Point(0, 0), 10);
             IList<ICard> fourthPlayerCards = new List<ICard>();
             IList<ICard> fourthPlayerTableCards = new List<ICard>();
 
@@ -746,7 +748,7 @@ namespace PokerTest.Dealer
             fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Queen));
             fourthPlayerTableCards.Add(new Card(CardSuit.Spades, CardRank.Ten));
 
-            ICharacter fifthPlayer = new Bot();
+            ICharacter fifthPlayer = new Bot(new Point(0, 0), 10);
             IList<ICard> fifthPlayerCards = new List<ICard>();
             IList<ICard> fifthPlayerTableCards = new List<ICard>();
 

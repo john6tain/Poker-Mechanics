@@ -25,6 +25,8 @@ namespace Poker
 {
     public partial class Form1 : Form
     {
+        public const int InitialCallValue = 500;
+
         private ICharacter bot1;
         private ICharacter bot2;
         private ICharacter bot3;
@@ -35,30 +37,60 @@ namespace Poker
         private IDecisionMaker decisionMaker;
         private ITable table;
         private IDealer dealer;
+        private int callSum;
 
 
         public Form1()
         {
             InitializeComponent();
             InitializeGameObjects();
-      
+
             Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
 
+            EnableButtons();
             //RotateTimer.Start();
+        }
+
+        private void EnableButtons()
+        {
+            this.foldButton.Enabled = true;
+            this.checkButton.Enabled = true;
+            this.callButton.Enabled = true;
+            this.raiseButton.Enabled = true;
         }
 
         private void InitializeGameObjects()
         {
-            this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX,Constants.FirstBotCoordinateY), Constants.CardWidth);
+            this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX, Constants.FirstBotCoordinateY), Constants.CardWidth);
             this.Bot2 = new Bot(new Point(Constants.SecondBotCoordinateX, Constants.SecondBotCoordinateY), Constants.CardWidth);
             this.Bot3 = new Bot(new Point(Constants.ThirdBotCoordinateX, Constants.ThirdBotCoordinateY), Constants.CardWidth);
             this.Bot4 = new Bot(new Point(Constants.FourthBotCoordinateX, Constants.FourthBotCoordinateY), Constants.CardWidth);
             this.Bot5 = new Bot(new Point(Constants.FifthBotCoordinateX, Constants.FifthBotCoordinateY), Constants.CardWidth);
             this.Player = new Player(new Point(Constants.PlayerCoordinateX, Constants.PlayerCoordinateY), Constants.CardWidth);
+            this.Bot1.Name = "Bot1";
+            this.Bot2.Name = "Bot2";
+            this.Bot3.Name = "Bot3";
+            this.Bot4.Name = "Bot4";
+            this.Bot5.Name = "Bot5";
+            this.Player.Name = "Player";
             this.GameDatabase = new DataBase.DataBase();
             this.DecisionMaker = new DecisionMaker();
             this.Table = new Table.Table();
             this.Dealer = new Dealer();
+            this.CallSum = InitialCallValue;
+            this.CharactersCollection = new List<ICharacter>();
+            InitializeCharactersCollection();
+
+        }
+
+        public void InitializeCharactersCollection()
+        {
+            this.CharactersCollection.Add(this.Player);
+            this.CharactersCollection.Add(this.Bot1);
+            this.CharactersCollection.Add(this.Bot2);
+            this.CharactersCollection.Add(this.Bot3);
+            this.CharactersCollection.Add(this.Bot4);
+            this.CharactersCollection.Add(this.Bot5);
         }
 
         public ICharacter Bot1 { get; set; }
@@ -73,7 +105,8 @@ namespace Poker
         public IDealer Dealer { get; set; }
         public bool GameIsSet { get; set; }
         public int Index { get; set; }
-        public IList <ICharacter> CharactersCollection { get; set; }
+        public IList<ICharacter> CharactersCollection { get; set; }
+        public int CallSum { get; set; }
 
 
         private void tbBotChips2_TextChanged(object sender, EventArgs e)
@@ -102,22 +135,73 @@ namespace Poker
 
         private async void bFold_Click(object sender, EventArgs e)
         {
+            Label statusLabelToUpdate = GetControl();
 
+            this.CharactersCollection[this.Index].Fold(statusLabelToUpdate);
+
+            //ContinueRotating();
+        }
+
+        private Label GetControl()
+        {
+            string controlName = "" + this.CharactersCollection[this.Index].Name + "StatusLabel";
+            Label searchedControl = (Label) Controls.Find(controlName, true)[0];
+            return searchedControl;
+        }
+
+        private void ContinueRotating()
+        {
+            if (this.RotateTimer.Enabled == false)
+            {
+                RotateTimer.Start();
+            }
         }
 
         private async void bCheck_Click(object sender, EventArgs e)
         {
+            Label statusLabelToUpdate = GetControl();
 
+            this.CharactersCollection[this.Index].ChangeStatusToChecking(statusLabelToUpdate);
+
+            RevealTheNextCard();
+
+            //ContinueRotating();
+        }
+
+        private void RevealTheNextCard()
+        {
+            for (int i = 0; i < this.Table.TableCardsCollection.Count; i++)
+            {
+                if (this.Table.TableCardsCollection[i].IsVisible != true)
+                {
+                    this.Table.TableCardsCollection[i].IsVisible = true;
+                    break;
+                }
+            }
         }
 
         private async void bCall_Click(object sender, EventArgs e)
         {
+            Label statusLabelToUpdate = GetControl();
 
+            string newText = "Call " + this.CallSum;
+
+            UpdateStatusLabel(newText, statusLabelToUpdate);
+
+
+            this.CharactersCollection[this.Index].Call(this.CallSum);
+
+            //ContinueRotating();
+        }
+
+        private void UpdateStatusLabel(string newText, Label statusLabelToUpdate)
+        {
+            statusLabelToUpdate.Text = newText;
         }
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
-
+            //ContinueRotating();
         }
 
         private void bAdd_Click(object sender, EventArgs e)
@@ -144,13 +228,7 @@ namespace Poker
 
         }
 
-        private void Renderer_Tick(object sender, EventArgs e)
-        {
-            if (this.CharactersCollection[this.Index].Name == "player")
-            {
 
-            }
-        }
 
         private void RotateTimer_Tick(object sender, EventArgs e)
         {
@@ -162,13 +240,13 @@ namespace Poker
             }
 
             this.Dealer.SetGameRules(this.CharactersCollection[this.Index].CharacterCardsCollection, this.Table.TableCardsCollection, this.CharactersCollection[this.Index]);
-            this.CharactersCollection[this.Index].Decide(this.CharactersCollection[this.Index], this.CharactersCollection[this.Index].CharacterCardsCollection, 2, 3, 1000, false, new Label(), 4, 20, 3);
 
-            if (this.CharactersCollection[this.Index].Name == "player")
+            if (this.CharactersCollection[this.Index].Name == "Player")
             {
                 this.RotateTimer.Stop();
             }
 
+            this.CharactersCollection[this.Index].Decide(this.CharactersCollection[this.Index], this.CharactersCollection[this.Index].CharacterCardsCollection, 0, 1, 1000, false, new Label(), this.Index, 20, CharactersCollection[this.Index].CardsCombination.BehaviourPower, this.CallSum);
         }
     }
 }

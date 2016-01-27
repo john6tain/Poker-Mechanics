@@ -9,6 +9,11 @@
 
     public class DecisionMaker : IDecisionMaker
     {
+        public void ChangeStatus(Label a)
+        {
+            a.Text = "asd";
+        }
+
         /// <summary>
         /// Tell us the specified straight combination.
         /// </summary>
@@ -21,7 +26,7 @@
         /// <param name="botPower">The bot power.</param>
         private void Straight(ICharacter character, ref int botChips,
             ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower)
+            int botIndex, double botPower, int callSum)
         {
             Random straightRandomGenerator = new Random();
             int chanceToCall = straightRandomGenerator.Next(3, 6);
@@ -29,7 +34,7 @@
 
             if (botPower >= 404 && botPower <= 480)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
             }
 
         }
@@ -44,12 +49,12 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         private void Flush(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower)
+            int botIndex, double botPower, int callSum)
         {
             Random flushRandomGenerator = new Random();
             int chanceToCall = flushRandomGenerator.Next(2, 6);
             int chanceToRaise = flushRandomGenerator.Next(3, 7);
-            ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
+            ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
         }
 
         /// <summary>
@@ -63,7 +68,7 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         private void FullHouse(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower)
+            int botIndex, double botPower, int callSum)
         {
             Random fullHouseRandomGenerator = new Random();
             int chanceToCall = fullHouseRandomGenerator.Next(1, 5);
@@ -71,7 +76,7 @@
 
             if (botPower <= 626 && botPower >= 602)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
             }
         }
 
@@ -86,7 +91,7 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         private void FourOfAKind(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower)
+            int botIndex, double botPower, int callSum)
         {
             Random fourOfAKindRandomGenerator = new Random();
             int chanceToCall = fourOfAKindRandomGenerator.Next(1, 4);
@@ -94,7 +99,7 @@
 
             if (botPower <= 752 && botPower >= 704)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
             }
         }
 
@@ -109,7 +114,7 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         private void StraightFlush(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower)
+            int botIndex, double botPower, int callSum)
         {
             Random straightFlushRandomGenerator = new Random();
             int chanceToCall = straightFlushRandomGenerator.Next(1, 3);
@@ -117,7 +122,7 @@
 
             if (botPower <= 913 && botPower >= 804)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
             }
         }
 
@@ -138,7 +143,7 @@
         public void MakeDecision(ICharacter character,
                                  int firstCard, int secondCard, ref int botChips, bool isOnTurn,
                                  ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
-                                 double behaviourPower)
+                                 double behaviourPower, int callSum)
         {
             IList<ICard> cardCollection = character.CharacterCardsCollection;
 
@@ -146,43 +151,43 @@
             {
                 if (behaviourPower == (Constants.HighCardBehaviourPower))
                 {
-                    HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
+                    HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
                 }
                 if (behaviourPower == 0)
                 {
-                    PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
+                    PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
                 }
                 if (behaviourPower == Constants.PairFromHandBehaviourPower)
                 {
-                    PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
+                    PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
                 }
                 if (behaviourPower == 2)
                 {
-                    TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower);
+                    TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
                 }
                 if (behaviourPower == Constants.ThreeOfAKindBehaviourPower)
                 {
-                    ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
                 if (behaviourPower == Constants.StraightBehaviourPower)
                 {
-                    Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
                 if (behaviourPower == Constants.LittleFlushBehaviourPower || behaviourPower == Constants.BigFlushBehaviourPower)
                 {
-                    Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
                 if (behaviourPower == Constants.FullHouseBehaviourPower)
                 {
-                    FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
                 if (behaviourPower == Constants.FourOfAKindBehavourPower)
                 {
-                    FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
                 if (behaviourPower == Constants.LittleStraightFlushBehaviourPower || behaviourPower == Constants.BigStraightFlushBehaviourPower)
                 {
-                    StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower);
+                    StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
                 }
             }
             if (isFinalTurn)
@@ -203,9 +208,9 @@
         /// <param name="botPower">The bot power.</param>
         private void HighCard(ICharacter character, ref int botChips,
                               ref bool isOnTurn, ref bool isFinalTurn,
-                              Label hasFolded, double botPower)
+                              Label hasFolded, double botPower, int callSum)
         {
-            ChooseBotsMoveFirstWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, 20, 25);
+            ChooseBotsMoveFirstWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, 20, 25, callSum);
         }
 
         /// <summary>
@@ -217,9 +222,9 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void PairTable(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower)
+        private void PairTable(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
         {
-            ChooseBotsMoveFirstWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, 16, 25);
+            ChooseBotsMoveFirstWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, 16, 25, callSum);
         }
 
         /// <summary>
@@ -231,7 +236,7 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void PairHand(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower)
+        private void PairHand(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
         {
             Random pairHandRandom = new Random();
             int rCall = pairHandRandom.Next(10, 16);
@@ -239,15 +244,15 @@
 
             if (botPower <= 199 && botPower >= 140)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 6, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 6, rRaise, callSum);
             }
             if (botPower <= 139 && botPower >= 128)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 7, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 7, rRaise, callSum);
             }
             if (botPower < 128 && botPower >= 101)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 9, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 9, rRaise, callSum);
             }
         }
 
@@ -260,7 +265,7 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void TwoPairs(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower)
+        private void TwoPairs(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
         {
             Random twoPairsRandom = new Random();
             int rCall = twoPairsRandom.Next(6, 11);
@@ -268,15 +273,15 @@
 
             if (botPower <= 290 && botPower >= 246)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 3, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 3, rRaise, callSum);
             }
             if (botPower <= 244 && botPower >= 234)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise, callSum);
             }
             if (botPower < 234 && botPower >= 201)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise, callSum);
             }
         }
 
@@ -290,7 +295,7 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void ThreeOfAKind(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower)
+        private void ThreeOfAKind(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower, int callSum)
         {
             Random threeOfAKindRandom = new Random();
             int tCall = threeOfAKindRandom.Next(3, 7);
@@ -298,7 +303,7 @@
 
             if (botPower <= 390 && botPower >= 303)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, tCall, tRaise);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, tCall, tRaise, callSum);
             }
         }
 
@@ -327,14 +332,14 @@
         /// <param name="botPower">The bot power.</param>
         /// <param name="carefulBehaviourFactor">The careful behaviour factor.</param>
         /// <param name="riskyBehaviourFactor">The risky behaviour factor.</param>
-        private void ChooseBotsMoveFirstWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label statusLabel, double botPower, int carefulBehaviourFactor, int riskyBehaviourFactor)
+        private void ChooseBotsMoveFirstWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label statusLabel, double botPower, int carefulBehaviourFactor, int riskyBehaviourFactor, int callSum)
         {
             Random botHighCardPairRandom = new Random();
             int botHighCardRandom = botHighCardPairRandom.Next(1, 4);
 
             if (call <= 0)
             {
-                character.ChangeStatusToChecking(ref isBotsTurn, statusLabel);
+                character.ChangeStatusToChecking(statusLabel);
             }
             else if (call > 0)
             {
@@ -342,11 +347,11 @@
                 {
                     if (call <= CalculateMaximumBidAbilityOfTheBot(botChips, carefulBehaviourFactor))
                     {
-                        character.Call(ref botChips, ref isBotsTurn, statusLabel, potChips);
+                        character.Call(callSum);
                     }
                     else
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, statusLabel);
+                        character.Fold(statusLabel);
                     }
                 }
 
@@ -354,11 +359,11 @@
                 {
                     if (call <= CalculateMaximumBidAbilityOfTheBot(botChips, riskyBehaviourFactor))
                     {
-                        character.Call(ref botChips, ref isBotsTurn, statusLabel, potChips);
+                        character.Call(callSum);
                     }
                     else
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, statusLabel);
+                        character.Fold(statusLabel);
                     }
                 }
             }
@@ -380,7 +385,7 @@
                     }
                     else
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, statusLabel);
+                        character.Fold( statusLabel);
                     }
                 }
             }
@@ -402,7 +407,7 @@
         /// <param name="raiseBehaviourFactor">The raise behaviour factor.</param>
         /// <param name="behaviourFactorBasedOnBotPower">The behaviour factor based on bot power.</param>
         /// <param name="callBehaviourFactor">The call behaviour factor.</param>
-        private void ChooseBotsMoveSecondWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label labelStatus, int raiseBehaviourFactor, int behaviourFactorBasedOnBotPower, int callBehaviourFactor)
+        private void ChooseBotsMoveSecondWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label labelStatus, int raiseBehaviourFactor, int behaviourFactorBasedOnBotPower, int callBehaviourFactor, int callSum)
         {
             Random pairsRandom = new Random();
             int randomNumber = pairsRandom.Next(1, 3);
@@ -411,27 +416,27 @@
             {
                 if (call <= 0)
                 {
-                    character.ChangeStatusToChecking(ref isBotsTurn, labelStatus);
+                    character.ChangeStatusToChecking(labelStatus);
                 }
                 if (call > 0)
                 {
                     if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower))
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, labelStatus);
+                        character.Fold(labelStatus);
                     }
                     if (raise > CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor))
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, labelStatus);
+                        character.Fold(labelStatus);
                     }
                     if (!botFolds)
                     {
                         if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor) && call <= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower))
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
+                            character.Call(callSum);
                         }
                         if (raise <= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor) && raise >= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor)) / 2)
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
+                            character.Call(callSum);
                         }
                         if (raise <= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor)) / 2)
                         {
@@ -456,21 +461,21 @@
                 {
                     if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower - randomNumber))
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, labelStatus);
+                        character.Fold(labelStatus);
                     }
                     if (raise > CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber))
                     {
-                        character.Fold(ref isBotsTurn, ref botFolds, labelStatus);
+                        character.Fold(labelStatus);
                     }
                     if (!botFolds)
                     {
                         if (call >= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber) && call <= CalculateMaximumBidAbilityOfTheBot(botChips, behaviourFactorBasedOnBotPower - randomNumber))
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
+                            character.Call(callSum);
                         }
                         if (raise <= CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber) && raise >= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber)) / 2)
                         {
-                            character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
+                            character.Call(callSum);
                         }
                         if (raise <= (CalculateMaximumBidAbilityOfTheBot(botChips, raiseBehaviourFactor - randomNumber)) / 2)
                         {
@@ -506,7 +511,7 @@
         /// <param name="botChips"></param>
         /// <param name="isBotsTurn"></param>
         /// <param name="labelStatus"></param>
-        private void FixCall(ICharacter character, ref int botChips, ref bool isBotsTurn, Label labelStatus)
+        private void FixCall(ICharacter character, ref int botChips, ref bool isBotsTurn, Label labelStatus, int callSum)
         {
             if (rounds != 4)
             {
@@ -516,11 +521,11 @@
                 }
                 if (labelStatus.Text.Contains("Call"))
                 {
-                    character.Call(ref botChips, ref isBotsTurn, labelStatus, potChips);
+                    character.Call(callSum);
                 }
                 if (labelStatus.Text.Contains("Check"))
                 {
-                    character.ChangeStatusToChecking(ref isBotsTurn, labelStatus);
+                    character.ChangeStatusToChecking(labelStatus);
                 }
             }
         }
@@ -538,14 +543,14 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="behaviourFactor">The behaviour factor.</param>
         /// <param name="r">The r.</param>
-        private void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label botStatus, int botIndex, int behaviourFactor, int r)
+        private void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label botStatus, int botIndex, int behaviourFactor, int r, int callSum)
         {
             Random randomCombination = new Random();
             int combination = randomCombination.Next(1, 3);
 
             if (call <= 0)
             {
-                character.ChangeStatusToChecking(ref isBotsTurn, botStatus);
+                character.ChangeStatusToChecking(botStatus);
             }
             else
             {
@@ -553,7 +558,7 @@
                 {
                     if (botChips > call)
                     {
-                        character.Call(ref botChips, ref isBotsTurn, botStatus, potChips);
+                        character.Call(callSum);
                     }
                     else if (botChips <= call)
                     {
@@ -575,7 +580,7 @@
                         }
                         else
                         {
-                            character.Call(ref botChips, ref isBotsTurn, botStatus, potChips);
+                            character.Call(callSum);
                         }
                     }
                     else

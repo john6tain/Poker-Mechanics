@@ -9,9 +9,11 @@
     /// </summary>
     public interface IDecisionMaker
     {
+        void ChangeStatus(Label a);
+
         void MakeDecision(ICharacter character,
             int firstCard, int secondCard, ref int botChips, bool isOnTurn,
             ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
-            double behaviourPower);
+            double behaviourPower, int callSum);
     }
 }

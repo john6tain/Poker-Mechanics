@@ -36,12 +36,12 @@ namespace Poker.Character
         public override void Decide(ICharacter character, IList<ICard> cardCollection,
             int firstCard, int secondCard, int botChips,
             bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
-            double behaviourPower)
+            double behaviourPower, int callSum)
         {
             this.decisionMaker.MakeDecision(character,
                                             firstCard, secondCard, ref botChips, this.IsOnTurn,
                                             ref isFinalTurn, hasFolded, botIndex, botPower,
-                                            behaviourPower);
+                                            behaviourPower, callSum);
         }
     }
 }

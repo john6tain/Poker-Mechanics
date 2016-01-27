@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Poker.Interfacees;
 
 namespace Poker.Interfaces
@@ -11,5 +13,6 @@ namespace Poker.Interfaces
     {
         IList<ICard> TableCardsCollection { get; set; }
         int Pot { get; set; }
+        void TakeCall(int callSum, TextBox tablePotSum);
     }
 }

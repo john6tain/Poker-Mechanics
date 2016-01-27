@@ -13,7 +13,7 @@ namespace Poker.Character
         }
 
         public override void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard,
-    int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower)
+    int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower, int callSum)
         {
             this.IsOnTurn = true;
         }
