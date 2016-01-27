@@ -41,8 +41,9 @@ namespace Poker
         {
             InitializeComponent();
             InitializeGameObjects();
-            //dealer.SetupGame(database, player, bot1, bot2, bot3, bot4, bot5, table);
+      
             Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
+            //Rotate()
             
 
         }
