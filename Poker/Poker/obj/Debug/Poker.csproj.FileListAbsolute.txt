@@ -92,3 +92,4 @@ C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTex
 =======
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
 >>>>>>> a0b1f35694df1eb289692d7f4ff023452dc3cd8d
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
