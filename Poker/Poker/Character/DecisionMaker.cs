@@ -134,11 +134,13 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         /// <param name="behaviourPower">The bot current.</param>
-        public void MakeDecision(ICharacter character, IList<ICard> cardCollection,
-                                 int firstCard, int secondCard, ref int botChips, ref bool isOnTurn,
+        public void MakeDecision(ICharacter character,
+                                 int firstCard, int secondCard, ref int botChips, bool isOnTurn,
                                  ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
                                  double behaviourPower)
         {
+            IList<ICard> cardCollection = character.CharacterCardsCollection;
+
             if (!isFinalTurn)
             {
                 if (behaviourPower == (Constants.HighCardBehaviourPower))

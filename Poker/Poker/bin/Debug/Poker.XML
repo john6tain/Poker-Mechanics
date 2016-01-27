@@ -101,7 +101,7 @@
             <param name="botIndex">Index of the bot.</param>
             <param name="botPower">The bot power.</param>
         </member>
-        <member name="M:Poker.Character.DecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
+        <member name="M:Poker.Character.DecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Int32,System.Int32,System.Int32@,System.Boolean,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
             <summary>
             Decision manager decide who has biggest winning combination
             </summary>
@@ -234,7 +234,7 @@
             Initializes a new instance of DecisionMaker class.
             </summary>
         </member>
-        <member name="M:Poker.Character.Bot.Decide(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
+        <member name="M:Poker.Character.Bot.Decide(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32,System.Boolean,System.Windows.Forms.Label,System.Int32,System.Double,System.Double)">
             <summary>
             Decides the winning combination.
             </summary>
@@ -488,14 +488,14 @@
             <param name="gameCharacters">All particialnts in the game.</param>
             <param name="pot">The pot chips.</param>
         </member>
-        <member name="M:Poker.Table.Dealer.ChooseTheWinnerByTheKickers(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
+        <member name="M:Poker.Table.Dealer.ChooseTheWinnerByTheCardsRank(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
             <summary>
             Chooses the winner, comparing the 'kickers' ranks.
             </summary>
             <param name="topCombinationCharactersCollection"></param>
             <returns></returns>
         </member>
-        <member name="M:Poker.Table.Dealer.DeclareWinners(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
+        <member name="M:Poker.Table.Dealer.ConstructWinnersMessage(System.Collections.Generic.IList{Poker.Interfaces.ICharacter})">
             <summary>
             Gets the names of the winners and prints them to the user.
             </summary>

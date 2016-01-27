@@ -14,9 +14,17 @@ namespace Poker.Interfaces
 
         bool HasFolded { get; set; }
 
+        bool IsOnTurn { get; set; }
+
+
         ICombination CardsCombination { get; set; }
 
         IList<ICard> CharacterCardsCollection { get; set; }
+
+        void Decide(ICharacter character, IList<ICard> cardCollection,
+            int firstCard, int secondCard, int botChips,
+            bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
+            double behaviourPower);
 
         /// <summary>
         /// You bet all the money you have.
