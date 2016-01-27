@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
@@ -70,3 +71,87 @@ C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Pro
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+=======
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\ff\Downloads\Poker-Mechanics-master (37)\Poker-Mechanics-master\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.AddChips.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\ff\Documents\SakiFile\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\ff\Documents\File_27.01.2016\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Form1.resources
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\wowjo\OneDrive\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+>>>>>>> bfe2975d034aaf565c78e1f5e9158ebee89b81ce

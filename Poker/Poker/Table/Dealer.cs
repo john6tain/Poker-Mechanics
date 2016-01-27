@@ -141,16 +141,48 @@ namespace Poker.Table
         private static Label secondBotStatus;
         private static int Chips = 10000;
 
-        
 
+
+        /// <summary>
+        /// Deals the shuffled cards to the players and on the table.
+        /// </summary>
+        /// <param name="database">The database.</param>
+        /// <param name="player">The player.</param>
+        /// <param name="bot1">The first bot.</param>
+        /// <param name="bot2">The second bot.</param>
+        /// <param name="bot3">The third bot.</param>
+        /// <param name="bot4">The fourth bot.</param>
+        /// <param name="bot5">The fifth bot.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="controls">The array of objects to be drawn.</param>
         public void SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection controls)
         {
 
             IList<ICard> shuffledDeck = database.Deck.ToList();
 
-            ShuffleCards(shuffledDeck);
+            try
+            {
+                ShuffleCards(shuffledDeck);
+            }
+            catch (Exception)
+            {
+                
+                throw new ArgumentException("Failed to Shuffle Cards"); // Custom Exception: Think of a name...
+            }
 
-            DealCards(shuffledDeck, player, bot1, bot2, bot3, bot4, bot5, table, controls);
+            try
+            {
+                DealCards(shuffledDeck, player, bot1, bot2, bot3, bot4, bot5, table, controls);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Failed to Deal Cards"); // Custom Exception: Think of a name...
+            }
+
+
+
+           
 
 
 
