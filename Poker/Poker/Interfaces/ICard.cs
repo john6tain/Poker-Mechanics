@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using Poker.Enumerations;
-
-namespace Poker.Interfacees
+﻿namespace Poker.Interfacees
 {
+    using Enumerations;
+    using System.Drawing;
+    using System.Windows.Forms;
+
     public interface ICard
     {
         bool IsVisible { get; set; }
@@ -13,6 +13,10 @@ namespace Poker.Interfacees
         CardRank Rank { get; set; }
         PictureBox CardPictureBox { get; set; }
 
+        /// <summary>
+        /// Updates the specified controls.
+        /// </summary>
+        /// <param name="controls">The controls.</param>
         void Update(Control.ControlCollection controls);
     }
 }

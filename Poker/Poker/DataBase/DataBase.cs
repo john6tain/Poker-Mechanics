@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Poker.Enumerations;
-using Poker.Interfacees;
-using Poker.Table;
-
-namespace Poker.DataBase
+﻿namespace Poker.DataBase
 {
-    public class DataBase:IDatabase
+    using Enumerations;
+    using Interfacees;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using Table;
+
+    public class DataBase : IDatabase
     {
         private readonly IList<ICard> deck;
 
@@ -27,7 +27,6 @@ namespace Poker.DataBase
         {
             var values = Enum.GetValues(typeof(CardSuit));
             var valuesTwo = Enum.GetValues(typeof(CardRank));
-
 
             foreach (var element in values)
             {
