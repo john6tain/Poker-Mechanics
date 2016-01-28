@@ -38,3 +38,13 @@ C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache

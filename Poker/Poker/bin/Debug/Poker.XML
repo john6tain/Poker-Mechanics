@@ -250,6 +250,34 @@
             <param name="botPower">The bot power.</param>
             <param name="behaviourPower">The behaviour power.</param>
         </member>
+        <member name="M:Poker.Interfaces.IDealer.SetGameRules(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
+            <summary>
+            Sets the game rules.
+            </summary>
+            <param name="charactersCardsCollection">The characters cards collection.</param>
+            <param name="tableCardsCollection">The table cards collection.</param>
+            <param name="character">The character.</param>
+        </member>
+        <member name="M:Poker.Interfaces.IDealer.SetupGame(Poker.Interfacees.IDatabase,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ICharacter,Poker.Interfaces.ITable,System.Windows.Forms.Control.ControlCollection)">
+            <summary>
+            Setups the game.
+            </summary>
+            <param name="database">The database.</param>
+            <param name="player">The player.</param>
+            <param name="bot1">The bot1.</param>
+            <param name="bot2">The bot2.</param>
+            <param name="bot3">The bot3.</param>
+            <param name="bot4">The bot4.</param>
+            <param name="bot5">The bot5.</param>
+            <param name="table">The table.</param>
+            <param name="Controls">The controls.</param>
+        </member>
+        <member name="M:Poker.Interfaces.IDealer.RevealTheNextCard(Poker.Interfaces.ITable)">
+            <summary>
+            Reveals the next card.
+            </summary>
+            <param name="table">The table.</param>
+        </member>
         <member name="M:Poker.Interfaces.ICharacter.AllIn(System.Windows.Forms.TextBox)">
             <summary>
             You bet all the money you have.
@@ -287,10 +315,63 @@
             <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
             <param name="statusLabel">The status label.</param>
         </member>
+        <member name="M:Poker.Interfaces.ICharacter.Update(System.Windows.Forms.TextBox)">
+            <summary>
+            Updates the specified chips text box.
+            </summary>
+            <param name="chipsTextBox">The chips text box.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.Decide(Poker.Interfaces.ICharacter,System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Int32,System.Int32,System.Int32,System.Boolean,System.Windows.Forms.Label,System.Int32,System.Double,System.Double,System.Int32)">
+            <summary>
+            Decides the specified card combination
+            </summary>
+            <param name="character">The character.</param>
+            <param name="cardCollection">The card collection.</param>
+            <param name="firstCard">The first card.</param>
+            <param name="secondCard">The second card.</param>
+            <param name="botChips">The bot chips.</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="hasFolded">The has folded.</param>
+            <param name="botIndex">Index of the bot.</param>
+            <param name="botPower">The bot power.</param>
+            <param name="behaviourPower">The behaviour power.</param>
+            <param name="callSum">The call sum.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ICharacter.GetSecondCardLocation(System.Drawing.Point,System.Int32)">
+            <summary>
+            Gets the second card location.
+            </summary>
+            <param name="firstCardLocation">The first card location.</param>
+            <param name="cardWidth">Width of the card.</param>
+            <returns></returns>
+        </member>
         <member name="T:Poker.Interfaces.IDecisionMaker">
             <summary>
             The decision maker is artificial inteligence of the bot
             </summary>
+        </member>
+        <member name="M:Poker.Interfaces.IDecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Int32,System.Int32,System.Int32@,System.Boolean,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double,System.Int32)">
+            <summary>
+            Makes the decision for specified combination.
+            </summary>
+            <param name="character">The character.</param>
+            <param name="firstCard">The first card.</param>
+            <param name="secondCard">The second card.</param>
+            <param name="botChips">The bot chips.</param>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="hasFolded">The has folded.</param>
+            <param name="botIndex">Index of the bot.</param>
+            <param name="botPower">The bot power.</param>
+            <param name="behaviourPower">The behaviour power.</param>
+            <param name="callSum">The call sum.</param>
+        </member>
+        <member name="M:Poker.Interfaces.ITable.TakeCall(System.Int32,System.Windows.Forms.TextBox)">
+            <summary>
+            Takes and sum the call.
+            </summary>
+            <param name="callSum">The call sum.</param>
+            <param name="tablePotSum">The table pot sum.</param>
         </member>
         <member name="F:Poker.GLSTexasPoker.components">
             <summary>
@@ -308,6 +389,12 @@
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
+        </member>
+        <member name="M:Poker.Interfacees.ICard.Update(System.Windows.Forms.Control.ControlCollection)">
+            <summary>
+            Updates the specified controls.
+            </summary>
+            <param name="controls">The controls.</param>
         </member>
         <member name="M:Poker.Program.Main">
             <summary>
