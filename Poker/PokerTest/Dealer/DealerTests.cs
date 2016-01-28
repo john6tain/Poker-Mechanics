@@ -3,6 +3,10 @@
 ﻿using System.Drawing;
 ﻿using System.Linq;
 using Poker.Table;
+using System.Linq;
+﻿using Poker.GameConstants;
+﻿using Poker.Table;
+
 
 namespace PokerTest.Dealer
 
@@ -15,6 +19,7 @@ namespace PokerTest.Dealer
     using Poker.Table;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
 
     [TestClass]
     public class DealerTests
@@ -23,12 +28,15 @@ namespace PokerTest.Dealer
         private IList<ICard> tableCardsCollection;
         private ICharacter character;
 
+        private Point firstCardLocation = new Point(Constants.PlayerCoordinateX, Constants.PlayerCoordinateY);
+        private int cardWidth = Constants.CardWidth;
+
         [TestInitialize]
         public void InitializeList()
         {
             this.characterCardsCollection = new List<ICard>();
             this.tableCardsCollection = new List<ICard>();
-            this.character = new Player(new Point(0,0),10 );
+            this.character = new Player(firstCardLocation, cardWidth);
         }
 
 
@@ -605,7 +613,7 @@ namespace PokerTest.Dealer
         }
         
         [TestMethod]
-        public void Test_ChooseTheWinnerByTheKickers_IfTwoPlayersHaveOnePair_ShouldPass()
+        public void Test_ChooseTheWinnerByTheCardsRank_IfTwoPlayersHaveOnePair_ShouldPass()
         {
             PrivateObject obj = new PrivateObject(typeof(Dealer));
 
@@ -630,11 +638,11 @@ namespace PokerTest.Dealer
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
-            ICharacter firstPlayer = new Bot(new Point(0,0),10 );
+            ICharacter firstPlayer = new Bot(firstCardLocation, cardWidth);
             firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
 
-            ICharacter secondPlayer = new Bot(new Point(0, 0), 10);
+            ICharacter secondPlayer = new Bot(firstCardLocation, cardWidth);
             secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
@@ -650,7 +658,7 @@ namespace PokerTest.Dealer
         }
 
         [TestMethod]
-        public void Test_ChooseTheWinnerByTheKickers_IfTwoPlayersHaveOnePair_ShoudFail()
+        public void Test_ChooseTheWinnerByTheCardsRank_IfTwoPlayersHaveOnePair_ShoudFail()
         {
             PrivateObject obj = new PrivateObject(typeof(Dealer));
 
@@ -675,11 +683,11 @@ namespace PokerTest.Dealer
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Diamonds, CardRank.Five));
             secondPlayerKikcersCollection.Add(new Card(CardSuit.Hearts, CardRank.Four));
 
-            ICharacter firstPlayer = new Bot(new Point(0, 0),10 );
+            ICharacter firstPlayer = new Bot(firstCardLocation, cardWidth);
             firstPlayer.CardsCombination = new Combination(1, CombinationType.OnePair, 0,
                 firstPlayerCombinationCardsCollection, firstPlayerKikcersCollection);
 
-            ICharacter secondPlayer = new Bot(new Point(0, 0), 10);
+            ICharacter secondPlayer = new Bot(firstCardLocation, cardWidth);
             secondPlayer.CardsCombination = new Combination(0, CombinationType.OnePair, 0,
                 secondPlayerCombinationCardsCollection, secondPlayerKikcersCollection);
 
@@ -782,5 +790,6 @@ namespace PokerTest.Dealer
 
 
         #endregion
+
     }
 }

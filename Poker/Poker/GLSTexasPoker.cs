@@ -23,7 +23,7 @@ using Poker.Table;
 
 namespace Poker
 {
-    public partial class Form1 : Form
+    public partial class GLSTexasPoker : Form
     {
         public const int InitialCallValue = 500;
 
@@ -40,7 +40,7 @@ namespace Poker
         private int callSum;
 
 
-        public Form1()
+        public GLSTexasPoker()
         {
             InitializeComponent();
             InitializeGameObjects();
@@ -49,6 +49,7 @@ namespace Poker
 
             EnableButtons();
             //RotateTimer.Start();
+            this.GameUpdate.Start();
         }
 
         private void EnableButtons()
@@ -73,6 +74,7 @@ namespace Poker
             this.Bot4.Name = "Bot4";
             this.Bot5.Name = "Bot5";
             this.Player.Name = "Player";
+            this.Player.Chips = 10000;
             this.GameDatabase = new DataBase.DataBase();
             this.DecisionMaker = new DecisionMaker();
             this.Table = new Table.Table();
@@ -80,7 +82,14 @@ namespace Poker
             this.CallSum = InitialCallValue;
             this.CharactersCollection = new List<ICharacter>();
             InitializeCharactersCollection();
+        }
 
+
+        private TextBox GetTextBox(string textAround, ICharacter a)
+        {
+            string labelName = "" + this.CharactersCollection[this.Index].Name + textAround;
+            TextBox searchedTextBox = (TextBox)Controls.Find(labelName, true)[0];
+            return searchedTextBox;
         }
 
         public void InitializeCharactersCollection()
@@ -135,18 +144,19 @@ namespace Poker
 
         private async void bFold_Click(object sender, EventArgs e)
         {
-            Label statusLabelToUpdate = GetControl();
+            Label statusLabelToUpdate = GetLabel("StatusLabel");
 
             this.CharactersCollection[this.Index].Fold(statusLabelToUpdate);
+            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
 
             //ContinueRotating();
         }
 
-        private Label GetControl()
+        private Label GetLabel(string textAround)
         {
-            string controlName = "" + this.CharactersCollection[this.Index].Name + "StatusLabel";
-            Label searchedControl = (Label) Controls.Find(controlName, true)[0];
-            return searchedControl;
+            string labelName = "" + this.CharactersCollection[this.Index].Name + textAround;
+            Label searchedLabel = (Label) Controls.Find(labelName, true)[0];
+            return searchedLabel;
         }
 
         private void ContinueRotating()
@@ -159,39 +169,45 @@ namespace Poker
 
         private async void bCheck_Click(object sender, EventArgs e)
         {
-            Label statusLabelToUpdate = GetControl();
+            Label statusLabelToUpdate = GetLabel("StatusLabel");
 
-            this.CharactersCollection[this.Index].ChangeStatusToChecking(statusLabelToUpdate);
+            string newText = "Check ";
 
-            RevealTheNextCard();
+            this.CharactersCollection[this.Index].ChangeStatusToChecking();
+
+
+
+            UpdateStatusLabel(newText, statusLabelToUpdate);
+            this.Dealer.RevealTheNextCard(this.Table);
+
+            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
 
             //ContinueRotating();
         }
 
-        private void RevealTheNextCard()
-        {
-            for (int i = 0; i < this.Table.TableCardsCollection.Count; i++)
-            {
-                if (this.Table.TableCardsCollection[i].IsVisible != true)
-                {
-                    this.Table.TableCardsCollection[i].IsVisible = true;
-                    break;
-                }
-            }
-        }
+
 
         private async void bCall_Click(object sender, EventArgs e)
         {
-            Label statusLabelToUpdate = GetControl();
+            Label statusLabelToUpdate = GetLabel("StatusLabel");
 
             string newText = "Call " + this.CallSum;
 
             UpdateStatusLabel(newText, statusLabelToUpdate);
 
+            this.Table.TakeCall(this.CallSum, potChips);
 
             this.CharactersCollection[this.Index].Call(this.CallSum);
 
+            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
             //ContinueRotating();
+        }
+
+        private void DisablePlayerButtons(Button callButton, Button foldButton, Button checkButton)
+        {
+            callButton.Enabled = false;
+            foldButton.Enabled = false;
+            checkButton.Enabled = false;
         }
 
         private void UpdateStatusLabel(string newText, Label statusLabelToUpdate)
@@ -201,6 +217,14 @@ namespace Poker
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
+            //to validateSum
+            this.CallSum = int.Parse(this.tbRaise.Text);
+
+            this.CharactersCollection[this.Index].Call(this.CallSum);
+
+            this.Table.TakeCall(this.CallSum, potChips);
+
+
             //ContinueRotating();
         }
 
@@ -247,6 +271,41 @@ namespace Poker
             }
 
             this.CharactersCollection[this.Index].Decide(this.CharactersCollection[this.Index], this.CharactersCollection[this.Index].CharacterCardsCollection, 0, 1, 1000, false, new Label(), this.Index, 20, CharactersCollection[this.Index].CardsCombination.BehaviourPower, this.CallSum);
+        }
+
+        private void CardsRenderer_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameRenderer_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameRenderer_Tick_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CardsRenderer_Tick_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameUpdate_Tick(object sender, EventArgs e)
+        {
+            foreach (var element in this.Table.TableCardsCollection)
+            {
+                element.Update(Controls);
+            }
+
+            foreach (var element in this.CharactersCollection)
+            {
+                TextBox searchedTextBox = GetTextBox("Chips", element);
+
+                element.Update(searchedTextBox);
+            }
         }
     }
 }

@@ -603,6 +603,18 @@ namespace Poker.Table
             #endregion
         }
 
+        public void RevealTheNextCard(ITable table)
+        {
+            for (int i = 0; i < table.TableCardsCollection.Count; i++)
+            {
+                if (table.TableCardsCollection[i].IsVisible != true)
+                {
+                    table.TableCardsCollection[i].IsVisible = true;
+                    break;
+                }
+            }
+        }
+
         private void DealCards(IList<ICard> shuffledDeck, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection controls)
         {
             #region Player
@@ -925,6 +937,7 @@ namespace Poker.Table
             IList<ICard> tableCardsCollection,
             ICharacter character)
         {
+
             if (!character.HasFolded)
             {
                 CheckForOnePair(charactersCardsCollection, tableCardsCollection, character, false);
@@ -948,7 +961,7 @@ namespace Poker.Table
 
                 CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
             }
-        }
+          }
 
         /// <summary>
         /// This method determins if straight flush of clubs combination is available 

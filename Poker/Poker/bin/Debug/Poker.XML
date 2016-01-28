@@ -18,7 +18,7 @@
             <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
             <param name="hasFolded">The has folded.</param>
         </member>
-        <member name="M:Poker.Character.Character.ChangeStatusToChecking(System.Windows.Forms.Label)">
+        <member name="M:Poker.Character.Character.ChangeStatusToChecking">
             <summary>
             Changes the label status to checking.
             </summary>
@@ -264,7 +264,7 @@
             <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
             <param name="sStatus">The s status.</param>
         </member>
-        <member name="M:Poker.Interfaces.ICharacter.ChangeStatusToChecking(System.Windows.Forms.Label)">
+        <member name="M:Poker.Interfaces.ICharacter.ChangeStatusToChecking">
             <summary>
             Changes the status label to checking.
             </summary>
@@ -292,18 +292,18 @@
             The decision maker is artificial inteligence of the bot
             </summary>
         </member>
-        <member name="F:Poker.Form1.components">
+        <member name="F:Poker.GLSTexasPoker.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:Poker.Form1.Dispose(System.Boolean)">
+        <member name="M:Poker.GLSTexasPoker.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:Poker.Form1.InitializeComponent">
+        <member name="M:Poker.GLSTexasPoker.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.

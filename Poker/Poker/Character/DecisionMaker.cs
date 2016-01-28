@@ -339,7 +339,7 @@
 
             if (call <= 0)
             {
-                character.ChangeStatusToChecking(statusLabel);
+                character.ChangeStatusToChecking();
             }
             else if (call > 0)
             {
@@ -416,7 +416,7 @@
             {
                 if (call <= 0)
                 {
-                    character.ChangeStatusToChecking(labelStatus);
+                    character.ChangeStatusToChecking();
                 }
                 if (call > 0)
                 {
@@ -525,7 +525,7 @@
                 }
                 if (labelStatus.Text.Contains("Check"))
                 {
-                    character.ChangeStatusToChecking(labelStatus);
+                    character.ChangeStatusToChecking();
                 }
             }
         }
@@ -550,7 +550,7 @@
 
             if (call <= 0)
             {
-                character.ChangeStatusToChecking(botStatus);
+                character.ChangeStatusToChecking();
             }
             else
             {

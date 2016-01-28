@@ -13,5 +13,6 @@ namespace Poker.Interfacees
         CardRank Rank { get; set; }
         PictureBox CardPictureBox { get; set; }
 
+        void Update(Control.ControlCollection controls);
     }
 }

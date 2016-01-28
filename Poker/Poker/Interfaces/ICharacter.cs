@@ -18,6 +18,8 @@ namespace Poker.Interfaces
 
         bool IsOnTurn { get; set; }
 
+        void Update(TextBox chipsTextBox);
+
 
         ICombination CardsCombination { get; set; }
 
@@ -53,7 +55,7 @@ namespace Poker.Interfaces
         /// </summary>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        void ChangeStatusToChecking(Label statusLabel);
+        void ChangeStatusToChecking();
 
         /// <summary>
         /// Calls the specified chips.
