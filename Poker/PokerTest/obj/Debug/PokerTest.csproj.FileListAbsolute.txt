@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
 C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
@@ -23,23 +22,6 @@ C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poke
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
-=======
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
-C:\GitHubProjects\PokerTeamWork\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
-C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
@@ -48,4 +30,3 @@ C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
->>>>>>> 46abda8068e15691bd83169474e2a2af6c4b7b1c
