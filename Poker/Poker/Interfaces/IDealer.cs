@@ -14,6 +14,8 @@
         /// <param name="character">The character.</param>
         void SetGameRules(IList<ICard> charactersCardsCollection, IList<ICard> tableCardsCollection, ICharacter character);
 
+        void DeclareWinner(IList<ICharacter> gameCharacters, int pot);
+
         /// <summary>
         /// Setups the game.
         /// </summary>

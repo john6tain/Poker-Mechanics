@@ -30,3 +30,11 @@ C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
 C:\Users\wowjo\Documents\GitShit\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.dll
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\bin\Debug\PokerTest.pdb
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.exe
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.pdb
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\bin\Debug\Poker.xml
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.csprojResolveAssemblyReference.cache
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.dll
+C:\Users\ff\Documents\Newest\Poker-Mechanics\Poker\PokerTest\obj\Debug\PokerTest.pdb

@@ -165,18 +165,33 @@ namespace Poker
 
         private async void bCheck_Click(object sender, EventArgs e)
         {
-            Label statusLabelToUpdate = GetLabel("StatusLabel");
+            foreach (var element in this.Table.TableCardsCollection)
+            {
+                element.IsVisible = true;
+            }
 
-            string newText = "Check ";
+            foreach (var element in this.CharactersCollection)
+            {
+                foreach (var card in element.CharacterCardsCollection)
+                {
+                    card.IsVisible = true;
+                }
+            }
 
-            this.CharactersCollection[this.Index].ChangeStatusToChecking();
+            GameUpdate.Start();
 
-            UpdateStatusLabel(newText, statusLabelToUpdate);
-            this.Dealer.RevealTheNextCard(this.Table);
+            //Label statusLabelToUpdate = GetLabel("StatusLabel");
 
-            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
+            //string newText = "Check ";
 
-            ContinueRotating();
+            //this.CharactersCollection[this.Index].ChangeStatusToChecking();
+
+            //UpdateStatusLabel(newText, statusLabelToUpdate);
+            //this.Dealer.RevealTheNextCard(this.Table);
+
+            //DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
+
+            //ContinueRotating();
         }
 
         private async void bCall_Click(object sender, EventArgs e)
@@ -209,15 +224,22 @@ namespace Poker
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
+            foreach (var character in this.CharactersCollection)
+            {
+                this.Dealer.SetGameRules(character.CharacterCardsCollection, this.Table.TableCardsCollection, character);
+            }
+
+            this.Dealer.DeclareWinner(this.CharactersCollection, this.Table.Pot);
+
             //to validateSum
-            this.CallSum = int.Parse(this.tbRaise.Text);
+            //this.CallSum = int.Parse(this.tbRaise.Text);
 
-            this.CharactersCollection[this.Index].Call(this.CallSum);
+            //this.CharactersCollection[this.Index].Call(this.CallSum);
 
-            this.Table.TakeCall(this.CallSum, potChips);
+            //this.Table.TakeCall(this.CallSum, potChips);
 
 
-            ContinueRotating();
+            //ContinueRotating();
         }
 
         private void bAdd_Click(object sender, EventArgs e)
@@ -305,14 +327,14 @@ namespace Poker
                 element.Update(Controls);
             }
 
-            foreach (var element in this.CharactersCollection)
+            foreach (var character in this.CharactersCollection)
             {
-                element.ChipsLabel.Text = "Chips: " + element.Chips.ToString();
-
-                TextBox searchedTextBox = GetTextBox("Chips", element);
-
-                element.Update(searchedTextBox);
+                foreach (var card in character.CharacterCardsCollection)
+                {
+                    card.Update(Controls);
+                }
             }
+
         }
 
         public void InitializeCharactersCollection()
