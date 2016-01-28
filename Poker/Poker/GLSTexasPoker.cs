@@ -48,8 +48,7 @@ namespace Poker
             Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
 
             EnableButtons();
-            //RotateTimer.Start();
-            this.GameUpdate.Start();
+            //this.GameUpdate.Start();
         }
 
         private void EnableButtons()
@@ -75,6 +74,11 @@ namespace Poker
             this.Bot5.Name = "Bot5";
             this.Player.Name = "Player";
             this.Player.Chips = 10000;
+            this.Bot1.Chips = 10000;
+            this.Bot2.Chips = 10000;
+            this.Bot3.Chips = 10000;
+            this.Bot4.Chips = 10000;
+            this.Bot5.Chips = 10000;
             this.GameDatabase = new DataBase.DataBase();
             this.DecisionMaker = new DecisionMaker();
             this.Table = new Table.Table();
@@ -149,7 +153,7 @@ namespace Poker
             this.CharactersCollection[this.Index].Fold(statusLabelToUpdate);
             DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
 
-            //ContinueRotating();
+            ContinueRotating();
         }
 
         private Label GetLabel(string textAround)
@@ -182,7 +186,7 @@ namespace Poker
 
             DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
 
-            //ContinueRotating();
+            ContinueRotating();
         }
 
 
@@ -200,7 +204,7 @@ namespace Poker
             this.CharactersCollection[this.Index].Call(this.CallSum);
 
             DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
-            //ContinueRotating();
+            ContinueRotating();
         }
 
         private void DisablePlayerButtons(Button callButton, Button foldButton, Button checkButton)
@@ -225,7 +229,7 @@ namespace Poker
             this.Table.TakeCall(this.CallSum, potChips);
 
 
-            //ContinueRotating();
+            ContinueRotating();
         }
 
         private void bAdd_Click(object sender, EventArgs e)
@@ -270,7 +274,30 @@ namespace Poker
                 this.RotateTimer.Stop();
             }
 
-            this.CharactersCollection[this.Index].Decide(this.CharactersCollection[this.Index], this.CharactersCollection[this.Index].CharacterCardsCollection, 0, 1, 1000, false, new Label(), this.Index, 20, CharactersCollection[this.Index].CardsCombination.BehaviourPower, this.CallSum);
+            Label characterLabel = new Label();
+
+            if (CharactersCollection[this.Index].Name == "Bot1")
+            {
+                characterLabel = Bot1StatusLabel;
+            }
+            else if (CharactersCollection[this.Index].Name == "Bot2")
+            {
+                characterLabel = Bot2StatusLabel;
+            }
+            else if (CharactersCollection[this.Index].Name == "Bot3")
+            {
+                characterLabel = Bot3StatusLabel;
+            }
+            else if (CharactersCollection[this.Index].Name == "Bot4")
+            {
+                characterLabel = Bot4StatusLabel;
+            }
+            else if (CharactersCollection[this.Index].Name == "Bot5")
+            {
+                characterLabel = Bot5StatusLabel;
+            }
+
+            this.CharactersCollection[this.Index].Decide(this.CharactersCollection[this.Index], this.CharactersCollection[this.Index].CharacterCardsCollection, 0, 1, 1000, false, characterLabel, this.Index, 20, CharactersCollection[this.Index].CardsCombination.BehaviourPower, this.CallSum);
         }
 
         private void CardsRenderer_Tick(object sender, EventArgs e)
