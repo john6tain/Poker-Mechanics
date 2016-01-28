@@ -10,6 +10,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+
 namespace Poker.Character
 {
     using Interfacees;
@@ -24,6 +26,7 @@ namespace Poker.Character
 
     public abstract class Character : ICharacter
     {
+
         private readonly Panel playerPanel = new Panel();
         private readonly Panel firstBotPanel = new Panel();
         private readonly Panel secondBotPanel = new Panel();
@@ -48,9 +51,15 @@ namespace Poker.Character
             this.FirstCardLocation = firstCardLocation;
             this.SecondCardLocation = GetSecondCardLocation(firstCardLocation, cardWidth);
             this.Name = "neshto";
+            this.ChipsLabel = new Label();
+            this.ChipsLabel.Text = "none";
+            this.ChipsLabel.Location = GetChipsLabelLocation(firstCardLocation, cardWidth);
         }
 
+
         public Label StatusLabel { get; set; }
+        public Label ChipsLabel { get; set; }
+
 
         public int Chips
         {
@@ -139,8 +148,8 @@ namespace Poker.Character
                 }
                 this.secondCardLocation = value;
             }
-        }
-
+        } 
+         
         private void UpdateChipsLabels(TextBox searchedTextBox)
         {
             searchedTextBox.Text = this.Chips.ToString();
@@ -156,10 +165,20 @@ namespace Poker.Character
             UpdateChipsLabels(searchedTextBox);
         }
 
+        private Point GetChipsLabelLocation(Point firstCardLocation, int cardWidth)
+        {
+            int labelX = firstCardLocation.X + (cardWidth / 2);
+            int labelY = firstCardLocation.Y + 150;
+
+            return new Point(labelX, labelY);
+        }
+
         public abstract void Decide(ICharacter character, IList<ICard> cardCollection,
                                     int firstCard, int secondCard, int botChips,
                                     bool isFinalTurn, Label hasFolded, int botIndex,
                                     double botPower, double behaviourPower, int callSum);
+
+        
 
         /// <summary>
         /// All characters can call an AllIn to play all the money they got

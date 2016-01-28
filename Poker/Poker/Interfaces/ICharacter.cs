@@ -11,6 +11,7 @@ namespace Poker.Interfaces
         int Chips { get; set; }
 
         Label StatusLabel { get; set; }
+        Label ChipsLabel { get; set; }
 
         string Name { get; set; }
 

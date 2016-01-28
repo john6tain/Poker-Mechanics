@@ -707,6 +707,7 @@ namespace Poker.Table
                 table.TableCardsCollection[tableCardIndex].CardPictureBox.Location = new Point(currentTableX, currentTableY);
                 currentTableX += distanceBetweenCards;
 
+                table.TableCardsCollection[tableCardIndex].CardPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 controls.Add(table.TableCardsCollection[tableCardIndex].CardPictureBox);
             }
         }

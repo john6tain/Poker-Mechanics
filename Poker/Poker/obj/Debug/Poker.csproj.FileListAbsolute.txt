@@ -8,7 +8,16 @@ C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Pr
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
 C:\Users\ff\Documents\MartiCommit\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
-<<<<<<< HEAD
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.pdb
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csprojResolveAssemblyReference.cache
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\Y50\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
@@ -19,7 +28,6 @@ C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.cspro
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\Alex\Documents\GitHub\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
-=======
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.exe.config
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\bin\Debug\Poker.XML
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.exe
@@ -30,4 +38,3 @@ C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.GLSTexasPoker.resources
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
 C:\Users\ff\Documents\Nai_nov\Poker-Mechanics\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.Cache
->>>>>>> 0063b952ef4679ec2baeaed3ddc705ae38569412
