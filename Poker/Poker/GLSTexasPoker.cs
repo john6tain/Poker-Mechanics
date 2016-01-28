@@ -43,7 +43,8 @@ namespace Poker
             Dealer.SetupGame(GameDatabase, Player, Bot1, Bot2, Bot3, Bot4, Bot5, Table, Controls);
 
             EnableButtons();
-            //this.GameUpdate.Start();
+
+            this.GameUpdate.Start();
         }
 
         public ICharacter Bot1 { get; set; }
@@ -143,9 +144,10 @@ namespace Poker
             Label statusLabelToUpdate = GetLabel("StatusLabel");
 
             this.CharactersCollection[this.Index].Fold(statusLabelToUpdate);
-            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
 
-            ContinueRotating();
+            //DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton, this.raiseButton);
+
+            //StartBotRotation();
         }
 
         private Label GetLabel(string textAround)
@@ -155,7 +157,7 @@ namespace Poker
             return searchedLabel;
         }
 
-        private void ContinueRotating()
+        private void StartBotRotation()
         {
             if (this.RotateTimer.Enabled == false)
             {
@@ -164,6 +166,30 @@ namespace Poker
         }
 
         private async void bCheck_Click(object sender, EventArgs e)
+        {
+
+            //The bellow code reveals 1 card from the table cards
+
+            Label statusLabelToUpdate = GetLabel("StatusLabel");
+
+            string newText = "Check ";
+
+            this.CharactersCollection[this.Index].ChangeStatusToChecking();
+
+            UpdateStatusLabel(newText, statusLabelToUpdate);
+
+            this.Dealer.RevealTheNextCard(this.Table);
+
+
+            //The bellow block was meant to be executed in the original version of the game. 
+            //After the player makes his turn by pressing a button, starts the rotating of the bots.
+
+            //DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton, this.raiseButton);
+
+            //StartBotRotation();
+        }
+
+        private void MakeAllCardsVisible()
         {
             foreach (var element in this.Table.TableCardsCollection)
             {
@@ -177,44 +203,32 @@ namespace Poker
                     card.IsVisible = true;
                 }
             }
-
-            GameUpdate.Start();
-
-            //Label statusLabelToUpdate = GetLabel("StatusLabel");
-
-            //string newText = "Check ";
-
-            //this.CharactersCollection[this.Index].ChangeStatusToChecking();
-
-            //UpdateStatusLabel(newText, statusLabelToUpdate);
-            //this.Dealer.RevealTheNextCard(this.Table);
-
-            //DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
-
-            //ContinueRotating();
         }
 
         private async void bCall_Click(object sender, EventArgs e)
         {
+            this.CharactersCollection[this.Index].Call(this.CallSum);
+
+            this.Table.TakeCall(this.CallSum, potChips);
+
             Label statusLabelToUpdate = GetLabel("StatusLabel");
 
             string newText = "Call " + this.CallSum;
 
             UpdateStatusLabel(newText, statusLabelToUpdate);
 
-            this.Table.TakeCall(this.CallSum, potChips);
 
-            this.CharactersCollection[this.Index].Call(this.CallSum);
-
-            DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton);
-            ContinueRotating();
+            //DisablePlayerButtons(this.callButton, this.foldButton, this.checkButton, this.raiseButton);
+            //StartBotRotation();
         }
 
-        private void DisablePlayerButtons(Button callButton, Button foldButton, Button checkButton)
+
+        private void DisablePlayerButtons(Button callButton, Button foldButton, Button checkButton, Button raiseButton)
         {
             callButton.Enabled = false;
             foldButton.Enabled = false;
             checkButton.Enabled = false;
+            raiseButton.Enabled = false;
         }
 
         private void UpdateStatusLabel(string newText, Label statusLabelToUpdate)
@@ -224,22 +238,20 @@ namespace Poker
 
         private async void bRaise_Click(object sender, EventArgs e)
         {
-            foreach (var character in this.CharactersCollection)
-            {
-                this.Dealer.SetGameRules(character.CharacterCardsCollection, this.Table.TableCardsCollection, character);
-            }
+            //Raise the call minimum
+            this.CallSum += int.Parse(this.tbRaise.Text);
 
-            this.Dealer.DeclareWinner(this.CharactersCollection, this.Table.Pot);
+            this.CharactersCollection[this.Index].Call(this.CallSum);
 
-            //to validateSum
-            //this.CallSum = int.Parse(this.tbRaise.Text);
+            this.Table.TakeCall(this.CallSum, potChips);
 
-            //this.CharactersCollection[this.Index].Call(this.CallSum);
+            Label statusLabelToUpdate = GetLabel("StatusLabel");
 
-            //this.Table.TakeCall(this.CallSum, potChips);
+            string newText = "Raise " + int.Parse(this.tbRaise.Text);
 
+            UpdateStatusLabel(newText, statusLabelToUpdate);
 
-            //ContinueRotating();
+            //StartBotRotation();
         }
 
         private void bAdd_Click(object sender, EventArgs e)
@@ -345,6 +357,21 @@ namespace Poker
             this.CharactersCollection.Add(this.Bot3);
             this.CharactersCollection.Add(this.Bot4);
             this.CharactersCollection.Add(this.Bot5);
+        }
+
+        private void checkAllButton_Click(object sender, EventArgs e)
+        {
+            MakeAllCardsVisible();
+        }
+
+        private void checkWinnersButton_Click(object sender, EventArgs e)
+        {
+            foreach (var character in this.CharactersCollection)
+            {
+                this.Dealer.SetGameRules(character.CharacterCardsCollection, this.Table.TableCardsCollection, character);
+            }
+
+            this.Dealer.DeclareWinner(this.CharactersCollection, this.Table.Pot);
         }
     }
 }

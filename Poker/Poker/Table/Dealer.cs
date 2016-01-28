@@ -1927,7 +1927,7 @@
         /// <returns></returns>
         private bool DetermineIfEqual(IList<ICharacter> topCombinationCharactersCollection, bool equalScore)
         {
-            for (int cardNumber = 0; cardNumber < 5; cardNumber++)
+            for (int cardNumber = 0; cardNumber < topCombinationCharactersCollection[0].CardsCombination.Hand.Count-1; cardNumber++)
             {
                 for (int characterNumber = 0; characterNumber < topCombinationCharactersCollection.Count - 1; characterNumber++)
                 {

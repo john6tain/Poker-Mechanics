@@ -58,6 +58,8 @@ namespace Poker
             this.Bot4Chips = new System.Windows.Forms.TextBox();
             this.Bot3Chips = new System.Windows.Forms.TextBox();
             this.Bot2Chips = new System.Windows.Forms.TextBox();
+            this.checkAllButton = new System.Windows.Forms.Button();
+            this.checkWinnersButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // GameUpdate
@@ -71,10 +73,11 @@ namespace Poker
             // tbRaise
             // 
             this.tbRaise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbRaise.Location = new System.Drawing.Point(742, 622);
+            this.tbRaise.Location = new System.Drawing.Point(935, 647);
             this.tbRaise.Name = "tbRaise";
             this.tbRaise.Size = new System.Drawing.Size(118, 20);
             this.tbRaise.TabIndex = 0;
+            this.tbRaise.Text = "1000";
             this.tbRaise.TextChanged += new System.EventHandler(this.tbRaise_TextChanged);
             // 
             // potLabel
@@ -90,7 +93,7 @@ namespace Poker
             // playerStatusLabel
             // 
             this.playerStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.playerStatusLabel.Location = new System.Drawing.Point(739, 664);
+            this.playerStatusLabel.Location = new System.Drawing.Point(933, 606);
             this.playerStatusLabel.Name = "playerStatusLabel";
             this.playerStatusLabel.Size = new System.Drawing.Size(120, 27);
             this.playerStatusLabel.TabIndex = 30;
@@ -216,7 +219,7 @@ namespace Poker
             this.raiseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.raiseButton.Enabled = false;
             this.raiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.raiseButton.Location = new System.Drawing.Point(742, 575);
+            this.raiseButton.Location = new System.Drawing.Point(796, 640);
             this.raiseButton.Name = "raiseButton";
             this.raiseButton.Size = new System.Drawing.Size(111, 32);
             this.raiseButton.TabIndex = 4;
@@ -229,7 +232,7 @@ namespace Poker
             this.callButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.callButton.Enabled = false;
             this.callButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.callButton.Location = new System.Drawing.Point(742, 507);
+            this.callButton.Location = new System.Drawing.Point(796, 562);
             this.callButton.Name = "callButton";
             this.callButton.Size = new System.Drawing.Size(111, 48);
             this.callButton.TabIndex = 3;
@@ -242,7 +245,7 @@ namespace Poker
             this.checkButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkButton.Enabled = false;
             this.checkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkButton.Location = new System.Drawing.Point(362, 507);
+            this.checkButton.Location = new System.Drawing.Point(368, 559);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(111, 48);
             this.checkButton.TabIndex = 2;
@@ -255,7 +258,7 @@ namespace Poker
             this.foldButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.foldButton.Enabled = false;
             this.foldButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.foldButton.Location = new System.Drawing.Point(362, 575);
+            this.foldButton.Location = new System.Drawing.Point(365, 622);
             this.foldButton.Name = "foldButton";
             this.foldButton.Size = new System.Drawing.Size(114, 49);
             this.foldButton.TabIndex = 0;
@@ -296,6 +299,31 @@ namespace Poker
             this.Bot2Chips.Text = "Chips : 0";
             this.Bot2Chips.TextChanged += new System.EventHandler(this.tbBotChips2_TextChanged);
             // 
+            // checkAllButton
+            // 
+            this.checkAllButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkAllButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkAllButton.Location = new System.Drawing.Point(368, 496);
+            this.checkAllButton.Name = "checkAllButton";
+            this.checkAllButton.Size = new System.Drawing.Size(111, 48);
+            this.checkAllButton.TabIndex = 32;
+            this.checkAllButton.Text = "Check All";
+            this.checkAllButton.UseVisualStyleBackColor = true;
+            this.checkAllButton.Click += new System.EventHandler(this.checkAllButton_Click);
+            // 
+            // checkWinnersButton
+            // 
+            this.checkWinnersButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkWinnersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkWinnersButton.Location = new System.Drawing.Point(796, 498);
+            this.checkWinnersButton.Name = "checkWinnersButton";
+            this.checkWinnersButton.Size = new System.Drawing.Size(111, 51);
+            this.checkWinnersButton.TabIndex = 33;
+            this.checkWinnersButton.Text = "Check Winners";
+            this.checkWinnersButton.UseVisualStyleBackColor = true;
+            this.checkWinnersButton.Click += new System.EventHandler(this.checkWinnersButton_Click);
+            // 
             // GLSTexasPoker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +332,8 @@ namespace Poker
             this.BackgroundImage = global::Poker.Properties.Resources.poker_table___Copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1284, 726);
+            this.Controls.Add(this.checkWinnersButton);
+            this.Controls.Add(this.checkAllButton);
             this.Controls.Add(this.tbRaise);
             this.Controls.Add(this.potLabel);
             this.Controls.Add(this.Bot2StatusLabel);
@@ -370,6 +400,8 @@ namespace Poker
         private TextBox Bot4Chips;
         private TextBox Bot3Chips;
         private TextBox Bot2Chips;
+        private Button checkAllButton;
+        private Button checkWinnersButton;
     }
 }
 
