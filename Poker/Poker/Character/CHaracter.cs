@@ -12,6 +12,8 @@
 // ***********************************************************************
 
 
+using Poker.CustomException;
+
 namespace Poker.Character
 {
     using Interfacees;
@@ -68,7 +70,7 @@ namespace Poker.Character
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Chips cannot be negative!"); //TODO: CUSTOM Exception: ChipsOutOfRangeException
+                    throw new ChipsOutOfRangeException("Chips cannot be negative!");
                 }
                 if (value > int.MaxValue)
                 {
@@ -85,7 +87,7 @@ namespace Poker.Character
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Character name cannot be null or empty!"); //TODO: CUSTOM Exception:
+                    throw new ArgumentNullException("Character name cannot be null or empty!");
                 }
 
                 this.name = value;
@@ -123,11 +125,11 @@ namespace Poker.Character
             {
                 if (value == null)
                 {
-                    throw new ArgumentException("First Card Location of Character cannot be null");  //TODO: CUSTOM Exception:
+                    throw new FirstCardLocationException("First Card Location of Character cannot be null");
                 }
                 if (value.X < 0 || value.Y < 0)
                 {
-                    throw new ArgumentOutOfRangeException("First Card Coordinates of Character cannot be negative");    //TODO: CUSTOM Exception:
+                    throw new FirstCardLocationException("First Card Coordinates of Character cannot be negative");
                 }
                 this.firstCardLocation = value;
             }
@@ -140,16 +142,16 @@ namespace Poker.Character
             {
                 if (value == null)
                 {
-                    throw new ArgumentException("Second Card Location of Character cannot be null");  //TODO: CUSTOM Exception:
+                    throw new FirstCardLocationException("Second Card Location of Character cannot be null");
                 }
                 if (value.X < 0 || value.Y < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Second Card Coordinates of Character cannot be negative");    //TODO: CUSTOM Exception:
+                    throw new FirstCardLocationException("Second Card Coordinates of Character cannot be negative");
                 }
                 this.secondCardLocation = value;
             }
-        } 
-         
+        }
+
         private void UpdateChipsLabels(TextBox searchedTextBox)
         {
             searchedTextBox.Text = this.Chips.ToString();
@@ -178,7 +180,7 @@ namespace Poker.Character
                                     bool isFinalTurn, Label hasFolded, int botIndex,
                                     double botPower, double behaviourPower, int callSum);
 
-        
+
 
         /// <summary>
         /// All characters can call an AllIn to play all the money they got

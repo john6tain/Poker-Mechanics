@@ -98,11 +98,6 @@
                 {
                     this.rank = value;
                 }
-                else
-                {
-                    //TODO : need Cumstom Exeption
-                    throw new ArgumentException("It's null Man");
-                }
             }
 
         }
@@ -118,8 +113,7 @@
                 }
                 else
                 {
-                    //TODO : need Cumstom Exeption
-                    throw new ArgumentException("It's null Man");
+                    throw new ArgumentNullException("Picture box cannot be null");
                 }
             }
         }

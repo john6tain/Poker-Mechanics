@@ -49,6 +49,9 @@
     <Compile Include="Character\DecisionMaker.cs" />
     <Compile Include="Character\Player.cs" />
     <Compile Include="Character\Bot.cs" />
+    <Compile Include="CustomException\ChipsOutOfRangeException.cs" />
+    <Compile Include="CustomException\FirstCardLocationException.cs" />
+    <Compile Include="CustomException\SecondCardLocationException.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="Interfaces\IDealer.cs" />
     <Compile Include="Resources\Enumerations\CardRank.cs" />
