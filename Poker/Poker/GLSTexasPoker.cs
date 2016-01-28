@@ -74,7 +74,25 @@ namespace Poker
             this.Bot4.Name = "Bot4";
             this.Bot5.Name = "Bot5";
             this.Player.Name = "Player";
+            this.Bot1.Chips = 10000;
+            this.Bot2.Chips = 10000;
+            this.Bot3.Chips = 10000;
+            this.Bot4.Chips = 10000;
+            this.Bot5.Chips = 10000;
             this.Player.Chips = 10000;
+            this.Bot1.ChipsLabel.Text ="Chips: " +  this.Bot1.Chips.ToString();
+            this.Bot2.ChipsLabel.Text = "Chips: " + this.Bot2.Chips.ToString();
+            this.Bot3.ChipsLabel.Text = "Chips: " + this.Bot3.Chips.ToString();
+            this.Bot4.ChipsLabel.Text = "Chips: " + this.Bot4.Chips.ToString();
+            this.Bot5.ChipsLabel.Text = "Chips: " + this.Bot5.Chips.ToString();
+            this.Player.ChipsLabel.Text = "Chips: " + this.Player.Chips.ToString();
+            Controls.Add(this.Bot1.ChipsLabel);
+            Controls.Add(this.Bot2.ChipsLabel);
+            Controls.Add(this.Bot3.ChipsLabel);
+            Controls.Add(this.Bot4.ChipsLabel);
+            Controls.Add(this.Bot5.ChipsLabel);
+            Controls.Add(this.Player.ChipsLabel);
+
             this.GameDatabase = new DataBase.DataBase();
             this.DecisionMaker = new DecisionMaker();
             this.Table = new Table.Table();

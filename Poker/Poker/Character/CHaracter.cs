@@ -13,6 +13,7 @@
 
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using Poker.GameConstants;
 
 namespace Poker.Character
 {
@@ -29,6 +30,7 @@ namespace Poker.Character
     {
 
         public Label StatusLabel { get; set; }
+        public Label ChipsLabel { get; set; }
 
 
 
@@ -69,8 +71,18 @@ namespace Poker.Character
             this.FirstCardLocation = firstCardLocation;
             this.SecondCardLocation = GetSecondCardLocation(firstCardLocation, cardWidth);
             this.Name = "neshto";
+            this.ChipsLabel = new Label();
+            this.ChipsLabel.Text = "none";
+            this.ChipsLabel.Location = GetChipsLabelLocation(firstCardLocation, cardWidth);
         }
 
+        private Point GetChipsLabelLocation(Point firstCardLocation, int cardWidth)
+        {
+            int labelX = firstCardLocation.X + (cardWidth/2);
+            int labelY = firstCardLocation.Y + 150;
+
+            return new Point(labelX, labelY);
+        }
 
         public int Chips
         {
