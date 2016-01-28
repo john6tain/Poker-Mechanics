@@ -3,47 +3,27 @@
 // Class Author     : Alex
 //
 // Last Modified By : Alex
-// Last Modified On : 26 Jan 2016
+// Last Modified On : 28 Jan 2016
 // ***********************************************************************
 // <copyright file="Character.cs" team="Currant">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-
-using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
-
 namespace Poker.Character
 {
+    using Interfacees;
     using Interfaces;
-    using Poker.Interfacees;
-    using Poker.Table;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
+    using Table;
 
     public abstract class Character : ICharacter
     {
-
-        public Label StatusLabel { get; set; }
-
-
-
-        public int chips;
-        public string name;
-        public bool hasFolded;
-        public bool isOnTurn;
-        public ICombination cardsCombination;
-        public IList<ICard> characterCardsCollection;
-        public Point firstCardLocation;
-        public Point secondCardLocation;
-
-
-
-
         private readonly Panel playerPanel = new Panel();
         private readonly Panel firstBotPanel = new Panel();
         private readonly Panel secondBotPanel = new Panel();
@@ -53,17 +33,16 @@ namespace Poker.Character
         private readonly List<int> playerChips = new List<int>();
         private readonly List<bool?> characterTurn = new List<bool?>();
 
+        private int chips;
+        private string name;
+        private bool hasFolded;
+        private bool isOnTurn;
+        private ICombination cardsCombination;
+        private IList<ICard> characterCardsCollection;
+        private Point firstCardLocation;
+        private Point secondCardLocation;
 
-
-
-        public abstract void Decide(ICharacter character, IList<ICard> cardCollection, int firstCard, int secondCard, int botChips, bool isFinalTurn, Label hasFolded, int botIndex, double botPower, double behaviourPower, int callSum);
-
-        private void UpdateStatus(string statusText)
-        {
-            this.StatusLabel.Text = statusText;
-        }
-
-        public Character(Point firstCardLocation, int cardWidth)
+        protected Character(Point firstCardLocation, int cardWidth)
         {
             this.CharacterCardsCollection = new List<ICard>();
             this.FirstCardLocation = firstCardLocation;
@@ -71,6 +50,7 @@ namespace Poker.Character
             this.Name = "neshto";
         }
 
+        public Label StatusLabel { get; set; }
 
         public int Chips
         {
@@ -113,16 +93,6 @@ namespace Poker.Character
         {
             get { return this.isOnTurn; }
             set { this.isOnTurn = value; }
-        }
-
-        public void Update(TextBox searchedTextBox)
-        {
-            UpdateChipsLabels(searchedTextBox);
-        }
-
-        private void UpdateChipsLabels(TextBox searchedTextBox)
-        {
-            searchedTextBox.Text = this.Chips.ToString();
         }
 
         public ICombination CardsCombination
@@ -171,9 +141,26 @@ namespace Poker.Character
             }
         }
 
-        
+        private void UpdateChipsLabels(TextBox searchedTextBox)
+        {
+            searchedTextBox.Text = this.Chips.ToString();
+        }
 
-        
+        private void UpdateStatus(string statusText)
+        {
+            this.StatusLabel.Text = statusText;
+        }
+
+        public void Update(TextBox searchedTextBox)
+        {
+            UpdateChipsLabels(searchedTextBox);
+        }
+
+        public abstract void Decide(ICharacter character, IList<ICard> cardCollection,
+                                    int firstCard, int secondCard, int botChips,
+                                    bool isFinalTurn, Label hasFolded, int botIndex,
+                                    double botPower, double behaviourPower, int callSum);
+
         /// <summary>
         /// All characters can call an AllIn to play all the money they got
         /// </summary>
@@ -184,7 +171,7 @@ namespace Poker.Character
             Label playerStatus = new Label();
             if (this.Chips <= 0 && !isWinning)
             {
-                if (playerStatus.Text.Contains("raise") && playerStatus.Text.Contains("Call"))
+                if (playerStatus.Text.Contains("Raise") && playerStatus.Text.Contains("Call"))
                 {
                     playerChips.Add(Chips);
                 }
@@ -241,7 +228,6 @@ namespace Poker.Character
             }
 
             int maxLeft = 6;
-
             if (playerChips.ToArray().Length == maxLeft)
             {
                 await Dealer.Finish(2);
@@ -299,16 +285,16 @@ namespace Poker.Character
                     MessageBox.Show("Bot 5 Wins");
                 }
 
-                for (int j = 0; j <= 16; j++)
+                for (int cardIndex = 0; cardIndex <= 16; cardIndex++)
                 {
-                    Dealer.Holder[j].Visible = false;
+                    Dealer.Holder[cardIndex].Visible = false;
                 }
                 await Dealer.Finish(1);
             }
 
             double rounds = 0;
-            int End = 4;
-            if (winner < 6 && winner > 1 && rounds >= End)
+            int end = 4;
+            if (winner < 6 && winner > 1 && rounds >= end)
             {
                 await Dealer.Finish(2);
             }
@@ -360,7 +346,7 @@ namespace Poker.Character
         /// <param name="botChips">The bot chips.</param>
         /// <param name="isBotsTurn">if set to <c>true</c> [is bots turn].</param>
         /// <param name="statusLabel">The status label.</param>
-        public void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel,TextBox potChips)
+        public void RaiseBet(ref int botChips, ref bool isBotsTurn, Label statusLabel, TextBox potChips)
         {
             botChips -= Convert.ToInt32(raise);
             statusLabel.Text = "Raise " + raise;

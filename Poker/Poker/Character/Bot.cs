@@ -1,20 +1,20 @@
-﻿using System.Drawing;
-
-namespace Poker.Character
+﻿namespace Poker.Character
 {
     using Interfacees;
     using Interfaces;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public class Bot : Character
     {
-        private IDecisionMaker decisionMaker;
+        private readonly IDecisionMaker decisionMaker;
 
         /// <summary>
         /// Initializes a new instance of DecisionMaker class.
         /// </summary>
-        public Bot(Point firstCardLocation, int cardWidth) : base(firstCardLocation, cardWidth)
+        public Bot(Point firstCardLocation, int cardWidth)
+            : base(firstCardLocation, cardWidth)
         {
             this.decisionMaker = new DecisionMaker();
         }
@@ -33,15 +33,17 @@ namespace Poker.Character
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         /// <param name="behaviourPower">The behaviour power.</param>
-        public override void Decide(ICharacter character, IList<ICard> cardCollection,
+        public override void Decide(
+            ICharacter character, IList<ICard> cardCollection,
             int firstCard, int secondCard, int botChips,
             bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
             double behaviourPower, int callSum)
         {
-            this.decisionMaker.MakeDecision(character,
-                                            firstCard, secondCard, ref botChips, this.IsOnTurn,
-                                            ref isFinalTurn, hasFolded, botIndex, botPower,
-                                            behaviourPower, callSum);
+            this.decisionMaker.MakeDecision(
+                character, firstCard, secondCard,
+                ref botChips, this.IsOnTurn,
+                ref isFinalTurn, hasFolded,
+                botIndex, botPower, behaviourPower, callSum);
         }
     }
 }

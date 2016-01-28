@@ -8,10 +8,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Poker.Character;
 using Timer = System.Windows.Forms.Timer;
 
 
@@ -141,7 +139,7 @@ namespace Poker.Table
         private static Label secondBotStatus;
         private static int Chips = 10000;
 
-        
+
 
         public void SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection controls)
         {
@@ -205,7 +203,7 @@ namespace Poker.Table
             //    Holder[index].Width = 80;
             //    //Controls.Add(Holder[index]);
             //    Holder[index].Name = "pb" + index;
-                
+
 
             //    #region Throwing Cards
 
@@ -650,7 +648,7 @@ namespace Poker.Table
         {
             character.CharacterCardsCollection.Add(shuffledDeck[deckCardIndex]);
 
-            
+
             character.CharacterCardsCollection[handCardIndex].CardPictureBox.Height = Constants.CardHeight;
             character.CharacterCardsCollection[handCardIndex].CardPictureBox.Width = Constants.CardWidth;
 
@@ -658,13 +656,13 @@ namespace Poker.Table
 
             if (character.CharacterCardsCollection[handCardIndex].IsVisible)
             {
-                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image =  character.CharacterCardsCollection[handCardIndex].FrontImage;
+                character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image = character.CharacterCardsCollection[handCardIndex].FrontImage;
             }
             else
             {
                 character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image = character.CharacterCardsCollection[handCardIndex].BackImage;
             }
-        
+
 
             if (handCardIndex == 0)
             {
@@ -674,12 +672,12 @@ namespace Poker.Table
             {
                 character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.SecondCardLocation;
             }
-            
-            
+
+
 
             character.CharacterCardsCollection[handCardIndex].CardPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             controls.Add(character.CharacterCardsCollection[handCardIndex].CardPictureBox);
-            
+
 
         }
 
@@ -714,7 +712,7 @@ namespace Poker.Table
         }
 
         private void DealCardsToBot(ICharacter bot, int firstDeckCardIndex, int secondDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection controls)
-        {      
+        {
             bot.CharacterCardsCollection.Clear();
             GiveCard(bot, 0, shuffledDeck, firstDeckCardIndex, controls);
             GiveCard(bot, 1, shuffledDeck, secondDeckCardIndex, controls);
@@ -961,7 +959,7 @@ namespace Poker.Table
 
                 CheckForHighCard(charactersCardsCollection, tableCardsCollection, character);
             }
-          }
+        }
 
         /// <summary>
         /// This method determins if straight flush of clubs combination is available 

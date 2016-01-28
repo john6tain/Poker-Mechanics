@@ -1,19 +1,14 @@
 ﻿namespace Poker.Character
 {
+    using GameConstants;
     using Interfacees;
     using Interfaces;
-    using Poker.GameConstants;
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
 
     public class DecisionMaker : IDecisionMaker
     {
-        public void ChangeStatus(Label a)
-        {
-            a.Text = "asd";
-        }
-
         /// <summary>
         /// Tell us the specified straight combination.
         /// </summary>
@@ -25,10 +20,11 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
         private void Straight(ICharacter character, ref int botChips,
-            ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower, int callSum)
+                              ref bool isOnTurn, ref bool isFinalTurn,
+                              Label hasFolded, int botIndex, double botPower, int callSum)
         {
             Random straightRandomGenerator = new Random();
+
             int chanceToCall = straightRandomGenerator.Next(3, 6);
             int chanceToRaise = straightRandomGenerator.Next(3, 8);
 
@@ -36,8 +32,8 @@
             {
                 ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
             }
-
         }
+
         /// <summary>
         /// Tell us the specified flush combination.
         /// </summary>
@@ -48,12 +44,14 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void Flush(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower, int callSum)
+        private void Flush(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn,
+                           Label hasFolded, int botIndex, double botPower, int callSum)
         {
             Random flushRandomGenerator = new Random();
+
             int chanceToCall = flushRandomGenerator.Next(2, 6);
             int chanceToRaise = flushRandomGenerator.Next(3, 7);
+
             ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
         }
 
@@ -67,10 +65,11 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void FullHouse(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower, int callSum)
+        private void FullHouse(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn,
+                               Label hasFolded, int botIndex, double botPower, int callSum)
         {
             Random fullHouseRandomGenerator = new Random();
+
             int chanceToCall = fullHouseRandomGenerator.Next(1, 5);
             int chanceToRaise = fullHouseRandomGenerator.Next(2, 6);
 
@@ -94,6 +93,7 @@
             int botIndex, double botPower, int callSum)
         {
             Random fourOfAKindRandomGenerator = new Random();
+
             int chanceToCall = fourOfAKindRandomGenerator.Next(1, 4);
             int chanceToRaise = fourOfAKindRandomGenerator.Next(2, 5);
 
@@ -113,87 +113,18 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void StraightFlush(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded,
-            int botIndex, double botPower, int callSum)
+        private void StraightFlush(ICharacter character, ref int botChips, ref bool isOnTurn,
+                                   ref bool isFinalTurn, Label hasFolded, int botIndex,
+                                   double botPower, int callSum)
         {
             Random straightFlushRandomGenerator = new Random();
+
             int chanceToCall = straightFlushRandomGenerator.Next(1, 3);
             int chanceToRaise = straightFlushRandomGenerator.Next(1, 3);
 
             if (botPower <= 913 && botPower >= 804)
             {
                 ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, chanceToCall, chanceToRaise, callSum);
-            }
-        }
-
-        /// <summary>
-        /// Decision manager decide who has biggest winning combination
-        /// </summary>
-        /// <param name="character">The character.</param>
-        /// <param name="cardCollection">The card collection.</param>
-        /// <param name="firstCard">The first card.</param>
-        /// <param name="secondCard">The second card.</param>
-        /// <param name="botChips">The bot chips.</param>
-        /// <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
-        /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
-        /// <param name="hasFolded">The has folded.</param>
-        /// <param name="botIndex">Index of the bot.</param>
-        /// <param name="botPower">The bot power.</param>
-        /// <param name="behaviourPower">The bot current.</param>
-        public void MakeDecision(ICharacter character,
-                                 int firstCard, int secondCard, ref int botChips, bool isOnTurn,
-                                 ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
-                                 double behaviourPower, int callSum)
-        {
-            IList<ICard> cardCollection = character.CharacterCardsCollection;
-
-            if (!isFinalTurn)
-            {
-                if (behaviourPower == (Constants.HighCardBehaviourPower))
-                {
-                    HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
-                }
-                if (behaviourPower == 0)
-                {
-                    PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
-                }
-                if (behaviourPower == Constants.PairFromHandBehaviourPower)
-                {
-                    PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
-                }
-                if (behaviourPower == 2)
-                {
-                    TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
-                }
-                if (behaviourPower == Constants.ThreeOfAKindBehaviourPower)
-                {
-                    ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-                if (behaviourPower == Constants.StraightBehaviourPower)
-                {
-                    Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-                if (behaviourPower == Constants.LittleFlushBehaviourPower || behaviourPower == Constants.BigFlushBehaviourPower)
-                {
-                    Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-                if (behaviourPower == Constants.FullHouseBehaviourPower)
-                {
-                    FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-                if (behaviourPower == Constants.FourOfAKindBehavourPower)
-                {
-                    FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-                if (behaviourPower == Constants.LittleStraightFlushBehaviourPower || behaviourPower == Constants.BigStraightFlushBehaviourPower)
-                {
-                    StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
-                }
-            }
-            if (isFinalTurn)
-            {
-                cardCollection[firstCard].IsVisible = false;
-                cardCollection[secondCard].IsVisible = false;
             }
         }
 
@@ -236,23 +167,25 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void PairHand(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
+        private void PairHand(ICharacter character, ref int botChips, ref bool isOnTurn,
+                              ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
         {
             Random pairHandRandom = new Random();
-            int rCall = pairHandRandom.Next(10, 16);
-            int rRaise = pairHandRandom.Next(10, 13);
+
+            int randomCall = pairHandRandom.Next(10, 16);
+            int randomPair = pairHandRandom.Next(10, 13);
 
             if (botPower <= 199 && botPower >= 140)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 6, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 6, randomPair, callSum);
             }
             if (botPower <= 139 && botPower >= 128)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 7, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 7, randomPair, callSum);
             }
             if (botPower < 128 && botPower >= 101)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 9, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 9, randomPair, callSum);
             }
         }
 
@@ -265,23 +198,25 @@
         /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botPower">The bot power.</param>
-        private void TwoPairs(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
+        private void TwoPairs(ICharacter character, ref int botChips, ref bool isOnTurn,
+                              ref bool isFinalTurn, Label hasFolded, double botPower, int callSum)
         {
             Random twoPairsRandom = new Random();
-            int rCall = twoPairsRandom.Next(6, 11);
-            int rRaise = twoPairsRandom.Next(6, 11);
+
+            int randomCall = twoPairsRandom.Next(6, 11);
+            int randomRaise = twoPairsRandom.Next(6, 11);
 
             if (botPower <= 290 && botPower >= 246)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 3, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 3, randomRaise, callSum);
             }
             if (botPower <= 244 && botPower >= 234)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 4, randomRaise, callSum);
             }
             if (botPower < 234 && botPower >= 201)
             {
-                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, rCall, 4, rRaise, callSum);
+                ChooseBotsMoveSecondWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, randomCall, 4, randomRaise, callSum);
             }
         }
 
@@ -295,15 +230,18 @@
         /// <param name="hasFolded">The has folded.</param>
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="botPower">The bot power.</param>
-        private void ThreeOfAKind(ICharacter character, ref int botChips, ref bool isOnTurn, ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower, int callSum)
+        private void ThreeOfAKind(ICharacter character, ref int botChips, ref bool isOnTurn,
+                                  ref bool isFinalTurn, Label hasFolded, int botIndex,
+                                  double botPower, int callSum)
         {
             Random threeOfAKindRandom = new Random();
-            int tCall = threeOfAKindRandom.Next(3, 7);
-            int tRaise = threeOfAKindRandom.Next(4, 8);
+
+            int threeOfAKindCall = threeOfAKindRandom.Next(3, 7);
+            int threeOfAKindRaise = threeOfAKindRandom.Next(4, 8);
 
             if (botPower <= 390 && botPower >= 303)
             {
-                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, tCall, tRaise, callSum);
+                ChooseBotsMoveThirdWay(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, threeOfAKindCall, threeOfAKindRaise, callSum);
             }
         }
 
@@ -332,9 +270,12 @@
         /// <param name="botPower">The bot power.</param>
         /// <param name="carefulBehaviourFactor">The careful behaviour factor.</param>
         /// <param name="riskyBehaviourFactor">The risky behaviour factor.</param>
-        private void ChooseBotsMoveFirstWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label statusLabel, double botPower, int carefulBehaviourFactor, int riskyBehaviourFactor, int callSum)
+        private void ChooseBotsMoveFirstWay(ICharacter character, ref int botChips, ref bool isBotsTurn,
+                                            ref bool botFolds, Label statusLabel, double botPower,
+                                            int carefulBehaviourFactor, int riskyBehaviourFactor, int callSum)
         {
             Random botHighCardPairRandom = new Random();
+
             int botHighCardRandom = botHighCardPairRandom.Next(1, 4);
 
             if (call <= 0)
@@ -385,10 +326,11 @@
                     }
                     else
                     {
-                        character.Fold( statusLabel);
+                        character.Fold(statusLabel);
                     }
                 }
             }
+
             if (botChips <= 0)
             {
                 botFolds = true;
@@ -407,9 +349,13 @@
         /// <param name="raiseBehaviourFactor">The raise behaviour factor.</param>
         /// <param name="behaviourFactorBasedOnBotPower">The behaviour factor based on bot power.</param>
         /// <param name="callBehaviourFactor">The call behaviour factor.</param>
-        private void ChooseBotsMoveSecondWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label labelStatus, int raiseBehaviourFactor, int behaviourFactorBasedOnBotPower, int callBehaviourFactor, int callSum)
+        private void ChooseBotsMoveSecondWay(ICharacter character, ref int botChips, ref bool isBotsTurn,
+                                             ref bool botFolds, Label labelStatus, int raiseBehaviourFactor,
+                                             int behaviourFactorBasedOnBotPower,
+                                             int callBehaviourFactor, int callSum)
         {
             Random pairsRandom = new Random();
+
             int randomNumber = pairsRandom.Next(1, 3);
 
             if (rounds < 2)
@@ -451,10 +397,10 @@
                                 character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                             }
                         }
-
                     }
                 }
             }
+
             if (rounds >= 2)
             {
                 if (call > 0)
@@ -492,12 +438,14 @@
                         }
                     }
                 }
+
                 if (call <= 0)
                 {
                     raise = CalculateMaximumBidAbilityOfTheBot(botChips, callBehaviourFactor - randomNumber);
                     character.RaiseBet(ref botChips, ref isBotsTurn, labelStatus, potChips);
                 }
             }
+
             if (botChips <= 0)
             {
                 botFolds = true;
@@ -543,9 +491,12 @@
         /// <param name="botIndex">Index of the bot.</param>
         /// <param name="behaviourFactor">The behaviour factor.</param>
         /// <param name="r">The r.</param>
-        private void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips, ref bool isBotsTurn, ref bool botFolds, Label botStatus, int botIndex, int behaviourFactor, int r, int callSum)
+        private void ChooseBotsMoveThirdWay(ICharacter character, ref int botChips,
+                                            ref bool isBotsTurn, ref bool botFolds, Label botStatus,
+                                            int botIndex, int behaviourFactor, int r, int callSum)
         {
             Random randomCombination = new Random();
+
             int combination = randomCombination.Next(1, 3);
 
             if (call <= 0)
@@ -590,9 +541,81 @@
                     }
                 }
             }
+
             if (botChips <= 0)
             {
                 botFolds = true;
+            }
+        }
+        /// <summary>
+        /// Decision manager decide who has biggest winning combination
+        /// </summary>
+        /// <param name="character">The character.</param>
+        /// <param name="cardCollection">The card collection.</param>
+        /// <param name="firstCard">The first card.</param>
+        /// <param name="secondCard">The second card.</param>
+        /// <param name="botChips">The bot chips.</param>
+        /// <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+        /// <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+        /// <param name="hasFolded">The has folded.</param>
+        /// <param name="botIndex">Index of the bot.</param>
+        /// <param name="botPower">The bot power.</param>
+        /// <param name="behaviourPower">The bot current.</param>
+        public void MakeDecision(ICharacter character,
+                                 int firstCard, int secondCard, ref int botChips, bool isOnTurn,
+                                 ref bool isFinalTurn, Label hasFolded, int botIndex, double botPower,
+                                 double behaviourPower, int callSum)
+        {
+            IList<ICard> cardCollection = character.CharacterCardsCollection;
+
+            if (!isFinalTurn)
+            {
+                if (behaviourPower == (Constants.HighCardBehaviourPower))
+                {
+                    HighCard(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
+                }
+                if (behaviourPower == 0)
+                {
+                    PairTable(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
+                }
+                if (behaviourPower == Constants.PairFromHandBehaviourPower)
+                {
+                    PairHand(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
+                }
+                if (behaviourPower == Constants.TwoOfAkindBehaviourPower)
+                {
+                    TwoPairs(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botPower, callSum);
+                }
+                if (behaviourPower == Constants.ThreeOfAKindBehaviourPower)
+                {
+                    ThreeOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+                if (behaviourPower == Constants.StraightBehaviourPower)
+                {
+                    Straight(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+                if (behaviourPower == Constants.LittleFlushBehaviourPower || behaviourPower == Constants.BigFlushBehaviourPower)
+                {
+                    Flush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+                if (behaviourPower == Constants.FullHouseBehaviourPower)
+                {
+                    FullHouse(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+                if (behaviourPower == Constants.FourOfAKindBehavourPower)
+                {
+                    FourOfAKind(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+                if (behaviourPower == Constants.LittleStraightFlushBehaviourPower || behaviourPower == Constants.BigStraightFlushBehaviourPower)
+                {
+                    StraightFlush(character, ref botChips, ref isOnTurn, ref isFinalTurn, hasFolded, botIndex, botPower, callSum);
+                }
+            }
+
+            if (isFinalTurn)
+            {
+                cardCollection[firstCard].IsVisible = false;
+                cardCollection[secondCard].IsVisible = false;
             }
         }
     }
