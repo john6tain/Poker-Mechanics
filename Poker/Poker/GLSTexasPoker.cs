@@ -341,6 +341,8 @@ namespace Poker
 
             foreach (var element in this.CharactersCollection)
             {
+                element.ChipsLabel.Text = "Chips: " + element.Chips.ToString();
+
                 TextBox searchedTextBox = GetTextBox("Chips", element);
 
                 element.Update(searchedTextBox);
