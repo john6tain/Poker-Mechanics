@@ -1,22 +1,22 @@
-﻿using Poker.Enumerations;
-using Poker.GameConstants;
-using Poker.Interfacees;
-using Poker.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
-
-
-namespace Poker.Table
+﻿namespace Poker.Table
 {
+    using Enumerations;
+    using GameConstants;
+    using Interfacees;
+    using Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
+    using Timer = System.Windows.Forms.Timer;
+
     public class Dealer : IDealer
     {
+        #region Constants
         private const double HighCardBehaviourPower = -1;
         private const double ThreeOfAKindBehaviourPower = 3;
         private const double OnePairBehaviourPower = 1;
@@ -28,27 +28,20 @@ namespace Poker.Table
         private const double BigFlushBehaviourPower = 5.5;
         private const double LittleFlushBehaviourPower = 5;
         private const double StraightBehaviourPower = 4;
+        #endregion
 
-
-        private static Label playerStatus;
-
-        public static readonly PictureBox[] Holder = new PictureBox[52];
-
+        #region ReadOnly variables
         private static readonly List<bool?> bools = new List<bool?>();
-
-        private static string[] ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
-
         private static readonly Image[] Deck = new Image[52];
-
         private static readonly int[] Reserve = new int[17];
-
         private static readonly Timer timer = new Timer();
+        public static readonly PictureBox[] Holder = new PictureBox[52];
+        #endregion
 
-        private static ProgressBar progressBarTimer;
-
+        #region Static variables
         private static bool PlayerFirstTurn;
         private static bool botOneFirstTurn;
-        private static bool botTwoFirstTurn; //botTwoTurn
+        private static bool botTwoFirstTurn;
         private static bool botThreeFirstTurn;
         private static bool botFourFirstTurn;
         private static bool botFiveFirstTurn;
@@ -67,6 +60,10 @@ namespace Poker.Table
         private static readonly Panel thirdBotPanel = new Panel();
         private static readonly Panel fourthBotPanel = new Panel();
         private static readonly Panel fifthBotPanel = new Panel();
+
+        private static Label playerStatus;
+        private static string[] ImgLocation = Directory.GetFiles("Assets\\Cards", "*.png", SearchOption.TopDirectoryOnly);
+        private static ProgressBar progressBarTimer;
 
         private static int playerChips = 10000;
         private static int firstBotChips = 10000;
@@ -138,19 +135,15 @@ namespace Poker.Table
         private static Label firstBotStatus;
         private static Label secondBotStatus;
         private static int Chips = 10000;
-
-
+        #endregion
 
         public void SetupGame(IDatabase database, ICharacter player, ICharacter bot1, ICharacter bot2, ICharacter bot3, ICharacter bot4, ICharacter bot5, ITable table, Control.ControlCollection controls)
         {
-
             IList<ICard> shuffledDeck = database.Deck.ToList();
 
             ShuffleCards(shuffledDeck);
 
             DealCards(shuffledDeck, player, bot1, bot2, bot3, bot4, bot5, table, controls);
-
-
 
             #region Code to be assesed and removed...
 
@@ -663,7 +656,6 @@ namespace Poker.Table
                 character.CharacterCardsCollection[handCardIndex].CardPictureBox.Image = character.CharacterCardsCollection[handCardIndex].BackImage;
             }
 
-
             if (handCardIndex == 0)
             {
                 character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.FirstCardLocation;
@@ -673,12 +665,8 @@ namespace Poker.Table
                 character.CharacterCardsCollection[handCardIndex].CardPictureBox.Location = character.SecondCardLocation;
             }
 
-
-
             character.CharacterCardsCollection[handCardIndex].CardPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             controls.Add(character.CharacterCardsCollection[handCardIndex].CardPictureBox);
-
-
         }
 
         private void DealCardsToTable(ITable table, int startingDeckCardIndex, IList<ICard> shuffledDeck, Control.ControlCollection controls)
@@ -1001,8 +989,6 @@ namespace Poker.Table
                     {
                         return false;
                     }
-
-
                 }
 
                 if (straightFlushCardsCollection[0].Rank == CardRank.Ace)
@@ -1072,8 +1058,6 @@ namespace Poker.Table
                     {
                         return false;
                     }
-
-
                 }
 
                 if (straightFlushCardsCollection[0].Rank == CardRank.Ace)
@@ -1143,8 +1127,6 @@ namespace Poker.Table
                     {
                         return false;
                     }
-
-
                 }
 
                 if (straightFlushCardsCollection[0].Rank == CardRank.Ace)
@@ -1244,7 +1226,6 @@ namespace Poker.Table
             return hasStraightFlush;
         }
 
-
         /// <summary>
         /// This method checks if the character has card combination "Straight"
         /// </summary>
@@ -1293,9 +1274,7 @@ namespace Poker.Table
             }
 
             return hasStraight;
-
         }
-
 
         /// <summary>
         /// This method checks if the character has card combination "Flush"
@@ -1363,12 +1342,10 @@ namespace Poker.Table
                         joinedCardCollection.Where(x => !cardsThatMakeUpFlush.Contains(x)).ToList();
 
                     RegisterCombination(character, power, cardsThatMakeUpFlush, theOtherCardsFromTheHandNotIncludedInTheCombination, CombinationType.Flush, currentFlushBehaviourPower);
-
                 }
             }
             return hasFlush;
         }
-
 
         /// <summary>
         /// Checks if the cards on the table make a flush without the cards from the characters hand.
@@ -1432,7 +1409,6 @@ namespace Poker.Table
             return true;
         }
 
-
         /// <summary>
         /// This method cheks for forur of a kind combination
         /// </summary>
@@ -1470,11 +1446,8 @@ namespace Poker.Table
                     return true;
                 }
             }
-
             return false;
         }
-
-
 
         /// <summary>
         /// This method checks if the character has card combination "Full House"
@@ -1512,7 +1485,6 @@ namespace Poker.Table
                         i--;
                     }
                 }
-
 
                 //checks if there is a pair in the remaining collection
                 //if yes -> the player has a full house combination
@@ -1631,7 +1603,6 @@ namespace Poker.Table
                 character.CardsCombination = new Combination(power, combinationType, behaviourPower, combinationCardsCollection, kickersCollection);
             }
         }
-
 
         /// <summary>
         /// Checks for a "High card" combination
@@ -1770,8 +1741,6 @@ namespace Poker.Table
 
                 hasASecondPair = CheckForOnePair(nonCombinationCards, emptyCollection, character, true);
             }
-
-
             return hasASecondPair;
         }
 
@@ -1817,7 +1786,6 @@ namespace Poker.Table
             {
                 PrintOneWinnerMessage(winMessage);
             }
-
         }
 
         private void PrintSeveralWinnersMessage(string winMessage)
@@ -1972,7 +1940,5 @@ namespace Poker.Table
             }
             return equalScore;
         }
-
-
     }
 }

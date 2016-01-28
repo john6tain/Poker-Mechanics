@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Poker.Enumerations;
-using Poker.Interfacees;
-using Poker.Interfaces;
-
-namespace Poker.Table
+﻿namespace Poker.Table
 {
+    using Enumerations;
+    using Interfacees;
+    using Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Combination : ICombination
     {
-        public Combination(double power, CombinationType type, double behaviourPower, IList<ICard> combinationCardsCollection, IList<ICard> kickersCollection)
+        public Combination(double power, CombinationType type, double behaviourPower,
+                           IList<ICard> combinationCardsCollection, IList<ICard> kickersCollection)
         {
             this.Power = power;
             this.Type = type;
@@ -31,8 +29,11 @@ namespace Poker.Table
                 return hand;
             }
         }
+
         public double Power { get; set; }
+
         public CombinationType Type { get; set; }
+
         public double BehaviourPower { get; set; }
     }
 }

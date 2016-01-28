@@ -7,22 +7,18 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-
-using Poker.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Poker.Character;
-using Poker.GameConstants;
-using Poker.Interfacees;
-using Poker.Table;
-
 namespace Poker
 {
+    using Character;
+    using GameConstants;
+    using Interfacees;
+    using Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using Table;
+
     public partial class GLSTexasPoker : Form
     {
         public const int InitialCallValue = 500;
@@ -39,7 +35,6 @@ namespace Poker
         private IDealer dealer;
         private int callSum;
 
-
         public GLSTexasPoker()
         {
             InitializeComponent();
@@ -50,6 +45,21 @@ namespace Poker
             EnableButtons();
             //this.GameUpdate.Start();
         }
+
+        public ICharacter Bot1 { get; set; }
+        public ICharacter Bot2 { get; set; }
+        public ICharacter Bot3 { get; set; }
+        public ICharacter Bot4 { get; set; }
+        public ICharacter Bot5 { get; set; }
+        public ICharacter Player { get; set; }
+        public IDatabase GameDatabase { get; set; }
+        public IDecisionMaker DecisionMaker { get; set; }
+        public ITable Table { get; set; }
+        public IDealer Dealer { get; set; }
+        public bool GameIsSet { get; set; }
+        public int Index { get; set; }
+        public IList<ICharacter> CharactersCollection { get; set; }
+        public int CallSum { get; set; }
 
         private void EnableButtons()
         {
@@ -79,7 +89,7 @@ namespace Poker
             this.Bot4.Chips = 10000;
             this.Bot5.Chips = 10000;
             this.Player.Chips = 10000;
-            this.Bot1.ChipsLabel.Text ="Chips: " +  this.Bot1.Chips.ToString();
+            this.Bot1.ChipsLabel.Text = "Chips: " + this.Bot1.Chips.ToString();
             this.Bot2.ChipsLabel.Text = "Chips: " + this.Bot2.Chips.ToString();
             this.Bot3.ChipsLabel.Text = "Chips: " + this.Bot3.Chips.ToString();
             this.Bot4.ChipsLabel.Text = "Chips: " + this.Bot4.Chips.ToString();
@@ -100,39 +110,12 @@ namespace Poker
             InitializeCharactersCollection();
         }
 
-
         private TextBox GetTextBox(string textAround, ICharacter a)
         {
             string labelName = "" + this.CharactersCollection[this.Index].Name + textAround;
             TextBox searchedTextBox = (TextBox)Controls.Find(labelName, true)[0];
             return searchedTextBox;
         }
-
-        public void InitializeCharactersCollection()
-        {
-            this.CharactersCollection.Add(this.Player);
-            this.CharactersCollection.Add(this.Bot1);
-            this.CharactersCollection.Add(this.Bot2);
-            this.CharactersCollection.Add(this.Bot3);
-            this.CharactersCollection.Add(this.Bot4);
-            this.CharactersCollection.Add(this.Bot5);
-        }
-
-        public ICharacter Bot1 { get; set; }
-        public ICharacter Bot2 { get; set; }
-        public ICharacter Bot3 { get; set; }
-        public ICharacter Bot4 { get; set; }
-        public ICharacter Bot5 { get; set; }
-        public ICharacter Player { get; set; }
-        public IDatabase GameDatabase { get; set; }
-        public IDecisionMaker DecisionMaker { get; set; }
-        public ITable Table { get; set; }
-        public IDealer Dealer { get; set; }
-        public bool GameIsSet { get; set; }
-        public int Index { get; set; }
-        public IList<ICharacter> CharactersCollection { get; set; }
-        public int CallSum { get; set; }
-
 
         private void tbBotChips2_TextChanged(object sender, EventArgs e)
         {
@@ -146,16 +129,12 @@ namespace Poker
         {
         }
 
-
-
         private async void timer_Tick(object sender, object e)
         {
-
         }
 
         private void Update_Tick(object sender, object e)
         {
-
         }
 
         private async void bFold_Click(object sender, EventArgs e)
@@ -171,7 +150,7 @@ namespace Poker
         private Label GetLabel(string textAround)
         {
             string labelName = "" + this.CharactersCollection[this.Index].Name + textAround;
-            Label searchedLabel = (Label) Controls.Find(labelName, true)[0];
+            Label searchedLabel = (Label)Controls.Find(labelName, true)[0];
             return searchedLabel;
         }
 
@@ -191,8 +170,6 @@ namespace Poker
 
             this.CharactersCollection[this.Index].ChangeStatusToChecking();
 
-
-
             UpdateStatusLabel(newText, statusLabelToUpdate);
             this.Dealer.RevealTheNextCard(this.Table);
 
@@ -200,8 +177,6 @@ namespace Poker
 
             ContinueRotating();
         }
-
-
 
         private async void bCall_Click(object sender, EventArgs e)
         {
@@ -250,25 +225,19 @@ namespace Poker
 
         private void bOptions_Click(object sender, EventArgs e)
         {
-
         }
 
         private void bSB_Click(object sender, EventArgs e)
         {
-
         }
 
         private void bBB_Click(object sender, EventArgs e)
         {
-
         }
 
         private void Layout_Change(object sender, LayoutEventArgs e)
         {
-
         }
-
-
 
         private void RotateTimer_Tick(object sender, EventArgs e)
         {
@@ -314,22 +283,18 @@ namespace Poker
 
         private void CardsRenderer_Tick(object sender, EventArgs e)
         {
-
         }
 
         private void GameRenderer_Tick(object sender, EventArgs e)
         {
-
         }
 
         private void GameRenderer_Tick_1(object sender, EventArgs e)
         {
-
         }
 
         private void CardsRenderer_Tick_1(object sender, EventArgs e)
         {
-
         }
 
         private void GameUpdate_Tick(object sender, EventArgs e)
@@ -347,6 +312,16 @@ namespace Poker
 
                 element.Update(searchedTextBox);
             }
+        }
+
+        public void InitializeCharactersCollection()
+        {
+            this.CharactersCollection.Add(this.Player);
+            this.CharactersCollection.Add(this.Bot1);
+            this.CharactersCollection.Add(this.Bot2);
+            this.CharactersCollection.Add(this.Bot3);
+            this.CharactersCollection.Add(this.Bot4);
+            this.CharactersCollection.Add(this.Bot5);
         }
     }
 }

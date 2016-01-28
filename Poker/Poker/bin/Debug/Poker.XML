@@ -401,6 +401,12 @@
             The main entry point for the application.
             </summary>
         </member>
+        <member name="M:Poker.Table.Card.Update(System.Windows.Forms.Control.ControlCollection)">
+            <summary>
+            Updates the specified controls.
+            </summary>
+            <param name="controls">The controls.</param>
+        </member>
         <member name="M:Poker.Table.Dealer.CheckForStraightFlushOfClubs(System.Collections.Generic.IList{Poker.Interfacees.ICard},System.Collections.Generic.IList{Poker.Interfacees.ICard},Poker.Interfaces.ICharacter)">
             <summary>
             This method determins if straight flush of clubs combination is available 
@@ -609,6 +615,13 @@
             <param name="topCombinationCharactersCollection"></param>
             <param name="equalScore"></param>
             <returns></returns>
+        </member>
+        <member name="M:Poker.Table.Table.TakeCall(System.Int32,System.Windows.Forms.TextBox)">
+            <summary>
+            Takes and sum the call.
+            </summary>
+            <param name="callSum">The call sum.</param>
+            <param name="tablePotSum">The table pot sum.</param>
         </member>
         <member name="T:Poker.Properties.Resources">
             <summary>

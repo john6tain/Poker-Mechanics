@@ -1,19 +1,9 @@
-
-﻿using System.Collections;
-﻿using System.Drawing;
-﻿using System.Linq;
-using Poker.Table;
-using System.Linq;
-﻿using Poker.GameConstants;
-﻿using Poker.Table;
-
-
 namespace PokerTest.Dealer
-
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Poker.Character;
     using Poker.Enumerations;
+    using Poker.GameConstants;
     using Poker.Interfacees;
     using Poker.Interfaces;
     using Poker.Table;
@@ -38,7 +28,6 @@ namespace PokerTest.Dealer
             this.tableCardsCollection = new List<ICard>();
             this.character = new Player(firstCardLocation, cardWidth);
         }
-
 
         [TestMethod]
         public void Test_CheckForRoyalStraightFlushOfClubs_ShouldPass()
@@ -611,7 +600,7 @@ namespace PokerTest.Dealer
 
             Assert.AreEqual(false, result, "Player doesn't register Pair combination");
         }
-        
+
         [TestMethod]
         public void Test_ChooseTheWinnerByTheCardsRank_IfTwoPlayersHaveOnePair_ShouldPass()
         {
@@ -700,10 +689,8 @@ namespace PokerTest.Dealer
             ICharacter result = (Bot)(obj.Invoke("ChooseTheWinnerByTheCardsRank",
                 gameCharacters));
 
-
             Assert.AreNotEqual(result, winner);
         }
-
 
         #region Winning Scenario
 
@@ -787,9 +774,6 @@ namespace PokerTest.Dealer
 
             Assert.AreNotEqual(result, winner);
         }
-
-
         #endregion
-
     }
 }

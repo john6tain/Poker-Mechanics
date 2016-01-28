@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Poker
+﻿namespace Poker
 {
+    using System;
+    using System.Windows.Forms;
+
     static class Program
     {
         /// <summary>
@@ -24,4 +24,3 @@ namespace Poker
         }
     }
 }
-

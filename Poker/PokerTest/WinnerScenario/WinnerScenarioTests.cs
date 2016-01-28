@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Poker.Character;
-using Poker.Enumerations;
-using Poker.GameConstants;
-using Poker.Interfacees;
-using Poker.Interfaces;
-using Poker.Table;
-
-namespace PokerTest.WinningScenarioTests
+﻿namespace PokerTest.WinningScenarioTests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Poker.Character;
+    using Poker.Enumerations;
+    using Poker.GameConstants;
+    using Poker.Interfacees;
+    using Poker.Interfaces;
+    using Poker.Table;
+    using System.Collections.Generic;
+    using System.Drawing;
+
     [TestClass]
     public class WinningTests
     {
@@ -23,7 +23,6 @@ namespace PokerTest.WinningScenarioTests
         private IList<ICard> fourthPlayerTableCards;
         private IList<ICard> fifthPlayerCards;
         private IList<ICard> fifthPlayerTableCards;
-
 
         private ICharacter firstPlayer;
         private ICharacter secondPlayer;
@@ -46,23 +45,26 @@ namespace PokerTest.WinningScenarioTests
             this.firstPlayer.Name = "Bot1";
             this.firstPlayerCards = new List<ICard>();
             this.firstPlayerTableCards = new List<ICard>();
+
             this.secondPlayer = new Bot(secondCardLocation, cardWidth);
             this.secondPlayer.Name = "Bot2";
             this.secondPlayerCards = new List<ICard>();
             this.secondPlayerTableCards = new List<ICard>();
+
             this.thirdPlayer = new Bot(thirdCardLocation, cardWidth);
             this.thirdPlayer.Name = "Bot3";
             this.thirdPlayerCards = new List<ICard>();
             this.thirdPlayerTableCards = new List<ICard>();
+
             this.fourthPlayer = new Bot(fourthCardLocation, cardWidth);
             this.fourthPlayer.Name = "Bot4";
             this.fourthPlayerCards = new List<ICard>();
             this.fourthPlayerTableCards = new List<ICard>();
+
             this.fifthPlayer = new Bot(fifthCardLocation, cardWidth);
             this.fifthPlayer.Name = "Bot5";
             this.fifthPlayerCards = new List<ICard>();
             this.fifthPlayerTableCards = new List<ICard>();
-
         }
 
         [TestMethod]

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Poker.Enumerations;
-using Poker.Interfacees;
-
-namespace Poker.Table
+﻿namespace Poker.Table
 {
+    using Enumerations;
+    using Interfacees;
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+
     public class Card : ICard
     {
         private CardRank rank;
         private bool isVisible;
         private string backCardPath;
-        private Image frontImage;
-        private Image backImage;
         private CardSuit suit;
         private PictureBox cardPictureBox;
 
@@ -31,11 +29,65 @@ namespace Poker.Table
             this.CardPictureBox = new PictureBox();
         }
 
-        public bool IsVisible { get { return isVisible; } set { this.isVisible = value; } }
-        private string BackCardPath { get { return this.backCardPath; }set { this.backCardPath = value; } }
-        public Image FrontImage { get { return this.frontImage; } private set { this.frontImage = value; } }
-        public Image BackImage { get { return this.backImage; } private set { this.backImage = value; } }
-        public CardSuit Suit { get { return this.suit; } private set { this.suit = value; } }
+        public bool IsVisible
+        {
+            get
+            {
+                return isVisible;
+            }
+            set
+            {
+                this.isVisible = value;
+            }
+        }
+
+        private string BackCardPath
+        {
+            get
+            {
+                return this.backCardPath;
+            }
+            set
+            {
+                this.backCardPath = value;
+            }
+        }
+
+        public Image FrontImage
+        {
+            get
+            {
+                return this.frontImage;
+            }
+            private set
+            {
+                this.frontImage = value;
+            }
+        }
+
+        public Image BackImage
+        {
+            get
+            {
+                return this.backImage;
+            }
+            private set
+            {
+                this.backImage = value;
+            }
+        }
+
+        public CardSuit Suit
+        {
+            get
+            {
+                return this.suit;
+            }
+            private set
+            {
+                this.suit = value;
+            }
+        }
 
         public CardRank Rank
         {
@@ -54,6 +106,7 @@ namespace Poker.Table
             }
 
         }
+
         public PictureBox CardPictureBox
         {
             get { return cardPictureBox; }
@@ -69,9 +122,14 @@ namespace Poker.Table
                     throw new ArgumentException("It's null Man");
                 }
             }
-
         }
 
+        private Image frontImage;
+        private Image backImage;
+        /// <summary>
+        /// Updates the specified controls.
+        /// </summary>
+        /// <param name="controls">The controls.</param>
         public void Update(Control.ControlCollection controls)
         {
             if (this.IsVisible)
