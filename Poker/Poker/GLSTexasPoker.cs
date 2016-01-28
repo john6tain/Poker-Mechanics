@@ -71,6 +71,7 @@ namespace Poker
 
         private void InitializeGameObjects()
         {
+
             this.Bot1 = new Bot(new Point(Constants.FirstBotCoordinateX, Constants.FirstBotCoordinateY), Constants.CardWidth);
             this.Bot2 = new Bot(new Point(Constants.SecondBotCoordinateX, Constants.SecondBotCoordinateY), Constants.CardWidth);
             this.Bot3 = new Bot(new Point(Constants.ThirdBotCoordinateX, Constants.ThirdBotCoordinateY), Constants.CardWidth);

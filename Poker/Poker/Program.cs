@@ -19,7 +19,8 @@
             }
             catch (Exception e)
             {
-                //TODO: figure out this one ...
+                MessageBox.Show(e.Message.ToString(), "Exception Hass Occured", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
     }
