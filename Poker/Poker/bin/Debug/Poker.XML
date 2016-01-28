@@ -101,22 +101,6 @@
             <param name="botIndex">Index of the bot.</param>
             <param name="botPower">The bot power.</param>
         </member>
-        <member name="M:Poker.Character.DecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Int32,System.Int32,System.Int32@,System.Boolean,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double,System.Int32)">
-            <summary>
-            Decision manager decide who has biggest winning combination
-            </summary>
-            <param name="character">The character.</param>
-            <param name="cardCollection">The card collection.</param>
-            <param name="firstCard">The first card.</param>
-            <param name="secondCard">The second card.</param>
-            <param name="botChips">The bot chips.</param>
-            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
-            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
-            <param name="hasFolded">The has folded.</param>
-            <param name="botIndex">Index of the bot.</param>
-            <param name="botPower">The bot power.</param>
-            <param name="behaviourPower">The bot current.</param>
-        </member>
         <member name="M:Poker.Character.DecisionMaker.HighCard(Poker.Interfaces.ICharacter,System.Int32@,System.Boolean@,System.Boolean@,System.Windows.Forms.Label,System.Double,System.Int32)">
             <summary>
             Tell us the highest card
@@ -228,6 +212,22 @@
              <param name="botIndex">Index of the bot.</param>
              <param name="behaviourFactor">The behaviour factor.</param>
              <param name="r">The r.</param>
+        </member>
+        <member name="M:Poker.Character.DecisionMaker.MakeDecision(Poker.Interfaces.ICharacter,System.Int32,System.Int32,System.Int32@,System.Boolean,System.Boolean@,System.Windows.Forms.Label,System.Int32,System.Double,System.Double,System.Int32)">
+            <summary>
+            Decision manager decide who has biggest winning combination
+            </summary>
+            <param name="character">The character.</param>
+            <param name="cardCollection">The card collection.</param>
+            <param name="firstCard">The first card.</param>
+            <param name="secondCard">The second card.</param>
+            <param name="botChips">The bot chips.</param>
+            <param name="isOnTurn">if set to <c>true</c> [is on turn].</param>
+            <param name="isFinalTurn">if set to <c>true</c> [is final turn].</param>
+            <param name="hasFolded">The has folded.</param>
+            <param name="botIndex">Index of the bot.</param>
+            <param name="botPower">The bot power.</param>
+            <param name="behaviourPower">The bot current.</param>
         </member>
         <member name="M:Poker.Character.Bot.#ctor(System.Drawing.Point,System.Int32)">
             <summary>

@@ -1,12 +1,11 @@
-﻿using System.Drawing;
-
-namespace Poker.GameConstants
+﻿namespace Poker.GameConstants
 {
     public class Constants
     {
         //Card Powers
         public const double HighCardBehaviourPower = -1;
         public const double ThreeOfAKindBehaviourPower = 3;
+        public const double TwoOfAkindBehaviourPower = 2;
         public const double PairFromHandBehaviourPower = 1;
         public const double FullHouseBehaviourPower = 6;
         public const double LittleStraightFlushBehaviourPower = 8;
@@ -35,7 +34,7 @@ namespace Poker.GameConstants
         public const int TableCoordinateY = 265; //265
 
 
-        
+
 
     }
 }
